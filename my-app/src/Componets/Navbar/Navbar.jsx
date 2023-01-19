@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo_blanco.png";
-
+import './Navbar.css'
 
 export const Navbar = () => {
   return (
@@ -9,7 +9,7 @@ export const Navbar = () => {
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
         <div className="container-fluid">
               <NavLink to="/home" className="navbar-brand">
-                <img src={logo} alt="logo" width="100" />
+                <img src={logo} alt="logo" width="105em" />
               </NavLink>
           {/* Boton menu dropdown*/}
           <button
@@ -26,7 +26,7 @@ export const Navbar = () => {
           </button>
 			<div className="collapse navbar-collapse" id="menu">
           <ul className="navbar-nav me-auto">
-			<li className="navbar nav-item">
+			<li className="navbar nav-item .ms-5">
             <NavLink to="/adoption" className="nav-link active text-light">
               Adoptame🐾
             </NavLink>
@@ -49,7 +49,7 @@ export const Navbar = () => {
             <li className="navbar nav-item">
 				{/* Renegando con el login para que aparezca mas a la derecha */}
             <NavLink to="/login" className="nav-link text-light">
-              Ingresa
+              Ingresar
             </NavLink>
 			</li>
           </ul>

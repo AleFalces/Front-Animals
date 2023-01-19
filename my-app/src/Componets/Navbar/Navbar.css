@@ -1,0 +1,25 @@
+
+.bg-dark {
+    background-color: rgb(114, 25, 122) !important;
+}
+
+.navbar .nav-item {
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+@media (min-width: 576px) {
+    body {
+        background-color: red;
+    }
+}
+@media (min-width: 768px) {
+    body {
+        background-color: green;
+    }
+} 
+@media (min-width: 992px) {
+    body {
+        background-color: blue;
+    }
+} 
