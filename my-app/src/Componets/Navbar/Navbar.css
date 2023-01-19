@@ -1,14 +1,13 @@
 .navHeight {
-    font-size: 20px;
-    /* text-align: justify; */
-    /* padding-left: 8%; */
-    height: 5em;
-    background: rgb(9, 18, 146) !important;
+    font-size: 26px;
+    padding-left: 8%;
+    background: linear-gradient(45deg, rgba(97, 247, 255, 0.478) 15%, rgba(180, 62, 249, 0.444) 100%) !important;
     box-shadow: 0 0 0.5rem 0.5rem rgba(149, 149, 149, 0.545);
 }
 
- /* .navContainer {
+ .navContainer {
     height: 100vh;
     width: 100vw; 
-} */
+}
+
 

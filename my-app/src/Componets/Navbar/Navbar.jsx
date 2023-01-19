@@ -6,7 +6,9 @@ import "./Navbar.css"
 export const Navbar = () => {
   return (
     <div className="navContainer">
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark navHeight sticky">
+
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark navHeight">
+
         <div className="container-fluid">
               <NavLink to="/home" className="navbar-brand">
                 <img src={logo} alt="logo" width="105em" />
