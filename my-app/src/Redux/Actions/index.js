@@ -1,6 +1,7 @@
 import { GET_ALL_PETS } from "../ActionTypes";
 import axios from "axios";
 
+
 export const getAllPets = () => async (dispatch) => {
 	try {
 		const getPets = await axios.get("https://restcountries.com/v3/all");
@@ -14,3 +15,4 @@ export const getAllPets = () => async (dispatch) => {
 		console.log(err.message);
 	}
 };
+

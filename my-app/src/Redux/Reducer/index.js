@@ -1,6 +1,7 @@
 import { GET_ALL_PETS } from "../ActionTypes";
 
 const initialState = {
+
 	allPets: [],
 	pets: [],
 	details: {},
