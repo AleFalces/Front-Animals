@@ -1,19 +1,18 @@
 import React from "react";
 import { Navbar } from "../Navbar/Navbar";
-import { num } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
+import './Home.css'
 
 
 export const Home = () => {
 const dispatch = useDispatch()
-const num2 = useSelector(state => state.num)
 	return (
 		<>
 			<Navbar />
-			<div>Soy el Home</div>
-			<button onClick={()=>dispatch(num())}>Aumentar en 1</button>
-			<h2>{num2}</h2>
+			<div className="home">Soy el Home
 
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+			</div>
 		</>
 	);
 };
