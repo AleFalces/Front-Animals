@@ -1,16 +1,22 @@
-import {} from "../ActionTypes";
+// import {} from "../ActionTypes";
 
 const initialState = {
-	allPets: [],
-	details: {},
-	allUsers: [],
+  num: 0,
+  allPets: [],
+  details: {},
+  allUsers: [],
 };
 
 const RootReducer = (state = initialState, action) => {
-	switch (action.type) {
-		default:
-			return state;
-	}
+  switch (action.type) {
+    case "NUM":
+      return {
+        ...state,
+        num: state.num + 1,
+      };
+    default:
+      return state;
+  }
 };
 
 export default RootReducer;
