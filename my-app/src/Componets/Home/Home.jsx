@@ -9,6 +9,8 @@ const dispatch = useDispatch()
 		<>
 			<Navbar />
 			<div>Soy el Home</div>
+
+			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 		</>
 	);
 };
