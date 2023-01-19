@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo_blanco.png";
-
+import "./Navbar.css"
 
 export const Navbar = () => {
   return (
-    <>
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+    <div className="navContainer">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark altura">
         <div className="container-fluid">
               <NavLink to="/home" className="navbar-brand">
                 <img src={logo} alt="logo" width="100" />
@@ -56,6 +56,6 @@ export const Navbar = () => {
 		  </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 };
