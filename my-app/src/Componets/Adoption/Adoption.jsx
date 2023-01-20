@@ -4,6 +4,7 @@ import { Navbar } from "../Navbar/Navbar";
 import { Card } from "../Card/Card";
 import { getAllPets } from "../../Redux/Actions/index";
 import { Link } from "react-router-dom";
+import "./Cards.css"
 
 export const Adoption = () => {
 	const allPets = useSelector((state) => state.allPets);
@@ -79,13 +80,15 @@ export const Adoption = () => {
 	return (
 		<>
 			<Navbar />
-			<div>
+			<div className="cardsContainer">
 				{!Pets?.length ? (
 					<p>No hay mascotas</p>
 				) : (
 					Pets?.map((el) => (
 						<Link to={`/pets/${el.id}`} key={el.id}>
+							<div className="cardsContainerPadding">
 							<Card data={el} />
+							</div>
 						</Link>
 					))
 				)}

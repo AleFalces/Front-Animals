@@ -1,0 +1,8 @@
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.cardsContainerPadding {
+    padding: 50px;
+}

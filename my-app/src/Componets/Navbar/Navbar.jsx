@@ -1,19 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import logo from "../../assets/logo_blanco.png";
 import "./Navbar.css"
 
 export const Navbar = () => {
   return (
     <div className="navContainer">
-
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark navHeight">
+{/*        ↓↓↓↓ saqué la clase bg-dark del nav de abajo ↓↓↓↓        */}
+      <nav className="navbar navbar-expand-md navbar-dark navHeight">
 
         <div className="container-fluid">
-              <NavLink to="/home" className="navbar-brand">
-                <img src={logo} alt="logo" width="105em" />
-              </NavLink>
-          {/* Boton menu dropdown*/}
+          <NavLink to="/home" className="navbar-brand">
+            <img src={logo} alt="logo" width="105em" />
+          </NavLink>
+              {/* Boton menu dropdown*/}
           <button
             class="navbar-toggler"
             type="button"
@@ -23,39 +23,42 @@ export const Navbar = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
-			{/* si la pantalla es mas chica, automaticamente aparece el menu dropdown con todos las secciones */}
+          <span class="navbar-toggler-icon"></span>
+			          {/* si la pantalla es mas chica, automaticamente aparece el menu dropdown con todos las secciones */}
           </button>
-			<div className="collapse navbar-collapse" id="menu">
-          <ul className="navbar-nav me-auto">
-			<li className="navbar nav-item">
-            <NavLink to="/adoption" className="nav-link active text-light">
-              Adoptame🐾
-            </NavLink>
-			</li>
+
+			    <div className="collapse navbar-collapse" id="menu">
+            {/* clases que estaban en el ul de abajo: navbar-nav  me-auto */}
+          <ul className="ul">
+			      <li className="navbar nav-item">
+              {/* clases que estaban en los NavLinks de abajo: text-light active */}
+              <NavLink to="/adoption" className="nav-link">
+                Adoptame🐾
+              </NavLink>
+			      </li>
             <li className="navbar nav-item">
-              <NavLink to="/aboutUs" className="nav-link text-light">
+              <NavLink to="/aboutUs" className="nav-link">
                 ¿Quienes Somos?
               </NavLink>
             </li> 
-			<li className="navbar nav-item">
-            <NavLink to="/donate" className="nav-link text-light">
-              Aporta a nuestra causa
-            </NavLink>
-			</li>
+			      <li className="navbar nav-item">
+              <NavLink to="/donate" className="nav-link">
+                Aporta a nuestra causa
+              </NavLink>
+			      </li>
             <li className="navbar nav-item">
-              <NavLink to="/store" className="nav-link text-light">
+              <NavLink to="/store" className="nav-link">
                 Tienda
               </NavLink>
             </li>
             <li className="navbar nav-item">
-				{/* Renegando con el login para que aparezca mas a la derecha */}
-            <NavLink to="/login" className="nav-link text-light">
-              Ingresar
-            </NavLink>
-			</li>
+				        {/* Renegando con el login para que aparezca mas a la derecha */}
+              <NavLink to="/login" className="nav-link">
+                Ingresar
+              </NavLink>
+			      </li>
           </ul>
-		  </div>
+		      </div>
         </div>
       </nav>
     </div>
