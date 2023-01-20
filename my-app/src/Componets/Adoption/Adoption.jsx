@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Navbar } from "../Navbar/Navbar";
 import { Card } from "../Card/Card";
 import { getAllPets } from "../../Redux/Actions/index";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import "./Cards.css"
 
 export const Adoption = () => {
-	const allPets = useSelector((state) => state.allPets);
+	// const allPets = useSelector((state) => state.allPets);
 	const Pets = [
 		{
 			id: 1,
@@ -75,7 +75,7 @@ export const Adoption = () => {
 
 	useEffect(() => {
 		dispatch(getAllPets());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<>
