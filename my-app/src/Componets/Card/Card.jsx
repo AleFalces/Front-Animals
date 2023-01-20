@@ -1,18 +1,18 @@
 import React from "react";
-import {Link} from "react-router-dom"
-import "./Card.css"
+import { Link } from "react-router-dom";
+import "./Card.css";
 
-export const Card = ({ data: { Nombre, Imagen, Tipo } }) => {
+export const Card = ({ data: { size, img, Sex } }) => {
 	return (
 		<div className="cardContainer">
-		<p className="petName">Nombre: {Nombre}</p>
-		<div className="cardContainer2">
-
-			<div className="cardd" stylee="--clr: #ffc400;">
-			<img className="Img imgCard" src={Imagen}  alt={Nombre} />
-				<Link to={Nombre}>Details of {Nombre}</Link>
+			<p className="petName"> {size}</p>
+			<p className="petSex"> {Sex}</p>
+			<div className="cardContainer2">
+				<div className="cardd" stylee="--clr: #ffc400;">
+					<img className="Img imgCard" src={img} alt={size} />
+					<Link to={size}>Details</Link>
+				</div>
 			</div>
-		</div>
 		</div>
 	);
 };

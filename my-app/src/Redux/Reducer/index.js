@@ -1,10 +1,9 @@
-import { GET_ALL_PETS } from "../ActionTypes";
+import { GET_ALL_PETS, GET_PET_ID } from "../ActionTypes";
 
 const initialState = {
 	allPets: [],
 	pets: [],
-	details: {},
-	allUsers: [],
+	Detail: {},
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -15,11 +14,15 @@ const RootReducer = (state = initialState, action) => {
 				allPets: action.payload.pets,
 				pets: action.payload.pets,
 			};
+		case GET_PET_ID:
+			return {
+				...state,
+				Detail: action.payload,
+			};
 
 		default:
 			return state;
 	}
-
 };
 
 export default RootReducer;
