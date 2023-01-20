@@ -7,7 +7,6 @@ import { getAllPets } from "../../Redux/Actions/index";
 import { Link } from "react-router-dom";
 import "./Cards.css";
 
-
 const Adoption = () => {
 	// const allPets = useSelector((state) => state.allPets);
 	const Pets = [
@@ -63,33 +62,31 @@ const Adoption = () => {
 		},
 	];
 
+	const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getAllPets());
+	}, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getAllPets());
-  }, [dispatch]);
-  
-  return (
-    <>
-      <Navbar />
-      <div className="cardsContainer">
-        {!Pets?.length ? (
-          <p>No hay mascotas</p>
-        ) : (
-          Pets?.map((el) => (
-            <Link to={`/pets/${el.id}`} key={el.id}>
-              <div className="cardsContainerPadding">
-                <Card data={el} />
-              </div>
-            </Link>
-          ))
-        )}
-      </div>
-      <Footer />
-    </>
-  );
-
+	return (
+		<>
+			<Navbar />
+			<div className="cardsContainer">
+				{!Pets?.length ? (
+					<p>No hay mascotas</p>
+				) : (
+					Pets?.map((el) => (
+						<Link to={`/pet/${el.id}`} key={el.id}>
+							<div className="cardsContainerPadding">
+								<Card data={el} />
+							</div>
+						</Link>
+					))
+				)}
+			</div>
+			<Footer />
+		</>
+	);
 };
 
 export default Adoption;
