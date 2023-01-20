@@ -1,4 +1,11 @@
 .edit {
-    height: 85vh !important;
+    /* height: 78vh !important; */
     /* width: 75% !important; */
+}
+.titulo {
+    font-weight: bold;
+    /* font-family: Georgia, 'Times New Roman', Times, serif; */
+}
+.texto {
+ font-weight: bold;
 }
