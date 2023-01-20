@@ -1,11 +1,15 @@
 import React from "react";
-import { Navbar } from "../Navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
-export const Login = () => {
-	return (
-		<>
-			<Navbar />
-			<div>🐾</div>
-		</>
-	);
+const Login = () => {
+  return (
+    <>
+      <Navbar />
+      <div>🐾</div>
+      <Footer />
+    </>
+  );
 };
+
+export default Login;

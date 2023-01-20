@@ -1,11 +1,11 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { Home } from "../src/Componets/Home/Home";
-import { Adoption } from "../src/Componets/Adoption/Adoption";
-import { Details } from "../src/Componets/Details/Details";
-import { Login } from "../src/Componets/Login/Login";
-import { LandingPage } from "../src/Componets/LandingPage/LandingPage";
-import { NotFound } from "../src/Componets/NotFound/NotFound";
+import  Home  from "../src/Componets/Home/Home";
+import  Adoption  from "../src/Componets/Adoption/Adoption";
+import  Details  from "../src/Componets/Details/Details";
+import  Login  from "../src/Componets/Login/Login";
+import  LandingPage  from "../src/Componets/LandingPage/LandingPage";
+import  NotFound  from "../src/Componets/NotFound/NotFound";
 
 function App() {
 	return (

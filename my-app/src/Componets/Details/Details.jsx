@@ -1,11 +1,14 @@
 import React from "react";
-import { Navbar } from "../Navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
-export const Details = () => {
-	return (
-		<>
-			<Navbar />
-			<div>🐾</div>
-		</>
-	);
+const Details = () => {
+  return (
+    <>
+      <Navbar />
+      <div>🐾</div>
+      <Footer />
+    </>
+  );
 };
+export default Details;
