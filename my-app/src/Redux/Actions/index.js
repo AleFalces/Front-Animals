@@ -1,4 +1,4 @@
-import { GET_ALL_PETS } from "../ActionTypes";
+import { GET_ALL_PETS, GET_PET_ID } from "../ActionTypes";
 import axios from "axios";
 
 export const getAllPets = () => async (dispatch) => {
@@ -15,4 +15,15 @@ export const getAllPets = () => async (dispatch) => {
 	}
 };
 
-
+export const petDetails = (id) => async (dispatch) => {
+	try {
+		const getID = await axios.get(`http://localhost:3001/pet/${id}`);
+		console.log("getid", getID);
+		dispatch({
+			type: GET_PET_ID,
+			payload: getID.data,
+		});
+	} catch (err) {
+		console.log(err.message);
+	}
+};
