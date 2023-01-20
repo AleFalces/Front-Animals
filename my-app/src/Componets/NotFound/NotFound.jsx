@@ -5,7 +5,7 @@ export const NotFound = () => {
 	return (
 		<>
 			<Navbar />
-			<div>TA TODO ROTOOO</div>
+			<div>We are working on this component</div>
 		</>
 	);
 };
