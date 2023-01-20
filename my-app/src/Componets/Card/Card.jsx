@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Card.css";
 
-export const Card = ({ data: { size, img, Sex } }) => {
+
+const Card = ({ data: { size, img, Sex } }) => {
 	return (
 		<div className="cardContainer">
 			<p className="petName"> {size}</p>
@@ -17,6 +18,7 @@ export const Card = ({ data: { size, img, Sex } }) => {
 	);
 };
 
+export default Card;
 // ↓↓↓↓    Asi es como Ale dejó el codigo jueves 19/01/23     ↓↓↓↓
 /* 
 		<div className="card">

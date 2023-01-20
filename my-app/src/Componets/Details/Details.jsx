@@ -1,10 +1,11 @@
+
 // import { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
-import { Navbar } from "../Navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 // import { useParams } from "react-router-dom";
 // import { petDetails } from "../../Redux/Actions/index";
 
-export const Details = () => {
+const Details = () => {
 	// listo para conectar con el back
 	// const dispatch = useDispatch();
 	// const { paramsId } = useParams();
@@ -41,6 +42,8 @@ export const Details = () => {
 	);
 };
 
+export default Details;
+
 // listo para cuando conecte el back
 // <div>
 // 					<img src={Detail?.img} alt={Detail.size} />
@@ -53,3 +56,4 @@ export const Details = () => {
 // 					<p>Area: {Detail.area}</p>
 // 					<p>species: {Detail.species}</p>
 // 				</div>
+
