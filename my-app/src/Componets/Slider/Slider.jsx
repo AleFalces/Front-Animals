@@ -1,5 +1,8 @@
 import { Carousel } from "react-bootstrap"
 import './Slider.css'
+import img1 from '../../assets/imagenes/img1.jpg'
+import img2 from '../../assets/imagenes/img2.jpg'
+import img3 from '../../assets/imagenes/img3.jpg'
 
 const Slider = () => {
   return (
@@ -8,18 +11,18 @@ const Slider = () => {
       <Carousel.Item interval={2500}>
         <img
           className="d-block w-100 edit"
-          src="https://images.pexels.com/photos/59965/dog-young-dog-puppy-59965.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src={img1}
           alt="First slide"
         />
         <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3 className="titulo">Bienvenido a Buddy ONG</h3>
+          <p className="texto">En nuestro sitio web encontraras todo para ayudar a nuestros amigos peluditos.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={2500}>
         <img
           className="d-block w-100 edit"
-          src="https://images.pexels.com/photos/7324407/pexels-photo-7324407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src={img2}
           alt="Second slide"
         />
         <Carousel.Caption>
@@ -30,7 +33,7 @@ const Slider = () => {
       <Carousel.Item interval={2500}>
         <img
           className="d-block w-100 edit"
-          src="https://images.pexels.com/photos/14817889/pexels-photo-14817889.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src={img3}
           alt="Third slide"
         />
         <Carousel.Caption>
