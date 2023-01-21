@@ -13,13 +13,17 @@
     justify-content: space-around;
     color: #252525;
     font-size: 26px;
-    font-weight:bold;
+    font-weight: bold;
 }
-@media screen and (max-width: 480px){
-    .ul{
+
+@media screen and (max-width: 768px) {
+    .ul {
         flex-direction: column;
     }
 }
 
-
-
+@media screen and (max-width: 1170px) {
+    .ul {
+        flex-wrap: wrap;
+    }
+}
