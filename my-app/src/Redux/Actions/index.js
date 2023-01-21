@@ -15,25 +15,6 @@ export function getAllPets() {
 	};
 }
 
-/* 
-	↓↓↓↓↓↓   Esta es la action que creó Ale 20/01/23   ↓↓↓↓↓↓     
-
-export const getAllPets = () => async (dispatch) => {
-  try {
-    const getPets = await axios.get("https://restcountries.com/v3/all");
-    dispatch({
-      type: GET_ALL_PETS,
-      payload: {
-        allPets: getPets.data.pets,
-      },
-    });
-  } catch (err) {
-    console.log(err.message);
-  }
-};
-
-*/
-
 export const petDetails = (id) => async (dispatch) => {
 	try {
 		const getID = await axios.get(`http://localhost:3001/pets/${id}`);
