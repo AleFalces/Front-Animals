@@ -19,12 +19,12 @@ const Details = () => {
 			<Navbar />
 			<div>
 				<img src={Det?.img} alt={Det.size} />
-				<p> size: {Det.size}</p>
+				<p>Species: {Det.species}</p>
+				<p>Size: {Det.size}</p>
 				<p>Sexo: {Det.sex}</p>
-				<p>Detalle:{Det.detail}</p>
-				<p>Edad: {Det.age}</p>
+				<p>Age: {Det.age}</p>
 				<p>Area: {Det.area}</p>
-				<p>species: {Det.species}</p>
+				<p>Details: {Det.detail}</p>
 			</div>
 			<Footer />
 		</>
