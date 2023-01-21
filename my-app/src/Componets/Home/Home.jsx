@@ -8,8 +8,9 @@ const Home = () => {
   return (
     <>
       <Navbar />
+      <br />
+      <br />
       <div className="home">
-        <span>Hola soy el se;or home</span>
         <Slider />
         <br />
         <br />
