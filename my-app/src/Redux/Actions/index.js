@@ -36,7 +36,7 @@ export const getAllPets = () => async (dispatch) => {
 
 export const petDetails = (id) => async (dispatch) => {
   try {
-    const getID = await axios.get(`http://localhost:3001/pet/${id}`);
+    const getID = await axios.get(`http://localhost:3001/pets/${id}`);
     console.log("getid", getID);
     dispatch({
       type: GET_PET_ID,

@@ -26,7 +26,7 @@ const Adoption = () => {
 					<p>No hay mascotas</p>
 				) : (
 					allPets?.map((el) => (
-						<Link to={`/pet/${el.id}`} key={el.id}>
+						<Link to={`/pets/${el.id}`} key={el.id}>
 							<div className="cardsContainerPadding">
 								<Card data={el} />
 							</div>
