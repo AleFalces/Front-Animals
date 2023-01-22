@@ -1,0 +1,34 @@
+.contenedor {
+    min-height: 100vh;
+    position: relative;
+    background: linear-gradient(20deg, #2dfff4ba 15%, #fff64fbe 100%) !important;
+    background: linear-gradient(20deg, #ff4066c6 15%, #fff06ace 100%) !important;
+    background: linear-gradient(45deg, #0d6dfd82 15%, #d633848c 100%) !important;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.contenedor .logo {
+    margin-right: 20%;
+}
+.container-box {
+    background-color: #fff;
+    text-align: center;
+    height: 100vh;
+    width: 25%;
+    position: relative;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    font-weight: bold;
+    height: 50vh;
+    /* border: solid black 1px; */
+    margin-top: 35%;
+}
