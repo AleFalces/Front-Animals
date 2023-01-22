@@ -10,7 +10,6 @@ import "./Cards.css";
 
 const Adoption = () => {
 	const allPets = useSelector((state) => state.allPets);
-	
 
 	const dispatch = useDispatch();
 
@@ -30,7 +29,7 @@ const Adoption = () => {
 							<div className="cardsContainerPadding">
 								<Card data={el} />
 							</div>
-						</Link> 
+						</Link>
 					))
 				)}
 			</div>
