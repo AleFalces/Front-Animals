@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 
-const Login = () => {
+const Donate = () => {
 	return (
 		<>
 			<Navbar />
@@ -12,4 +12,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default Donate;
