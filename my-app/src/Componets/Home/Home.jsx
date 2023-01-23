@@ -13,6 +13,7 @@ const Home = () => {
       <div className="home">
         <Slider />
         <br />
+        <hr />
         <br />
         <br />
         <br />

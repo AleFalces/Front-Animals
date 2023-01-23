@@ -1,0 +1,13 @@
+.contenedor-notFound {
+    min-height: 100vh;
+    position: relative;
+    /* border: solid black 1px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} 
+
+.texto-Notfound {
+   text-align: center;
+}
