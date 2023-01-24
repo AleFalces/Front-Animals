@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import {} from "../../Redux/Actions";
 import { Link, redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { useEffect } from "react";
-// import { postPet } from "../../Redux/Actions";
+import { useEffect } from "react";
+import { postPet } from "../../Redux/Actions";
 
 export default function FormPostPet() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
@@ -19,16 +19,28 @@ export default function FormPostPet() {
     img: "",
   });
 
+  useEffect(()=>{
+
+  },[])
+
   function validate(input) {
-    let errors = {};
+    let errors = {
+      species: "",
+      sex: "",
+      age: "",
+      size: "",
+      area: "",
+      detail: "",
+      img: "",
+    };
 
     if (input.detail.length < 15) {
       errors.detail = "Debes escribir al menos 16 carácteres";
     } else if (!input.detail.match(/^[a-zA-Z\s]+$/)) {
       errors.name = "Solo letras, por favor!";
-    } else if (input.species === "default") {
+    } else if (!input.species) {
       errors.species = "Selecciona una especie";
-    } else if (input.age) {
+    } else if (!input.age) {
       errors.age = "Selecciona una edad para la mascota";
     } else if (!input.size) {
       errors.size = "Selecciona un tamaño aproximado";
@@ -49,6 +61,8 @@ export default function FormPostPet() {
       ...input,
       [e.target.name]: e.target.value,
     });
+    console.log("input",input)
+    console.log("error",errors)
     setErrors(
       validate({
         ...input,
@@ -57,9 +71,10 @@ export default function FormPostPet() {
     );
   };
 
-  const handlerCreate = (event) => {
+  const handlerSubmit = (event) => {
     event.preventDefault();
-    // dispatch(postPet(input)); //importar accion de juli
+    dispatch(postPet(input)); //importar accion de juli
+    alert("Formulario creado con éxito!");
     setInput({
       species: "",
       sex: "",
@@ -70,16 +85,15 @@ export default function FormPostPet() {
       img: "",
       status: "",
     });
-    alert("Formulario creado con éxito!");
-    redirect("/adoption");
+    // redirect("/adoption");
   };
 
   return (
     <div>
-      <form>
+      <form onSubmit={(e)=>handlerSubmit(e)}>
         <h1>Completa el formulario</h1>
-        <div>
-        <select name="species">
+       
+        <select name="species" key="species" onChange={(e)=>handlerChange(e)}>
           <option value="default" key="defaultSpecies">
             Especie
           </option>
@@ -90,11 +104,10 @@ export default function FormPostPet() {
             Perrx
           </option>
         </select>
-        {errors.species &&(<p>{errors.species}</p>)}
-        </div>
+        {/* {errors.species &&(<p>{errors.species}</p>)} */}
+      
         
-
-        <select name="sex" key="sex">
+        <select name="sex" key="sex" onChange={(e)=>handlerChange(e)}>
           <option value="default" key="defaultSex">
             Sexo
           </option>
@@ -106,7 +119,7 @@ export default function FormPostPet() {
           </option>
         </select>
 
-        <select name="age" key="age">
+        <select name="age" key="age" onChange={(e)=>handlerChange(e)}>
           <option value="default" key="defaultAge">
             Edad
           </option>
@@ -121,7 +134,7 @@ export default function FormPostPet() {
           </option>
         </select>
 
-        <select name="size" key="size">
+        <select name="size" key="size" onChange={(e)=>handlerChange(e)}>
           <option value="default" key="defaultSize">
             Tamaño
           </option>
@@ -136,7 +149,7 @@ export default function FormPostPet() {
           </option>
         </select>
 
-        <select name="status" key="status">
+        <select name="status" key="status" onChange={(e)=>handlerChange(e)}>
           <option value="default" key="defaultSize">
             Estado
           </option>
@@ -171,7 +184,7 @@ export default function FormPostPet() {
         <Link to={"/home"}>
           <button>Atrás</button>
         </Link>
-        <button onClick={handlerCreate}>Postear la mascota</button>
+        <button type="submit">Postear la mascota</button>
       </form>
     </div>
   );
