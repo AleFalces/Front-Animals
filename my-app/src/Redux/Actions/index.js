@@ -31,8 +31,9 @@ export const petDetails = (id) => async (dispatch) => {
 export function postPet(formInput) {
   return async function (dispatch) {
     try {
+      console.log("ACTION ENTRE! input desde form", formInput);
       const json = await axios.post("http://localhost:3001/pets", formInput);
-      console.log("JSON DATAAAAA!!!!", json.data);
+      console.log("ACTION!!! : JSON DATAAAAA!!!!", json.data);
       dispatch({
         type: POST_PET,
       });
