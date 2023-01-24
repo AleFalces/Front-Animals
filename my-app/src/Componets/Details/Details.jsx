@@ -4,16 +4,16 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { useParams } from "react-router-dom";
 import { petDetails } from "../../Redux/Actions/index";
-import "./Detail.css"
+import "./Detail.css";
 
 const Details = () => {
-	const dispatch = useDispatch();
-	const { paramsId } = useParams();
-	const Det = useSelector((state) => state.Detail);
+  const dispatch = useDispatch();
+  const { paramsId } = useParams();
+  const Det = useSelector((state) => state.Detail);
 
-	useEffect(() => {
-		dispatch(petDetails(paramsId));
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(petDetails(paramsId));
+  }, [dispatch]);
 
 	return (
 		<div className="detailContainer">
@@ -38,6 +38,7 @@ const Details = () => {
 
 		</div>
 	);
+
 };
 
 export default Details;
