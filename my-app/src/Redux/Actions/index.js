@@ -16,6 +16,7 @@ export function getAllPets() {
 }
 
 export const petDetails = (id) => async (dispatch) => {
+
 	try {
 		const getID = await axios.get(`http://localhost:3001/pets/${id}`);
 		console.log("getid", getID);

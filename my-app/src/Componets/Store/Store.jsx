@@ -3,7 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import NotFound from "../NotFound/NotFound";
 
-const Login = () => {
+const Store = () => {
   return (
     <>
       <div>
@@ -13,4 +13,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Store;

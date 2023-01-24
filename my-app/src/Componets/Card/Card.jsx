@@ -23,8 +23,9 @@ const Card = ({ data: { size, img, sex, species, age } }) => {
 export default Card;
 
 // ↓↓↓   Asi es como dejó Julian el codigo el 20/01/23   ↓↓↓
-{
-	/* 
+
+/* 
+
 		<div className="cardContainer">
 			<p className="petName"> {size}</p>
 			<p className="petSex"> {sex}</p>
@@ -36,11 +37,12 @@ export default Card;
 			</div>
 		</div> 
 */
-}
+
 
 // ↓↓↓↓    Asi es como Ale dejó el codigo jueves 19/01/23     ↓↓↓↓
-{
-	/* 
+
+/* 
+
 		<div className="card">
 			<div className="TextCard">
 				<p className="TextCard">Tipo:{Tipo}</p>
@@ -49,4 +51,3 @@ export default Card;
 			</div>
 		</div> 
 */
-}
