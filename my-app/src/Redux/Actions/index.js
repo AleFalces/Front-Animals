@@ -42,3 +42,24 @@ export function postPet(formInput) {
     }
   };
 }
+<<<<<<< Updated upstream
+=======
+
+export function postUser(formInput) {
+  return async function (dispatch) {
+    try {
+      console.log("ENTRÉ A LA ACTION POSTUSER");
+      console.log("FORMINPUT DESDE ACTION POSTUSER!", formInput);
+      const newUser = await axios.post(
+        "http://localhost:3001/?????????????????",
+        formInput
+      );
+      dispatch({
+        type: POST_USER,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+>>>>>>> Stashed changes

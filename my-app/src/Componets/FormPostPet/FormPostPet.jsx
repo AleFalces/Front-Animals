@@ -11,6 +11,8 @@ export default function FormPostPet() {
   useEffect(()=>{
               
   },[])
+
+
   const [input, setInput] = useState({
         species: "",
         sex: "",
@@ -19,6 +21,7 @@ export default function FormPostPet() {
         area: "",
         detail: "",
         img: "",
+        userId: ""
       });
   const errors = {
        species: "",
@@ -28,6 +31,7 @@ export default function FormPostPet() {
        area: "",
        detail: "",
        img: "",
+       userId: ""
      };
             
   const handlerChange = (e) => {
@@ -67,12 +71,19 @@ export default function FormPostPet() {
     if(input.img === ""){
       errors.img = "Debes poner el link de una imagen"
     }
+    if(input.userId.trim() === "") {
+      errors.userId = "Debes ingresar el UUID del usuario"
+    }
     if (!errors.species && !errors.sex && !errors.age && !errors.size && !errors.area && !errors.detail && !errors.img) {
         handlerSubmit(e)
     } 
     else {
+<<<<<<< Updated upstream
         alert("Falta rellenar algun campo")
 
+=======
+        alert("Error en el formulario")
+>>>>>>> Stashed changes
     }
 
   const handlerChange = (e) => {
@@ -188,7 +199,15 @@ export default function FormPostPet() {
           />
         </div>
         <div>
-          
+          <label>ID de Usuario:</label>
+          <input
+            type="text"
+            name="userId"
+            placeholder="UUID del usuario.."
+            onChange={(e) => handlerChange(e)}
+          />
+        </div>
+        <div>
           <label>Imagen:</label>
           <input
             type="text"
@@ -196,7 +215,7 @@ export default function FormPostPet() {
             placeholder="https://urlDeLaImagen.jpg"
             onChange={(e) => handlerChange(e)}
           />
-        </div>
+        </div>        
         <Link to={"/home"}>
           <button>Atrás</button>
         </Link>
