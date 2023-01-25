@@ -1,33 +1,30 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link, redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { postPet } from "../../Redux/Actions";
+import { useDispatch } from "react-redux";
+// import { postUser } from "../../Redux/Actions";
 
-export default function FormPostPet() {
+export default function FormPostUser() {
   const dispatch = useDispatch();
 
   useEffect(()=>{
               
   },[])
   const [input, setInput] = useState({
-        species: "",
-        sex: "",
-        age: "",
-        size: "",
-        area: "",
-        detail: "",
-        img: "",
+        name: "",
+        surname: "",
+        email: "",
+        username: "",
+        phone: 0,
+        role: "user",
       });
   const errors = {
-       species: "",
-       sex: "",
-       age: "",
-       size: "",
-       area: "",
-       detail: "",
-       img: "",
-     };
+        name: "",
+        surname: "",
+        email: "",
+        username: "",
+        phone: 0,
+      };
             
   const handlerChange = (e) => {
     setInput({
@@ -37,8 +34,7 @@ export default function FormPostPet() {
    console.log("input",input)
    console.log("error",errors)
   };
-
-              
+   
 
   function handlerErrors(e) {
     e.preventDefault();
@@ -77,29 +73,15 @@ export default function FormPostPet() {
   const handlerSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(postPet(input)); 
-    alert("Mascota creada con éxito!");
-  
+    // dispatch(postUser(input)); 
+    alert("Usuario creado con éxito!");
   };
 
   return (
     <div>
       <form onSubmit={(e)=>handlerErrors(e)}>
-        <h1>Completa el formulario</h1>
-        <div>
-        <select name="species" onChange={(e)=>handlerChange(e)}>
-          <option value="default" key="defaultSpecies">
-            Especie
-          </option>
-          <option value="gato" key="cat">
-            Gatx
-          </option>
-          <option value="perro" key="dog">
-            Perrx
-          </option>
-        </select>
-        {errors.species &&(<p>{errors.species}</p>)}
-        </div>
+        <h1>Completa el formulario para crear tu usuario</h1>
+        <div> <label>Nombre: </label> <input type="text" onChange={(e) => handlerChange(e)} /> </div>
         
 
         <select name="sex" key="sex" onChange={(e)=>handlerChange(e)}>
@@ -114,6 +96,15 @@ export default function FormPostPet() {
           </option>
         </select>
 
+ {/* {
+        name: "",
+        surname: "",
+        email: "",
+        username: "",
+        phone: 0,
+        role: "user",
+      }
+*/}
         <select name="age" key="age" onChange={(e)=>handlerChange(e)}>
           <option value="default" key="defaultAge">
             Edad
