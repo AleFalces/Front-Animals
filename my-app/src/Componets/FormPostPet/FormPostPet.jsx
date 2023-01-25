@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import {} from "../../Redux/Actions";
+import { useEffect } from "react";
 import { Link, redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { postPet } from "../../Redux/Actions";
 
 export default function FormPostPet() {
@@ -78,31 +77,15 @@ export default function FormPostPet() {
         handlerSubmit(e)
     } 
     else {
-<<<<<<< Updated upstream
-        alert("Falta rellenar algun campo")
-
-=======
         alert("Error en el formulario")
->>>>>>> Stashed changes
     }
-
-  const handlerChange = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-
   };
-
-
-
-};
 
   const handlerSubmit = (e) => {
     e.preventDefault();
 
     dispatch(postPet(input)); 
-    alert("Formulario creado con éxito! SUPUESTAMENTE");
+    alert("Mascota creada con éxito!");
   
   };
 
@@ -143,13 +126,13 @@ export default function FormPostPet() {
             Edad
           </option>
           <option value="cachorro" key="cachorro">
-            Cachorrx
+            Cachorro
           </option>
           <option value="joven" key="joven">
             Joven
           </option>
           <option value="adulto" key="adulto">
-            Adultx
+            Adulto
           </option>
         </select>
 
@@ -158,10 +141,10 @@ export default function FormPostPet() {
             Tamaño
           </option>
           <option value="pequeño" key="pequeño">
-            Chicx
+            Chico
           </option>
           <option value="mediano" key="mediano">
-            Medianx
+            Mediano
           </option>
           <option value="grande" key="grande">
             Grande

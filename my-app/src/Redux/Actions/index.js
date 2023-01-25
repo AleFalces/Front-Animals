@@ -42,8 +42,6 @@ export function postPet(formInput) {
     }
   };
 }
-<<<<<<< Updated upstream
-=======
 
 export function postUser(formInput) {
   return async function (dispatch) {
@@ -62,4 +60,3 @@ export function postUser(formInput) {
     }
   };
 }
->>>>>>> Stashed changes
