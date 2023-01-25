@@ -58,11 +58,12 @@ export default function FormPostPet() {
     if(input.area.trim() === "") {
         errors.area = "Debes escribir una localidad"
     }
-    if(input.detail.trim() === "") {
+    if(input.detail.trim() !== "") {
+      if(input.detail.trim().length < 15) {
+        errors.detail = "La descripcion debe ser de al menos 16 caraceteres"
+      }
+    } else {
       errors.detail = "Debes escribir una breve descripcion de la mascota"
-    }
-    if(input.detail.trim().length < 15) {
-      errors.detail = "La descripcion debe ser de al menos 16 caraceteres"
     }
     if(input.img === ""){
       errors.img = "Debes poner el link de una imagen"
