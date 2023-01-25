@@ -48,7 +48,12 @@ export function postUser(formInput) {
     try {
       console.log("ENTRÉ A LA ACTION POSTUSER");
       console.log("FORMINPUT DESDE ACTION POSTUSER!", formInput);
-      const newUser = await axios.post("http://localhost:3001/pets", formInput);
+
+      const newUser = await axios.post(
+        "http://localhost:3001/?????????????????",
+        formInput
+      );
+
       dispatch({
         type: POST_USER,
       });
