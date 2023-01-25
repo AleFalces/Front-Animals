@@ -1,4 +1,4 @@
-import { GET_ALL_PETS, GET_PET_ID, POST_PET } from "../ActionTypes";
+import { GET_ALL_PETS, GET_PET_ID, POST_PET, POST_USER } from "../ActionTypes";
 
 const initialState = {
   allPets: [],
@@ -20,6 +20,10 @@ const RootReducer = (state = initialState, action) => {
         Detail: action.payload,
       };
     case POST_PET:
+      return {
+        ...state,
+      };
+    case POST_USER:
       return {
         ...state,
       };

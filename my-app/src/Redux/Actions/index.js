@@ -1,4 +1,4 @@
-import { GET_ALL_PETS, GET_PET_ID, POST_PET } from "../ActionTypes";
+import { GET_ALL_PETS, GET_PET_ID, POST_PET, POST_USER } from "../ActionTypes";
 import axios from "axios";
 
 export function getAllPets() {
@@ -32,8 +32,8 @@ export function postPet(formInput) {
   return async function (dispatch) {
     try {
       console.log("ACTION ENTRE! input desde form", formInput);
-      const json = await axios.post("http://localhost:3001/pets", formInput);
-      console.log("ACTION!!! : JSON DATAAAAA!!!!", json.data);
+      const newPet = await axios.post("http://localhost:3001/pets", formInput);
+      console.log("ACTION!!! : JSON DATAAAAA!!!!", newPet.data);
       dispatch({
         type: POST_PET,
       });
@@ -48,10 +48,12 @@ export function postUser(formInput) {
     try {
       console.log("ENTRÉ A LA ACTION POSTUSER");
       console.log("FORMINPUT DESDE ACTION POSTUSER!", formInput);
+
       const newUser = await axios.post(
         "http://localhost:3001/?????????????????",
         formInput
       );
+
       dispatch({
         type: POST_USER,
       });
