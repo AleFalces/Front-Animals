@@ -10,7 +10,9 @@ import Donate from "./Componets/Donate/Donate";
 import AboutUs from "./Componets/AboutUs/AboutUs";
 import Store from "./Componets/Store/Store";
 import FormPostPet from "./Componets/FormPostPet/FormPostPet";
-import FormPostUser from "./Componets/FormPostUser/FormUser";
+
+import FormPostUser from "./Componets/FormPostUser/FormPostUser";
+
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
         <Route exact path="/store" element={<Store />}></Route>
         <Route exact path="/pets/:paramsId" element={<Details />}></Route>
         <Route exact path="/createPet" element={<FormPostPet />}></Route>
-        <Route ecxact path="/createUser" element={<FormPostUser />}></Route>
+        <Route exact path="/createUser" element={<FormPostUser />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
