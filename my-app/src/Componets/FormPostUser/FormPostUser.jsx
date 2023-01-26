@@ -101,7 +101,7 @@ export default function FormPostUser() {
           <input
             type="text"
             name="username"
-            placeholder="Fernandez"
+            placeholder="NombreDeUsuario"
             onChange={(e) => handlerChange(e)}
           />
         </div>        

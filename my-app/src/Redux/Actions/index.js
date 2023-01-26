@@ -21,6 +21,7 @@ import {
   FILTER_LOST_SEX,
   FILTER_LOST_AGE,
   FILTER_LOST_SIZE,
+  FILTER_LOST_SEARCH_AREA,
 } from "../ActionTypes";
 import axios from "axios";
 
@@ -42,6 +43,8 @@ export function getAdoptionPets() {
   return async function (dispatch) {
     try {
       const allPets = await axios.get("http://localhost:3001/pets");
+      console.log(allPets.data);
+
       return dispatch({
         type: GET_ADOPTION_PETS,
         payload: allPets.data,
@@ -158,12 +161,12 @@ export function filterByAge(value) {
         });
       }
       if (value === "joven") {
-        dispatch({
+        return dispatch({
           type: FILTER_AGE_YOUNG_ADOPTION,
           payload: value,
         });
       } else {
-        dispatch({
+        return dispatch({
           type: FILTER_AGE_ADULT_ADOPTION,
           payload: value,
         });
@@ -184,13 +187,13 @@ export function filterBySize(value) {
         });
       }
       if (value === "mediano") {
-        dispatch({
+        return dispatch({
           type: FILTER_SIZE_MEDIUM_ADOPTION,
           payload: value,
         });
       }
       if (value === "grande") {
-        dispatch({
+        return dispatch({
           type: FILTER_SIZE_BIG_ADOPTION,
           payload: value,
         });
@@ -204,7 +207,7 @@ export function filterBySize(value) {
 export function filterBySearchArea(inputValue) {
   return async function (dispatch) {
     try {
-      dispatch({
+      return dispatch({
         type: FILTER_BY_SEARCH_AREA_ADOPTION,
         payload: inputValue,
       });
@@ -268,6 +271,19 @@ export function filterLostSize(value) {
       return dispatch({
         type: FILTER_LOST_SIZE,
         payload: value,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function filterLostSearchArea(inputValue) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: FILTER_LOST_SEARCH_AREA,
+        payload: inputValue,
       });
     } catch (error) {
       console.log(error);

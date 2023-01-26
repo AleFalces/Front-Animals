@@ -20,9 +20,4 @@ export const FILTER_DOGS_LOST = "FILTER_DOGS_LOST";
 export const FILTER_LOST_SEX = "FILTER_LOST_SEX";
 export const FILTER_LOST_AGE = "FILTER_LOST_AGE";
 export const FILTER_LOST_SIZE = "FILTER_LOST_SIZE";
-// export const FILTER_LOST_
-// export const FILTER_LOST_
-// export const FILTER_LOST_
-// export const FILTER_LOST_
-// export const FILTER_LOST_
-// export const FILTER_LOST_
+export const FILTER_LOST_SEARCH_AREA = "FILTER_LOST_SEARCH_AREA";
