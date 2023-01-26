@@ -1,9 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/imagenes/logo_negro.png";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const { user } = useAuth0();
+  console.log(user);
   return (
     <div className="navContainer">
       {/*        ↓↓↓↓ saqué la clase bg-dark del nav de abajo ↓↓↓↓        */}
@@ -52,9 +55,11 @@ const Navbar = () => {
               </li>
               <li className="navbar nav-item">
                 {/* Renegando con el login para que aparezca mas a la derecha */}
-                <NavLink to="/login" className="nav-link">
-                  Ingresar
-                </NavLink>
+                <img
+                  src={user ? user.picture : "404"}
+                  alt={user ? user.name : "siuuuu"}
+                  className="navbar-brand imagenDeusuario"
+                />
               </li>
             </ul>
           </div>
