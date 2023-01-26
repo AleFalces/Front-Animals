@@ -6,6 +6,7 @@ import logo from "../../assets/imagenes/logo_blanco.png";
 
 function CollapsibleExample() {
   return (
+
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="/home">
@@ -30,6 +31,7 @@ function CollapsibleExample() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
   );
 }
 

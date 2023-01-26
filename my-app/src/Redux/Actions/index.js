@@ -1,4 +1,27 @@
-import { GET_ALL_PETS, GET_PET_ID, POST_PET, POST_USER } from "../ActionTypes";
+import {
+  GET_ALL_PETS,
+  GET_ADOPTION_PETS,
+  GET_LOST_PETS,
+  GET_PET_ID,
+  POST_PET,
+  POST_USER,
+  FILTER_CATS_ADOPTION,
+  FILTER_DOGS_ADOPTION,
+  FILTER_SEX_FEMALE_ADOPTION,
+  FILTER_SEX_MALE_ADOPTION,
+  FILTER_AGE_PUPPY_ADOPTION,
+  FILTER_AGE_YOUNG_ADOPTION,
+  FILTER_AGE_ADULT_ADOPTION,
+  FILTER_SIZE_SMALL_ADOPTION,
+  FILTER_SIZE_MEDIUM_ADOPTION,
+  FILTER_SIZE_BIG_ADOPTION,
+  FILTER_BY_SEARCH_AREA_ADOPTION,
+  FILTER_CATS_LOST,
+  FILTER_DOGS_LOST,
+  FILTER_LOST_SEX,
+  FILTER_LOST_AGE,
+  FILTER_LOST_SIZE,
+} from "../ActionTypes";
 import axios from "axios";
 
 export function getAllPets() {
@@ -15,10 +38,38 @@ export function getAllPets() {
   };
 }
 
+export function getAdoptionPets() {
+  return async function (dispatch) {
+    try {
+      const allPets = await axios.get("http://localhost:3001/pets");
+      return dispatch({
+        type: GET_ADOPTION_PETS,
+        payload: allPets.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getLostPets() {
+  return async function (dispatch) {
+    try {
+      const allPets = await axios.get("http://localhost:3001/pets");
+      return dispatch({
+        type: GET_LOST_PETS,
+        payload: allPets.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export const petDetails = (id) => async (dispatch) => {
   try {
     const getID = await axios.get(`http://localhost:3001/pets/${id}`);
-    dispatch({
+    return dispatch({
       type: GET_PET_ID,
       payload: getID.data,
     });
@@ -31,7 +82,7 @@ export function postPet(formInput) {
   return async function (dispatch) {
     try {
       const json = await axios.post("http://localhost:3001/pets", formInput);
-      dispatch({
+      return dispatch({
         type: POST_PET,
       });
     } catch (error) {
@@ -48,8 +99,175 @@ export function postUser(formInput) {
         "http://localhost:3001/users",
         formInput
       );
-      dispatch({
+      return dispatch({
         type: POST_USER,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function filterBySpecie(value) {
+  return async function (dispatch) {
+    try {
+      if (value === "gato") {
+        return dispatch({
+          type: FILTER_CATS_ADOPTION,
+          payload: value,
+        });
+      } else {
+        return dispatch({
+          type: FILTER_DOGS_ADOPTION,
+          payload: value,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function filterBySex(value) {
+  return async function (dispatch) {
+    try {
+      if (value === "hembra") {
+        return dispatch({
+          type: FILTER_SEX_FEMALE_ADOPTION,
+          payload: value,
+        });
+      } else {
+        return dispatch({
+          type: FILTER_SEX_MALE_ADOPTION,
+          payload: value,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function filterByAge(value) {
+  return async function (dispatch) {
+    try {
+      if (value === "cachorro") {
+        return dispatch({
+          type: FILTER_AGE_PUPPY_ADOPTION,
+          payload: value,
+        });
+      }
+      if (value === "joven") {
+        dispatch({
+          type: FILTER_AGE_YOUNG_ADOPTION,
+          payload: value,
+        });
+      } else {
+        dispatch({
+          type: FILTER_AGE_ADULT_ADOPTION,
+          payload: value,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function filterBySize(value) {
+  return async function (dispatch) {
+    try {
+      if (value === "pequeño") {
+        return dispatch({
+          type: FILTER_SIZE_SMALL_ADOPTION,
+          payload: value,
+        });
+      }
+      if (value === "mediano") {
+        dispatch({
+          type: FILTER_SIZE_MEDIUM_ADOPTION,
+          payload: value,
+        });
+      }
+      if (value === "grande") {
+        dispatch({
+          type: FILTER_SIZE_BIG_ADOPTION,
+          payload: value,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function filterBySearchArea(inputValue) {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: FILTER_BY_SEARCH_AREA_ADOPTION,
+        payload: inputValue,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function filterLostSpecies(value) {
+  return async function (dispatch) {
+    try {
+      if (value === "gato") {
+        console.log("ACTION LOST SPECIE", value);
+        return dispatch({
+          type: FILTER_CATS_LOST,
+          payload: value,
+        });
+      } else {
+        console.log("ACTION LOST SPECIE", value);
+        return dispatch({
+          type: FILTER_DOGS_LOST,
+          payload: value,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function filterLostSex(value) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: FILTER_LOST_SEX,
+        payload: value,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function filterLostAge(value) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: FILTER_LOST_AGE,
+        payload: value,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function filterLostSize(value) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: FILTER_LOST_SIZE,
+        payload: value,
       });
     } catch (error) {
       console.log(error);

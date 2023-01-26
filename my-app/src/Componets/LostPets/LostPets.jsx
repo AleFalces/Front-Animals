@@ -1,28 +1,27 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
-import FilterBarAdoption from "./FilterBarAdoption";
+import FilterBarLost from "./FilterBarLost";
 import Footer from "../Footer/Footer";
 import Card from "../Card/Card";
-import { getAdoptionPets } from "../../Redux/Actions/index";
+import { getLostPets } from "../../Redux/Actions/index";
 import { Link } from "react-router-dom";
-import "./Cards.css";
-import "./FilterBar.css"
+import "../Adoption/Cards.css";
 
-const Adoption = () => {
+const LostPets = () => {
 	const pets = useSelector((state) => state.pets);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getAdoptionPets())
+		dispatch(getLostPets())
 	}, [dispatch]);
 
 	return (
 		<>
 			<Navbar />
 			<br />
-			<div class="example"><FilterBarAdoption/></div>
+			<div className="example"><FilterBarLost/></div>
 
 			<div className="cardsContainer">
 				{!pets?.length ? (
@@ -42,4 +41,4 @@ const Adoption = () => {
 	);
 };
 
-export default Adoption;
+export default LostPets;
