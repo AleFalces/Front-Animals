@@ -1,4 +1,5 @@
 import {
+
   GET_ALL_PETS,
   GET_ADOPTION_PETS,
   GET_PET_ID,
@@ -22,17 +23,19 @@ import {
   FILTER_LOST_AGE,
   FILTER_LOST_SIZE,
   FILTER_LOST_SEARCH_AREA,
+
 } from "../ActionTypes";
 
 const initialState = {
-  allPets: [],
-  adoptionPets: [],
-  lostPets: [],
-  pets: [],
-  Detail: {},
+	allPets: [],
+	adoptionPets: [],
+	lostPets: [],
+	pets: [],
+	Detail: {},
 };
 
 const RootReducer = (state = initialState, action) => {
+
   switch (action.type) {
     case GET_ALL_PETS:
       return {
@@ -164,6 +167,7 @@ const RootReducer = (state = initialState, action) => {
     default:
       return state;
   }
+
 };
 
 export default RootReducer;
