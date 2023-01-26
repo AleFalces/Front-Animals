@@ -21,6 +21,7 @@ import {
   FILTER_LOST_SEX,
   FILTER_LOST_AGE,
   FILTER_LOST_SIZE,
+  FILTER_LOST_SEARCH_AREA,
 } from "../ActionTypes";
 
 const initialState = {
@@ -152,6 +153,13 @@ const RootReducer = (state = initialState, action) => {
       return {
         ...state,
         pets: state.lostPets.filter((pet) => pet.size === action.payload),
+      };
+    case FILTER_LOST_SEARCH_AREA:
+      return {
+        ...state,
+        pets: state.lostPets.filter((pet) =>
+          pet.area.toLowerCase().includes(action.payload.toLowerCase())
+        ),
       };
     default:
       return state;
