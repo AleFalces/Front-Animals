@@ -10,9 +10,8 @@ import Donate from "./Componets/Donate/Donate";
 import AboutUs from "./Componets/AboutUs/AboutUs";
 import Store from "./Componets/Store/Store";
 import FormPostPet from "./Componets/FormPostPet/FormPostPet";
-
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
-
+import LostPets from "./Componets/LostPets/LostPets";
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
       <Routes>
         <Route exact path="/" element={<LandingPage />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
-        <Route exact path="/adoption" element={<Adoption />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/aboutUs" element={<AboutUs />}></Route>
         <Route exact path="/donate" element={<Donate />}></Route>
@@ -28,6 +26,8 @@ function App() {
         <Route exact path="/pets/:paramsId" element={<Details />}></Route>
         <Route exact path="/createPet" element={<FormPostPet />}></Route>
         <Route exact path="/createUser" element={<FormPostUser />}></Route>
+        <Route exact path="/adoptions" element={<Adoption />}></Route>
+        <Route exact path="/lostPets" element={<LostPets />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
