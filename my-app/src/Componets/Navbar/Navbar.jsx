@@ -34,7 +34,7 @@ const Navbar = () => {
             <ul className="ul">
               <li className="navbar nav-item">
                 {/* clases que estaban en los NavLinks de abajo: text-light active */}
-                <NavLink to="/adoption" className="nav-link">
+                <NavLink to="/adoptions" className="nav-link">
                   Adoptame🐾
                 </NavLink>
               </li>
