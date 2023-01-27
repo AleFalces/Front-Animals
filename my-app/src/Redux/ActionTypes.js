@@ -20,9 +20,12 @@ export const FILTER_DOGS_LOST = "FILTER_DOGS_LOST";
 export const FILTER_LOST_SEX = "FILTER_LOST_SEX";
 export const FILTER_LOST_AGE = "FILTER_LOST_AGE";
 export const FILTER_LOST_SIZE = "FILTER_LOST_SIZE";
-// export const FILTER_LOST_
-// export const FILTER_LOST_
-// export const FILTER_LOST_
-// export const FILTER_LOST_
-// export const FILTER_LOST_
-// export const FILTER_LOST_
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const SET_SHOP_CHECKLIST = "SET_SHOP_CHECKLIST";
+export const SHOP_FILTER_CHECKLIST = "SHOP_FILTER_CHECKLIST";
+export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
+export const SHOP_SEARCH_INPUT_NAME = "SHOP_SEARCH_INPUT_NAME";
+export const FILTER_LOST_SEARCH_AREA = "FILTER_LOST_SEARCH_AREA";
+export const NEXT_PAGE = "NEXT_PAGE";
+export const PREV_PAGE = "PREV_PAGE";
+export const ACTUAL_PAGE = "ACTUAL_PAGE";

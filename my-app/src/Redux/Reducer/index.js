@@ -21,6 +21,15 @@ import {
 	FILTER_LOST_SEX,
 	FILTER_LOST_AGE,
 	FILTER_LOST_SIZE,
+	FILTER_LOST_SEARCH_AREA,
+	GET_ALL_PRODUCTS,
+	SET_SHOP_CHECKLIST,
+	SHOP_FILTER_CHECKLIST,
+	GET_PRODUCT_DETAIL,
+	SHOP_SEARCH_INPUT_NAME,
+	NEXT_PAGE,
+	PREV_PAGE,
+	ACTUAL_PAGE,
 } from "../ActionTypes";
 
 const initialState = {
@@ -29,6 +38,11 @@ const initialState = {
 	lostPets: [],
 	pets: [],
 	Detail: {},
+	allProducts: [],
+	products: [],
+	productDetail: {},
+	shopChecklist: {},
+	actualPage: 1,
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -70,54 +84,62 @@ const RootReducer = (state = initialState, action) => {
 		case FILTER_CATS_ADOPTION:
 			return {
 				...state,
-				pets: state.adoptionPets.filter(
-					(pet) => pet.species === action.payload
-				),
+				pets: state.pets.filter((pet) => pet.species === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_DOGS_ADOPTION:
 			return {
 				...state,
 				pets: state.pets.filter((pet) => pet.species === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_SEX_FEMALE_ADOPTION:
 			return {
 				...state,
 				pets: state.pets.filter((pet) => pet.sex === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_SEX_MALE_ADOPTION:
 			return {
 				...state,
 				pets: state.pets.filter((pet) => pet.sex === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_AGE_PUPPY_ADOPTION:
 			return {
 				...state,
 				pets: state.pets.filter((pet) => pet.age === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_AGE_YOUNG_ADOPTION:
 			return {
 				...state,
 				pets: state.pets.filter((pet) => pet.age === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_AGE_ADULT_ADOPTION:
 			return {
 				...state,
 				pets: state.pets.filter((pet) => pet.age === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_SIZE_SMALL_ADOPTION:
 			return {
 				...state,
 				pets: state.pets.filter((pet) => pet.size === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_SIZE_MEDIUM_ADOPTION:
 			return {
 				...state,
 				pets: state.pets.filter((pet) => pet.size === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_SIZE_BIG_ADOPTION:
 			return {
 				...state,
 				pets: state.pets.filter((pet) => pet.size === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_BY_SEARCH_AREA_ADOPTION:
 			return {
@@ -125,31 +147,89 @@ const RootReducer = (state = initialState, action) => {
 				pets: state.pets.filter((pet) =>
 					pet.area.toLowerCase().includes(action.payload.toLowerCase())
 				),
+				actualPage: 1,
 			};
 		case FILTER_CATS_LOST:
 			return {
 				...state,
-				pets: state.lostPets.filter((pet) => pet.species === action.payload),
+				pets: state.pets.filter((pet) => pet.species === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_DOGS_LOST:
 			return {
 				...state,
-				pets: state.lostPets.filter((pet) => pet.species === action.payload),
+				pets: state.pets.filter((pet) => pet.species === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_LOST_SEX:
 			return {
 				...state,
-				pets: state.lostPets.filter((pet) => pet.sex === action.payload),
+				pets: state.pets.filter((pet) => pet.sex === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_LOST_AGE:
 			return {
 				...state,
-				pets: state.lostPets.filter((pet) => pet.age === action.payload),
+				pets: state.pets.filter((pet) => pet.age === action.payload),
+				actualPage: 1,
 			};
 		case FILTER_LOST_SIZE:
 			return {
 				...state,
-				pets: state.lostPets.filter((pet) => pet.size === action.payload),
+				pets: state.pets.filter((pet) => pet.size === action.payload),
+				actualPage: 1,
+			};
+
+		case GET_ALL_PRODUCTS:
+			return {
+				...state,
+				allProducts: action.payload,
+				products: action.payload,
+			};
+		case GET_PRODUCT_DETAIL:
+			return {
+				...state,
+				// productDetail: action.payload
+			};
+		case SET_SHOP_CHECKLIST:
+			return {
+				...state,
+				shopChecklist: action.payload,
+			};
+		case SHOP_FILTER_CHECKLIST:
+			return {
+				...state,
+				// products:
+			};
+		case SHOP_SEARCH_INPUT_NAME:
+			return {
+				...state,
+				products: state.allProducts.filter((product) =>
+					product.name.toLowerCase().includes(action.payload.toLowerCase())
+				),
+			};
+
+		case FILTER_LOST_SEARCH_AREA:
+			return {
+				...state,
+				pets: state.lostPets.filter((pet) =>
+					pet.area.toLowerCase().includes(action.payload.toLowerCase())
+				),
+			};
+		case ACTUAL_PAGE:
+			return {
+				...state,
+				actualPage: action.payload,
+			};
+		case NEXT_PAGE:
+			return {
+				...state,
+				actualPage: action.payload,
+			};
+		case PREV_PAGE:
+			return {
+				...state,
+				actualPage: action.payload,
 			};
 		default:
 			return state;

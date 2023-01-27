@@ -6,6 +6,7 @@ import logo from "../../assets/imagenes/logo_negro.png";
 import "./Navbar.css";
 
 function CollapsibleExample() {
+
   return (
     <Navbar
       collapseOnSelect
@@ -41,6 +42,6 @@ function CollapsibleExample() {
       </Container>
     </Navbar>
   );
-}
 
+}
 export default CollapsibleExample;
