@@ -19,27 +19,52 @@
     width: 100%;        
     margin: auto;
     padding: 3%;
+
 }
 .container2 img {
     width: 35%;
     height: 60vh;
     border-radius: 5%;
+    
+    box-shadow:  20px 20px 60px #858282,
+             -20px -20px 60px #ffffff;
+
 }
 
 .petDescription {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content:center;
     padding-top: 50px;
+    
+
 }
 .petDescription2 {
-    border: 1px solid black;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    border: 1px solid rgb(207, 206, 206);
     border-radius: 1rem;
     width: 40%;
     padding: 20px;
+    background-color: #DCE0AC;
+    box-shadow:  20px 20px 60px #858282,
+    -20px -20px 60px #ffffff;
+    
 }
 .petDescription2 p{
-    font-family: sans-serif;
+    font-family:'Barlow';
+    font-weight: 600;
+    font-size: 1.5rem; 
+   
+}
+
+.petDescription2 h3{
+    display:inline;
+    font-family: 'Comfortaa', cursive;
     font-weight: 700;
-    font-size: 30px;
+    font-size: 1.5rem;
+    margin: 1rem;
+ 
 }
