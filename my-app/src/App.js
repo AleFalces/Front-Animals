@@ -12,11 +12,19 @@ import Store from "./Componets/Store/Store";
 import FormPostPet from "./Componets/FormPostPet/FormPostPet";
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
 import LostPets from "./Componets/LostPets/LostPets";
+import TopNav from "./Componets/TopNav/TopNav";
+import SideNav from "./Componets/SideNav";
+// import Dashboard from "./Componets/Dashboard";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
+
+      <TopNav />
+      <SideNav />
+      {/* <Dashboard/> */}
+
+      {/* <Routes>
         <Route exact path="/" element={<LandingPage />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
@@ -29,7 +37,7 @@ function App() {
         <Route exact path="/adoptions" element={<Adoption />}></Route>
         <Route exact path="/lostPets" element={<LostPets />}></Route>
         <Route path="*" element={<NotFound />}></Route>
-      </Routes>
+      </Routes> */}
     </div>
   );
 }
