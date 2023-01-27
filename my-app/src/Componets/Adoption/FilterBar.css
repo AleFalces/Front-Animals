@@ -1,45 +1,68 @@
 .example {
-    padding: 20px;
-    background:#f9977b;
-
+  padding: 20px;
+  background: #f6f5f5;
+  display: flex;
+  justify-content: space-around;
+  /* align-items: center; */
 }
-.selectsFilter {
-    background: #1f2032;
-    /* background: #ffe5c1; */
-    color: #1f2032;
-    color: #fff;
-    padding: 6px;
+
+.titleSearch {
+  font-family: Inter;
+  font-weight: 400;
 }
 .inputSearch {
-background: #ffe5c1;
-color: #1f2032;
+  color: #272343;
+  border-radius: 20px;
+}
+
+.buttonSearch {
+  border: none;
+  background-color: #ffd803;
+  height: 1.2rem;
+  border-radius: 10px;
+  align-items: center;
 }
 
 .filterBarContainer {
-    /* background: #1f2032; */
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
-.filterBarContainer h2 {
-    color: #1f2032;
-    background: #ffe5c1;
-    width: max-content;
-    padding: 10px;
-    border-radius: 8px;
-    align-self: center;
-}
-.filterBarContainer select{
-    width: 130px;
 
+.filterBarContainer h2 {
+  font-size: larger;
+  color: #1f2032;
+  /* width: max-content; */
+  /* padding: 10px; */
+  font-family: Inter;
+  font-weight: 600;
+  align-items: center;
 }
-.filterBarContainer .navlinkBar {
-    width: 200px;
-    /* background-color: #fff; */
-    position: absolute;
-    right: 0;
+.filterBarContainer select {
+  width: 100px;
 }
+
+.selectsFilter {
+  border: none;
+  font-family: Inter;
+  font-weight: 500;
+  height: 2rem;
+  border-radius: 20px;
+  background: #272343;
+  color: #fff;
+  padding: 6px;
+  /* align-items: center; */
+  display: flex;
+  justify-content: space-around;
+}
+
 .selectsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: space-evenly;
 }

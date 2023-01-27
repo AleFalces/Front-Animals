@@ -7,39 +7,40 @@ import Card from "../Card/Card";
 import { getAdoptionPets } from "../../Redux/Actions/index";
 import { Link } from "react-router-dom";
 import "./Cards.css";
-import "./FilterBar.css"
+import "./FilterBar.css";
 
 const Adoption = () => {
-	const pets = useSelector((state) => state.pets);
+  const pets = useSelector((state) => state.pets);
 
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getAdoptionPets())
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(getAdoptionPets());
+  }, [dispatch]);
 
-	return (
-		<>
-			<Navbar />
-			<br />
-			<div class="example"><FilterBarAdoption/></div>
+  return (
+    <>
+      <Navbar />
+      <div class="example">
+        <FilterBarAdoption />
+      </div>
 
-			<div className="cardsContainer">
-				{!pets?.length ? (
-					<p>No hay mascotas</p>
-				) : (
-					pets?.map((el) => (
-						<Link to={`/pets/${el.id}`} key={el.id}>
-							<div className="cardsContainerPadding">
-								<Card data={el} />
-							</div>
-						</Link>
-					))
-				)}
-			</div>
-			<Footer />
-		</>
-	);
+      <div className="cardsContainer">
+        {!pets?.length ? (
+          <p>No hay mascotas</p>
+        ) : (
+          pets?.map((el) => (
+            <Link to={`/pets/${el.id}`} key={el.id}>
+              <div className="cardsContainerPadding">
+                <Card data={el} />
+              </div>
+            </Link>
+          ))
+        )}
+      </div>
+      <Footer />
+    </>
+  );
 };
 
 export default Adoption;

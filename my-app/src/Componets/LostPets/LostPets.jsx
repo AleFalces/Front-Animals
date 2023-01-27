@@ -9,36 +9,37 @@ import { Link } from "react-router-dom";
 import "../Adoption/Cards.css";
 
 const LostPets = () => {
-	const pets = useSelector((state) => state.pets);
+  const pets = useSelector((state) => state.pets);
 
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getLostPets())
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(getLostPets());
+  }, [dispatch]);
 
-	return (
-		<>
-			<Navbar />
-			<br />
-			<div className="example"><FilterBarLost/></div>
+  return (
+    <>
+      <Navbar />
+      <div className="example">
+        <FilterBarLost />
+      </div>
 
-			<div className="cardsContainer">
-				{!pets?.length ? (
-					<p>No hay mascotas</p>
-				) : (
-					pets?.map((el) => (
-						<Link to={`/pets/${el.id}`} key={el.id}>
-							<div className="cardsContainerPadding">
-								<Card data={el} />
-							</div>
-						</Link>
-					))
-				)}
-			</div>
-			<Footer />
-		</>
-	);
+      <div className="cardsContainer">
+        {!pets?.length ? (
+          <p>No hay mascotas</p>
+        ) : (
+          pets?.map((el) => (
+            <Link to={`/pets/${el.id}`} key={el.id}>
+              <div className="cardsContainerPadding">
+                <Card data={el} />
+              </div>
+            </Link>
+          ))
+        )}
+      </div>
+      <Footer />
+    </>
+  );
 };
 
 export default LostPets;

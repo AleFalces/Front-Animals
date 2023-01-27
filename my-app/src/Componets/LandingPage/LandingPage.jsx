@@ -15,7 +15,7 @@ const LandingPage = () => {
       <div className="container-box">
         <div className="box">
           <img src={logo} alt="logo" width="125em" name="logo" />
-          <label htmlFor="logo">
+          <label className="logo">
             Donde ayudamos a nuestros amiguitos peludos
           </label>
           <Login name="Login" />

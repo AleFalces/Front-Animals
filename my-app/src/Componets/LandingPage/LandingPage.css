@@ -1,32 +1,35 @@
 .contenedor {
-    min-height: 100vh;
-    position: relative;
-    background: linear-gradient(20deg, #ff4066c6 15%, #fff06ace 100%);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  min-height: 100vh;
+  position: relative;
+  background-color: #bae8e8;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .contenedor .logo {
-    margin-right: 20%;
+  margin-right: 20%;
+  font-family: Inter;
 }
 .container-box {
-    background-color: #fff;
-    text-align: center;
-    height: 100vh;
-    width: 25%;
-    position: relative;
+  background-color: #fff;
+  font-family: Inter;
+  text-align: center;
+  height: 100vh;
+  width: 25%;
+  position: relative;
 }
 
 .box {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: center;
-    justify-content: space-evenly;
-    text-align: center;
-    font-weight: bold;
-    height: 50vh;
-    /* border: solid black 1px; */
-    margin-top: 35%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  font-family: Inter;
+  font-weight: bold;
+  height: 50vh;
+  /* border: solid black 1px; */
+  margin-top: 35%;
 }

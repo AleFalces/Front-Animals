@@ -11,41 +11,8 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <br />
-      <br />
       <div className="home">
         <Slider />
-        <br />
-        <hr />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
       </div>
       <Footer />
     </>
