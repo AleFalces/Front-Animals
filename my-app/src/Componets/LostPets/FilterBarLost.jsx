@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterLostSpecies, filterLostSex, filterLostAge, filterLostSize, getLostPets } from "../../Redux/Actions";
+import { filterLostSearchArea, filterLostSpecies, filterLostSex, filterLostAge, filterLostSize, getLostPets } from "../../Redux/Actions";
 import logo from "../../assets/imagenes/logo_negro.png";
 import { NavLink } from "react-router-dom";
 
@@ -50,7 +50,7 @@ const FilterBar = () => {
   const handlerSearchByArea = (e) => {
     e.preventDefault();
     if(input !== "" && input.trim() !== "") {
-    //   dispatch(filterBySearchArea(input.trim()))
+      dispatch(filterLostSearchArea(input.trim()))
     } else {
       alert("Debes especificar un area para que podamos buscar!")
     }

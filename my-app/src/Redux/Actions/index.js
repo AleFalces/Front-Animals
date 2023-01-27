@@ -26,6 +26,8 @@ import {
   SET_SHOP_CHECKLIST,
   SHOP_FILTER_CHECKLIST,
   SHOP_SEARCH_INPUT_NAME,
+  FILTER_LOST_SEARCH_AREA,
+
 } from "../ActionTypes";
 import { HOST } from "../../utils";
 import axios from "axios";
@@ -48,6 +50,8 @@ export function getAdoptionPets() {
   return async function (dispatch) {
     try {
       const allPets = await axios.get("http://localhost:3001/pets");
+      console.log(allPets.data);
+
       return dispatch({
         type: GET_ADOPTION_PETS,
         payload: allPets.data,
@@ -160,12 +164,12 @@ export function filterByAge(value) {
         });
       }
       if (value === "joven") {
-        dispatch({
+        return dispatch({
           type: FILTER_AGE_YOUNG_ADOPTION,
           payload: value,
         });
       } else {
-        dispatch({
+        return dispatch({
           type: FILTER_AGE_ADULT_ADOPTION,
           payload: value,
         });
@@ -186,13 +190,13 @@ export function filterBySize(value) {
         });
       }
       if (value === "mediano") {
-        dispatch({
+        return dispatch({
           type: FILTER_SIZE_MEDIUM_ADOPTION,
           payload: value,
         });
       }
       if (value === "grande") {
-        dispatch({
+        return dispatch({
           type: FILTER_SIZE_BIG_ADOPTION,
           payload: value,
         });
@@ -206,7 +210,7 @@ export function filterBySize(value) {
 export function filterBySearchArea(inputValue) {
   return async function (dispatch) {
     try {
-      dispatch({
+      return dispatch({
         type: FILTER_BY_SEARCH_AREA_ADOPTION,
         payload: inputValue,
       });
@@ -277,6 +281,7 @@ export function filterLostSize(value) {
   };
 }
 
+
 export function getAllProducts() {
   return async function (dispatch) {
     try {
@@ -337,6 +342,13 @@ export function shopSearchInputName(input) {
       return dispatch({
         type: SHOP_SEARCH_INPUT_NAME,
         payload: input,
+
+export function filterLostSearchArea(inputValue) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: FILTER_LOST_SEARCH_AREA,
+        payload: inputValue,
       });
     } catch (error) {
       console.log(error);

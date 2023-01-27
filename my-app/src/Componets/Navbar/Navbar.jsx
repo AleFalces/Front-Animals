@@ -1,33 +1,11 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import logo from "../../assets/imagenes/logo_negro.png";
-import { useAuth0 } from "@auth0/auth0-react";
-import "./Navbar.css";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import logo from "../../assets/imagenes/logo_blanco.png";
 
-const Navbar = () => {
-  const { user } = useAuth0();
-  console.log(user);
+function CollapsibleExample() {
   return (
-    <div className="navContainer">
-      {/*        ↓↓↓↓ saqué la clase bg-dark del nav de abajo ↓↓↓↓        */}
-      <nav className="navbar navbar-expand-md navbar-dark navHeight">
-        <div className="container-fluid">
-          <NavLink to="/home" className="navbar-brand">
-            <img src={logo} alt="logo" width="105em" />
-          </NavLink>
-          {/* Boton menu dropdown*/}
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#menu"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-            {/* si la pantalla es mas chica, automaticamente aparece el menu dropdown con todos las secciones */}
-          </button>
 
           <div className="collapse navbar-collapse" id="menu">
             {/* clases que estaban en el ul de abajo: navbar-nav  me-auto */}
@@ -65,7 +43,8 @@ const Navbar = () => {
         </div>
       </nav>
     </div>
-  );
-};
 
-export default Navbar;
+  );
+}
+
+export default CollapsibleExample;

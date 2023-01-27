@@ -1,4 +1,5 @@
 import {
+
   GET_ALL_PETS,
   GET_ADOPTION_PETS,
   GET_PET_ID,
@@ -21,6 +22,7 @@ import {
   FILTER_LOST_SEX,
   FILTER_LOST_AGE,
   FILTER_LOST_SIZE,
+  FILTER_LOST_SEARCH_AREA,
   GET_ALL_PRODUCTS,
   SET_SHOP_CHECKLIST,
   SHOP_FILTER_CHECKLIST,
@@ -38,9 +40,13 @@ const initialState = {
   products: [],
   productDetail: {},
   shopChecklist: {},
+} from "../ActionTypes";
+
+
 };
 
 const RootReducer = (state = initialState, action) => {
+
   switch (action.type) {
     case GET_ALL_PETS:
       return {
@@ -162,6 +168,7 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         pets: state.lostPets.filter((pet) => pet.size === action.payload),
       };
+
     case GET_ALL_PRODUCTS:
       return {
         ...state,
@@ -188,11 +195,19 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         products: state.allProducts.filter((product) =>
           product.name.toLowerCase().includes(action.payload.toLowerCase())
+
+    case FILTER_LOST_SEARCH_AREA:
+      return {
+        ...state,
+        pets: state.lostPets.filter((pet) =>
+          pet.area.toLowerCase().includes(action.payload.toLowerCase())
+
         ),
       };
     default:
       return state;
   }
+
 };
 
 export default RootReducer;
