@@ -8,13 +8,15 @@ import { getAdoptionPets } from "../../Redux/Actions/index";
 import { Link } from "react-router-dom";
 import "./Cards.css";
 import "./FilterBar.css";
+
 import Pagination from "../Pagination/Pagination";
 
 const Adoption = () => {
 	const pets = useSelector((state) => state.pets);
 	const actualPage = useSelector((state) => state.actualPage);
 
-	const dispatch = useDispatch();
+
+  const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getAdoptionPets());
@@ -54,6 +56,7 @@ const Adoption = () => {
 			<Footer />
 		</>
 	);
+
 };
 
 export default Adoption;

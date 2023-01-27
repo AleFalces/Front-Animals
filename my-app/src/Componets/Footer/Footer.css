@@ -1,9 +1,8 @@
 .footer {
-    font-size: 26px;
-    font-weight: bold;
-    /* background: linear-gradient(20deg, #2dfff4ba 15%, #fff64fbe 100%) !important; */
-    background: linear-gradient(20deg, #ff4066c6 15%, #fff06ace 100%) !important;
-    /* background: linear-gradient(45deg, #0d6dfd82 15%, #d633848c 100%) !important; */
-    box-shadow: 0 0 1rem 1rem rgba(149, 149, 149, 0.545);
-   
+  font-size: medium;
+  background-color: #bae8e8;
+}
+
+.logo {
+  /* background-color: #bae8e8; */
 }

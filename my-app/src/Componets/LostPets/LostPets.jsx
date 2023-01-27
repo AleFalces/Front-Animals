@@ -10,10 +10,13 @@ import "../Adoption/Cards.css";
 import Pagination from "../Pagination/Pagination";
 
 const LostPets = () => {
+
 	const pets = useSelector((state) => state.pets);
 	const actualPage = useSelector((state) => state.actualPage);
 
-	const dispatch = useDispatch();
+
+  const dispatch = useDispatch();
+
 
 	useEffect(() => {
 		dispatch(getLostPets());
@@ -52,6 +55,7 @@ const LostPets = () => {
 			<Footer />
 		</>
 	);
+
 };
 
 export default LostPets;
