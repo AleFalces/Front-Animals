@@ -12,6 +12,7 @@ import Shop from "./Componets/Shop/Shop";
 import FormPostPet from "./Componets/FormPostPet/FormPostPet";
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
 import LostPets from "./Componets/LostPets/LostPets";
+import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route exact path="/createUser" element={<FormPostUser />}></Route>
         <Route exact path="/adoptions" element={<Adoption />}></Route>
         <Route exact path="/lostPets" element={<LostPets />}></Route>
+        <Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
