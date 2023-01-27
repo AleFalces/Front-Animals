@@ -23,12 +23,13 @@ const Details = () => {
 					<img src={Det?.img} alt={Det.size}/> 
 					<div className="petDescription">
 						<div className="petDescription2">
-						<p>size: {Det.size}</p>
-						<p>Sexo: {Det.sex}</p>
-						<p>Detalle:{Det.detail}</p>
-						<p>Edad: {Det.age}</p>
-						<p>Area: {Det.area}</p>
-						<p>species: {Det.species}</p>
+						<h3>Especie <p>{Det.species}</p> </h3> 
+						<h3>Tamaño <p>{Det.size}</p> </h3>
+						<h3>Sexo <p>{Det.sex}</p> </h3>  
+						<h3>Detalle <p> {Det.detail}</p> </h3> 
+						<h3>Edad <p> {Det.age}</p> </h3> 
+						<h3>Area <p>{Det.area}</p> </h3> 
+						
 						</div>
 					</div>
 				</div> 
