@@ -6,18 +6,18 @@ import "./NotFound.css";
 
 const NotFound = () => {
   const navigate = useNavigate();
-  const redirect = () => setTimeout(() => navigate("/home"), 5000);
+  // const redirect = () => setTimeout(() => navigate("/home"), 5000);
 
   useEffect(() => {
-    redirect();
+    // redirect();
 
-  }, [redirect]);
+  }, []);
   return (
     <div>
       <Navbar />
       <div className="contenedor-notFound">
         <h2 className="texto-NotFound">
-          We are working on this section, redirecting to home in 5 seconds...
+          We are working on this section...
         </h2>
         <br />
         <br />

@@ -21,8 +21,15 @@ import {
   FILTER_LOST_SEX,
   FILTER_LOST_AGE,
   FILTER_LOST_SIZE,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_DETAIL,
+  SET_SHOP_CHECKLIST,
+  SHOP_FILTER_CHECKLIST,
+  SHOP_SEARCH_INPUT_NAME,
   FILTER_LOST_SEARCH_AREA,
+
 } from "../ActionTypes";
+import { HOST } from "../../utils";
 import axios from "axios";
 
 export function getAllPets() {
@@ -58,7 +65,7 @@ export function getAdoptionPets() {
 export function getLostPets() {
   return async function (dispatch) {
     try {
-      const allPets = await axios.get("http://localhost:3001/pets");
+      const allPets = await axios.get(`${HOST}/pets`);
       return dispatch({
         type: GET_LOST_PETS,
         payload: allPets.data,
@@ -71,7 +78,7 @@ export function getLostPets() {
 
 export const petDetails = (id) => async (dispatch) => {
   try {
-    const getID = await axios.get(`http://localhost:3001/pets/${id}`);
+    const getID = await axios.get(`${HOST}/pets/${id}`);
     return dispatch({
       type: GET_PET_ID,
       payload: getID.data,
@@ -84,7 +91,7 @@ export const petDetails = (id) => async (dispatch) => {
 export function postPet(formInput) {
   return async function (dispatch) {
     try {
-      const json = await axios.post("http://localhost:3001/pets", formInput);
+      const json = await axios.post(`${HOST}/pets`, formInput);
       return dispatch({
         type: POST_PET,
       });
@@ -97,11 +104,7 @@ export function postPet(formInput) {
 export function postUser(formInput) {
   return async function (dispatch) {
     try {
-      console.log("INSIDE ACTION POSTUSER: formInput", formInput);
-      const newUser = await axios.post(
-        "http://localhost:3001/users",
-        formInput
-      );
+      const newUser = await axios.post(`${HOST}/users`, formInput);
       return dispatch({
         type: POST_USER,
       });
@@ -277,6 +280,68 @@ export function filterLostSize(value) {
     }
   };
 }
+
+
+export function getAllProducts() {
+  return async function (dispatch) {
+    try {
+      const allProducts = await axios.get(`${HOST}/products`);
+      return dispatch({
+        type: GET_ALL_PRODUCTS,
+        payload: allProducts.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getProductDetail(id) {
+  return async function (dispatch) {
+    try {
+      const productDetail = await axios.get(`${HOST}/products/${id}`);
+      return dispatch({
+        type: GET_PRODUCT_DETAIL,
+        payload: productDetail.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function setChecklist(checklistValues) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: SET_SHOP_CHECKLIST,
+        payload: checklistValues,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function shopFilterChecklist(checklistValues) {
+  return async function (dispatch) {
+    try {
+      console.log("CHECKLIST VALUES", checklistValues);
+      return dispatch({
+        type: SHOP_FILTER_CHECKLIST,
+        payload: checklistValues, // tmb está en el estado global shopChecklist
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function shopSearchInputName(input) {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: SHOP_SEARCH_INPUT_NAME,
+        payload: input,
 
 export function filterLostSearchArea(inputValue) {
   return async function (dispatch) {
