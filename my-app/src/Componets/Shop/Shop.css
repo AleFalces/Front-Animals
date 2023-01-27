@@ -1,0 +1,10 @@
+.divStoreContainer {
+    width: 100vw;
+    min-height: 100vh;
+}
+.productsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: space-evenly;
+}

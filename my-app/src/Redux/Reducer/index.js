@@ -21,6 +21,11 @@ import {
   FILTER_LOST_SEX,
   FILTER_LOST_AGE,
   FILTER_LOST_SIZE,
+  GET_ALL_PRODUCTS,
+  SET_SHOP_CHECKLIST,
+  SHOP_FILTER_CHECKLIST,
+  GET_PRODUCT_DETAIL,
+  SHOP_SEARCH_INPUT_NAME,
 } from "../ActionTypes";
 
 const initialState = {
@@ -29,6 +34,10 @@ const initialState = {
   lostPets: [],
   pets: [],
   Detail: {},
+  allProducts: [],
+  products: [],
+  productDetail: {},
+  shopChecklist: {},
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -152,6 +161,34 @@ const RootReducer = (state = initialState, action) => {
       return {
         ...state,
         pets: state.lostPets.filter((pet) => pet.size === action.payload),
+      };
+    case GET_ALL_PRODUCTS:
+      return {
+        ...state,
+        allProducts: action.payload,
+        products: action.payload,
+      };
+    case GET_PRODUCT_DETAIL:
+      return {
+        ...state,
+        // productDetail: action.payload
+      };
+    case SET_SHOP_CHECKLIST:
+      return {
+        ...state,
+        shopChecklist: action.payload,
+      };
+    case SHOP_FILTER_CHECKLIST:
+      return {
+        ...state,
+        // products:
+      };
+    case SHOP_SEARCH_INPUT_NAME:
+      return {
+        ...state,
+        products: state.allProducts.filter((product) =>
+          product.name.toLowerCase().includes(action.payload.toLowerCase())
+        ),
       };
     default:
       return state;

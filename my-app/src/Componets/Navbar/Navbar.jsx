@@ -49,12 +49,11 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="navbar nav-item">
-                <NavLink to="/store" className="nav-link">
+                <NavLink to="/shop" className="nav-link">
                   Tienda
                 </NavLink>
               </li>
               <li className="navbar nav-item">
-                {/* Renegando con el login para que aparezca mas a la derecha */}
                 <img
                   src={user ? user.picture : "404"}
                   alt={user ? user.name : "siuuuu"}
