@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from "../src/Redux/Store/Index";
 import { Auth0Provider } from "@auth0/auth0-react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { ChakraProvider } from "@chakra-ui/react"
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientID = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
@@ -24,7 +24,9 @@ root.render(
   >
     <Provider store={store}>
       <BrowserRouter>
+        <ChakraProvider> 
         <App />
+        </ChakraProvider>
       </BrowserRouter>
     </Provider>
   </Auth0Provider>
