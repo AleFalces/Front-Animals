@@ -15,8 +15,7 @@ const Adoption = () => {
 	const pets = useSelector((state) => state.pets);
 	const actualPage = useSelector((state) => state.actualPage);
 
-
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getAdoptionPets());
@@ -56,7 +55,6 @@ const Adoption = () => {
 			<Footer />
 		</>
 	);
-
 };
 
 export default Adoption;

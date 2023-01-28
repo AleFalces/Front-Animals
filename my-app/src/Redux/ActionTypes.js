@@ -28,3 +28,4 @@ export const NEXT_PAGE = "NEXT_PAGE";
 export const PREV_PAGE = "PREV_PAGE";
 export const ACTUAL_PAGE = "ACTUAL_PAGE";
 export const SHOP_FILTER_VALUE = "SHOP_FILTER_VALUE";
+export const GET_VETERINARIES = "GET_VETERINARIES";
