@@ -4,7 +4,8 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { useParams } from "react-router-dom";
 import { petDetails } from "../../Redux/Actions/index";
-import "./Detail.css";
+/* import "./Detail.css"; */
+import { Box } from '@chakra-ui/react'
 
 const Details = () => {
   const dispatch = useDispatch();
