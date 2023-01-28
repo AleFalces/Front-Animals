@@ -6,7 +6,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import "./Shop.css"
 import CardsProduct from "./CardsProduct"
 import ShopNavbar from "./ShopNavbar";
-import CheckboxGrid from "./Checkbox/CheckboxGrid";
+import Navbar from "../Navbar/Navbar"
+import Footer from "../Footer/Footer"
 
 export default function Shop() {
   const dispatch = useDispatch()
@@ -18,11 +19,15 @@ export default function Shop() {
 
     return (
       <div className="divStoreContainer">
-        <h1>Shop</h1>
-        <ShopNavbar/>
-        <div className="productsContainer">
-          {products.length?<CardsProduct products={products}/> : <h1>No se econtraron productos</h1> }
+        <Navbar></Navbar>
+        <br /><br />
+        <div className="divContainerShop">
+          <ShopNavbar/>
+          <div className="productsContainer">
+            {products.length?<CardsProduct products={products}/> : <h1>No se econtraron productos</h1> }
+          </div>
         </div>
+        <Footer/>
       </div>
     )
 }

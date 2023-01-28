@@ -1,0 +1,65 @@
+/* COLORES
+#161616
+#ffd4ac
+#dce0ac Beige
+*/
+
+.shopNavbarContainer {
+    background-color: #bae8e8;
+    box-shadow: 0 0 .7rem .1rem #1616164d;
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.shopNavbarContainer2 {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;    
+}
+.shopNavbarContainer2 button {
+    height: 40px;
+    border: none;
+    background-color: rgba(150, 29, 29, 0);
+    width: 140px;
+    font-size: 22px;
+}
+.shopNavbarContainer2 button:hover {
+    transition: .3s;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-size: 26px;
+}
+.divNavbarInput {
+    padding-top: 10px;
+}
+.divNavbarInput input{
+    background-color: #161616;
+    border-radius: 8px;
+    padding: 2px;
+}
+.divNavbarInput button {
+    border-radius: 6px;
+    padding: 2px;
+}
+
+@media screen and (max-width: 600px) {
+.shopNavbarContainer button:hover {
+}
+.shopNavbarContainer2 button {
+    font-size: 16px;
+    font-weight: 700;
+    height: 40px;
+    border: none;
+    background-color: rgba(150, 29, 29, 0);
+    width: 160px;
+}
+.shopNavbarContainer {
+    height: 8rem;
+}
+.shopNavbarContainer2 {
+    flex-wrap: wrap;
+}
+}

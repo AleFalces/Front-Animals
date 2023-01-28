@@ -1,10 +1,27 @@
 .divStoreContainer {
     width: 100vw;
-    min-height: 100vh;
+    /* min-height: 100vh; */
+    height: auto;
 }
 .productsContainer {
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
     justify-content: space-evenly;
+    /* background-color: aqua; */
+    width: 100%;
+}
+.divContainerShop {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+
+@media screen and (max-width: 600px) {
+   .clase {
+    
+   }
+
 }
