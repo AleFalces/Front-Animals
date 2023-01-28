@@ -17,7 +17,8 @@ import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardA
 
 function App() {
   return (
-    <div className="App">
+ 
+    <div className="App">  
       <Routes>
         <Route exact path="/" element={<LandingPage />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
@@ -34,6 +35,7 @@ function App() {
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
+   /*  </ChakraProvider> */
   );
 }
 
