@@ -5,7 +5,7 @@
 */
 
 .shopNavbarContainer {
-    background-color: #bae8e8;
+    background-color: #edf2f7;
     box-shadow: 0 0 .7rem .1rem #1616164d;
     height: 5rem;
     display: flex;
@@ -23,37 +23,51 @@
     height: 40px;
     border: none;
     background-color: rgba(150, 29, 29, 0);
-    width: 140px;
-    font-size: 22px;
+    width: 180px;
+    font-size: 20px;
 }
 .shopNavbarContainer2 button:hover {
     transition: .3s;
-    color: rgb(255, 255, 255);
+    color: #5463a7;
     font-weight: 700;
-    font-size: 26px;
+}
+.divNavbarInputContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 4%;
 }
 .divNavbarInput {
     padding-top: 10px;
+    width: 17rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .divNavbarInput input{
-    background-color: #161616;
+    background-color: #fff;
     border-radius: 8px;
     padding: 2px;
 }
 .divNavbarInput button {
     border-radius: 6px;
     padding: 2px;
+    background-color: #5463a7;
+    color: rgb(185, 185, 185);
+    font-size: 18px;
+    width: 80px;
+    height: 36px;
+}
+.divNavbarInput button:hover{
+    color: #fff;
+    transition: .3s;
 }
 
 @media screen and (max-width: 600px) {
-.shopNavbarContainer button:hover {
-}
+
 .shopNavbarContainer2 button {
-    font-size: 16px;
     font-weight: 700;
     height: 40px;
-    border: none;
-    background-color: rgba(150, 29, 29, 0);
     width: 160px;
 }
 .shopNavbarContainer {
@@ -61,5 +75,12 @@
 }
 .shopNavbarContainer2 {
     flex-wrap: wrap;
+}
+.shopNavbarContainer {
+    box-shadow: 0 0 .7rem .1rem #1616164d;
+    height: 9rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 }

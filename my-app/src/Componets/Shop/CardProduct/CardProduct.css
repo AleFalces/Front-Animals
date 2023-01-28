@@ -1,5 +1,5 @@
 .productCard {
-    border: 2px solid #bae8e8;
+    border: 3px solid #edf2f7;
     border-radius: 3%;
     box-shadow: 10px 20px .7rem .2rem rgba(73, 73, 73, 0.418);
     width: 14rem;
@@ -31,7 +31,7 @@
 }
 
 .productCard div button{
-    background-color: #bae8e8;
+    background-color: #edf2f7;
     border-radius: 8px;
     border: none;
     font-size: 16px;

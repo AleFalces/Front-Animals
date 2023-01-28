@@ -28,6 +28,7 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   ACTUAL_PAGE,
+  SHOP_FILTER_VALUE,
 } from "../ActionTypes";
 import { HOST } from "../../utils";
 import axios from "axios";
@@ -334,22 +335,47 @@ export function filterLostSearchArea(inputValue) {
   };
 }
 export const Prev = (actualPage) => (dispatch) => {
-  let next = actualPage - 1;
-  dispatch({
-    type: PREV_PAGE,
-    payload: next,
-  });
+  try {
+    let next = actualPage - 1;
+    dispatch({
+      type: PREV_PAGE,
+      payload: next,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 export const Next = (actualPage) => (dispatch) => {
-  let next = actualPage + 1;
-  dispatch({
-    type: NEXT_PAGE,
-    payload: next,
-  });
+  try {
+    let next = actualPage + 1;
+    dispatch({
+      type: NEXT_PAGE,
+      payload: next,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 export const ActualPage = (page) => (dispatch) => {
-  dispatch({
-    type: ACTUAL_PAGE,
-    payload: page,
-  });
+  try {
+    dispatch({
+      type: ACTUAL_PAGE,
+      payload: page,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
+
+export function shopFilterValue(value) {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: SHOP_FILTER_VALUE,
+        payload: value,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

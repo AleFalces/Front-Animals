@@ -1,4 +1,4 @@
-import "./App.css"; 
+import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "../src/Componets/Home/Home";
 import Adoption from "../src/Componets/Adoption/Adoption";
@@ -13,12 +13,11 @@ import FormPostPet from "./Componets/FormPostPet/FormPostPet";
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
 import LostPets from "./Componets/LostPets/LostPets";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
-
+import Cart from "./Componets/Shop/Cart.jsx/Cart";
 
 function App() {
   return (
- 
-    <div className="App">  
+    <div className="App">
       <Routes>
         <Route exact path="/" element={<LandingPage />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
@@ -26,6 +25,7 @@ function App() {
         <Route exact path="/aboutUs" element={<AboutUs />}></Route>
         <Route exact path="/donate" element={<Donate />}></Route>
         <Route exact path="/shop" element={<Shop />}></Route>
+        <Route exact path="/shop/cart" element={<Cart />}></Route>
         <Route exact path="/pets/:paramsId" element={<Details />}></Route>
         <Route exact path="/createPet" element={<FormPostPet />}></Route>
         <Route exact path="/createUser" element={<FormPostUser />}></Route>
@@ -35,7 +35,7 @@ function App() {
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
-   /*  </ChakraProvider> */
+    /*  </ChakraProvider> */
   );
 }
 

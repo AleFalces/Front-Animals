@@ -4,8 +4,8 @@ import { Link, redirect } from "react-router-dom";
 import { getAllProducts } from "../../Redux/Actions";
 import { Container, Row, Col } from "react-bootstrap";
 import "./Shop.css"
-import CardsProduct from "./CardsProduct"
-import ShopNavbar from "./ShopNavbar";
+import CardsProduct from "./CardProduct/CardsProduct"
+import ShopNavbar from "./ShopNavbar/ShopNavbar";
 import Navbar from "../Navbar/Navbar"
 import Footer from "../Footer/Footer"
 

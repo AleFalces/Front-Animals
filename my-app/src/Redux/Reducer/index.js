@@ -28,6 +28,7 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   ACTUAL_PAGE,
+  SHOP_FILTER_VALUE,
 } from "../ActionTypes";
 
 const initialState = {
@@ -39,8 +40,8 @@ const initialState = {
   allProducts: [],
   products: [],
   productDetail: {},
-  shopChecklist: {},
   actualPage: 1,
+  userCart: {},
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -218,6 +219,13 @@ const RootReducer = (state = initialState, action) => {
       return {
         ...state,
         actualPage: action.payload,
+      };
+    case SHOP_FILTER_VALUE:
+      return {
+        ...state,
+        products: state.allProducts.filter(
+          (p) => p.Category === action.payload
+        ),
       };
     default:
       return state;
