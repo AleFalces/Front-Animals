@@ -2,13 +2,14 @@
     width: 100%;
     min-height: 100vh;
     height: 100%;
-    background: radial-gradient(#fff, rgb(218, 178, 255));
+    background:  #e3f6f5 ;
+   /*  background: radial-gradient(#fff, rgb(218, 178, 255)); */
     display: flex;
     flex-direction: column;
 
 }
 
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: 0;
@@ -68,3 +69,4 @@
     margin: 1rem;
  
 }
+ */
