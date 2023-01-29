@@ -15,36 +15,38 @@ import LostPets from "./Componets/LostPets/LostPets";
 import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
 import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
-
+import VetsDetails from "./Componets/VetsDetail/VetsDetail";
 
 function App() {
-  return (
-    <div className="App">
-      <Routes>
-        <Route exact path="/" element={<LandingPage />}></Route>
-        <Route exact path="/home" element={<Home />}></Route>
-        <Route exact path="/login" element={<Login />}></Route>
-        <Route exact path="/aboutUs" element={<AboutUs />}></Route>
-        <Route exact path="/donate" element={<Donate />}></Route>
-        <Route exact path="/shop" element={<Shop />}></Route>
-        {/* <Route exact path="/shop/cart" element={<Cart />}></Route> */}
-        <Route
-          path="/shop/product/:productId"
-          element={<ProductDetail />}
-        ></Route>
-        <Route exact path="/pets/:paramsId" element={<Details />}></Route>
-        <Route exact path="/createPet" element={<FormPostPet />}></Route>
-        <Route exact path="/createUser" element={<FormPostUser />}></Route>
-        <Route exact path="/adoptions" element={<Adoption />}></Route>
-        <Route exact path="/lostPets" element={<LostPets />}></Route>
-        <Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
-        <Route exact path="/veterinary" element={<Veterinaries />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
-    </div>
-    /*  </ChakraProvider> */
-  );
-
+	return (
+		<div className="App">
+			<Routes>
+				<Route exact path="/" element={<LandingPage />}></Route>
+				<Route exact path="/home" element={<Home />}></Route>
+				<Route exact path="/login" element={<Login />}></Route>
+				<Route exact path="/aboutUs" element={<AboutUs />}></Route>
+				<Route exact path="/donate" element={<Donate />}></Route>
+				<Route exact path="/shop" element={<Shop />}></Route>
+				{/* <Route exact path="/shop/cart" element={<Cart />}></Route> */}
+				<Route
+					path="/shop/product/:productId"
+					element={<ProductDetail />}></Route>
+				<Route exact path="/pets/:paramsId" element={<Details />}></Route>
+				<Route exact path="/createPet" element={<FormPostPet />}></Route>
+				<Route exact path="/createUser" element={<FormPostUser />}></Route>
+				<Route exact path="/adoptions" element={<Adoption />}></Route>
+				<Route exact path="/lostPets" element={<LostPets />}></Route>
+				<Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
+				<Route exact path="/veterinary" element={<Veterinaries />}></Route>
+				<Route
+					exact
+					path="/veterinary/:paramsId"
+					element={<VetsDetails />}></Route>
+				<Route path="*" element={<NotFound />}></Route>
+			</Routes>
+		</div>
+		/*  </ChakraProvider> */
+	);
 }
 
 export default App;
