@@ -132,7 +132,7 @@ export default function Simple() {
                 to="/veterinary"
                 variant="custom"
               >
-                <Text fontFamily={"body"}>Vetreinarias</Text>
+                <Text fontFamily={"body"}>Veterinarias</Text>
               </NavLink>
 
               <Menu>
