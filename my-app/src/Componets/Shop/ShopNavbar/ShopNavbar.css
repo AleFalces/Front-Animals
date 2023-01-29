@@ -6,7 +6,7 @@
 
 .shopNavbarContainer {
     background-color: #bae8e8;
-    box-shadow: 0 0 .7rem .1rem #1616164d;
+    box-shadow: 15px 10px .7rem .5rem #1616164d;
     height: 5rem;
     display: flex;
     flex-direction: column;
@@ -30,19 +30,24 @@
     transition: .3s;
     color: rgb(255, 255, 255);
     font-weight: 700;
-    font-size: 26px;
 }
 .divNavbarInput {
     padding-top: 10px;
+    /* background-color: bisque; */
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5%;
 }
 .divNavbarInput input{
-    background-color: #161616;
+    background-color: rgba(255, 255, 255, 0.897);
     border-radius: 8px;
     padding: 2px;
 }
 .divNavbarInput button {
     border-radius: 6px;
     padding: 2px;
+    color: #fff;
+    background-color: #161616e0;
 }
 
 @media screen and (max-width: 600px) {

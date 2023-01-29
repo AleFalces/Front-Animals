@@ -1,3 +1,10 @@
+.productContainer {
+    width: 17rem;
+    height: 21rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .productCard {
     border: 2px solid #bae8e8;
     border-radius: 3%;
@@ -50,4 +57,9 @@
 .productCard h4 {
     position: relative;
     top: 10px
+}
+.productCard:hover {
+    width: 15rem;
+    height: 19rem;
+    transition: .3s;
 }
