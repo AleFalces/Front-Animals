@@ -5,6 +5,9 @@
     align-items: center;
     justify-content: center;
 }
+.productCardItems :hover {
+    cursor: pointer;
+}
 .productCard {
     border: 2px solid #bae8e8;
     border-radius: 3%;

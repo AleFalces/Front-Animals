@@ -1,6 +1,5 @@
 import React from "react";
 import "./CardProduct.css"
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductDetail } from "../../../Redux/Actions";
@@ -8,11 +7,16 @@ import { getProductDetail } from "../../../Redux/Actions";
 export default function CardProduct({id, name, image, price, description}) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
+  const handle = (e) => {
+    e.preventDefault()
+    dispatch(getProductDetail(id))
+    setTimeout(()=>navigate(`/shop/product/${id}`), 200)
+  }      
     return(
-    <Link to={`/shop/product/${id}`}>
+      
+      <div  className="productContainer">
       <div className="productContainer">
-        <div className="productCardItems">
+        <div onClick={(e)=> handle(e)} className="productCardItems">
             <div className="productCard">
               <img src={image} alt="img not found" />
               <h4>{name}</h4>
@@ -24,7 +28,7 @@ export default function CardProduct({id, name, image, price, description}) {
             </div>
         </div>
       </div>
-    </Link>
+      </div>
     )
   }
 
