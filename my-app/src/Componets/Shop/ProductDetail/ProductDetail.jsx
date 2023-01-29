@@ -23,24 +23,24 @@ export default function ProductDetail(props) {
 			<div className="detailProductContainer">
 				<div className="divDetailProductDescription">
 					<div className="detailProductDescription">
-						{/* <h1>{detail[0].name}</h1> */}
+						<h1>{detail[0].name}</h1>
 						<h1>Puntuacion </h1>
 						<h4>★★★</h4>
 						<div className="detailDescription">
 							<div>
-								{/* <h2>Categoria</h2> <h3>{detail[0].Category}</h3> */}
+								<h2>Categoria</h2> <h3>{detail[0].Category}</h3>
 							</div>
 							<div className="detailProductDescription2">
-								{/* <h2>Descripcion:</h2> <h3>{detail[0].description}</h3> */}
+								<h2>Descripcion:</h2> <h3>{detail[0].description}</h3>
 							</div>
 							<div>
-								{/* <h2>Precio</h2> <h3>${detail[0].price}</h3>{" "} */}
+								<h2>Precio</h2> <h3>${detail[0].price}</h3>{" "}
 							</div>
-							<div>{/* <h2>Stock</h2> <h3>{detail[0].stock}u</h3> */}</div>
+							<div><h2>Stock</h2> <h3>{detail[0].stock}u</h3></div>
 						</div>
 					</div>
 					<div className="imgxbutton">
-						{/* <img src={detail[0].image} alt="" /> */}
+						<img src={detail[0].image} alt="" />
 						<div>
 							<button>Agregar</button>
 						</div>

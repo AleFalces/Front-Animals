@@ -29,8 +29,7 @@
 }
 .shopNavbarContainer2 button:hover {
     transition: .3s;
-    color: rgb(255, 255, 255);
-    font-weight: 700;
+    color: rgb(75, 78, 255);
 }
 .divNavbarInput {
     padding-top: 10px;
