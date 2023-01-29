@@ -25,6 +25,7 @@ import {
   GET_ALL_PRODUCTS,
   GET_PRODUCT_DETAIL,
   SHOP_SEARCH_INPUT_NAME,
+  SHOP_FILTER_VALUE,
   NEXT_PAGE,
   PREV_PAGE,
   ACTUAL_PAGE,
@@ -178,7 +179,6 @@ const RootReducer = (state = initialState, action) => {
         pets: state.pets.filter((pet) => pet.size === action.payload),
         actualPage: 1,
       };
-
     case GET_ALL_PRODUCTS:
       return {
         ...state,
@@ -186,6 +186,7 @@ const RootReducer = (state = initialState, action) => {
         products: action.payload,
       };
     case GET_PRODUCT_DETAIL:
+      console.log("DENTRO DE REDUCER", action.payload);
       return {
         ...state,
         productDetail: action.payload,
@@ -197,12 +198,18 @@ const RootReducer = (state = initialState, action) => {
           product.name.toLowerCase().includes(action.payload.toLowerCase())
         ),
       };
-
     case FILTER_LOST_SEARCH_AREA:
       return {
         ...state,
         pets: state.lostPets.filter((pet) =>
           pet.area.toLowerCase().includes(action.payload.toLowerCase())
+        ),
+      };
+    case SHOP_FILTER_VALUE:
+      return {
+        ...state,
+        products: state.allProducts.filter(
+          (p) => p.Category === action.payload
         ),
       };
     case ACTUAL_PAGE:
@@ -220,13 +227,7 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         actualPage: action.payload,
       };
-    case SHOP_FILTER_VALUE:
-      return {
-        ...state,
-        products: state.allProducts.filter(
-          (p) => p.Category === action.payload
-        ),
-      };
+
     default:
       return state;
   }

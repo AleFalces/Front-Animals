@@ -13,7 +13,8 @@ import FormPostPet from "./Componets/FormPostPet/FormPostPet";
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
 import LostPets from "./Componets/LostPets/LostPets";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
-import Cart from "./Componets/Shop/Cart.jsx/Cart";
+import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
+
 
 function App() {
   return (
@@ -25,7 +26,11 @@ function App() {
         <Route exact path="/aboutUs" element={<AboutUs />}></Route>
         <Route exact path="/donate" element={<Donate />}></Route>
         <Route exact path="/shop" element={<Shop />}></Route>
-        <Route exact path="/shop/cart" element={<Cart />}></Route>
+        {/* <Route exact path="/shop/cart" element={<Cart />}></Route> */}
+        <Route
+          path="/shop/product/:productId"
+          element={<ProductDetail />}
+        ></Route>
         <Route exact path="/pets/:paramsId" element={<Details />}></Route>
         <Route exact path="/createPet" element={<FormPostPet />}></Route>
         <Route exact path="/createUser" element={<FormPostUser />}></Route>

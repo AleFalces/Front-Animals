@@ -10,6 +10,7 @@ import { extendTheme } from '@chakra-ui/react'
 
 
 
+
 import {
 	Box,
     Heading,
@@ -134,18 +135,3 @@ const Details = () => {
 
 
 export default Details;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

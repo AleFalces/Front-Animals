@@ -24,6 +24,7 @@ import {
   GET_ALL_PRODUCTS,
   GET_PRODUCT_DETAIL,
   SHOP_SEARCH_INPUT_NAME,
+  SHOP_FILTER_VALUE,
   FILTER_LOST_SEARCH_AREA,
   NEXT_PAGE,
   PREV_PAGE,
@@ -299,6 +300,7 @@ export function getAllProducts() {
 export function getProductDetail(id) {
   return async function (dispatch) {
     try {
+      console.log("DENTRO DE ACTION GET DETAIL", id);
       const productDetail = await axios.get(`${HOST}/products/${id}`);
       return dispatch({
         type: GET_PRODUCT_DETAIL,
@@ -328,6 +330,19 @@ export function filterLostSearchArea(inputValue) {
       return dispatch({
         type: FILTER_LOST_SEARCH_AREA,
         payload: inputValue,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function shopFilterValue(value) {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: SHOP_FILTER_VALUE,
+        payload: value,
       });
     } catch (error) {
       console.log(error);
