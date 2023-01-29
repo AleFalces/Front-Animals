@@ -8,7 +8,6 @@
 }
 .contenedor .logo {
   margin-right: 20%;
-  font-family: Inter;
 }
 .container-box {
   background-color: #fff;
@@ -16,7 +15,6 @@
   text-align: center;
   height: 100vh;
   width: 25%;
-  position: relative;
 }
 
 .box {
@@ -27,7 +25,6 @@
   align-items: center;
   justify-content: space-evenly;
   text-align: center;
-  font-family: Inter;
   font-weight: bold;
   height: 50vh;
   /* border: solid black 1px; */
