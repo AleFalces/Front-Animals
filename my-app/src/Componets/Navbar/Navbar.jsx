@@ -1,4 +1,5 @@
 import logo from "../../assets/imagenes/logo_negro.png";
+import { GiSittingDog } from "react-icons/gi";
 import {
   Box,
   Flex,
@@ -11,38 +12,37 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
+  // MenuDivider,
   useDisclosure,
   useColorModeValue,
   Stack,
   Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { NavbarBrand } from "react-bootstrap";
 
-const Links = ["Adopciones", "Tienda", "Sobre nosotros"];
+// const Links = ["Sobre Nosotros", "Tienda", <GiSittingDog size="20px" />];
 
-const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={"#"}
-  >
-    {children}
-  </Link>
-);
+// const NavLink = ({ children }) => (
+//   <Link
+//     px={2}
+//     py={1}
+//     rounded={"md"}
+//     _hover={{
+//       textDecoration: "none",
+//       bg: useColorModeValue("gray.200", "gray.700"),
+//     }}
+//     href={"/"}
+//   >
+//     {children}
+//   </Link>
+// );
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box bg="brand.green.100" px={100}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
@@ -53,22 +53,77 @@ export default function Simple() {
           />
           <HStack spacing={8} alignItems={"center"}>
             <Box>
-              <Image
-                src={logo}
-                alt="Dan Abramov"
-                boxSize="100px"
-                mx="5rem"
-                mt="2rem"
-              />
+              <Link href="/home">
+                <Image
+                  src={logo}
+                  // alt="Dan Abramov"
+                  boxSize="70px"
+                  mx="2rem"
+                  mt="1rem"
+                />
+              </Link>
             </Box>
+
             <HStack
               as={"nav"}
-              spacing={4}
+              spacing={7}
               display={{ base: "none", md: "flex" }}
             >
-              {Links.map((link) => (
+              <Link
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: useColorModeValue("gray.200", "gray.700"),
+                }}
+                href="/aboutUs"
+                variant="custom"
+              >
+                Sobre Nosotros
+              </Link>
+              <Link
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: useColorModeValue("gray.200", "gray.700"),
+                }}
+                href="/donate"
+                variant="custom"
+              >
+                Donaciones
+              </Link>
+              <Link
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: useColorModeValue("gray.200", "gray.700"),
+                }}
+                href="/shop"
+                variant="custom"
+              >
+                Tienda
+              </Link>
+              <Menu>
+                <MenuButton>
+                  <GiSittingDog size="20px" />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>
+                    <Link href="/adoptions">Adopcion</Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link href="/lostPets">Perdidos</Link>
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+              {/* {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
-              ))}
+              ))} */}
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
@@ -88,10 +143,10 @@ export default function Simple() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem>Perfil</MenuItem>
+                <MenuItem>Mis mascotas</MenuItem>
+                {/* <MenuDivider />
+                <MenuItem>Link 3</MenuItem> */}
               </MenuList>
             </Menu>
           </Flex>
@@ -100,14 +155,14 @@ export default function Simple() {
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              {Links.map((link) => (
+              {/* {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
-              ))}
+              ))} */}
             </Stack>
           </Box>
         ) : null}
       </Box>
-      <Box bg="brand.green.100"> hOLAAA</Box>
+      {/* <Box bg="brand.green.100"> hOLAAA</Box> */}
     </>
   );
 }

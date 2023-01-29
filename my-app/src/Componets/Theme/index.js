@@ -1,7 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import './styles.css'
-
-
+import "./styles.css";
 
 export const theme = extendTheme({
   colors: {
@@ -17,11 +15,15 @@ export const theme = extendTheme({
   },
 
   fonts: {
-    heading: 'Montserrat',
-    body: 'Inter'
-  }
+    heading: "Montserrat",
+    body: "Inter",
+  },
 
-
-
-
+  linkTheme: {
+    variant: {
+      custom: {
+        textDecoration: "none",
+      },
+    },
+  },
 });
