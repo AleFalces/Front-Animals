@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
@@ -7,12 +6,11 @@ import { useParams } from "react-router-dom";
 import { petDetails } from "../../Redux/Actions/index";
 /* import "./Detail.css"; */
 
-
 import { extendTheme } from '@chakra-ui/react'
-
 
 import {
 	Box,
+
 	Heading,
 	Center,
 	Text,
@@ -36,7 +34,6 @@ const messages = [
 ];
 
 
-
 const features = messages.map(function (x, i) {
 	return {
 		id: i,
@@ -50,11 +47,7 @@ const features = messages.map(function (x, i) {
 
 
 
-
-
-
 const Details = () => {
-
 	const dispatch = useDispatch();
 	const { paramsId } = useParams();
 	const Det = useSelector((state) => state.Detail);
@@ -64,6 +57,7 @@ const Details = () => {
 	}, [dispatch]);
 
 	return (
+
 
 		<div className='detailContainer'>
 
@@ -164,10 +158,6 @@ const Details = () => {
 						</Box>
 					</Center>
 				</SimpleGrid>
-
-
-
-
 				<Box p={4} pt='7rem'>
 					<Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
 						<Heading fontSize={'3xl'}>Antes de adoptar, tené en cuenta estos consejos</Heading>
@@ -200,6 +190,7 @@ const Details = () => {
 		</div>
 	);
 }
+
 
 
 
