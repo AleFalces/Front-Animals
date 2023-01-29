@@ -12,6 +12,7 @@ import Shop from "./Componets/Shop/Shop";
 import FormPostPet from "./Componets/FormPostPet/FormPostPet";
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
 import LostPets from "./Componets/LostPets/LostPets";
+import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
 import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
 
@@ -37,11 +38,13 @@ function App() {
         <Route exact path="/adoptions" element={<Adoption />}></Route>
         <Route exact path="/lostPets" element={<LostPets />}></Route>
         <Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
+        <Route exact path="/veterinary" element={<Veterinaries />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
     /*  </ChakraProvider> */
   );
+
 }
 
 export default App;

@@ -30,22 +30,25 @@ import {
   PREV_PAGE,
   ACTUAL_PAGE,
   SHOP_FILTER_VALUE,
+  GET_VETERINARIES,
 } from "../ActionTypes";
 
 const initialState = {
-  allPets: [],
-  adoptionPets: [],
-  lostPets: [],
-  pets: [],
-  Detail: {},
-  allProducts: [],
-  products: [],
-  productDetail: {},
-  actualPage: 1,
-  userCart: {},
+	allPets: [],
+	adoptionPets: [],
+	lostPets: [],
+	pets: [],
+	Detail: {},
+	allProducts: [],
+	products: [],
+	productDetail: {},
+	actualPage: 1,
+	userCart: {},
+	allVets: [],
 };
 
 const RootReducer = (state = initialState, action) => {
+
   switch (action.type) {
     case GET_ALL_PETS:
       return {
@@ -227,6 +230,11 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         actualPage: action.payload,
       };
+      case GET_VETERINARIES:
+			return {
+				...state,
+				allVets: action.payload,
+			};
 
     default:
       return state;
