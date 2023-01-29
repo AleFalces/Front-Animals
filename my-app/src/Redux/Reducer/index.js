@@ -29,6 +29,7 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   ACTUAL_PAGE,
+  SHOP_FILTER_VALUE,
 } from "../ActionTypes";
 
 const initialState = {
@@ -40,8 +41,8 @@ const initialState = {
   allProducts: [],
   products: [],
   productDetail: {},
-  shopChecklist: {},
   actualPage: 1,
+  userCart: {},
 };
 
 const RootReducer = (state = initialState, action) => {

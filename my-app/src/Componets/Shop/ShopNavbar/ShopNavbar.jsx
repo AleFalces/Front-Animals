@@ -31,7 +31,7 @@ export default function ShopNavbar () {
         :dispatch(getAllProducts())
     };
 
-    const userCart = {};
+    const [userCart, setUserCart] = useState({});
     const handlerAddProduct = (value) => {
         window.localStorage
     } 
