@@ -1,11 +1,15 @@
 import logo from "../../assets/imagenes/logo_negro.png";
+
+
 import { GiSittingDog } from "react-icons/gi";
+import { NavLink } from "react-router-dom";
+
 import {
   Box,
   Flex,
   Avatar,
   HStack,
-  Link,
+  // Link,
   IconButton,
   Button,
   Menu,
@@ -17,25 +21,10 @@ import {
   useColorModeValue,
   Stack,
   Image,
+  Text,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-// const Links = ["Sobre Nosotros", "Tienda", <GiSittingDog size="20px" />];
-
-// const NavLink = ({ children }) => (
-//   <Link
-//     px={2}
-//     py={1}
-//     rounded={"md"}
-//     _hover={{
-//       textDecoration: "none",
-//       bg: useColorModeValue("gray.200", "gray.700"),
-//     }}
-//     href={"/"}
-//   >
-//     {children}
-//   </Link>
-// );
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,7 +42,9 @@ export default function Simple() {
           />
           <HStack spacing={8} alignItems={"center"}>
             <Box>
-              <Link href="/home">
+
+              <NavLink to="/home">
+
                 <Image
                   src={logo}
                   // alt="Dan Abramov"
@@ -61,7 +52,9 @@ export default function Simple() {
                   mx="2rem"
                   mt="1rem"
                 />
-              </Link>
+
+              </NavLink>
+
             </Box>
 
             <HStack
@@ -69,7 +62,9 @@ export default function Simple() {
               spacing={7}
               display={{ base: "none", md: "flex" }}
             >
-              <Link
+
+              <NavLink
+
                 px={2}
                 py={1}
                 rounded={"md"}
@@ -77,12 +72,14 @@ export default function Simple() {
                   textDecoration: "none",
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
-                href="/aboutUs"
+
+                to="/aboutUs"
                 variant="custom"
               >
-                Sobre Nosotros
-              </Link>
-              <Link
+                <Text fontFamily={"body"}>Sobre Nosotros</Text>
+              </NavLink>
+              <NavLink
+
                 px={2}
                 py={1}
                 rounded={"md"}
@@ -90,12 +87,14 @@ export default function Simple() {
                   textDecoration: "none",
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
-                href="/donate"
+
+                to="/donate"
                 variant="custom"
               >
-                Donaciones
-              </Link>
-              <Link
+                <Text fontFamily={"body"}>Donaciones</Text>
+              </NavLink>
+              <NavLink
+
                 px={2}
                 py={1}
                 rounded={"md"}
@@ -103,27 +102,58 @@ export default function Simple() {
                   textDecoration: "none",
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
-                href="/shop"
+
+                to="/shop"
                 variant="custom"
               >
-                Tienda
-              </Link>
+                <Text fontFamily={"body"}>Tienda</Text>
+              </NavLink>
+              <NavLink
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: useColorModeValue("gray.200", "gray.700"),
+                }}
+                to="/createPet"
+                variant="custom"
+              >
+                <Text fontFamily={"body"}>Publicar Mascota</Text>
+              </NavLink>
+              <NavLink
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: useColorModeValue("gray.200", "gray.700"),
+                }}
+                to="/veterinary"
+                variant="custom"
+              >
+                <Text fontFamily={"body"}>Vetreinarias</Text>
+              </NavLink>
+
               <Menu>
                 <MenuButton>
                   <GiSittingDog size="20px" />
                 </MenuButton>
                 <MenuList>
                   <MenuItem>
-                    <Link href="/adoptions">Adopcion</Link>
+
+                    <NavLink to="/adoptions">
+                      <Text fontFamily={"body"}>Adopcion</Text>
+                    </NavLink>
                   </MenuItem>
                   <MenuItem>
-                    <Link href="/lostPets">Perdidos</Link>
+                    <NavLink to="/lostPets">
+                      <Text fontFamily={"body"}>Perdidos</Text>
+                    </NavLink>
                   </MenuItem>
                 </MenuList>
               </Menu>
-              {/* {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))} */}
+
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
@@ -145,8 +175,12 @@ export default function Simple() {
               <MenuList>
                 <MenuItem>Perfil</MenuItem>
                 <MenuItem>Mis mascotas</MenuItem>
-                {/* <MenuDivider />
-                <MenuItem>Link 3</MenuItem> */}
+
+                <MenuDivider />
+                <MenuItem>
+                  <NavLink to="/createUser">Registrarse</NavLink>
+                </MenuItem>
+
               </MenuList>
             </Menu>
           </Flex>
@@ -162,7 +196,7 @@ export default function Simple() {
           </Box>
         ) : null}
       </Box>
-      {/* <Box bg="brand.green.100"> hOLAAA</Box> */}
+
     </>
   );
 }
