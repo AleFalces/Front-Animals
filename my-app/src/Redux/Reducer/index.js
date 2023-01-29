@@ -30,6 +30,7 @@ import {
 	PREV_PAGE,
 	ACTUAL_PAGE,
 	GET_VETERINARIES,
+	GET_DETAILS_VETERINARIES,
 } from "../ActionTypes";
 
 const initialState = {
@@ -43,6 +44,7 @@ const initialState = {
 	productDetail: {},
 	actualPage: 1,
 	allVets: [],
+	vetsDetail: {},
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -232,7 +234,11 @@ const RootReducer = (state = initialState, action) => {
 				...state,
 				allVets: action.payload,
 			};
-
+		case GET_DETAILS_VETERINARIES:
+			return {
+				...state,
+				vetsDetail: action.payload,
+			};
 		default:
 			return state;
 	}

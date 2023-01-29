@@ -30,6 +30,7 @@ import {
 	PREV_PAGE,
 	ACTUAL_PAGE,
 	GET_VETERINARIES,
+	GET_DETAILS_VETERINARIES,
 } from "../ActionTypes";
 import { HOST } from "../../utils";
 import axios from "axios";
@@ -396,3 +397,15 @@ export function getAllVeterinaries() {
 		}
 	};
 }
+
+export const VeterinaryDetails = (id) => async (dispatch) => {
+	try {
+		const getID = await axios.get(`${HOST}/veterinary/${id}`);
+		return dispatch({
+			type: GET_DETAILS_VETERINARIES,
+			payload: getID.data,
+		});
+	} catch (err) {
+		console.log(err.message);
+	}
+};
