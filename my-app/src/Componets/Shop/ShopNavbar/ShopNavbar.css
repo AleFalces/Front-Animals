@@ -5,8 +5,8 @@
 */
 
 .shopNavbarContainer {
-    background-color: #edf2f7;
-    box-shadow: 0 0 .7rem .1rem #1616164d;
+    background-color: #bae8e8;
+    box-shadow: 15px 10px .7rem .5rem #1616164d;
     height: 5rem;
     display: flex;
     flex-direction: column;
@@ -23,51 +23,43 @@
     height: 40px;
     border: none;
     background-color: rgba(150, 29, 29, 0);
-    width: 180px;
-    font-size: 20px;
+
+    width: 140px;
+    font-size: 22px;
 }
 .shopNavbarContainer2 button:hover {
     transition: .3s;
-    color: #5463a7;
+    color: rgb(255, 255, 255);
     font-weight: 700;
-}
-.divNavbarInputContainer {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 4%;
 }
 .divNavbarInput {
     padding-top: 10px;
-    width: 17rem;
+    /* background-color: bisque; */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: flex-end;
+    padding-right: 5%;
 }
 .divNavbarInput input{
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.897);
     border-radius: 8px;
     padding: 2px;
 }
 .divNavbarInput button {
     border-radius: 6px;
     padding: 2px;
-    background-color: #5463a7;
-    color: rgb(185, 185, 185);
-    font-size: 18px;
-    width: 80px;
-    height: 36px;
-}
-.divNavbarInput button:hover{
     color: #fff;
-    transition: .3s;
+    background-color: #161616e0;
 }
 
 @media screen and (max-width: 600px) {
-
+.shopNavbarContainer button:hover {
+}
 .shopNavbarContainer2 button {
+    font-size: 16px;
     font-weight: 700;
     height: 40px;
+    border: none;
+    background-color: rgba(150, 29, 29, 0);
     width: 160px;
 }
 .shopNavbarContainer {
@@ -76,6 +68,7 @@
 .shopNavbarContainer2 {
     flex-wrap: wrap;
 }
+
 .shopNavbarContainer {
     box-shadow: 0 0 .7rem .1rem #1616164d;
     height: 9rem;

@@ -1,4 +1,7 @@
 import { extendTheme } from "@chakra-ui/react";
+import './styles.css'
+
+
 
 export const theme = extendTheme({
   colors: {
@@ -12,4 +15,13 @@ export const theme = extendTheme({
       darkBlue: "#272343",
     },
   },
+
+  fonts: {
+    heading: 'Montserrat',
+    body: 'Inter'
+  }
+
+
+
+
 });

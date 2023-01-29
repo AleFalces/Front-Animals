@@ -1,0 +1,189 @@
+.detailProductContainerAll {
+    width: 100%;
+    height: 150vh;
+    /* background-color: rgba(54, 54, 251, 0.39); */
+    display: flex;
+    flex-direction: column;
+
+}
+.detailProductContainer {
+    display: flex;
+    /* background-color: rgba(0, 255, 255, 0.265); */
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+}
+.detailProductDescription {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    /* background-color: rgba(255, 208, 22, 0.551); */
+    justify-content: space-evenly;
+}
+.detailProductDescription h4 {
+    color: #95cfff;
+}
+.divDetailProductDescription {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    border: 3px solid #edf2f6;
+    border-radius: 12px;
+}
+.detailDescription {
+    /* background-color: rgba(255, 65, 65, 0.806); */
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.detailDescription div {
+    display: flex;
+    /* background-color: rgba(137, 43, 226, 0.463); */
+    justify-content: space-between;
+}
+.detailDescription h2 {
+    /* color: rgb(161, 161, 161); */
+    padding-left: 10px;
+    /* color: green; */
+}
+.detailProductDescription h3 {
+    padding-right: 10px;
+    padding-left: 20px;
+    color: #95cfff;
+}
+.detailProductDescription2 {
+    /* color: rgb(255, 0, 0); */
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 20px;
+}
+.detailProductDescription2 h3 {
+    color: gray
+}
+
+.imgxbutton {
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(95, 255, 37, 0.665); */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.imgxbutton div{
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.imgxbutton img {
+    width: 100%;
+    height: 90%;
+    border-radius: 12px;
+}
+.imgxbutton button {
+    border: none;
+    border-radius: 12px;
+    padding: 0 4rem 0 4rem;
+    background-color:#edf2f6;
+}
+.imgxbutton button:hover {
+    background-color: #ddeffd;
+    transition: .3s;
+}
+.reviewsContainer {
+    /* background-color: rgba(0, 255, 0, 0.281); */
+    align-self: center;
+    width: 90%;
+}
+.footerProductDetail {
+    padding-top: 10vh;
+}
+.divTopReview {
+   height: 290px;  
+}
+@media screen and (max-width: 650px) {
+    .divDetailProductDescription {
+        display: flex;
+        flex-direction: column-reverse;
+        border: none;
+        /* background-color: rgba(127, 255, 212, 0.726); */
+    }
+    .detailProductContainer {
+        /* background-color: black; */
+    }
+    .imgxbutton img{
+        width: 100%;
+    }
+    .detailDescription div {
+        height: 100px;
+    }
+    .detailProductDescription {
+        width: 100%;
+    }
+    .divTopReview {
+        height: 290px;
+    }
+    .detailProductNavbarDivBottom {
+        padding-top: 12rem;
+    }
+    .footerProductDetail {
+        padding-top: 50%;
+    }
+    .reviewsContainer {
+        position: relative;
+        width: 95%;
+        top: 20%;
+    }
+    .divDetailProductDescription {
+        display: flex;
+        width: 100%;
+    }
+}
+/* @media screen and (min-width: 700px) and (max-width: 800px) {
+    .divDetailProductDescription {
+        flex-direction: column-reverse;
+    }
+    .detailProductContainer {
+            background-color: black;
+        }
+        .imgxbutton {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .imgxbutton img {
+            width: 70%;
+        }
+    
+        .detailDescription div {
+            height: 100px;
+        }
+    
+        .detailProductDescription {
+            width: 100%;
+            flex-direction: column;
+        }
+    
+        .divTopReview {
+            height: 290px;
+        }
+    
+        .detailProductNavbarDivBottom {
+            height: 220px;
+        }
+        
+} */
+@media screen and (min-width: 800px) and (max-width: 992px){
+    .detailProductContainerAll {
+        /* background-color: rgb(107, 88, 63); */
+    }
+    .footerProductDetail {
+    background-color: black;
+    align-self: flex-end;
+    position: relative;
+    top: 30%;
+    }
+}

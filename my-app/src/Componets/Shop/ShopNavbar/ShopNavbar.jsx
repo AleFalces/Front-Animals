@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { shopSearchInputName, shopFilterValue, getAllProducts } from "../../../Redux/Actions";
 import "./ShopNavbar.css"
+import { useNavigate } from "react-router-dom";
 
 export default function ShopNavbar () {
-
     const dispatch = useDispatch()
     const [input, setInput] = useState("")
     const inputSearch = document.getElementById("inputSearch")
@@ -16,8 +15,13 @@ export default function ShopNavbar () {
     } 
     const handlerClickSearch = (e) => {
         e.preventDefault(e);
-        dispatch(shopSearchInputName(input.trim()))
-        inputSearch.value = ""
+        if(input.trim() !== "") {
+            dispatch(shopSearchInputName(input.trim()))
+            inputSearch.value = ""
+        } else {
+            inputSearch.value = ""
+        }
+
     }
 
     const handlerShopFilterValue = (e) => {
@@ -26,6 +30,11 @@ export default function ShopNavbar () {
         ?dispatch(shopFilterValue(e.target.value))
         :dispatch(getAllProducts())
     };
+
+    const [userCart, setUserCart] = useState({});
+    const handlerAddProduct = (value) => {
+        window.localStorage
+    } 
     return (
         <div className="shopNavbarContainer">
           <div className="divNavbarInputContainer">
@@ -35,7 +44,7 @@ export default function ShopNavbar () {
             </div>
           </div>
 
-          <div className="shopNavbarContainer2">
+            <div className="shopNavbarContainer2">
               <button value="alimentos" onClick={(e) => handlerShopFilterValue(e)}>Alimentos</button>
               <button value="indumentaria" onClick={(e) => handlerShopFilterValue(e)}>Indumentaria</button>
               <button value="tazas" onClick={(e) => handlerShopFilterValue(e)}>Tazas</button>

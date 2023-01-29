@@ -1,35 +1,36 @@
 import {
-	GET_ALL_PETS,
-	GET_ADOPTION_PETS,
-	GET_LOST_PETS,
-	GET_PET_ID,
-	POST_PET,
-	POST_USER,
-	FILTER_CATS_ADOPTION,
-	FILTER_DOGS_ADOPTION,
-	FILTER_SEX_FEMALE_ADOPTION,
-	FILTER_SEX_MALE_ADOPTION,
-	FILTER_AGE_PUPPY_ADOPTION,
-	FILTER_AGE_YOUNG_ADOPTION,
-	FILTER_AGE_ADULT_ADOPTION,
-	FILTER_SIZE_SMALL_ADOPTION,
-	FILTER_SIZE_MEDIUM_ADOPTION,
-	FILTER_SIZE_BIG_ADOPTION,
-	FILTER_BY_SEARCH_AREA_ADOPTION,
-	FILTER_CATS_LOST,
-	FILTER_DOGS_LOST,
-	FILTER_LOST_SEX,
-	FILTER_LOST_AGE,
-	FILTER_LOST_SIZE,
-	GET_ALL_PRODUCTS,
-	GET_PRODUCT_DETAIL,
-	SHOP_SEARCH_INPUT_NAME,
-	FILTER_LOST_SEARCH_AREA,
-	NEXT_PAGE,
-	PREV_PAGE,
-	ACTUAL_PAGE,
-	SHOP_FILTER_VALUE,
-	GET_VETERINARIES,
+  GET_ALL_PETS,
+  GET_ADOPTION_PETS,
+  GET_LOST_PETS,
+  GET_PET_ID,
+  POST_PET,
+  POST_USER,
+  FILTER_CATS_ADOPTION,
+  FILTER_DOGS_ADOPTION,
+  FILTER_SEX_FEMALE_ADOPTION,
+  FILTER_SEX_MALE_ADOPTION,
+  FILTER_AGE_PUPPY_ADOPTION,
+  FILTER_AGE_YOUNG_ADOPTION,
+  FILTER_AGE_ADULT_ADOPTION,
+  FILTER_SIZE_SMALL_ADOPTION,
+  FILTER_SIZE_MEDIUM_ADOPTION,
+  FILTER_SIZE_BIG_ADOPTION,
+  FILTER_BY_SEARCH_AREA_ADOPTION,
+  FILTER_CATS_LOST,
+  FILTER_DOGS_LOST,
+  FILTER_LOST_SEX,
+  FILTER_LOST_AGE,
+  FILTER_LOST_SIZE,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_DETAIL,
+  SHOP_SEARCH_INPUT_NAME,
+  SHOP_FILTER_VALUE,
+  FILTER_LOST_SEARCH_AREA,
+  NEXT_PAGE,
+  PREV_PAGE,
+  ACTUAL_PAGE,
+  SHOP_FILTER_VALUE,
+  GET_VETERINARIES,
 } from "../ActionTypes";
 import { HOST } from "../../utils";
 import axios from "axios";
@@ -298,17 +299,19 @@ export function getAllProducts() {
 }
 
 export function getProductDetail(id) {
-	return async function (dispatch) {
-		try {
-			const productDetail = await axios.get(`${HOST}/products/${id}`);
-			return dispatch({
-				type: GET_PRODUCT_DETAIL,
-				payload: productDetail.data,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  return async function (dispatch) {
+    try {
+      console.log("DENTRO DE ACTION GET DETAIL", id);
+      const productDetail = await axios.get(`${HOST}/products/${id}`);
+      return dispatch({
+        type: GET_PRODUCT_DETAIL,
+        payload: productDetail.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 }
 
 export function shopSearchInputName(input) {
@@ -334,6 +337,19 @@ export function filterLostSearchArea(inputValue) {
 			console.log(error);
 		}
 	};
+}
+
+export function shopFilterValue(value) {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: SHOP_FILTER_VALUE,
+        payload: value,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 export const Prev = (actualPage) => (dispatch) => {
 	try {
