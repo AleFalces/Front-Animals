@@ -1,10 +1,14 @@
 import logo from "../../assets/imagenes/logo_negro.png";
+
+import { GiSittingDog } from "react-icons/gi";
+import { NavLink } from "react-router-dom";
+
 import {
   Box,
   Flex,
   Avatar,
   HStack,
-  Link,
+  // Link,
   IconButton,
   Button,
   Menu,
@@ -16,26 +20,9 @@ import {
   useColorModeValue,
   Stack,
   Image,
+  Text,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { NavbarBrand } from "react-bootstrap";
-
-const Links = ["Adopciones", "Tienda", "Sobre nosotros"];
-
-const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={"#"}
-  >
-    {children}
-  </Link>
-);
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,22 +40,103 @@ export default function Simple() {
           />
           <HStack spacing={8} alignItems={"center"}>
             <Box>
-              <Image
-                src={logo}
-                alt="Dan Abramov"
-                boxSize="100px"
-                mx="5rem"
-                mt="2rem"
-              />
+              <NavLink to="/home">
+                <Image
+                  src={logo}
+                  // alt="Dan Abramov"
+                  boxSize="70px"
+                  mx="2rem"
+                  mt="1rem"
+                />
+              </NavLink>
             </Box>
             <HStack
               as={"nav"}
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
+              <NavLink
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: useColorModeValue("gray.200", "gray.700"),
+                }}
+                to="/aboutUs"
+                variant="custom"
+              >
+                <Text fontFamily={"body"}>Sobre Nosotros</Text>
+              </NavLink>
+              <NavLink
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: useColorModeValue("gray.200", "gray.700"),
+                }}
+                to="/donate"
+                variant="custom"
+              >
+                <Text fontFamily={"body"}>Donaciones</Text>
+              </NavLink>
+              <NavLink
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: useColorModeValue("gray.200", "gray.700"),
+                }}
+                to="/shop"
+                variant="custom"
+              >
+                <Text fontFamily={"body"}>Tienda</Text>
+              </NavLink>
+              <NavLink
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: useColorModeValue("gray.200", "gray.700"),
+                }}
+                to="/createPet"
+                variant="custom"
+              >
+                <Text fontFamily={"body"}>Publicar Mascota</Text>
+              </NavLink>
+              <NavLink
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: useColorModeValue("gray.200", "gray.700"),
+                }}
+                to="/veterinary"
+                variant="custom"
+              >
+                <Text fontFamily={"body"}>Vetreinarias</Text>
+              </NavLink>
+              <Menu>
+                <MenuButton>
+                  <GiSittingDog size="20px" />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>
+                    <NavLink to="/adoptions">
+                      <Text fontFamily={"body"}>Adopcion</Text>
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem>
+                    <NavLink to="/lostPets">
+                      <Text fontFamily={"body"}>Perdidos</Text>
+                    </NavLink>
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
@@ -88,10 +156,12 @@ export default function Simple() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
+                <MenuItem>Perfil</MenuItem>
+                <MenuItem>Mis mascotas</MenuItem>
                 <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem>
+                  <NavLink to="/createUser">Registrarse</NavLink>
+                </MenuItem>
               </MenuList>
             </Menu>
           </Flex>
@@ -100,14 +170,13 @@ export default function Simple() {
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              {Links.map((link) => (
+              {/* {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
-              ))}
+              ))} */}
             </Stack>
           </Box>
         ) : null}
       </Box>
-      <Box bg="brand.green.100"> hOLAAA</Box>
     </>
   );
 }
