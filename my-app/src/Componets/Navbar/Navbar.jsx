@@ -1,5 +1,6 @@
 import logo from "../../assets/imagenes/logo_negro.png";
 
+
 import { GiSittingDog } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
 
@@ -15,7 +16,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
+  // MenuDivider,
   useDisclosure,
   useColorModeValue,
   Stack,
@@ -24,12 +25,13 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
+
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box bg="brand.green.100" px={100}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
@@ -40,7 +42,9 @@ export default function Simple() {
           />
           <HStack spacing={8} alignItems={"center"}>
             <Box>
+
               <NavLink to="/home">
+
                 <Image
                   src={logo}
                   // alt="Dan Abramov"
@@ -48,14 +52,19 @@ export default function Simple() {
                   mx="2rem"
                   mt="1rem"
                 />
+
               </NavLink>
+
             </Box>
+
             <HStack
               as={"nav"}
-              spacing={4}
+              spacing={7}
               display={{ base: "none", md: "flex" }}
             >
+
               <NavLink
+
                 px={2}
                 py={1}
                 rounded={"md"}
@@ -63,12 +72,14 @@ export default function Simple() {
                   textDecoration: "none",
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
+
                 to="/aboutUs"
                 variant="custom"
               >
                 <Text fontFamily={"body"}>Sobre Nosotros</Text>
               </NavLink>
               <NavLink
+
                 px={2}
                 py={1}
                 rounded={"md"}
@@ -76,12 +87,14 @@ export default function Simple() {
                   textDecoration: "none",
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
+
                 to="/donate"
                 variant="custom"
               >
                 <Text fontFamily={"body"}>Donaciones</Text>
               </NavLink>
               <NavLink
+
                 px={2}
                 py={1}
                 rounded={"md"}
@@ -89,6 +102,7 @@ export default function Simple() {
                   textDecoration: "none",
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
+
                 to="/shop"
                 variant="custom"
               >
@@ -120,12 +134,14 @@ export default function Simple() {
               >
                 <Text fontFamily={"body"}>Vetreinarias</Text>
               </NavLink>
+
               <Menu>
                 <MenuButton>
                   <GiSittingDog size="20px" />
                 </MenuButton>
                 <MenuList>
                   <MenuItem>
+
                     <NavLink to="/adoptions">
                       <Text fontFamily={"body"}>Adopcion</Text>
                     </NavLink>
@@ -137,6 +153,7 @@ export default function Simple() {
                   </MenuItem>
                 </MenuList>
               </Menu>
+
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
@@ -158,10 +175,12 @@ export default function Simple() {
               <MenuList>
                 <MenuItem>Perfil</MenuItem>
                 <MenuItem>Mis mascotas</MenuItem>
+
                 <MenuDivider />
                 <MenuItem>
                   <NavLink to="/createUser">Registrarse</NavLink>
                 </MenuItem>
+
               </MenuList>
             </Menu>
           </Flex>
@@ -177,6 +196,7 @@ export default function Simple() {
           </Box>
         ) : null}
       </Box>
+
     </>
   );
 }
