@@ -51,10 +51,9 @@ const Adoption = () => {
 						</Link>
 					))
 				)}
+
 				<Footer />
 			</div>
-			
-			
 		</>
 	);
 };
