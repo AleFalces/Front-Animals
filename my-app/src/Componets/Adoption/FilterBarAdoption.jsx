@@ -7,6 +7,7 @@ import {
   filterBySize,
   filterBySearchArea,
   getAdoptionPets,
+  filterValuesAdoption
 } from "../../Redux/Actions";
 
 const FilterBar = () => {
@@ -15,10 +16,9 @@ const FilterBar = () => {
   const [input, setInput] = useState("");
 
   const handlerInputChange = (e) => {
-    e.preventDefault();
-    setInput(e.target.value.trim());
-  };
-
+    e.preventDefault()
+    setInput(e.target.value)
+  }
   const handlerFilterBySpecie = (e) => {
     e.preventDefault();
     if (e.target.value !== defaultValue) {
@@ -65,8 +65,9 @@ const FilterBar = () => {
     dispatch(getAdoptionPets());
   };
 
+
   useEffect(() => {}, [dispatch]);
-  return (
+return (
     <div className="filterBarContainer">
       <h2>Mascotas en Adopcion</h2>
       <div className="selectsContainer">
@@ -151,3 +152,87 @@ const FilterBar = () => {
 };
 
 export default FilterBar;
+
+
+// return (
+//     <div className="filterBarContainer">
+//       <h2>Mascotas en Adopcion</h2>
+//       <div className="selectsContainer">
+//         <button
+//           className="selectsFilter"
+//           onClick={(e) => handlerRefreshPets(e)}
+//         >
+//           Todos
+//         </button>
+
+//         <select
+//           className="selectsFilter"
+//           name="species"
+//           id="species"
+//           onChange={(e) => handlerFilterBySpecie(e)}
+//         >
+//           <option value="defaultValue" key="default">
+//             Especie
+//           </option>
+//           <option value="gato">Gato/a</option>
+//           <option value="perro">Perro/a</option>
+//         </select>
+
+//         <select
+//           className="selectsFilter"
+//           name="sex"
+//           id="sex"
+//           onChange={(e) => handlerFilterBySex(e)}
+//         >
+//           <option value="defaultValue" key="default">
+//             Sexo
+//           </option>
+//           <option value="hembra">Hembra</option>
+//           <option value="macho">Macho</option>
+//         </select>
+
+//         <select
+//           className="selectsFilter"
+//           name="age"
+//           id="age"
+//           onChange={(e) => handlerFilterByAge(e)}
+//         >
+//           <option value="defaultValue" key="default">
+//             Edad
+//           </option>
+//           <option value="cachorro">Cachorro/a</option>
+//           <option value="joven">Joven</option>
+//           <option value="adulto">Adulto/a</option>
+//         </select>
+
+//         <select
+//           className="selectsFilter"
+//           name="size"
+//           id="size"
+//           onChange={(e) => handlerFilterBySize(e)}
+//         >
+//           <option value="defaultValue" key="default">
+//             Tamaño
+//           </option>
+//           <option value="pequeño">Pequeño</option>
+//           <option value="mediano">Mediano/a</option>
+//           <option value="grande">Grande</option>
+//         </select>
+//       </div>
+//       <div className="searchBar">
+//         <label className="titleSearch">Buscar por area:</label>
+//         <input
+//           className="inputSearch"
+//           type="text"
+//           onChange={(e) => handlerInputChange(e)}
+//           placeholder="Ej: La plata..."
+//         />
+//         <button
+//           className="buttonSearch"
+//           onClick={(e) => handlerSearchByArea(e)}
+//         >
+//           Buscar
+//         </button>
+//       </div>
+//     </div>
+//   );
