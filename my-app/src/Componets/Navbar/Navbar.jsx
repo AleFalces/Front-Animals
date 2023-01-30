@@ -1,6 +1,5 @@
 import logo from "../../assets/imagenes/logo_negro.png";
-
-
+import { useAuth0 } from "@auth0/auth0-react";
 import { GiSittingDog } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
 
@@ -25,9 +24,9 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { user, isAuthenticated } = useAuth0();
 
   return (
     <>
@@ -42,9 +41,7 @@ export default function Simple() {
           />
           <HStack spacing={8} alignItems={"center"}>
             <Box>
-
               <NavLink to="/home">
-
                 <Image
                   src={logo}
                   // alt="Dan Abramov"
@@ -52,9 +49,7 @@ export default function Simple() {
                   mx="2rem"
                   mt="1rem"
                 />
-
               </NavLink>
-
             </Box>
 
             <HStack
@@ -62,9 +57,7 @@ export default function Simple() {
               spacing={7}
               display={{ base: "none", md: "flex" }}
             >
-
               <NavLink
-
                 px={2}
                 py={1}
                 rounded={"md"}
@@ -72,14 +65,12 @@ export default function Simple() {
                   textDecoration: "none",
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
-
                 to="/aboutUs"
                 variant="custom"
               >
                 <Text fontFamily={"body"}>Sobre Nosotros</Text>
               </NavLink>
               <NavLink
-
                 px={2}
                 py={1}
                 rounded={"md"}
@@ -87,14 +78,12 @@ export default function Simple() {
                   textDecoration: "none",
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
-
                 to="/donate"
                 variant="custom"
               >
                 <Text fontFamily={"body"}>Donaciones</Text>
               </NavLink>
               <NavLink
-
                 px={2}
                 py={1}
                 rounded={"md"}
@@ -102,7 +91,6 @@ export default function Simple() {
                   textDecoration: "none",
                   bg: useColorModeValue("gray.200", "gray.700"),
                 }}
-
                 to="/shop"
                 variant="custom"
               >
@@ -141,7 +129,6 @@ export default function Simple() {
                 </MenuButton>
                 <MenuList>
                   <MenuItem>
-
                     <NavLink to="/adoptions">
                       <Text fontFamily={"body"}>Adopcion</Text>
                     </NavLink>
@@ -153,7 +140,6 @@ export default function Simple() {
                   </MenuItem>
                 </MenuList>
               </Menu>
-
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
@@ -167,8 +153,11 @@ export default function Simple() {
               >
                 <Avatar
                   size={"sm"}
+                  borderBlockEndColor={"brand.orange"}
                   src={
-                    "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                    isAuthenticated
+                      ? user?.picture
+                      : "https://st2.depositphotos.com/19428878/44645/v/450/depositphotos_446453832-stock-illustration-default-avatar-profile-icon-social.jpg"
                   }
                 />
               </MenuButton>
@@ -180,7 +169,6 @@ export default function Simple() {
                 <MenuItem>
                   <NavLink to="/createUser">Registrarse</NavLink>
                 </MenuItem>
-
               </MenuList>
             </Menu>
           </Flex>
@@ -196,7 +184,6 @@ export default function Simple() {
           </Box>
         ) : null}
       </Box>
-
     </>
   );
 }
