@@ -2,7 +2,7 @@
 	text-align: center;
 	width: 30px;
 	height: 25px;
-	border: 1px solid rgb(220, 146, 35);
+	border: 1px solid rgb(35, 189, 220);
 	border-radius: 10px;
 	position: relative;
 	transition: transform 500ms ease;
@@ -18,7 +18,7 @@
 
 .li:hover {
 	transform: scale(1);
-	background-color: rgb(255, 110, 74);
+	background-color: rgb(74, 164, 255);
 	box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
 	bottom: 2px;
 }
@@ -26,5 +26,5 @@
 .activePage {
 	background: var(--purple);
 	font-size: large;
-	-webkit-text-fill-color: rgba(222, 151, 27, 0.883);
+	-webkit-text-fill-color: rgba(66, 27, 222, 0.883);
 }
