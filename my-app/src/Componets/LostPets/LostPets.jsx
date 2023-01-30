@@ -51,8 +51,9 @@ const LostPets = () => {
 						</Link>
 					))
 				)}
+				<Footer />
 			</div>
-			<Footer />
+			
 		</>
 	);
 
