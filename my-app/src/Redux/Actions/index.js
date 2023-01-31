@@ -25,9 +25,25 @@ import {
   ACTUAL_PAGE,
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
+  GET_ALL_USERS
 } from "../ActionTypes";
 import { HOST } from "../../utils";
 import axios from "axios";
+
+export function getAllUsers(){
+  return async function ( dispatch){
+    try {
+    const json = await axios.get("http://localhost:3001/users")
+      return dispatch({
+        type: GET_ALL_USERS,
+        payload: json.data
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+}
 
 export function getAllPets() {
   return async function (dispatch) {

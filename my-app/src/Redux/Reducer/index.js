@@ -25,6 +25,7 @@ import {
   ACTUAL_PAGE,
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
+  GET_ALL_USERS
 } from "../ActionTypes";
 
 const initialState = {
@@ -39,10 +40,16 @@ const initialState = {
   actualPage: 1,
   allVets: [],
   vetsDetail: {},
+  allUsers:[]
 };
 
 const RootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        allUsers: action.payload
+      }
     case GET_ALL_PETS:
       return {
         ...state,
