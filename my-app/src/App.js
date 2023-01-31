@@ -54,11 +54,11 @@ function App() {
           path="/createPet"
           element={<FormPostPet token={token} />}
         ></Route>
+        <Route exact path="/dashboard" element={<DashboardAdmin token={token}/>}></Route>
+	      <Route exact path="/dashboard/createProduct" element={<FormPostProduct token={token}/>}></Route>
         <Route exact path="/createUser" element={<FormPostUser />}></Route>
         <Route exact path="/adoptions" element={<Adoption />}></Route>
         <Route exact path="/lostPets" element={<LostPets />}></Route>
-        <Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
-	      <Route exact path="/dashboard/createProduct" element={<FormPostProduct />}></Route>
         <Route exact path="/veterinary" element={<Veterinaries />}></Route>
         <Route
           exact
