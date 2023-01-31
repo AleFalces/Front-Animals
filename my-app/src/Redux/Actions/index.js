@@ -28,21 +28,21 @@ import {
   PREV_PAGE,
   ACTUAL_PAGE,
 } from "../ActionTypes";
-import { HOST } from "../../utils";
+import { HOST, header } from "../../utils";
 import axios from "axios";
 
-export function getAllUsers(){
-  return async function ( dispatch){
+export function getAllUsers() {
+  return async function (dispatch) {
     try {
-    const json = await axios.get("http://localhost:3001/users")
+      const json = await axios.get("http://localhost:3001/users");
       return dispatch({
         type: GET_ALL_USERS,
-        payload: json.data
-      })
+        payload: json.data,
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 }
 
 export function getAllPets() {
@@ -99,10 +99,11 @@ export const petDetails = (id) => async (dispatch) => {
   }
 };
 
-export function postPet(formInput) {
+export function postPet(formInput, token) {
   return async function (dispatch) {
     try {
-      const json = await axios.post(`${HOST}/pets`, formInput);
+      const config = header(token);
+      const json = await axios.post(`${HOST}/pets`, formInput, config);
       return dispatch({
         type: POST_PET,
       });
@@ -125,17 +126,17 @@ export function postUser(formInput) {
   };
 }
 
-export function postProduct(formInput){
-  return async function(dispatch){
+export function postProduct(formInput) {
+  return async function (dispatch) {
     try {
-      const newProduct = await axios.post(`${HOST}/products`, formInput)
+      const newProduct = await axios.post(`${HOST}/products`, formInput);
       return dispatch({
         type: POST_PRODUCT,
-      })
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 }
 
 export function filterBySpecie(value) {
