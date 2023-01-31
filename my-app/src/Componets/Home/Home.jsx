@@ -58,7 +58,7 @@ function StatsCard({ icon, title, stat }) {
 
 const Home = () => {
   const { user } = useAuth0();
-  console.log(user);
+
   return (
     <>
       <Navbar />

@@ -21,6 +21,7 @@ root.render(
     clientId={clientID}
     authorizationParams={{
       redirect_uri: "http://localhost:3000/home",
+      audience: "http://animales.com",
     }}
   >
     <Provider store={store}>
