@@ -1,7 +1,7 @@
 import React from "react";
 import { getAllProducts, getAllUsers, getAllPets } from "../../../Redux/Actions";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ShowUsers from "./ShowUsers";
 import ShowPets from "./ShowPets";
 import ShowProducts from "./ShowProducts";
@@ -11,6 +11,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const [selection, setSelection] = useState("");
+  const usersArray = useSelector((state) => state.allUsers)
 
   function handlerShowDataUsers(e) {
     e.preventDefault();
@@ -43,7 +44,7 @@ const Dashboard = () => {
       <div>
       
         {selection === "users" ? (
-          <ShowUsers/>
+          <ShowUsers users={usersArray}/>
         ) : selection === "products" ? (
           <><ShowProducts/></>
         ) : selection === "pets" ? (
