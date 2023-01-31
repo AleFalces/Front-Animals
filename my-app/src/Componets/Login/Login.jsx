@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FormPostUser } from "../FormPostUser/FormPostUser";
+// import { User } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
+
 // <button className="btn btn-success" onClick={() => loginWithRedirect()}>
 //   Login{" "}
 // </button>
@@ -14,8 +15,10 @@ import { Link } from "react-router-dom";
 const Login = () => {
 	const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 	const navegate = useNavigate();
+
 	const [input, setInput] = useState({
-		form: { email: "", password: "" },
+		email: "",
+		username: "",
 	});
 
 	const handleChange = (e) => {
@@ -23,27 +26,34 @@ const Login = () => {
 			...input,
 			[e.target.name]: e.target.value,
 		});
+		console.log(input);
 	};
 
 	const loginPost = async (formData) => {
 		try {
-			const loginUser = await axios.post(
-				"http://localhost:3001/users",
-				formData
-			);
-			console.log(loginUser);
+			let login = await axios
+				.post("http://localhost:3001/login", formData)
+				.then(({ data }) => {
+					localStorage.setItem("loggedUser", JSON.stringify(data));
+					navegate("/home");
+					alert("Usuario Logueado");
+				})
+				.catch(({ response }) => {
+					alert(response.data);
+				});
+			console.log(login);
 		} catch (err) {
-			console.log(err.message);
+			return err.message;
 		}
 	};
 
-	const handleSubmit = (e) => {
+	const handlerSubmit = (e) => {
 		e.preventDefault();
-		navegate("/home");
 		loginPost({ ...input });
+
+		// ;
 	};
 
-	console.log(input);
 	return (
 		<>
 			{isAuthenticated ? (
@@ -59,18 +69,21 @@ const Login = () => {
 								type="email"
 								name="email"
 								placeholder="Ingrese su Email"
-								value={input.name}
+								value={input.email}
 								onChange={handleChange}></input>
 
 							<input
 								type="password"
-								name="password"
-								placeholder="Contraseña"
-								value={input.password}
+								name="username"
+								placeholder="username"
+								value={input.username}
 								onChange={handleChange}
 							/>
 						</form>
-						<button className="formButtom" type="submit">
+						<button
+							onClick={handlerSubmit}
+							className="formButtom"
+							type="submit">
 							Ingresar
 						</button>
 						<Link to={`/createUser`}>
@@ -79,7 +92,6 @@ const Login = () => {
 					</div>
 					<Link />
 					<button
-						onSubmit={handleSubmit}
 						className="btn btn-success"
 						onClick={() => loginWithRedirect()}>
 						Ingresar Con Google{" "}
