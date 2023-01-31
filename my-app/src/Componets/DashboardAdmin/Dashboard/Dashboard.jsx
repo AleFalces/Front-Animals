@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import ShowUsers from "./ShowUsers";
 import ShowPets from "./ShowPets";
+import ShowProducts from "./ShowProducts";
 
 
 const Dashboard = () => {
@@ -23,7 +24,7 @@ const Dashboard = () => {
   
   function handlerShowDataProducts(e) {
     e.preventDefault();
-    setSelection("product");
+    setSelection("products");
   }
 
   useEffect(() => {
@@ -38,23 +39,20 @@ const Dashboard = () => {
         <button onClick={(e) => handlerShowDataUsers(e)}>Ver usuarios</button>
         <button onClick={(e) => handlerShowDataPets(e)}>Ver mascotas</button>
         <button onClick={(e) => handlerShowDataProducts(e)}>Ver productos</button>
-        
       </div>
       <div>
       
         {selection === "users" ? (
           <ShowUsers/>
         ) : selection === "products" ? (
-          <>"products"</>
+          <><ShowProducts/></>
         ) : selection === "pets" ? (
           <ShowPets/>
         ) : (
-          <>"Elegir una de las opciones"</>
+          <>{null}</>
         )}
       </div>
-      <div>
-        <button>Ver Productos</button>
-      </div>
+
     </div>
   );
 };

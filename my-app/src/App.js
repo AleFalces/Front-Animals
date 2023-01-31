@@ -11,6 +11,7 @@ import AboutUs from "./Componets/AboutUs/AboutUs";
 import Shop from "./Componets/Shop/Shop";
 import FormPostPet from "./Componets/FormPostPet/FormPostPet";
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
+import FormPostProduct from "./Componets/DashboardAdmin/Dashboard/FormPostProduct";
 import LostPets from "./Componets/LostPets/LostPets";
 import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
@@ -19,7 +20,9 @@ import VetsDetails from "./Componets/VetsDetail/VetsDetail";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
 
+
 function App() {
+
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const [token, setToken] = useState("");
 
@@ -55,6 +58,7 @@ function App() {
         <Route exact path="/adoptions" element={<Adoption />}></Route>
         <Route exact path="/lostPets" element={<LostPets />}></Route>
         <Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
+	      <Route exact path="/dashboard/createProduct" element={<FormPostProduct />}></Route>
         <Route exact path="/veterinary" element={<Veterinaries />}></Route>
         <Route
           exact
@@ -84,6 +88,7 @@ function App() {
       </Routes>
     </div>
   );
+
 }
 
 export default App;
