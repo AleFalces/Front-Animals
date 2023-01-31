@@ -1,19 +1,18 @@
 import React from "react";
-import { useEffect } from "react";
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 
-import {getAllProducts} from '../../../Redux/Actions/index'
 
-const ListProducts = () => {
-    const dispatch = useDispatch()
-    
+const ShowProducts = () => {
+  const products = useSelector((state) => state.allProducts);
+  // console.log("Productos", product)
 
-    const product = useSelector((state) => state.allProducts)
-    // console.log("Productos", product)
-
-    return(
-            product.map(p => p.name)
-    )
+  return (
+    <div>
+        {products.map((pro)=> (
+            <>{pro? pro.name : "No hay productos"}</>
+        ))}
+    </div>
+  );
 };
 
-export default ListProducts;
+export default ShowProducts;

@@ -19,8 +19,8 @@ const SideNav = () => {
     <aside className={styles.sideNav}>
       <div className={styles.img}></div>
       <div className={styles.panel}>
-        {menu.map(icon => (
-          <div className={styles.icon}>
+        {menu.map((icon, idx) => (
+          <div className={styles.icon} key={idx}>
             <Icon icon={icon} />
           </div>
         ))}

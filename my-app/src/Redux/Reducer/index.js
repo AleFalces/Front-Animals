@@ -5,6 +5,7 @@ import {
   GET_LOST_PETS,
   POST_PET,
   POST_USER,
+  POST_PRODUCT,
   FILTER_VALUES_ADOPTION,
   FILTER_SPECIE_ADOPTION,
   FILTER_SEX_ADOPTION,
@@ -49,7 +50,7 @@ const RootReducer = (state = initialState, action) => {
       return {
         ...state,
         allUsers: action.payload
-      }
+      };
     case GET_ALL_PETS:
       return {
         ...state,
@@ -83,6 +84,10 @@ const RootReducer = (state = initialState, action) => {
     case POST_USER:
       return {
         ...state,
+      };
+    case POST_PRODUCT:
+      return {
+        ...state
       };
     case FILTER_VALUES_ADOPTION:
       //   let specie = action.payload.specie;

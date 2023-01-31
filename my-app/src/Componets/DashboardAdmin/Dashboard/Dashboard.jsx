@@ -1,7 +1,7 @@
 import React from "react";
 import { getAllProducts, getAllUsers, getAllPets } from "../../../Redux/Actions";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ShowUsers from "./ShowUsers";
 import ShowPets from "./ShowPets";
 
@@ -21,7 +21,7 @@ const Dashboard = () => {
     setSelection("pets");
   }
   
-  function handlerShowDataProduct(e) {
+  function handlerShowDataProducts(e) {
     e.preventDefault();
     setSelection("product");
   }
@@ -37,9 +37,11 @@ const Dashboard = () => {
       <div>
         <button onClick={(e) => handlerShowDataUsers(e)}>Ver usuarios</button>
         <button onClick={(e) => handlerShowDataPets(e)}>Ver mascotas</button>
-        {/* <button value="products">Product List</button> */}
+        <button onClick={(e) => handlerShowDataProducts(e)}>Ver productos</button>
+        
       </div>
       <div>
+      
         {selection === "users" ? (
           <ShowUsers/>
         ) : selection === "products" ? (
@@ -50,13 +52,16 @@ const Dashboard = () => {
           <>"Elegir una de las opciones"</>
         )}
       </div>
+      <div>
+        <button>Ver Productos</button>
+      </div>
     </div>
   );
 };
 
+export default Dashboard;
 //componente para agregar, quitar o editar productos de la tienda
 //componente para cargar imagenes
 //componente para controlar usuarios: bloquear o desbloqeuar
 //componente de solicitudes de cambios generados por el usuario
 
-export default Dashboard;
