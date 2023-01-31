@@ -30,7 +30,7 @@ export default function Simple() {
 
   return (
     <>
-      <Box bg="brand.green.100" px={100}>
+      <Box bg="brand.green.100" px={100} py="10px">
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
@@ -46,16 +46,17 @@ export default function Simple() {
                   src={logo}
                   // alt="Dan Abramov"
                   boxSize="70px"
-                  mx="2rem"
-                  mt="1rem"
+                  mx="1rem"
+                  mt="0.5rem"
                 />
               </NavLink>
             </Box>
 
             <HStack
               as={"nav"}
-              spacing={7}
+              spacing={9}
               display={{ base: "none", md: "flex" }}
+              paddingLeft="10rem"
             >
               <NavLink
                 px={2}
