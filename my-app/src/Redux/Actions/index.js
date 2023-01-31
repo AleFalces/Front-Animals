@@ -3,8 +3,14 @@ import {
   GET_ADOPTION_PETS,
   GET_LOST_PETS,
   GET_PET_ID,
+  GET_ALL_USERS,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_DETAIL,
+  GET_VETERINARIES,
+  GET_DETAILS_VETERINARIES,
   POST_PET,
   POST_USER,
+  POST_PRODUCT,
   FILTER_VALUES_ADOPTION,
   FILTER_SPECIE_ADOPTION,
   FILTER_SEX_ADOPTION,
@@ -15,17 +21,12 @@ import {
   FILTER_LOST_SEX,
   FILTER_LOST_AGE,
   FILTER_LOST_SIZE,
-  GET_ALL_PRODUCTS,
-  GET_PRODUCT_DETAIL,
   SHOP_SEARCH_INPUT_NAME,
   SHOP_FILTER_VALUE,
   FILTER_LOST_SEARCH_AREA,
   NEXT_PAGE,
   PREV_PAGE,
   ACTUAL_PAGE,
-  GET_VETERINARIES,
-  GET_DETAILS_VETERINARIES,
-  GET_ALL_USERS
 } from "../ActionTypes";
 import { HOST } from "../../utils";
 import axios from "axios";
@@ -42,7 +43,6 @@ export function getAllUsers(){
       console.log(error)
     }
   }
-
 }
 
 export function getAllPets() {
@@ -123,6 +123,19 @@ export function postUser(formInput) {
       console.log(error);
     }
   };
+}
+
+export function postProduct(formInput){
+  return async function(dispatch){
+    try {
+      const newProduct = await axios.post(`${HOST}/products`, formInput)
+      return dispatch({
+        type: POST_PRODUCT,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 export function filterBySpecie(value) {
