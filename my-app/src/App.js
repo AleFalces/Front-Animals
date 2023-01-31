@@ -11,11 +11,13 @@ import AboutUs from "./Componets/AboutUs/AboutUs";
 import Shop from "./Componets/Shop/Shop";
 import FormPostPet from "./Componets/FormPostPet/FormPostPet";
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
+import FormPostProduct from "./Componets/DashboardAdmin/Dashboard/FormPostProduct";
 import LostPets from "./Componets/LostPets/LostPets";
 import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
 import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
 import VetsDetails from "./Componets/VetsDetail/VetsDetail";
+
 
 function App() {
 	return (
@@ -37,6 +39,7 @@ function App() {
 				<Route exact path="/adoptions" element={<Adoption />}></Route>
 				<Route exact path="/lostPets" element={<LostPets />}></Route>
 				<Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
+				<Route exact path="/dashboard/createProduct" element={<FormPostProduct />}></Route>
 				<Route exact path="/veterinary" element={<Veterinaries />}></Route>
 				<Route
 					exact

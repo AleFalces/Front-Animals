@@ -164,11 +164,13 @@ export default function Simple() {
               <MenuList>
                 <MenuItem>Perfil</MenuItem>
                 <MenuItem>Mis mascotas</MenuItem>
-
+                <NavLink to="/dashboard">
+                  <MenuItem>Administrar cuenta</MenuItem>
+                </NavLink>
                 <MenuDivider />
-                <MenuItem>
-                  <NavLink to="/">Ingresar</NavLink>
-                </MenuItem>
+                <NavLink to="/">
+                  <MenuItem>Ingresar</MenuItem>
+                </NavLink>
               </MenuList>
             </Menu>
           </Flex>

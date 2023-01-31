@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 
 const ShowProducts = () => {
   const products = useSelector((state) => state.allProducts);
-  // console.log("Productos", product)
+  console.log("Productos", products)
 
   return (
     <div>
-        {products.map((pro)=> (
-            <>{pro? pro.name : "No hay productos"}</>
+        {products?.map((pro)=> (
+            <>{pro.name}</>
         ))}
     </div>
   );
