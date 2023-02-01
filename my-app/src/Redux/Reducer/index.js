@@ -26,7 +26,8 @@ import {
   ACTUAL_PAGE,
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
-  GET_ALL_USERS
+  GET_ALL_USERS,
+  SET_STATUS_USER
 } from "../ActionTypes";
 
 const initialState = {
@@ -256,6 +257,10 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         vetsDetail: action.payload,
       };
+    case SET_STATUS_USER:
+      return {
+        ...state
+      }
     default:
       return state;
   }
