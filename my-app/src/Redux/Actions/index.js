@@ -412,10 +412,10 @@ export function getCart(cart) {
   };
 }
 
-export function setStatusUser(id, status) {//preguntar si se manda en obj o array la data
+export function setStatusUser(id) {//preguntar si se manda en obj o array la data
   return async function (dispatch) {
     try {
-      await axios.put(`${HOST}/users/setUser`, status)
+      await axios.put(`${HOST}/users/setStatusUser/${id}`)
       dispatch({
         type: SET_STATUS_USER
       })
@@ -424,5 +424,3 @@ export function setStatusUser(id, status) {//preguntar si se manda en obj o arra
     }
   };
 }
-
-
