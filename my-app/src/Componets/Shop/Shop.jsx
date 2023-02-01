@@ -14,7 +14,14 @@ import Footer from "../Footer/Footer"
 export default function Shop() {
   const dispatch = useDispatch()
   const products = useSelector((state) => state.products)
-
+  const [cart, setCart] = useState({});
+  const setLocalStorage = (value) => {
+      try {
+          setCart("Prueba")
+      } catch (error) {
+          console.log(error);
+      }
+  }
   useEffect(() => {
     dispatch(getAllProducts())
   }, [dispatch])
