@@ -11,7 +11,6 @@ import {
   POST_PET,
   POST_USER,
   POST_PRODUCT,
-  FILTER_VALUES_ADOPTION,
   FILTER_SPECIE_ADOPTION,
   FILTER_SEX_ADOPTION,
   FILTER_AGE_ADOPTION,
@@ -27,6 +26,8 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   ACTUAL_PAGE,
+  UP_FUNCTION_SET_CART,
+  GET_CART,
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -270,11 +271,11 @@ export function getAllProducts() {
   };
 }
 
-export function getProductDetail(id) {
+export function getProductDetail(obj) {
   return async function (dispatch) {
     try {
-      console.log("DENTRO DE ACTION GET DETAIL", id);
-      const productDetail = await axios.get(`${HOST}/products/${id}`);
+      const productDetail = await axios.get(`${HOST}/products/${obj.id}`);
+      productDetail.data[0].handlerSetCart = obj.handlerSetCart;
       return dispatch({
         type: GET_PRODUCT_DETAIL,
         payload: productDetail.data,
@@ -382,13 +383,26 @@ export const VeterinaryDetails = (id) => async (dispatch) => {
   }
 };
 
-export function filterValuesAdoption(filters) {
-  // no terminada
+export function upFunctionSetCart(handlerSetCart) {
   return async function (dispatch) {
     try {
       dispatch({
-        type: FILTER_VALUES_ADOPTION,
-        payload: filters,
+        type: UP_FUNCTION_SET_CART,
+        payload: handlerSetCart,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getCart(cart) {
+  return async function (dispatch) {
+    try {
+      console.log("GET CART ACTION ENTRE");
+      dispatch({
+        type: GET_CART,
+        payload: cart,
       });
     } catch (error) {
       console.log(error);
