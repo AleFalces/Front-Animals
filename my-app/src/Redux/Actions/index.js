@@ -27,6 +27,7 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   ACTUAL_PAGE,
+  SET_STATUS_USER,
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -395,3 +396,18 @@ export function filterValuesAdoption(filters) {
     }
   };
 }
+
+export function setStatusUser(id, status) {//preguntar si se manda en obj o array la data
+  return async function (dispatch) {
+    try {
+      await axios.put(`${HOST}/users/setUser`, status)
+      dispatch({
+        type: SET_STATUS_USER
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
