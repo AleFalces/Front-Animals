@@ -11,7 +11,7 @@ export default function ProductDetail(props) {
 	const dispatch = useDispatch();
 	const detail = useSelector((state) => state.productDetail);
 	useEffect(() => {
-		dispatch(getProductDetail(productId));
+		// dispatch(getProductDetail(productId));
 		console.log("DETAIL", detail);
 	}, [dispatch]);
 

@@ -19,10 +19,9 @@ import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
 import VetsDetails from "./Componets/VetsDetail/VetsDetail";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
-
+import Cart from "./Componets/Shop/Cart/Cart";
 
 function App() {
-
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const [token, setToken] = useState("");
 
@@ -43,7 +42,7 @@ function App() {
         <Route exact path="/aboutUs" element={<AboutUs />}></Route>
         <Route exact path="/donate" element={<Donate />}></Route>
         <Route exact path="/shop" element={<Shop />}></Route>
-        {/* <Route exact path="/shop/cart" element={<Cart />}></Route> */}
+        <Route exact path="/shop/cart" element={<Cart />}></Route>
         <Route
           path="/shop/product/:productId"
           element={<ProductDetail />}
@@ -58,7 +57,11 @@ function App() {
         <Route exact path="/adoptions" element={<Adoption />}></Route>
         <Route exact path="/lostPets" element={<LostPets />}></Route>
         <Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
-	      <Route exact path="/dashboard/createProduct" element={<FormPostProduct />}></Route>
+        <Route
+          exact
+          path="/dashboard/createProduct"
+          element={<FormPostProduct />}
+        ></Route>
         <Route exact path="/veterinary" element={<Veterinaries />}></Route>
         <Route
           exact
@@ -88,7 +91,6 @@ function App() {
       </Routes>
     </div>
   );
-
 }
 
 export default App;
