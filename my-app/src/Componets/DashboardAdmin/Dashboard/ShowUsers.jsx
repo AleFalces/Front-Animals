@@ -1,9 +1,9 @@
 import React from "react";
 import UserCard from "./Cards/UserCard";
-// import { useSelector } from "react-redux";
+
 
 export default function ShowUsers({ users }) {
-
+  
   return (
       users.map((user) => (
         <UserCard
@@ -12,7 +12,7 @@ export default function ShowUsers({ users }) {
           surname={user.surname}
           email={user.email}
           phone={user.phone}
-          role={user.role}
+          status={user.status}
         ></UserCard>
       ))
   );
