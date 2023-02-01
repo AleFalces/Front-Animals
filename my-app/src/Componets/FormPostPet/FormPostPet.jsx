@@ -4,8 +4,10 @@ import { Link, redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postPet } from "../../Redux/Actions";
 import { MdArrowBackIosNew } from 'react-icons/md'
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer"
+import { ErrorForm, SuccedForm } from "./AlertForm/AlertForm";
 import "./FormPostPet.css"
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
   Flex,
   Box,
@@ -20,6 +22,7 @@ import {
   Icon,
   /*  Link, */
   Select
+
 } from '@chakra-ui/react';
 
 
@@ -62,20 +65,15 @@ const validateForm = (input) => {
 
 
 
-
-
-
-
-
-
 export default function FormPostPet() {
 
-  const [showPassword, setShowPassword] = useState(false);
+  /* let isIncomplete = true; */
   const dispatch = useDispatch();
 
   useEffect(() => { }, []);
 
-
+  const [isIncomplete, setIsIncomplete] = useState(false)
+  const [infoSend, setInfoSend] = useState(false)
 
   const [inputError, setInputError] = useState({})
   const [input, setInput] = useState({
@@ -122,19 +120,30 @@ export default function FormPostPet() {
       input.img
       !== ""
     ) {
+
       dispatch(postPet(input));
-      alert("Mascota creada con éxito!");
+      setIsIncomplete(false)
+      setInfoSend(true)
+
+
+
     } else {
       console.log(inputError)
-      alert("some information is missing")
+      setIsIncomplete(true)
+      setInfoSend(false)
+
     }
   }
-
 
 
   return (
 
     <div>
+      <Navbar />
+
+      {isIncomplete ? <ErrorForm /> : null}
+      {infoSend ? <SuccedForm /> : null}
+
       <form onSubmit={handlerSubmit}>
         <Flex
           minH={'100vh'}
@@ -154,7 +163,7 @@ export default function FormPostPet() {
             </Stack>
             <Box
               rounded={'lg'}
-              bg={useColorModeValue('white', 'gray.700')}
+              /*  bg={useColorModeValue('white', 'gray.700')} */
               boxShadow={'lg'}
               p={8}
             >
@@ -288,7 +297,7 @@ export default function FormPostPet() {
                   {inputError.img && <Text className="text_inputError">{inputError.img}</Text>}
                 </FormControl>
                 <Stack spacing={10} pt={2}>
-                  <Button onClick={(e) => handlerSubmit(e)}
+                  <Button onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
                     loadingText="Post mascota"
                     fontFamily={'body'}
                     size="lg"
@@ -327,15 +336,14 @@ export default function FormPostPet() {
           </Stack>
         </Flex>
       </form>
+
+      <Footer />
+
+
+
     </div>
   );
 }
-
-
-
-
-
-
 
 
 
