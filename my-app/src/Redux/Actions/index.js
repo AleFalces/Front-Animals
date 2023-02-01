@@ -28,6 +28,8 @@ import {
   ACTUAL_PAGE,
   UP_FUNCTION_SET_CART,
   GET_CART,
+  SET_STATUS_USER,
+
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -409,3 +411,18 @@ export function getCart(cart) {
     }
   };
 }
+
+export function setStatusUser(id, status) {//preguntar si se manda en obj o array la data
+  return async function (dispatch) {
+    try {
+      await axios.put(`${HOST}/users/setUser`, status)
+      dispatch({
+        type: SET_STATUS_USER
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+

@@ -28,6 +28,7 @@ import {
   GET_ALL_USERS,
   UP_FUNCTION_SET_CART,
   GET_CART,
+  SET_STATUS_USER
 } from "../ActionTypes";
 
 const initialState = {
@@ -217,6 +218,10 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         cart: action.payload,
       };
+    case SET_STATUS_USER:
+      return {
+        ...state
+      }
     default:
       return state;
   }
