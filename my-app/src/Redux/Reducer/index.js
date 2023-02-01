@@ -6,7 +6,6 @@ import {
   POST_PET,
   POST_USER,
   POST_PRODUCT,
-  FILTER_VALUES_ADOPTION,
   FILTER_SPECIE_ADOPTION,
   FILTER_SEX_ADOPTION,
   FILTER_AGE_ADOPTION,
@@ -27,6 +26,8 @@ import {
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
   GET_ALL_USERS,
+  UP_FUNCTION_SET_CART,
+  GET_CART,
   SET_STATUS_USER
 } from "../ActionTypes";
 
@@ -42,7 +43,9 @@ const initialState = {
   actualPage: 1,
   allVets: [],
   vetsDetail: {},
-  allUsers:[]
+  allUsers: [],
+  cart: [],
+  handlerSetCart: {},
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -50,7 +53,7 @@ const RootReducer = (state = initialState, action) => {
     case GET_ALL_USERS:
       return {
         ...state,
-        allUsers: action.payload
+        allUsers: action.payload,
       };
     case GET_ALL_PETS:
       return {
@@ -88,59 +91,7 @@ const RootReducer = (state = initialState, action) => {
       };
     case POST_PRODUCT:
       return {
-        ...state
-      };
-    case FILTER_VALUES_ADOPTION:
-      //   let specie = action.payload.specie;
-      //   let sex = action.payload.sex;
-      //   let age = action.payload.age;
-      //   let size = action.payload.size;
-      //   let array = state.adoptionPets.filter((pet) => specie === pet.specie);
-      let filters = action.payload;
-      console.log("reducer", action.payload);
-
-      let result = state.adoptionPets.filter((pet) => {
-        let booleans = [];
-        filters.forEach((str, i) => {
-          if (i % 2 === 0) {
-            pet[str] === filters[i + 1]
-              ? booleans.push(true)
-              : booleans.push(false);
-          }
-          //   pet[arr[0]] === arr[1] ? booleans.push(true) : booleans.push(false);
-        });
-        if (booleans.length === 1) {
-          if (booleans[0]) {
-            return true;
-          } else {
-            return false;
-          }
-        }
-        if (booleans.length === 2) {
-          if (booleans[0] && booleans[1]) {
-            console.log("2 SIIII", booleans[0], booleans[1]);
-            return true;
-          } else {
-            return false;
-          }
-        }
-        if (booleans.length === 3) {
-          if (booleans[0] && booleans[1] && booleans[2]) {
-            return true;
-          } else {
-            return false;
-          }
-        }
-        if (booleans[0] && booleans[1] && booleans[2] && booleans[3]) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-
-      return {
         ...state,
-        pets: result,
       };
     case FILTER_SPECIE_ADOPTION:
       return {
@@ -256,6 +207,16 @@ const RootReducer = (state = initialState, action) => {
       return {
         ...state,
         vetsDetail: action.payload,
+      };
+    case UP_FUNCTION_SET_CART:
+      return {
+        ...state,
+        handlerSetCart: { handlerSetCart: action.payload },
+      };
+    case GET_CART:
+      return {
+        ...state,
+        cart: action.payload,
       };
     case SET_STATUS_USER:
       return {

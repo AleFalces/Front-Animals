@@ -4,11 +4,12 @@ import {
 	shopSearchInputName,
 	shopFilterValue,
 	getAllProducts,
+	upFunctionSetCart
 } from "../../../Redux/Actions";
 import "./ShopNavbar.css";
 import { useNavigate } from "react-router-dom";
 
-export default function ShopNavbar() {
+export default function ShopNavbar({handlerSetCart}) {
 	const navigate = useNavigate()
 	const dispatch = useDispatch();
 	const [input, setInput] = useState("");
@@ -35,15 +36,17 @@ export default function ShopNavbar() {
 			: dispatch(getAllProducts());
 	};
 
-	// const [userCart, setUserCart] = useState({});
-	// const handlerAddProduct = (value) => {
-	// 	window.localStorage;
-	// };
+	function handlerClick (e) {
+		e.preventDefault()
+		dispatch(upFunctionSetCart(handlerSetCart))
+		setTimeout(() => navigate("/shop/cart"),500)
+	}
+
 	return (
 		<div className="shopNavbarContainer">
 			<div className="divNavbarInputContainer">
 				<div className="divCartAndInput">
-				    <button onClick={(e) => {navigate("/shop/cart")}}>Carrito</button>
+				    <button onClick={(e) => { handlerClick(e) }}>Carrito</button>
 					<div className="divNavbarInput">
 
 					  <input
