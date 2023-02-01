@@ -7,6 +7,7 @@ export const theme = extendTheme({
       green: {
         100: "#bae8e8",
         200: "#e3f6f5",
+        300: "#40c2bb"
       },
       orange: "#f9bc60",
       background: "#fffffe",
@@ -17,6 +18,7 @@ export const theme = extendTheme({
   fonts: {
     heading: "Montserrat",
     body: "Inter",
+   
   },
 
   linkTheme: {

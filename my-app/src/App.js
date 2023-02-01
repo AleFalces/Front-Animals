@@ -19,78 +19,77 @@ import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
 import VetsDetails from "./Componets/VetsDetail/VetsDetail";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
-import Cart from "./Componets/Shop/Cart/Cart";
 
 function App() {
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
-  const [token, setToken] = useState("");
+	const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+	const [token, setToken] = useState("");
 
-  useEffect(() => {
-    const validator = async () => {
-      const isVerify = await getAccessTokenSilently();
-      setToken(isVerify);
-    };
-    validator();
-  }, [getAccessTokenSilently]);
+	useEffect(() => {
+		const validator = async () => {
+			const isVerify = await getAccessTokenSilently();
+			setToken(isVerify);
+		};
+		validator();
+	}, [getAccessTokenSilently]);
 
-  return isAuthenticated ? (
-    <div className="App">
-      <Routes>
-        <Route exact path="/" element={<LandingPage />}></Route>
-        <Route exact path="/home" element={<Home />}></Route>
-        <Route exact path="/login" element={<Login />}></Route>
-        <Route exact path="/aboutUs" element={<AboutUs />}></Route>
-        <Route exact path="/donate" element={<Donate />}></Route>
-        <Route exact path="/shop" element={<Shop />}></Route>
-        <Route exact path="/shop/cart" element={<Cart />}></Route>
-        <Route
-          path="/shop/product/:productId"
-          element={<ProductDetail />}
-        ></Route>
-        <Route exact path="/pets/:paramsId" element={<Details />}></Route>
-        <Route
-          exact
-          path="/createPet"
-          element={<FormPostPet token={token} />}
-        ></Route>
-        <Route exact path="/createUser" element={<FormPostUser />}></Route>
-        <Route exact path="/adoptions" element={<Adoption />}></Route>
-        <Route exact path="/lostPets" element={<LostPets />}></Route>
-        <Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
-        <Route
-          exact
-          path="/dashboard/createProduct"
-          element={<FormPostProduct />}
-        ></Route>
-        <Route exact path="/veterinary" element={<Veterinaries />}></Route>
-        <Route
-          exact
-          path="/veterinary/:paramsId"
-          element={<VetsDetails />}
-        ></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
-    </div>
-  ) : (
-    /*  </ChakraProvider> */
-    <div className="App">
-      <Routes>
-        <Route exact path="/" element={<LandingPage />}></Route>
-        <Route exact path="/home" element={<Home />}></Route>
-        <Route exact path="/aboutUs" element={<AboutUs />}></Route>
-        <Route exact path="/pets/:paramsId" element={<Details />}></Route>
-        <Route exact path="/adoptions" element={<Adoption />}></Route>
-        <Route exact path="/lostPets" element={<LostPets />}></Route>
-        <Route exact path="/veterinary" element={<Veterinaries />}></Route>
-        <Route
-          exact
-          path="/veterinary/:paramsId"
-          element={<VetsDetails />}
-        ></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
-    </div>
-  );
+	return isAuthenticated ? (
+		<div className="App">
+			<Routes>
+				<Route exact path="/" element={<LandingPage />}></Route>
+				<Route exact path="/home" element={<Home />}></Route>
+				<Route exact path="/login" element={<Login />}></Route>
+				<Route exact path="/aboutUs" element={<AboutUs />}></Route>
+				<Route exact path="/donate" element={<Donate />}></Route>
+				<Route exact path="/shop" element={<Shop />}></Route>
+				{/* <Route exact path="/shop/cart" element={<Cart />}></Route> */}
+				<Route
+					path="/shop/product/:productId"
+					element={<ProductDetail />}></Route>
+				<Route exact path="/pets/:paramsId" element={<Details />}></Route>
+				<Route
+					exact
+					path="/createPet"
+					element={<FormPostPet token={token} />}></Route>
+				<Route
+					exact
+					path="/dashboard"
+					element={<DashboardAdmin token={token} />}></Route>
+				<Route
+					exact
+					path="/dashboard/createProduct"
+					element={<FormPostProduct token={token} />}></Route>
+
+				<Route exact path="/adoptions" element={<Adoption />}></Route>
+				<Route exact path="/lostPets" element={<LostPets />}></Route>
+				<Route exact path="/veterinary" element={<Veterinaries />}></Route>
+				<Route
+					exact
+					path="/veterinary/:paramsId"
+					element={<VetsDetails />}></Route>
+				<Route path="*" element={<NotFound />}></Route>
+			</Routes>
+		</div>
+	) : (
+		/*  </ChakraProvider> */
+		<div className="App">
+			<Routes>
+				<Route exact path="/createUser" element={<FormPostUser />}></Route>
+				<Route exact path="/" element={<LandingPage />}></Route>
+				<Route exact path="/home" element={<Home />}></Route>
+				<Route exact path="/aboutUs" element={<AboutUs />}></Route>
+				<Route exact path="/pets/:paramsId" element={<Details />}></Route>
+				<Route exact path="/adoptions" element={<Adoption />}></Route>
+				<Route exact path="/lostPets" element={<LostPets />}></Route>
+				<Route exact path="/veterinary" element={<Veterinaries />}></Route>
+				<Route
+					exact
+					path="/veterinary/:paramsId"
+					element={<VetsDetails />}></Route>
+				<Route path="*" element={<NotFound />}></Route>
+			</Routes>
+		</div>
+	);
+
 }
 
 export default App;
