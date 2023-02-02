@@ -27,10 +27,7 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   ACTUAL_PAGE,
-  UP_FUNCTION_SET_CART,
-  GET_CART,
   SET_STATUS_USER,
-
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -292,6 +289,7 @@ export function getProductDetail(obj) {
     try {
       const productDetail = await axios.get(`${HOST}/products/${obj.id}`);
       productDetail.data[0].handlerSetCart = obj.handlerSetCart;
+      productDetail.data[0].handleRemoveItemCart = obj.handleRemoveItemCart;
       return dispatch({
         type: GET_PRODUCT_DETAIL,
         payload: productDetail.data,
@@ -399,26 +397,13 @@ export const VeterinaryDetails = (id) => async (dispatch) => {
   }
 };
 
-export function upFunctionSetCart(handlerSetCart) {
+export function setStatusUser(id) {
+  //preguntar si se manda en obj o array la data
   return async function (dispatch) {
     try {
+      await axios.put(`${HOST}/users/setStatusUser/${id}`);
       dispatch({
-        type: UP_FUNCTION_SET_CART,
-        payload: handlerSetCart,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function getCart(cart) {
-  return async function (dispatch) {
-    try {
-      console.log("GET CART ACTION ENTRE");
-      dispatch({
-        type: GET_CART,
-        payload: cart,
+        type: SET_STATUS_USER,
       });
     } catch (error) {
       console.log(error);
@@ -440,3 +425,4 @@ export function setStatusUser(id) {//preguntar si se manda en obj o array la dat
     }
   };
 }
+
