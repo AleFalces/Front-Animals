@@ -39,15 +39,12 @@ const Adoption = () => {
         <Pagination pets={pets} PetPerPage={PetPerPage} />
       </div>
       <SimpleGrid columns={[1, 2, 3]} spacing='40px' >
-        {/*    <div className="cardsContainer"> */}
         {!pets?.length ? (
           <p>No hay mascotas</p>
         ) :
           currentPetPerPage?.map((el) => (
             (
               <Link to={`/pets/${el.id}`} key={el.id}>
-                {/* <div className="cardsContainerPadding"> */}
-                <Box bg='tomato' height='80px'> </Box>
                 <Card data={el} />
 
                 {/*  </div> */}

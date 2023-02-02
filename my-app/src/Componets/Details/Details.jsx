@@ -26,18 +26,20 @@ import {
   HStack,
   VStack,
 } from "@chakra-ui/react";
+
 import { GiSittingDog } from "react-icons/gi";
+import { GiCat } from "react-icons/gi";
 import { PhoneIcon, CheckIcon } from "@chakra-ui/icons";
 
 const messages = [
-	"Asegúrate de tener suficiente espacio y tiempo para dedicar al cuidado del animal.",
+  "Asegúrate de tener suficiente espacio y tiempo para dedicar al cuidado del animal.",
   "Adopción de un animal de compañía conlleva costos relacionados con alimentación, atención veterinaria, juguetes, etc.",
   " Debes estar dispuesto a asumir la gran responsabilidad de cuidar y brindar amor a un animal por el resto de su vida.",
   "Compatibilidad con tu estilo de vida: Considera si tu horario de trabajo, viajes, etc. son compatibles con el cuidado de un animal.",
   "Preparación para la llegada: Prepara tu hogar para la llegada del animal, con un lugar cómodo para dormir, juguetes y alimentación adecuada.",
 ];
 
-const titulo= ["Espacio y tiempo disponible","Costos asociados","Responsabilidades a largo plazo", "Compatibilidad con tu estilo de vida", "Preparación para la llegada" ]
+const titulo = ["Espacio y tiempo disponible", "Costos asociados", "Responsabilidades a largo plazo", "Compatibilidad con tu estilo de vida", "Preparación para la llegada"]
 const features = messages.map(function (x, i) {
   return {
     id: i,
@@ -60,30 +62,31 @@ const Details = () => {
   return (
     <div className="detailContainer">
       <Navbar />
-
-      <Box bg="brand.green.200" mt="1rem" pb="4rem">
-        <SimpleGrid columns={[1, 1, 1, 2]} spacing={["20px", "20px", "30px"]}>
+      {window.scrollTo(0, 0)}
+      <Box bg="brand.green.200" mt="1rem"
+        pb={["1rem", "2rem", "2rem"]}>
+        <SimpleGrid columns={[1, 1, 2, 2]} spacing={["10px", "10px", "30px"]}>
           {/* Info1 Titulos*/}
           <Center w="100%" h="100%">
             <Box
-              /* bg="brand.green.100" */ height="300px"
+              height="300px"
               w={[250, 400, 600]}
               pl="2"
-              pt="5rem"
-              ml="6rem"
-              mt="4rem"
+              ml={["1rem", "0rem", "6rem"]}
+              mt={["1rem", "0rem", "4rem"]}
+              pt={["8rem", "6rem", "2rem"]}
               borderRadius="15px"
             >
               {/*  Info1  */}
-              {/* <GridItem pl='2' area={'info1'} py='3rem' mt="2rem" borderRadius='15px'> */}
-              <Heading as="h1" size="3xl" textTransform="uppercase">
+              <Heading as="h1" size="3xl" textTransform="uppercase" color="gray.500">
                 {Det.species}{" "}
               </Heading>
-              <Heading as="h2" size="lg" textTransform="uppercase">
+              <Heading as="h2" size="lg" textTransform="uppercase" color="gray.500">
                 {Det.sex}{" "}
               </Heading>
-              <Icon as={GiSittingDog} color="orange" boxSize={14} mt="1rem" />
-              {/* </GridItem> */}
+              <Box pt='0px'> {Det.species === "perro" ? <Icon as={GiSittingDog} color="orange" boxSize={14} mt="1rem" /> : <Icon as={GiCat} color="orange" boxSize={14} mt={"1rem"} />}</Box>
+
+
               <Divider
                 orientation="horizontal"
                 mt="2rem"
@@ -98,9 +101,10 @@ const Details = () => {
           <Center w="100%">
             <Box
               height="300px"
-              w={[400, 500, 700]}
-              ml={{ sm: "0rem", md: "0rem", lg: "2rem" }}
-              pt={{ md: "0rem", lg: "3rem" }}
+              w={[600, 600, 700]}
+              ml={["0rem", "1rem", "1rem"]}
+              mt={["0rem", "0rem", "1rem"]}
+              pt={["0rem", "5rem", "1rem"]}
             >
               <Center w="100%" h="100%">
                 <Image
@@ -109,65 +113,76 @@ const Details = () => {
                   borderRadius="50px"
                   objectFit="cover"
                   w="60%"
-                  mt="1rem"
                 />
               </Center>
             </Box>
           </Center>
         </SimpleGrid>
 
-        {/* Segunda sección se SimpleGrid*/}
-        {/*  Info2 */}
+
+        {/*  Info2 Detail */}
         <SimpleGrid
           columns={[1, 1, 1, 2]}
           spacing={["20px", "20px", "30px"]}
           mt="3rem"
         >
-          <Center w="100%" /* pl="5rem" */>
+          <Center>
             <Box
               bg="brand.green.200"
               boxShadow={"2xl"}
               rounded={"md"}
               overflow={"hidden"}
-              height="300px"
+              height={["400px", "300px", "340px"]}
               w={[250, 400, 700]}
               borderRadius="15px"
-              ml={["2rem", "2rem", "7rem"]}
+              ml={["1rem", "1rem", "3rem"]}
+              my={["0rem", "2rem", "0rem"]}
+              pb="1rem"
             >
-              <Heading as="h4" size="lg" pt="2rem">
+              {/* Título sec. info */}
+              <Heading as="h4" size="lg" pt="2rem" color="gray.600">
                 {" "}
                 Un poco sobre mi
               </Heading>
+
+              {/* DETAIL */}
+              <Text
+                fontFamily={"body"}
+                fontWeight={"300"}
+                noOfLines={[4, 4, 3]}
+                px="1rem"
+                py={["2rem", "1rem", "2rem"]}
+                my="0rem"
+                fontSize={{ base: "14px", md: "18px", lg: "20px" }}
+                color="gray.500"
+              >
+                {Det.detail}
+              </Text>
+
+              {/* AGE */}
+              <Text
+                noOfLines={[1, 2, 3]}
+                fontSize={{ base: "14px", md: "18px", lg: "18px" }}
+                color="orange.500" textTransform={'uppercase'} fontFamily={'heading'} fontWeight="bold" pb={["0rem", "0rem", "1rem"]}>{Det.age}
+
+              </Text>
+
+              {/* Area */}
               <Text
                 fontFamily={"body"}
                 fontWeight={"300"}
                 noOfLines={[2, 2, 3]}
-                pt="1rem"
-                fontSize={{ base: "12px", md: "18px", lg: "23px" }}
+                fontSize={{ base: "14px", md: "16px", lg: "18px" }}
+                color="gray.500"
+                py={["3rem", "2rem", "0rem"]}
+
               >
-                {Det.detail}
-              </Text>
-              <Text
-                noOfLines={[1, 2, 3]}
-                fontWeight={"300"}
-                fontSize={{ base: "12px", md: "18px", lg: "18px" }}
-                pt="0.5rem"
-              >
-                {Det.age}
-              </Text>
-              <Text
-                fontFamily={"body"}
-                fontWeight={"300"}
-                noOfLines={[1, 2, 3]}
-                fontSize={{ base: "12px", md: "18px", lg: "16px" }}
-                pt="1rem"
-              >
-                Se encuentra en la zona de: {Det.area}
+                Se encuentra en la zona de: <Text color="orange.500" textTransform={'uppercase'} fontFamily={'heading'} fontWeight="bold">{Det.area} </Text>
               </Text>
             </Box>
           </Center>
 
-          {/*  Info3  Contacto */}
+          {/*  Info3  Contact */}
           <Center w="100%">
             <Box
               bg="orange.100"
@@ -178,18 +193,19 @@ const Details = () => {
               w={[250, 300, 400]}
               borderRadius="15px"
               ml={{ md: "0rem", lg: "1rem" }}
+              mt={["2rem", "2rem", "0rem"]}
             >
-              {/* Fotitos */}
+              {/* Little photos */}
               <Center w="100%">
                 <Wrap m="1rem" mt="1rem" pt="1rem">
                   <WrapItem>
-                    <Avatar size="lg" name="Segun Adebayo" src={Det.img} />{" "}
+                    <Avatar size="lg" name={Det.species} src={Det.img} />{" "}
                   </WrapItem>
                   <WrapItem>
-                    <Avatar size="lg" name="Segun Adebayo" src={Det.img} />{" "}
+                    <Avatar size="lg" name={Det.species} src={Det.img} />{" "}
                   </WrapItem>
                   <WrapItem>
-                    <Avatar size="lg" name="Segun Adebayo" src={Det.img} />{" "}
+                    <Avatar size="lg" name={Det.species} src={Det.img} />{" "}
                   </WrapItem>
                 </Wrap>
               </Center>
@@ -242,7 +258,7 @@ const Details = () => {
           </Container>
         </Box>
       </Box>
-	  <Footer></Footer>
+      <Footer></Footer>
     </div>
   );
 };
