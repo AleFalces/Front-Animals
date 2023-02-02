@@ -42,33 +42,15 @@ function App() {
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/aboutUs" element={<AboutUs />}></Route>
         <Route exact path="/donate" element={<Donate />}></Route>
-        <Route exact path="/shop" element={<Shop />}></Route>
-        <Route exact path="/shop/cart" element={<Cart />}></Route>
-        <Route
-          path="/shop/product/:productId"
-          element={<ProductDetail />}
-        ></Route>
+        
         <Route exact path="/pets/:paramsId" element={<Details />}></Route>
         <Route
           exact
           path="/createPet"
           element={<FormPostPet  />}
         ></Route>
-        <Route
-          exact
-          path="/dashboard"
-          element={<DashboardAdmin  />}
-        ></Route>
-        <Route
-          exact
-          path="/dashboard/createProduct"
-          element={<FormPostProduct  />}
-        ></Route>
-        <Route
-          exact
-          path="/dashboard/createVet"
-          element={<FormAffiliateVets />}
-        ></Route>
+      
+        
 
         <Route exact path="/adoptions" element={<Adoption />}></Route>
         <Route exact path="/lostPets" element={<LostPets />}></Route>
@@ -102,7 +84,17 @@ function App() {
           path="/veterinary/:paramsId"
           element={<VetsDetails />}
         ></Route>
-        <Route path="*" element={<NotFound />}></Route>
+          <Route exact path="/dashboard" element={<DashboardAdmin  />}></Route>
+          <Route exact path="/dashboard/createProduct" element={<FormPostProduct  />}></Route>
+        <Route exact path="/dashboard/createVet" element={<FormAffiliateVets />}></Route>
+        <Route exact path="/shop" element={<Shop />}></Route>
+        <Route exact path="/shop/cart" element={<Cart />}></Route>
+        <Route
+          path="/shop/product/:productId"
+          element={<ProductDetail />}
+        ></Route>
+        <Route 
+        path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
   );
