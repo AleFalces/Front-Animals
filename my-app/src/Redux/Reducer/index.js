@@ -26,9 +26,7 @@ import {
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
   GET_ALL_USERS,
-  UP_FUNCTION_SET_CART,
-  GET_CART,
-  SET_STATUS_USER
+  SET_STATUS_USER,
 } from "../ActionTypes";
 
 const initialState = {
@@ -45,7 +43,7 @@ const initialState = {
   vetsDetail: {},
   allUsers: [],
   cart: [],
-  handlerSetCart: {},
+  functions: {},
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -208,20 +206,10 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         vetsDetail: action.payload,
       };
-    case UP_FUNCTION_SET_CART:
-      return {
-        ...state,
-        handlerSetCart: { handlerSetCart: action.payload },
-      };
-    case GET_CART:
-      return {
-        ...state,
-        cart: action.payload,
-      };
     case SET_STATUS_USER:
       return {
-        ...state
-      }
+        ...state,
+      };
     default:
       return state;
   }

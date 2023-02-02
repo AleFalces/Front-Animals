@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, redirect } from "react-router-dom";
-import { getAllProducts, getCart } from "../../Redux/Actions";
+import { getAllProducts } from "../../Redux/Actions";
 import "./Shop.css"
 import CardsProduct from "./CardsProducts/CardsProduct"
 import ShopNavbar from "./ShopNavbar/ShopNavbar";
@@ -11,13 +11,46 @@ import Footer from "../Footer/Footer"
 export default function Shop() {
   const dispatch = useDispatch()
   const products = useSelector((state) => state.products)
-  const [cart, setCart] = useState({});
-  let reduxCart = useSelector((state) => state.cart)
+  // let reduxCart = useSelector((state) => state.cart)
+  const [cart, setCart] = useState();
 
+  function handleRemoveItemCart(e, id) {
+    e.preventDefault();
+    try {
+      let currentCart = JSON.parse(window.localStorage.getItem("cart"));
+      let flag = false;
+      let index;
+      currentCart.forEach((pr, i) => {
+        if(pr.id === id) {
+          flag = true
+          index = i
+        }})
+
+      if(flag) {
+        console.log("CASO FLAG TRUE");
+        if(currentCart[index].amount === 1) {
+          console.log("CASO FLAG TRUE & AMOUNT == 1");
+          if(index === 0) {
+            console.log("CASO FLAG TRUE & AMOUNT == 1 & INDEX === 0");
+            currentCart.shift()
+            console.log(currentCart);
+          }
+        } else {
+          console.log("CASO FLAG TRUE & AMOUNT !== 0");
+        }
+      } else {
+        console.log("CASO FLAG FALSE");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  
   const handlerSetCart = (e, id, price, image, name) => {
     e.preventDefault()
     try {
-
       let product = {
         name,
         image,
@@ -37,18 +70,21 @@ export default function Shop() {
         if (index !== false) {
           oldCart[index].amount += 1;
           oldCart[index].total = oldCart[index].price * oldCart[index].amount
-          let a = window.localStorage.setItem("cart", JSON.stringify([...oldCart]))
+          let newCart = window.localStorage.setItem("cart", JSON.stringify([...oldCart]))
+          dispatch(getAllProducts)
           console.log("CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",JSON.parse(localStorage.getItem("cart")));
         alert(`Agregaste de nuevo el producto ${name}`)
       } else {
         product.total = product.price
-        window.localStorage.setItem("cart", JSON.stringify([...oldCart, product]))
+        let newCart = window.localStorage.setItem("cart", JSON.stringify([...oldCart, product]))
+        dispatch(getAllProducts)
         console.log("CASO SI EXISTE CARRITO Y NOOOOO TENGO INDEX",JSON.parse(localStorage.getItem("cart")));
         alert(`Agregaste el producto ${name}`)
       }
     } else {
       product.total = product.price
-      window.localStorage.setItem("cart", JSON.stringify([product]))
+      let newCart = window.localStorage.setItem("cart", JSON.stringify([product]))
+      dispatch(getAllProducts)
       console.log("CASO NO EXISTE CARRITO",JSON.parse(localStorage.getItem("cart")));
       alert(`Agregaste el producto ${name}`)
     }
@@ -57,20 +93,20 @@ export default function Shop() {
     }
   }
 
+
+
   useEffect(() => {
     dispatch(getAllProducts())
-    dispatch(getCart())
-    console.log("SHOP, REDUX CART",reduxCart);
-  }, [dispatch])
+  }, [cart])
 
     return (
       <div className="divStoreContainer">
         <Navbar></Navbar>
         <br /><br />
         <div className="divContainerShop">
-          <ShopNavbar handlerSetCart={handlerSetCart}/>
+          <ShopNavbar handlerSetCart={handlerSetCart} handleRemoveItemCart={handleRemoveItemCart}/>
           <div className="productsContainer">
-            {products.length?<CardsProduct products={products} handlerSetCart={handlerSetCart}/> : <h1>No se econtraron productos</h1> }
+            {products.length?<CardsProduct products={products} handlerSetCart={handlerSetCart} handleRemoveItemCart={handleRemoveItemCart}/> : <h1>No se econtraron productos</h1> }
           </div>
         </div>
         <Footer/>
