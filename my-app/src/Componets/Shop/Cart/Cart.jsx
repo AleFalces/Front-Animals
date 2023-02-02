@@ -108,12 +108,20 @@ const handlerSetCart = (e, id, price, image, name) => {
       window.localStorage.setItem("cart", JSON.stringify([product]))
       alert(`Agregaste el producto ${name}`)
     }
+
     handleStateChange()
     } catch (error) {
       console.log(error);
     }
   }
 
+  // function accRecursion(array, index) {
+  //   if (index === 0) {
+  //     return array[index].total
+  //   } else {
+  //     return accRecursion(array, --index)
+  //   }
+  // }
     useEffect(() => {
     }, [cartFlag])
     return (

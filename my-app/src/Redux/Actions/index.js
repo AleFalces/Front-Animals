@@ -460,4 +460,3 @@ export function modifyProduct(obj){
 //     }
 //   }
 // }
-
