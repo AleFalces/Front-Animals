@@ -397,20 +397,6 @@ export const VeterinaryDetails = (id) => async (dispatch) => {
   }
 };
 
-export function setStatusUser(id) {
-  //preguntar si se manda en obj o array la data
-  return async function (dispatch) {
-    try {
-      await axios.put(`${HOST}/users/setStatusUser/${id}`);
-      dispatch({
-        type: SET_STATUS_USER,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
 export function setStatusUser(id) {//preguntar si se manda en obj o array la data
   return async function (dispatch) {
     try {
