@@ -13,6 +13,7 @@ import FormPostPet from "./Componets/FormPostPet/FormPostPet";
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
 import FormPostProduct from "./Componets/DashboardAdmin/Dashboard/FormPostProduct";
 import FormAffiliateVets from "./Componets/DashboardAdmin/Dashboard/FormAffiliateVets";
+import FormUpdateProduct from "./Componets/DashboardAdmin/Dashboard/FormUpdateProduct";
 import LostPets from "./Componets/LostPets/LostPets";
 import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
@@ -49,18 +50,10 @@ function App() {
 					path="/shop/product/:productId"
 					element={<ProductDetail />}></Route>
 				<Route exact path="/pets/:paramsId" element={<Details />}></Route>
-				<Route
-					exact
-					path="/createPet"
-					element={<FormPostPet token={token} />}></Route>
-				<Route
-					exact
-					path="/dashboard"
-					element={<DashboardAdmin token={token} />}></Route>
-				<Route
-					exact
-					path="/dashboard/createProduct"
-					element={<FormPostProduct token={token} />}></Route>
+				<Route exact path="/dashboard" element={<DashboardAdmin  />}></Route>
+          <Route exact path="/dashboard/createProduct" element={<FormPostProduct  />}></Route>
+        <Route exact path="/dashboard/createVet" element={<FormAffiliateVets />}></Route>
+        <Route exact path="/dashboard/updateProduct" element={<FormUpdateProduct />}></Route>
 				<Route exact path="/adoptions" element={<Adoption />}></Route>
 				<Route exact path="/lostPets" element={<LostPets />}></Route>
 				<Route exact path="/veterinary" element={<Veterinaries />}></Route>

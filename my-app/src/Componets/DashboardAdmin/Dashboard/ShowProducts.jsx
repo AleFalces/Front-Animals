@@ -1,18 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import ProductCard from "./Cards/ProductCard";
 
-
-const ShowProducts = () => {
-  const products = useSelector((state) => state.allProducts);
-  console.log("Productos", products)
-
-  return (
-    <div>
-        {products?.map((pro)=> (
-            <>{pro.name}</>
-        ))}
-    </div>
-  );
-};
-
-export default ShowProducts;
+export default function ShowProduct({ products }) {
+  return (products.map((product) => (
+    <ProductCard
+      id={product.id}
+      name={product.name}
+      image={product.image}
+      stock={product.stock}
+      price={product.price}
+      Category={product.Category}
+      description={product.description}
+    ></ProductCard>
+    )
+    ));
+}
