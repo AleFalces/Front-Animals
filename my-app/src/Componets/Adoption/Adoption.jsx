@@ -8,7 +8,7 @@ import { getAdoptionPets } from "../../Redux/Actions/index";
 import { Link } from "react-router-dom";
 import "./Cards.css";
 import "./FilterBar.css";
-
+import { Box, SimpleGrid, } from '@chakra-ui/react'
 import Pagination from "../Pagination/Pagination";
 
 const Adoption = () => {
@@ -38,22 +38,22 @@ const Adoption = () => {
       <div className="Pagination">
         <Pagination pets={pets} PetPerPage={PetPerPage} />
       </div>
-
-      <div className="cardsContainer">
+      <SimpleGrid columns={[1, 2, 3]} spacing='40px' >
         {!pets?.length ? (
           <p>No hay mascotas</p>
-        ) : (
+        ) :
           currentPetPerPage?.map((el) => (
-            <Link to={`/pets/${el.id}`} key={el.id}>
-              <div className="cardsContainerPadding">
+            (
+              <Link to={`/pets/${el.id}`} key={el.id}>
                 <Card data={el} />
-              </div>
-            </Link>
-          ))
-        )}
 
-        <Footer />
-      </div>
+                {/*  </div> */}
+              </Link>
+            ))
+          )}
+      </SimpleGrid>
+      <Footer />
+      {/*  </div> */}
     </>
   );
 };

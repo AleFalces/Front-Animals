@@ -28,22 +28,23 @@ import { useState } from "react";
 
 export default function Simple() {
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const { user, isAuthenticated } = useAuth0();
+	const { user, isAuthenticated, logout } = useAuth0();
 	const [usuario, setUsuario] = useState([]);
 	const navegate = useNavigate();
 	useEffect(() => {
 		const loggedUser = localStorage.getItem("loggedUser");
 		if (loggedUser) {
-			var logged = JSON.parse(loggedUser);
+			const logged = JSON.parse(loggedUser);
 			setUsuario(logged);
 		}
 	}, []);
 
-	const logOut = () => {
+	const cerrarSesion = () => {
+		logout({ returnTo: "/" });
 		localStorage.removeItem("loggedUser");
-		navegate("/");
+		// navegate("/");
 	};
-	console.log(usuario.length, usuario);
+
 	return (
 		<>
 			<Box bg="brand.green.100" px={100} py="10px">
@@ -179,7 +180,10 @@ export default function Simple() {
 									<MenuList>
 										<MenuItem>Perfil</MenuItem>
 										<MenuItem>Mis mascotas</MenuItem>
-										<MenuItem onClick={logOut}> Cerrar Sesión</MenuItem>
+										<MenuItem onClick={() => cerrarSesion()}>
+											{" "}
+											Cerrar Sesión
+										</MenuItem>
 									</MenuList>
 								) : (
 									<NavLink to="/">Ingresar</NavLink>
