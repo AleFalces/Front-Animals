@@ -30,17 +30,18 @@ import { GiSittingDog } from "react-icons/gi";
 import { PhoneIcon, CheckIcon } from "@chakra-ui/icons";
 
 const messages = [
-  "Debes asegurarte que tu casa es un lugar seguro apra mascotas pequeñas, tener cuidado con espacios como balcón y de gran altura",
-  "Debes disponer de tiempo para tu mascota, el animal no puede pasar grandes períodos de tiempo solo, sobre todo perros que recién han sido adoptados, en el caso de gatos, no es tan estrícto",
-  "Mensaje 3",
-  "Mensaje 4",
-  "Mensaje 5",
+	"Asegúrate de tener suficiente espacio y tiempo para dedicar al cuidado del animal.",
+  "Adopción de un animal de compañía conlleva costos relacionados con alimentación, atención veterinaria, juguetes, etc.",
+  " Debes estar dispuesto a asumir la gran responsabilidad de cuidar y brindar amor a un animal por el resto de su vida.",
+  "Compatibilidad con tu estilo de vida: Considera si tu horario de trabajo, viajes, etc. son compatibles con el cuidado de un animal.",
+  "Preparación para la llegada: Prepara tu hogar para la llegada del animal, con un lugar cómodo para dormir, juguetes y alimentación adecuada.",
 ];
 
+const titulo= ["Espacio y tiempo disponible","Costos asociados","Responsabilidades a largo plazo", "Compatibilidad con tu estilo de vida", "Preparación para la llegada" ]
 const features = messages.map(function (x, i) {
   return {
     id: i,
-    title: "Título",
+    title: titulo[i],
     text: messages[i],
   };
 });
@@ -241,6 +242,7 @@ const Details = () => {
           </Container>
         </Box>
       </Box>
+	  <Footer></Footer>
     </div>
   );
 };
