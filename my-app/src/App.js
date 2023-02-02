@@ -78,6 +78,7 @@ function App() {
           path="/veterinary/:paramsId"
           element={<VetsDetails />}
         ></Route>
+        <Route exact path="/createUser" element={<FormPostUser />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
