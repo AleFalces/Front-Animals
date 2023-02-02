@@ -122,10 +122,11 @@ export default function FormPostPet() {
     ) {
 
       dispatch(postPet(input));
+
       setIsIncomplete(false)
       setInfoSend(true)
 
-
+      document.getElementById("myForm").reset();
 
     } else {
       console.log(inputError)
@@ -133,6 +134,7 @@ export default function FormPostPet() {
       setInfoSend(false)
 
     }
+
   }
 
 
@@ -144,7 +146,7 @@ export default function FormPostPet() {
       {isIncomplete ? <ErrorForm /> : null}
       {infoSend ? <SuccedForm /> : null}
 
-      <form onSubmit={handlerSubmit}>
+      <form onSubmit={handlerSubmit} id="myForm">
         <Flex
           minH={'100vh'}
           align={'center'}
@@ -176,10 +178,10 @@ export default function FormPostPet() {
                         <option value="default" name="especie" key="defaultSpecies">
                           Especie
                         </option>
-                        <option value="gato" key="cat">
+                        <option value={input.name} name="cat" key="cat">
                           Gatx
                         </option>
-                        <option value="perro" key="dog">
+                        <option value={input.name} name="perro" key="dog">
                           Perrx
                         </option>
                       </Select>
@@ -283,7 +285,7 @@ export default function FormPostPet() {
                   <Input fontFamily={'body'} variant='flushed' focusBorderColor={'brand.green.300'} placeholder="UUID del usuario.." size='md' onChange={(e) => handlerChange(e)} name="userId" />
                   {inputError.userId && <Text className="text_inputError">{inputError.userId}</Text>}
                 </FormControl>
-                
+
                 <FormControl>
                   <Text fontFamily={'body'} fontSize="14px" >Imagen:</Text>
                   <Input
