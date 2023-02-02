@@ -12,6 +12,7 @@ const Dashboard = () => {
 
   const [selection, setSelection] = useState("");
   const usersArray = useSelector((state) => state.allUsers)
+  const productsArray = useSelector((state) => state.allProducts)
 
   function handlerShowDataUsers(e) {
     e.preventDefault();
@@ -46,7 +47,7 @@ const Dashboard = () => {
         {selection === "users" ? (
           <ShowUsers users={usersArray}/>
         ) : selection === "products" ? (
-          <><ShowProducts/></>
+          <><ShowProducts products={productsArray}/></>
         ) : selection === "pets" ? (
           <ShowPets/>
         ) : (

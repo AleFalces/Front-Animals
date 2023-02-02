@@ -274,6 +274,7 @@ export function getAllProducts() {
   return async function (dispatch) {
     try {
       const allProducts = await axios.get(`${HOST}/products`);
+      // console.log(allProducts)
       return dispatch({
         type: GET_ALL_PRODUCTS,
         payload: allProducts.data,
