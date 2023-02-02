@@ -26,7 +26,7 @@ const Card = ({ data: { size, img, sex, species, age, area } }) => {
         <Box
           maxW={'320px'}
           w={'full'}
-          h={'500px'}
+          h={'450px'}
           bg={useColorModeValue('white', 'gray.900')}
           boxShadow={'2xl'}
           rounded={'lg'}
@@ -39,7 +39,7 @@ const Card = ({ data: { size, img, sex, species, age, area } }) => {
               img
             }
             borderRadius="7px"
-            maxH={'200px'}
+            h={'150px'}
             alt={species}
             mb={4}
             pos={'relative'}
@@ -78,7 +78,7 @@ const Card = ({ data: { size, img, sex, species, age, area } }) => {
 
           <Stack mt={4} direction={'column'}  spacing={4}>
             <Center>
-              <Button
+{/*               <Button
                 loadingText="Post mascota"
                 fontFamily={'body'}
                 size="md"
@@ -87,10 +87,9 @@ const Card = ({ data: { size, img, sex, species, age, area } }) => {
                 color={'white'}
                 _hover={{
                   bg: 'orange.400',
-                  /* color:"brand.green.100" */
                 }}>
                <Text>Conoceme</Text> 
-              </Button>
+              </Button> */}
             </Center>
           </Stack>
         </Box>
