@@ -52,17 +52,13 @@ function App() {
         <Route
           exact
           path="/createPet"
-          element={<FormPostPet  />}
+          element={<FormPostPet token={token} />}
         ></Route>
-        <Route
-          exact
-          path="/dashboard"
-          element={<DashboardAdmin  />}
-        ></Route>
+        <Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
         <Route
           exact
           path="/dashboard/createProduct"
-          element={<FormPostProduct  />}
+          element={<FormPostProduct />}
         ></Route>
         <Route
           exact
@@ -84,9 +80,6 @@ function App() {
   ) : (
     /*  </ChakraProvider> */
 
-
-
-    
     <div className="App">
       <Routes>
         <Route exact path="/createUser" element={<FormPostUser />}></Route>

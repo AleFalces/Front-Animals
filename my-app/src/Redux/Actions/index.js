@@ -140,17 +140,17 @@ export function postProduct(formInput) {
   };
 }
 
-export function postVet(formInput){
-  return async function(dispatch){
+export function postVet(formInput) {
+  return async function (dispatch) {
     try {
-      const newVet = await axios.post(`${HOST}/veterinary`, formInput)
+      const newVet = await axios.post(`${HOST}/veterinary`, formInput);
       return dispatch({
-        type: POST_VET
-      })
+        type: POST_VET,
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 }
 
 export function filterBySpecie(value) {
@@ -410,19 +410,3 @@ export function setStatusUser(id) {
     }
   };
 }
-
-export function setStatusUser(id) {//preguntar si se manda en obj o array la data
-  return async function (dispatch) {
-    try {
-      await axios.put(`${HOST}/users/setStatusUser/${id}`)
-      const updatedUsers = await axios.get(`${HOST}/users`)
-      dispatch({
-        type: GET_ALL_USERS,
-        payload: updatedUsers.data
-      })
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
