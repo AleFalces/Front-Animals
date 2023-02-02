@@ -18,7 +18,7 @@ const Login = () => {
 
 	const [input, setInput] = useState({
 		email: "",
-		username: "",
+		password: "",
 	});
 
 	const handleChange = (e) => {
@@ -26,13 +26,12 @@ const Login = () => {
 			...input,
 			[e.target.name]: e.target.value,
 		});
-		console.log(input);
 	};
-
+	console.log(input);
 	const loginPost = async (formData) => {
 		try {
 			let login = await axios
-				.post("http://localhost:3001/login", formData)
+				.post("http://localhost:3001/users/login", formData)
 				.then(({ data }) => {
 					localStorage.setItem("loggedUser", JSON.stringify(data));
 					navegate("/home");
@@ -50,8 +49,6 @@ const Login = () => {
 	const handlerSubmit = (e) => {
 		e.preventDefault();
 		loginPost({ ...input });
-
-		// ;
 	};
 
 	return (
@@ -69,14 +66,12 @@ const Login = () => {
 								type="email"
 								name="email"
 								placeholder="Ingrese su Email"
-								value={input.email}
 								onChange={handleChange}></input>
 
 							<input
 								type="password"
-								name="username"
-								placeholder="username"
-								value={input.username}
+								name="password"
+								placeholder="password"
 								onChange={handleChange}
 							/>
 						</form>
