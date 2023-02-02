@@ -284,6 +284,7 @@ export default function FormPostPet({token}) {
                   <Input fontFamily={'body'} variant='flushed' focusBorderColor={'brand.green.300'} placeholder="UUID del usuario.." size='md' onChange={(e) => handlerChange(e)} name="userId" />
                   {inputError.userId && <Text className="text_inputError">{inputError.userId}</Text>}
                 </FormControl>
+                
                 <FormControl>
                   <Text fontFamily={'body'} fontSize="14px" >Imagen:</Text>
                   <Input
