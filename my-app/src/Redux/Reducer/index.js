@@ -6,6 +6,7 @@ import {
   POST_PET,
   POST_USER,
   POST_PRODUCT,
+  POST_VET,
   FILTER_SPECIE_ADOPTION,
   FILTER_SEX_ADOPTION,
   FILTER_AGE_ADOPTION,
@@ -88,6 +89,10 @@ const RootReducer = (state = initialState, action) => {
         ...state,
       };
     case POST_PRODUCT:
+      return {
+        ...state,
+      };
+    case POST_VET:
       return {
         ...state,
       };

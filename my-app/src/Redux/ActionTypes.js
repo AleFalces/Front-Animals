@@ -5,6 +5,7 @@ export const GET_LOST_PETS = "GET_LOST_PETS";
 export const POST_PET = "POST_PET";
 export const POST_USER = "POST_USER";
 export const POST_PRODUCT = "POST_PRODUCT";
+export const POST_VET = "POST_VET";
 export const FILTER_SPECIE_ADOPTION = "FILTER_SPECIE_ADOPTION";
 export const FILTER_SEX_ADOPTION = "FILTER_SEX_ADOPTION";
 export const FILTER_AGE_ADOPTION = "FILTER_AGE_ADOPTION";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from "react";
+import React, { useState, useEffect  }  from "react";
 import {
   Card,
   CardBody,
@@ -10,22 +10,22 @@ import {
   Box,
   Button,
 } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, setStatusUser } from "../../../../Redux/Actions";
 
-export default function UserCard({ id, name, surname, email, phone, role, status }) {
+export default function UserCard({ id, name, surname, email, phone, status }) {
   const dispatch = useDispatch();
-  const [statusUser, setStatus] = useState(status);
+  // const [statusUser, setStatus] = useState(status);
+  const users = useSelector((state) => state.allUsers)
 
   function handlerSetStatusUser(id) {
     dispatch(setStatusUser(id));
-    //averiguar como despachar el id del usuario
-    // para matchear en la db y setear el status a "banned"
+  
   }
 
-  // useEffect(()=>{
-  //     dispatch(getAllUsers(statusUser))
-  // },[dispatch])
+  useEffect(()=>{
+      
+  },[users])
 
   return (
     <div>
