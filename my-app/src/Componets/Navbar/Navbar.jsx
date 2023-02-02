@@ -176,7 +176,7 @@ export default function Simple() {
 									<MenuItem>Administrar cuenta</MenuItem>
 								</NavLink>
 								<MenuDivider />
-								{usuario.length && isAuthenticated ? (
+								{usuario.length ? (
 									<MenuList>
 										<MenuItem>Perfil</MenuItem>
 										<MenuItem>Mis mascotas</MenuItem>

@@ -58,9 +58,6 @@ export default function CreateUserAuth0() {
 	if ((user && logUser.length <= 0) || user || logUser.length <= 0) {
 		CheckUser();
 	}
-	// if (!logUser?.name) {
-	// 	handlerSubmit();
-	// }
 
 	return (
 		<div>{!user ? <h1>Estamos comprobando sus datos</h1> : <div></div>}</div>
