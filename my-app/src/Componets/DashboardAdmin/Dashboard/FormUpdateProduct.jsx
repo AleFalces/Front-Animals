@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { postProduct } from "../../../Redux/Actions";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProduct } from "../../../Redux/Actions";
 
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+// import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Flex,
   Box,
@@ -15,21 +15,21 @@ import {
   Button,
   Heading,
   Text,
-  useColorModeValue,
+//   useColorModeValue,
   Select,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
 
-export default function FormPostProduct() {
-  const dispatch = useDispatch();
+export default function FormUpdateProduct() {//deberia recibir el objeto con los datos actuales
+const dispatch = useDispatch();
+const dataProduct = useSelector((state) => state.modifyProduct)
 
   const [input, setInput] = useState({
-    name: "",
-    description: "",
-    Category: "",
-    image: "",
-    price: 0,
-    stock: 0,
+    name: dataProduct.name,
+    description: dataProduct.description,
+    Category: dataProduct.Category,
+    image: dataProduct.image,
+    price: dataProduct.price,
+    stock: dataProduct.stock,
   });
 
   const errors = {
@@ -39,6 +39,7 @@ export default function FormPostProduct() {
     image: "",
     price: 0,
     stock: 0,
+    
   };
 
   function handlerErrors(e) {
@@ -56,11 +57,11 @@ export default function FormPostProduct() {
     if (input.image === "") {
       errors.image = "Selecciona una imagen.";
     }
-    if (input.price < 0) {
-      errors.price = "Los numeros de precios no deben ser negativos.";
+    if (input.price < 100) {
+      errors.price = "Selecciona una imagen.";
     }
-    if (input.stock < 0) {
-      errors.stock = "No se puede pasar stock con numero negativo.";
+    if (input.stock <= 0) {
+      errors.stock = "Agregar por lo menos un stock del producto.";
     }
     if (
       !errors.name &&
@@ -82,33 +83,14 @@ export default function FormPostProduct() {
       [e.target.name]: e.target.value.trim(),
     });
     console.log("input", input);
-    console.log("error", errors);
+    // console.log("error", errors);
   }
 
-  function handlerSubmit(e, input) {
+  function handlerSubmit(e) {
     e.preventDefault();
-    dispatch(postProduct(input));
-    console.log("EXISTEE", input)
-    
-    alert("Producto agregado a la tienda.");
-
-    //↓↓↓ FALTA RESET CORRECTLY EL INPUT UNA VEZ AÑADIDO EL PRODUCT ↓↓↓
-    setInput({
-      name: "",
-      description: "",
-      Category: "",
-      image: "",
-      price: 0,
-      stock: 0,
-    });
-
-    // window.location.reload()
+    dispatch(updateProduct(dataProduct.id, input));
+    alert("Producto actualizado.");
   }
-
-  useEffect(()=>{
-
-  },[input])
-
     //Revisar xq la categoria "alimentos" me tira error si el name del product tiene espacios en el campo
   return (
     <div>
@@ -117,18 +99,18 @@ export default function FormPostProduct() {
           minH={"100vh"}
           align={"center"}
           justify={"center"}
-          bg={useColorModeValue("gray.50", "gray.800")}
+        //   bg={useColorModeValue("gray.50", "gray.800")}
         >
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
             <Stack align={"center"}>
               <Heading fontSize={"4xl"} textAlign={"center"}>
-                Añadir producto a la tienda
+                Actualizar producto
               </Heading>
             </Stack>
 
             <Box
               rounded={"lg"}
-              bg={useColorModeValue("white", "gray.700")}
+            //   bg={useColorModeValue("white", "gray.700")}
               boxShadow={"lg"}
               p={8}
             >
@@ -141,6 +123,8 @@ export default function FormPostProduct() {
                         placeholder="¿Que vas a vender?"
                         type="text"
                         name="name"
+                        key="name"
+                        value={input.name}
                         onChange={(e) => handlerChange(e)}
                       />
                       {errors.name && <Text>{errors.name}</Text>}
@@ -154,6 +138,7 @@ export default function FormPostProduct() {
                         placeholder="¿Cuanto cuesta?"
                         name="price"
                         type="number"
+                        value={input.price}
                         key="price"
                         onChange={(e) => handlerChange(e)}
                       />
@@ -164,6 +149,7 @@ export default function FormPostProduct() {
                 <FormControl id="Category" isRequired>
                   <Select
                     name="Category"
+                    value={input.Category}
                     key="Category"
                     onChange={(e) => handlerChange(e)}
                   >
@@ -190,6 +176,7 @@ export default function FormPostProduct() {
                   <Input
                     placeholder="Cantidad disponible"
                     name="stock"
+                    value={input.stock}
                     key="stock"
                     type="number"
                     onChange={(e) => handlerChange(e)}
@@ -197,10 +184,11 @@ export default function FormPostProduct() {
                 </FormControl>
 
                 <FormControl id="description">
-                  <FormLabel>Descripcion: </FormLabel>
+                  <FormLabel>Descripción: </FormLabel>
                   <Input
                     placeholder="Algún comentario sobre el producto"
                     name="description"
+                    value={input.description}
                     key="description"
                     type="text"
                     onChange={(e) => handlerChange(e)}
@@ -212,6 +200,7 @@ export default function FormPostProduct() {
                   <Input
                     type="text"
                     name="image"
+                    value={input.image}
                     placeholder="https://urlDeLaImagen.jpg"
                     onChange={(e) => handlerChange(e)}
                   />
@@ -227,7 +216,7 @@ export default function FormPostProduct() {
                       bg: "blue.500",
                     }}
                   >
-                    Publicar producto
+                    Guardar producto
                   </Button>
                 </Stack>
               </Stack>

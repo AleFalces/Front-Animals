@@ -9,6 +9,8 @@ export default function ShowProduct({ products }) {
       image={product.image}
       stock={product.stock}
       price={product.price}
+      Category={product.Category}
+      description={product.description}
     ></ProductCard>
     )
     ));

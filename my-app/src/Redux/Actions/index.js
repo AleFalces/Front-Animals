@@ -27,7 +27,10 @@ import {
   NEXT_PAGE,
   PREV_PAGE,
   ACTUAL_PAGE,
-  SET_STATUS_USER,
+  UPDATE_PRODUCT,
+  MODIFY_PRODUCT,
+  OUT_OF_STOCK
+  // SET_STATUS_USER,
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -412,4 +415,49 @@ export function setStatusUser(id) {//preguntar si se manda en obj o array la dat
     }
   };
 }
+
+export function updateProduct(id, formInput) {
+  return async function (dispatch) {
+    try {
+      console.log("Action updateProduc", id)
+      await axios.put(`${HOST}/products/${id}`, formInput)
+      // const updatedProduct = await axios.get(`${HOST}/products`)
+      dispatch({
+        type: UPDATE_PRODUCT
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function modifyProduct(obj){
+  return async function(dispatch){
+    try {
+      console.log("modifyProduct", obj)
+      return dispatch({
+        type: MODIFY_PRODUCT,
+        payload: obj
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+// export function outOfStock(){
+//   return async function(dispatch){
+//     try {
+//       const allProducts = await axios.get(`${HOST}/products`)
+//       console.log(allProducts.data)
+//       return dispatch({
+//         type: OUT_OF_STOCK,
+//         payload: allProducts.data,
+//       })
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   }
+// }
+
 

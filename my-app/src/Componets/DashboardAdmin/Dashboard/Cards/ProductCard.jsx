@@ -3,29 +3,45 @@ import {
   Card,
   CardBody,
   Text,
-  CardHeader,
   Heading,
   Stack,
   StackDivider,
   Box,
   Button,
-  Image,
+  // CardHeader,
+  // Image,
+  // Link
 } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-// import { getAllProducts  } from "../../../../Redux/Actions";
+import { useDispatch, useSelector} from "react-redux";
+import { outOfStock, modifyProduct  } from "../../../../Redux/Actions";
+import { useNavigate } from "react-router-dom";
 
-export default function ProductCard({ id, name, image, stock, price }) {
-// const dispatch = useDispatch();
-// const [statusUser, setStatus] = useState(status);
-  
-//   function handlerSetStatusUser(id) {
-//     dispatch(setStatusUser(id));
-  
-//   }
+export default function ProductCard({ id, name, image, stock, price, description, Category }) {
+const dispatch = useDispatch();
+const navigate = useNavigate()
 
-//   useEffect(()=>{
-      
-//   },[productsArray])
+  function recievedDataProduct(e, id, name, image, stock, price, description, Category){
+    e.preventDefault()
+    const obj = {
+      id,
+      name,
+      image,
+      stock,
+      price,
+      description,
+      Category
+    }
+    console.log("receivedData", obj)
+    dispatch(modifyProduct(obj))
+  }
+
+  // function handlerOutOfStock(id){
+  //   dispatch(outOfStock(id))
+  // }
+
+  // useEffect(()=>{
+  //     dispatch(getAllProducts())
+  // },[])
 
   return (
     <div>
@@ -72,26 +88,28 @@ export default function ProductCard({ id, name, image, stock, price }) {
                 <Text pt="2" fontSize="sm">
                   {price}
                 </Text>
-                
-                {/* {status === "banned" ? <Button
-                onClick={() => {handlerSetStatusUser(id)}}
+
+                {/* <Link href="http://localhost:3000" isExternal> */}
+                <Button
+                onClick={(e) => {recievedDataProduct(e, id, name, image, stock, price, description, Category); navigate("/dashboard/updateProduct")}}
                 bg={"green"}
                 color={"white"}
                   _hover={{
                     bg: "green.400",
                   }}
-                >Activar</Button>
-              :
-                <Button
-                  onClick={() => handlerSetStatusUser(id)}
+                >Modificar</Button>
+                {/* </Link> */}
+              
+              {/* <Button
+                  // onClick={() => handlerOutOfStock(id)}
                   bg={"red"}
                   color={"white"}
                   _hover={{
                     bg: "red.400",
                   }}
                 >
-                  Bloquear
-                </Button>} */}
+                  Sin stock
+                </Button> */}
               </Box>
             </Stack>
           </CardBody>
