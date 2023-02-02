@@ -11,6 +11,7 @@ import {
   POST_PET,
   POST_USER,
   POST_PRODUCT,
+  POST_VET,
   FILTER_SPECIE_ADOPTION,
   FILTER_SEX_ADOPTION,
   FILTER_AGE_ADOPTION,
@@ -140,6 +141,19 @@ export function postProduct(formInput) {
       console.log(error);
     }
   };
+}
+
+export function postVet(formInput){
+  return async function(dispatch){
+    try {
+      const newVet = await axios.post(`${HOST}/veterinary`, formInput)
+      return dispatch({
+        type: POST_VET
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 export function filterBySpecie(value) {
@@ -416,8 +430,10 @@ export function setStatusUser(id) {//preguntar si se manda en obj o array la dat
   return async function (dispatch) {
     try {
       await axios.put(`${HOST}/users/setStatusUser/${id}`)
+      const updatedUsers = await axios.get(`${HOST}/users`)
       dispatch({
-        type: SET_STATUS_USER
+        type: GET_ALL_USERS,
+        payload: updatedUsers.data
       })
     } catch (error) {
       console.log(error);

@@ -12,6 +12,7 @@ import Shop from "./Componets/Shop/Shop";
 import FormPostPet from "./Componets/FormPostPet/FormPostPet";
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
 import FormPostProduct from "./Componets/DashboardAdmin/Dashboard/FormPostProduct";
+import FormAffiliateVets from "./Componets/DashboardAdmin/Dashboard/FormAffiliateVets";
 import LostPets from "./Componets/LostPets/LostPets";
 import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
@@ -51,17 +52,22 @@ function App() {
         <Route
           exact
           path="/createPet"
-          element={<FormPostPet token={token} />}
+          element={<FormPostPet  />}
         ></Route>
         <Route
           exact
           path="/dashboard"
-          element={<DashboardAdmin token={token} />}
+          element={<DashboardAdmin  />}
         ></Route>
         <Route
           exact
           path="/dashboard/createProduct"
-          element={<FormPostProduct token={token} />}
+          element={<FormPostProduct  />}
+        ></Route>
+        <Route
+          exact
+          path="/dashboard/createVet"
+          element={<FormAffiliateVets />}
         ></Route>
 
         <Route exact path="/adoptions" element={<Adoption />}></Route>
