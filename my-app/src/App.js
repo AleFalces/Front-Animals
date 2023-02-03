@@ -17,6 +17,7 @@ import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
 import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
 import VetsDetails from "./Componets/VetsDetail/VetsDetail";
+import { MyPets } from "./Componets/MyPets/MyPets";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
 import Cart from "./Componets/Shop/Cart/Cart";
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/" element={<LandingPage />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
+        <Route exact path="/myPets" element={<MyPets />}></Route>
         <Route exact path="/aboutUs" element={<AboutUs />}></Route>
         <Route exact path="/donate" element={<Donate />}></Route>
         <Route exact path="/shop" element={<Shop />}></Route>

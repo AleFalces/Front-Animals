@@ -6,7 +6,7 @@ import {
   SimpleGrid,
   Text,
   Stack,
-  Flex,
+  // Flex,
   HStack,
   // Icon,
   VStack,
@@ -20,103 +20,104 @@ const AboutUs = () => {
   return (
     <>
       <Navbar />
-      <Box h={"1700"} bg="brand.backgorund">
-        <Flex
-          w={"full"}
-          h={"90vh"}
-          backgroundImage={
-            "url(https://www.hogarmania.com/archivos/202011/cosas-donar-refugio-animales-4-XxXx80.jpg)"
-          }
-          backgroundSize={"cover"}
-          backgroundPosition={"center center"}
-        ></Flex>
-        <Container maxW={"3xl"}>
-          <Stack
-            as={Box}
-            textAlign={"center"}
-            spacing={{ base: 8, md: 14 }}
-            py={{ base: 20, md: 36 }}
-          >
-            <Heading
-              fontWeight={600}
-              fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-              lineHeight={"150%"}
-            >
-              Hola!
-              <br />
-              <Text as={"span"} color={"brand.orange"}>
-                Somos Buddy ONG
-              </Text>
-            </Heading>
-            <Text color={"gray.500"}>
-              Somos organización sin fines de lucro liderada por un grupo de
-              voluntarios que buscan superar la situación de sobrepoblación,
-              abandono, crueldad e indiferencia que viven millones de animales
-              en nuestro país. (Buenos Aires/ Argentina). Propiciamos una
-              actitud de respeto hacia todas las especies, entendiendo que no
-              son “cosas” para ser utilizadas por el ser humano. Rechazamos todo
-              tipo de explotación animal, incluyendo su uso como vestimenta,
-              comida, entretenimiento y experimentación.
-            </Text>
+      {/* <Box h={"25px"} bg="brand.backgorund" /> */}
+      <Box h={"1800"} bg="brand.backgorund">
+        <Box maxW="20xl" mx={"auto"} pt={20} px={{ base: 2, sm: 12, md: 17 }}>
+          <SimpleGrid columns={{ base: 1, sm: 1, md: 2 }}>
+            <Box
+              w={"2xl"}
+              h={"80vh"}
+              backgroundImage={
+                "url(https://www.hogarmania.com/archivos/202011/cosas-donar-refugio-animales-4-XxXx80.jpg)"
+              }
+              boxShadow="2xl"
+              backgroundSize={"cover"}
+              backgroundPosition={"center center"}
+              borderRightRadius={"50px"}
+            />
 
-            <Box p={4}>
+            <Box alignItems="left" py={1} pr={"90px"}>
               <Stack
-                spacing={4}
-                as={Container}
-                maxW={"3xl"}
-                textAlign={"center"}
+                as={Box}
+                textAlign={"left"}
+                spacing={{ base: 4, md: 5 }}
+                py={{ base: 20, md: 36 }}
               >
-                <Heading fontSize={"3xl"}>Nuestros Objetivos</Heading>
+                <Heading
+                  fontWeight={600}
+                  fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+                  lineHeight={"150%"}
+                >
+                  Hola!
+                  <br />
+                  <Text as={"span"} color={"brand.orange"}>
+                    Somos Buddy ONG
+                  </Text>
+                </Heading>
+                <Text color={"gray.500"}>
+                  Somos organización sin fines de lucro liderada por un grupo de
+                  voluntarios que buscan superar la situación de sobrepoblación,
+                  abandono, crueldad e indiferencia que viven millones de
+                  animales en nuestro país.Propiciamos una actitud de respeto
+                  hacia todas las especies
+                </Text>
               </Stack>
-
-              <Container maxW={"6xl"} mt={10}>
-                <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
-                  <HStack align={"top"}>
-                    <VStack align={"start"}>
-                      <Text fontWeight={600}></Text>
-                      <Text color={"gray.600"}>
-                        Educar sobre el respeto por la vida de los animales a
-                        través de charlas y talleres educativos en lugares
-                        públicos y privados.
-                      </Text>
-                    </VStack>
-                  </HStack>
-                  <HStack align={"top"}>
-                    <VStack align={"start"}>
-                      <Text fontWeight={600}></Text>
-                      <Text color={"gray.600"}>
-                        Asistir a animales en situación de riesgo de muerte,
-                        brindarles la atención médica necesaria para
-                        recuperarlos y encontrar familias responsables para su
-                        adopción.
-                      </Text>
-                    </VStack>
-                  </HStack>
-                  <HStack align={"top"}>
-                    <VStack align={"start"}>
-                      <Text fontWeight={600}></Text>
-                      <Text color={"gray.600"}>
-                        Luchar contra el abandono, el maltrato y el sufrimiento
-                        animal
-                      </Text>
-                    </VStack>
-                  </HStack>
-                  <HStack align={"top"}>
-                    <VStack align={"start"}>
-                      <Text fontWeight={600}></Text>
-                      <Text color={"gray.600"}>
-                        Organizar campañas de castración gratuitas y/o a bajo
-                        costo en las zonas vulnerables donde el Estado está
-                        ausente y los perros y gatos se reproducen sin control.
-                      </Text>
-                    </VStack>
-                  </HStack>
-                </SimpleGrid>
-              </Container>
             </Box>
+          </SimpleGrid>
+        </Box>
+
+        <Box p={9}>
+          <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
+            <Heading fontSize={"3xl"}>Nuestros Objetivos</Heading>
           </Stack>
-        </Container>
+
+          <Container maxW={"6xl"} mt={10}>
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
+              <HStack align={"top"}>
+                <VStack align={"start"}>
+                  <Text fontWeight={600}></Text>
+                  <Text color={"gray.600"}>
+                    Educar sobre el respeto por la vida de los animales a través
+                    de charlas y talleres educativos en lugares públicos y
+                    privados.
+                  </Text>
+                </VStack>
+              </HStack>
+              <HStack align={"top"}>
+                <VStack align={"start"}>
+                  <Text fontWeight={600}></Text>
+                  <Text color={"gray.600"}>
+                    Asistir a animales en situación de riesgo de muerte,
+                    brindarles la atención médica necesaria para recuperarlos y
+                    encontrar familias responsables para su adopción.
+                  </Text>
+                </VStack>
+              </HStack>
+              <HStack align={"top"}>
+                <VStack align={"start"}>
+                  <Text fontWeight={600}></Text>
+                  <Text color={"gray.600"}>
+                    Luchar contra el abandono, el maltrato y el sufrimiento
+                    animal
+                  </Text>
+                </VStack>
+              </HStack>
+              <HStack align={"top"}>
+                <VStack align={"start"}>
+                  <Text fontWeight={600}></Text>
+                  <Text color={"gray.600"}>
+                    Organizar campañas de castración gratuitas y/o a bajo costo
+                    en las zonas vulnerables donde el Estado está ausente y los
+                    perros y gatos se reproducen sin control.
+                  </Text>
+                </VStack>
+              </HStack>
+            </SimpleGrid>
+          </Container>
+        </Box>
       </Box>
+      {/* </Stack>
+      </Container> */}
       <Footer />
     </>
   );

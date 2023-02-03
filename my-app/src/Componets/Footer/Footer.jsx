@@ -8,12 +8,16 @@ import {
   Stack,
   Text,
   VisuallyHidden,
+  Avatar,
   // Input,
   // IconButton,
   useColorModeValue,
 } from "@chakra-ui/react";
 import logo from "../../assets/imagenes/logo_negro.png";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import magui from "../../assets/imagenes/magui.png";
+import lau from "../../assets/imagenes/lau.png";
+import lucho from "../../assets/imagenes/lucho.png";
 
 const Logo = () => {
   return (
@@ -63,6 +67,8 @@ const ListHeader = ({ children }) => {
 };
 
 export default function LargeWithNewsletter() {
+  const profiles = [magui, lau, lucho];
+
   return (
     <Box
       bg="brand.green.100"
@@ -100,35 +106,51 @@ export default function LargeWithNewsletter() {
             <Link href={"#"}>Testimonials</Link>
           </Stack>
           <Stack align={"flex-start"}>
-            <ListHeader>Support</ListHeader>
-            <Link href={"#"}>Help Center</Link>
-            <Link href={"#"}>Terms of Service</Link>
-            <Link href={"#"}>Legal</Link>
-            <Link href={"#"}>Privacy Policy</Link>
-            <Link href={"#"}>Satus</Link>
+            <ListHeader fontWeight="extrabold">LinkedIn</ListHeader>
+            <Link href={"https://www.linkedin.com/in/m-g-maceira/"} isExternal>
+              Mariana Maceira
+            </Link>
+            <Link href={"https://www.linkedin.com/in/lauracolof/"} isExternal>
+              Maria Laura Colo
+            </Link>
+            <Link
+              href={"https://www.linkedin.com/in/ignacio-coria-de-bernardi/"}
+              isExternal
+            >
+              Ignacio Coria
+            </Link>
+            <Link href={"#"}>Alexis Falces</Link>
+            <Link
+              href={"https://www.linkedin.com/in/julian-navarro-b25938247/"}
+              isExternal
+            >
+              Julian Navarro
+            </Link>
+            <Link href={"https://www.linkedin.com/in/lucho47-dev/"} isExternal>
+              Luciano Navarro
+            </Link>
+            <Link
+              href={"https://www.linkedin.com/in/magdalena-aliaga-bb239698/"}
+              isExternal
+            >
+              Magdalena Aliaga
+            </Link>
+            <Link href={"https://www.linkedin.com/in/andres-salom/"} isExternal>
+              Andres Salom
+            </Link>
           </Stack>
-          {/* <Stack align={"flex-start"}>
-            <ListHeader>Stay up to date</ListHeader>
+          <Stack align={"flex-start"} spacing={6}>
+            <ListHeader>Proyecto</ListHeader>
             <Stack direction={"row"}>
-              <Input
-                placeholder={"Your email address"}
-                bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
-                border={0}
-                _focus={{
-                  bg: "whiteAlpha.300",
-                }}
-              />
-              <IconButton
-                bg={useColorModeValue("green.400", "green.800")}
-                color={useColorModeValue("white", "gray.800")}
-                _hover={{
-                  bg: "green.600",
-                }}
-                aria-label="Subscribe"
-                icon={<BiMailSend />}
-              />
+              {profiles?.map((photos) => (
+                <Avatar
+                  size={"lg"}
+                  borderBlockEndColor={"brand.orange"}
+                  src={photos}
+                />
+              ))}
             </Stack>
-          </Stack> */}
+          </Stack>
         </SimpleGrid>
       </Container>
     </Box>
