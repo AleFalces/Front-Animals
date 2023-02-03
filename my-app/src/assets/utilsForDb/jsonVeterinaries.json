@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Clínica VetLife",
+    "description": "una clínica veterinaria de vanguardia que ofrece tratamientos avanzados y cuidado personalizado para animales de compañía.",
+    "email": "vetlife@gmail.com",
+    "image": "https://colegioveterinarios.net/wp-content/uploads/2019/05/6867bf635f2d8c70807df4e139dfd12f.jpg",
+    "phone": 1112345678,
+    "address": "Av Pagano",
+    "location": [-34.64672405385258, -58.78071437543901]
+  },
+  {
+    "name": "Centro Médico Fauna",
+    "description": "un hospital veterinario con un equipo altamente capacitado que se dedica a brindar atención integral a todos los tipos de animales.",
+    "email": "faunaMed@gmail.com",
+    "image": "https://decosalud.com/wp-content/uploads/2017/10/PERSPECTIVA-PARLAVET-2-2.jpg?gid=28",
+    "phone": 1187654321,
+    "address": "Calle Real",
+    "location": [-34.67735298962293, -58.71416950397361]
+  },
+  {
+    "name": "Hospital Animal Love",
+    "description": "un centro de atención médica especializado en el bienestar de los animales, con un enfoque en la prevención y el tratamiento de enfermedades.",
+    "email": "animalLove@gmail.com",
+    "image": "https://www.clinicaveterinariaejea.com/wp-content/uploads/2020/03/clinica_veterinaria_ejea_143-1.jpeg",
+    "phone": 1123456789,
+    "address": "Bacacay",
+    "location": [-34.65152167439013, -58.67400592892839]
+  },
+  {
+    "name": "VetCare Plus",
+    "description": "una clínica veterinaria de alto nivel que ofrece servicios completos, desde chequeos regulares hasta intervenciones quirúrgicas.",
+    "email": "vetCare@gmail.com",
+    "image": "https://blog.mascotaysalud.com/wp-content/uploads/2018/11/espana-record-clinicas.jpg",
+    "phone": 1156781234,
+    "address": "Martin Fierro",
+    "location": [-34.62628173566962, -58.6938830241498]
+  },
+  {
+    "name": "PetMed Center",
+    "description": "un centro médico para animales de compañía que brinda atención médica de calidad a precios accesibles.",
+    "email": "petMed@gmail.com",
+    "image": "https://www.luzea.net/wp-content/uploads/2020/02/clinica.jpg",
+    "phone": 1143218765,
+    "address": "Diaz Velez",
+    "location": [-34.591511128960704, -58.736572438421284]
+  },
+  {
+    "name": "Fur & Paws",
+    "description": "una clínica veterinaria con un enfoque en la atención preventiva y la educación para dueños de mascotas.",
+    "email": "furPaws@gmail.com",
+    "image": "https://diariodepatas.files.wordpress.com/2020/04/mascota-en-veterinaria.png?w=880",
+    "phone": 1167892345,
+    "address": "Av Independencia",
+    "location": [-34.620795904516946, -58.41360919327659]
+  },
+  {
+    "name": "VetLife Solutions",
+    "description": "una clínica veterinaria con un equipo de profesionales que brinda soluciones integrales para el bienestar de su mascota.",
+    "email": "VetLife@gmail.com",
+    "image": "https://losmejoresdelima.org.pe/wp-content/uploads/2022/12/las-mejores-veterinarias-en-san-juan-de-lurigancho.jpg",
+    "phone": 1134567890,
+    "address": "California",
+    "location": [-34.649864279620324, -58.39134711456526]
+  }
+]
