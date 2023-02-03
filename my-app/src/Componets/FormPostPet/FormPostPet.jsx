@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
 import { Link, redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postPet } from "../../Redux/Actions";
@@ -82,11 +82,20 @@ export default function FormPostPet({ token }) {
 		img: "",
 		userId: "",
 	});
+	const [usuario, setUsuario] = useState([]);
+	useEffect(() => {
+		const loggedUser = localStorage.getItem("loggedUser");
+		if (loggedUser) {
+			const logged = JSON.parse(loggedUser);
+			setUsuario(logged);
+		}
+	}, []);
 
 	const handlerChange = (e) => {
 		setInput({
 			...input,
 			[e.target.name]: e.target.value.trim(),
+			userId: usuario[0]?.id,
 		});
 		console.log("input", input);
 		console.log("inputError", inputError);
@@ -99,7 +108,7 @@ export default function FormPostPet({ token }) {
 			})
 		);
 	};
-
+	console.log(input);
 	const handlerSubmit = (e) => {
 		e.preventDefault();
 		console.log(input);
@@ -318,7 +327,7 @@ export default function FormPostPet({ token }) {
 									)}
 								</FormControl>
 
-								<FormControl>
+								{/* <FormControl>
 									<Text fontFamily={"body"} fontSize="14px">
 										ID de Usuario:
 									</Text>
@@ -334,7 +343,7 @@ export default function FormPostPet({ token }) {
 									{inputError.userId && (
 										<Text className="text_inputError">{inputError.userId}</Text>
 									)}
-								</FormControl>
+								</FormControl> */}
 
 								<FormControl>
 									<Text fontFamily={"body"} fontSize="14px">

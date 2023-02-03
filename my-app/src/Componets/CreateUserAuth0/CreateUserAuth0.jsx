@@ -53,13 +53,12 @@ export default function CreateUserAuth0() {
 			phone: "123456789",
 			password: "123456789",
 			role: "user",
+			status: "active",
 		});
 	}
 	if ((user && logUser.length <= 0) || user || logUser.length <= 0) {
 		CheckUser();
 	}
-
-	return (
-		<div>{!user ? <h1>Estamos comprobando sus datos</h1> : <div></div>}</div>
-	);
+	console.log(user, input);
+	return <div>{!user ? <h1>Estamos comprobando sus datos</h1> : <div />}</div>;
 }

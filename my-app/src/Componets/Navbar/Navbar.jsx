@@ -5,29 +5,28 @@ import { NavLink } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Box,
-  Flex,
-  Avatar,
-  HStack,
-  // Link,
-  IconButton,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useDisclosure,
-  useColorModeValue,
-  Stack,
-  Image,
-  Text,
+	Box,
+	Flex,
+	Avatar,
+	HStack,
+	// Link,
+	IconButton,
+	Button,
+	Menu,
+	MenuButton,
+	MenuList,
+	MenuItem,
+	MenuDivider,
+	useDisclosure,
+	useColorModeValue,
+	Stack,
+	Image,
+	Text,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
 export default function Simple() {
-
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { user, isAuthenticated, logout } = useAuth0();
 	const [usuario, setUsuario] = useState([]);
@@ -70,77 +69,71 @@ export default function Simple() {
 							</NavLink>
 						</Box>
 
-            <HStack
-              as={"nav"}
-              spacing={8}
-              display={{ base: "none", md: "flex" }}
-              padding="140px"
-            >
-              <NavLink
-                px={2}
-                py={1}
-                rounded={"md"}
-                _hover={{
-                  textDecoration: "none",
-                  bg: useColorModeValue("gray.200", "gray.700"),
-                }}
-                to="/aboutUs"
-                variant="custom"
-              >
-                <Text fontFamily={"body"}>Nosotros</Text>
-              </NavLink>
-              <NavLink
-                px={2}
-                py={1}
-                rounded={"md"}
-                _hover={{
-                  textDecoration: "none",
-                  bg: useColorModeValue("gray.200", "gray.700"),
-                }}
-                to="/donate"
-                variant="custom"
-              >
-                <Text fontFamily={"body"}>Donaciones</Text>
-              </NavLink>
-              <NavLink
-                px={2}
-                py={1}
-                rounded={"md"}
-                _hover={{
-                  textDecoration: "none",
-                  bg: useColorModeValue("gray.200", "gray.700"),
-                }}
-                to="/shop"
-                variant="custom"
-              >
-                <Text fontFamily={"body"}>Tienda</Text>
-              </NavLink>
-              <NavLink
-                px={2}
-                py={1}
-                rounded={"md"}
-                _hover={{
-                  textDecoration: "none",
-                  bg: useColorModeValue("gray.200", "gray.700"),
-                }}
-                to="/createPet"
-                variant="custom"
-              >
-                <Text fontFamily={"body"}>Publicar Mascota</Text>
-              </NavLink>
-              <NavLink
-                px={2}
-                py={1}
-                rounded={"md"}
-                _hover={{
-                  textDecoration: "none",
-                  bg: useColorModeValue("gray.200", "gray.700"),
-                }}
-                to="/veterinary"
-                variant="custom"
-              >
-                <Text fontFamily={"body"}>Veterinarias</Text>
-              </NavLink>
+						<HStack
+							as={"nav"}
+							spacing={8}
+							display={{ base: "none", md: "flex" }}
+							padding="140px">
+							<NavLink
+								px={2}
+								py={1}
+								rounded={"md"}
+								_hover={{
+									textDecoration: "none",
+									bg: useColorModeValue("gray.200", "gray.700"),
+								}}
+								to="/aboutUs"
+								variant="custom">
+								<Text fontFamily={"body"}>Nosotros</Text>
+							</NavLink>
+							<NavLink
+								px={2}
+								py={1}
+								rounded={"md"}
+								_hover={{
+									textDecoration: "none",
+									bg: useColorModeValue("gray.200", "gray.700"),
+								}}
+								to="/donate"
+								variant="custom">
+								<Text fontFamily={"body"}>Donaciones</Text>
+							</NavLink>
+							<NavLink
+								px={2}
+								py={1}
+								rounded={"md"}
+								_hover={{
+									textDecoration: "none",
+									bg: useColorModeValue("gray.200", "gray.700"),
+								}}
+								to="/shop"
+								variant="custom">
+								<Text fontFamily={"body"}>Tienda</Text>
+							</NavLink>
+							<NavLink
+								px={2}
+								py={1}
+								rounded={"md"}
+								_hover={{
+									textDecoration: "none",
+									bg: useColorModeValue("gray.200", "gray.700"),
+								}}
+								to="/createPet"
+								variant="custom">
+								<Text fontFamily={"body"}>Publicar Mascota</Text>
+							</NavLink>
+							<NavLink
+								px={2}
+								py={1}
+								rounded={"md"}
+								_hover={{
+									textDecoration: "none",
+									bg: useColorModeValue("gray.200", "gray.700"),
+								}}
+								to="/veterinary"
+								variant="custom">
+								<Text fontFamily={"body"}>Veterinarias</Text>
+							</NavLink>
 
 							<Menu>
 								<MenuButton>
@@ -181,7 +174,10 @@ export default function Simple() {
 							</MenuButton>
 							<MenuList>
 								<NavLink to="/dashboard">
-									<MenuItem>Administrar cuenta</MenuItem>
+									<MenuItem
+										hidden={usuario[0]?.role === "admin" ? false : true}>
+										Administrar cuenta
+									</MenuItem>
 								</NavLink>
 								<MenuDivider />
 								{usuario.length ? (
@@ -201,16 +197,16 @@ export default function Simple() {
 					</Flex>
 				</Flex>
 
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
-              {/* {Links.map((link) => (
+				{isOpen ? (
+					<Box pb={4} display={{ md: "none" }}>
+						<Stack as={"nav"} spacing={4}>
+							{/* {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))} */}
-            </Stack>
-          </Box>
-        ) : null}
-      </Box>
-    </>
-  );
+						</Stack>
+					</Box>
+				) : null}
+			</Box>
+		</>
+	);
 }
