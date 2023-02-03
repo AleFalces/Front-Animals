@@ -120,13 +120,15 @@ export default function FormPostPet({token}) {
       input.img
       !== ""
     ) {
-      console.log("INPUT FORM",input);
-      console.log("TOKEN FORM :",token);
-      dispatch(postPet(input, token));
+
+
+      dispatch(postPet(input));
+
+      //dispatch(postPet(input, token));
       setIsIncomplete(false)
       setInfoSend(true)
 
-
+      document.getElementById("myForm").reset();
 
     } else {
       console.log(inputError)
@@ -134,6 +136,7 @@ export default function FormPostPet({token}) {
       setInfoSend(false)
 
     }
+
   }
 
 
@@ -145,7 +148,7 @@ export default function FormPostPet({token}) {
       {isIncomplete ? <ErrorForm /> : null}
       {infoSend ? <SuccedForm /> : null}
 
-      <form onSubmit={handlerSubmit}>
+      <form onSubmit={handlerSubmit} id="myForm">
         <Flex
           minH={'100vh'}
           align={'center'}
@@ -177,10 +180,10 @@ export default function FormPostPet({token}) {
                         <option value="default" name="especie" key="defaultSpecies">
                           Especie
                         </option>
-                        <option value="gato" key="cat">
+                        <option value={input.name} name="cat" key="cat">
                           Gatx
                         </option>
-                        <option value="perro" key="dog">
+                        <option value={input.name} name="perro" key="dog">
                           Perrx
                         </option>
                       </Select>
@@ -284,7 +287,7 @@ export default function FormPostPet({token}) {
                   <Input fontFamily={'body'} variant='flushed' focusBorderColor={'brand.green.300'} placeholder="UUID del usuario.." size='md' onChange={(e) => handlerChange(e)} name="userId" />
                   {inputError.userId && <Text className="text_inputError">{inputError.userId}</Text>}
                 </FormControl>
-                
+
                 <FormControl>
                   <Text fontFamily={'body'} fontSize="14px" >Imagen:</Text>
                   <Input
