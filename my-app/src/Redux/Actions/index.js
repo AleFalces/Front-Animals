@@ -1,33 +1,37 @@
 import {
-	GET_ALL_PETS,
-	GET_ADOPTION_PETS,
-	GET_LOST_PETS,
-	GET_PET_ID,
-	GET_ALL_USERS,
-	GET_ALL_PRODUCTS,
-	GET_PRODUCT_DETAIL,
-	GET_VETERINARIES,
-	GET_DETAILS_VETERINARIES,
-	POST_PET,
-	POST_USER,
-	POST_PRODUCT,
-	POST_VET,
-	FILTER_SPECIE_ADOPTION,
-	FILTER_SEX_ADOPTION,
-	FILTER_AGE_ADOPTION,
-	FILTER_SIZE_ADOPTION,
-	FILTER_BY_SEARCH_AREA_ADOPTION,
-	FILTER_SPECIE_LOST,
-	FILTER_LOST_SEX,
-	FILTER_LOST_AGE,
-	FILTER_LOST_SIZE,
-	SHOP_SEARCH_INPUT_NAME,
-	SHOP_FILTER_VALUE,
-	FILTER_LOST_SEARCH_AREA,
-	NEXT_PAGE,
-	PREV_PAGE,
-	ACTUAL_PAGE,
-	SET_STATUS_USER,
+  GET_ALL_PETS,
+  GET_ADOPTION_PETS,
+  GET_LOST_PETS,
+  GET_PET_ID,
+  GET_ALL_USERS,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_DETAIL,
+  GET_VETERINARIES,
+  GET_DETAILS_VETERINARIES,
+  POST_PET,
+  POST_USER,
+  POST_PRODUCT,
+  POST_VET,
+  FILTER_SPECIE_ADOPTION,
+  FILTER_SEX_ADOPTION,
+  FILTER_AGE_ADOPTION,
+  FILTER_SIZE_ADOPTION,
+  FILTER_BY_SEARCH_AREA_ADOPTION,
+  FILTER_SPECIE_LOST,
+  FILTER_LOST_SEX,
+  FILTER_LOST_AGE,
+  FILTER_LOST_SIZE,
+  SHOP_SEARCH_INPUT_NAME,
+  SHOP_FILTER_VALUE,
+  FILTER_LOST_SEARCH_AREA,
+  NEXT_PAGE,
+  PREV_PAGE,
+  ACTUAL_PAGE,
+  UPDATE_PRODUCT,
+  MODIFY_PRODUCT,
+  OUT_OF_STOCK
+  // SET_STATUS_USER,
+
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -271,17 +275,18 @@ export function filterLostSize(value) {
 }
 
 export function getAllProducts() {
-	return async function (dispatch) {
-		try {
-			const allProducts = await axios.get(`${HOST}/products`);
-			return dispatch({
-				type: GET_ALL_PRODUCTS,
-				payload: allProducts.data,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+
+  return async function (dispatch) {
+    try {
+      const allProducts = await axios.get(`${HOST}/products`);
+      return dispatch({
+        type: GET_ALL_PRODUCTS,
+        payload: allProducts.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function getProductDetail(obj) {
@@ -397,16 +402,61 @@ export const VeterinaryDetails = (id) => async (dispatch) => {
 	}
 };
 
-export function setStatusUser(id) {
-	//preguntar si se manda en obj o array la data
-	return async function (dispatch) {
-		try {
-			await axios.put(`${HOST}/users/setStatusUser/${id}`);
-			dispatch({
-				type: SET_STATUS_USER,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+export function setStatusUser(id) {//preguntar si se manda en obj o array la data
+  return async function (dispatch) {
+    try {
+      await axios.put(`${HOST}/users/setStatusUser/${id}`)
+      const updatedUsers = await axios.get(`${HOST}/users`)
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: updatedUsers.data
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
+
+export function updateProduct(id, formInput) {
+  return async function (dispatch) {
+    try {
+      console.log("Action updateProduc", id)
+      await axios.put(`${HOST}/products/${id}`, formInput)
+      // const updatedProduct = await axios.get(`${HOST}/products`)
+      dispatch({
+        type: UPDATE_PRODUCT
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function modifyProduct(obj){
+  return async function(dispatch){
+    try {
+      console.log("modifyProduct", obj)
+      return dispatch({
+        type: MODIFY_PRODUCT,
+        payload: obj
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+// export function outOfStock(){
+//   return async function(dispatch){
+//     try {
+//       const allProducts = await axios.get(`${HOST}/products`)
+//       console.log(allProducts.data)
+//       return dispatch({
+//         type: OUT_OF_STOCK,
+//         payload: allProducts.data,
+//       })
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   }
+// }

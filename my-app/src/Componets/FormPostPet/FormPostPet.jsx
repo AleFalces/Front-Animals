@@ -65,7 +65,7 @@ const validateForm = (input) => {
 
 
 
-export default function FormPostPet() {
+export default function FormPostPet({token}) {
 
   /* let isIncomplete = true; */
   const dispatch = useDispatch();
@@ -121,8 +121,10 @@ export default function FormPostPet() {
       !== ""
     ) {
 
+
       dispatch(postPet(input));
 
+      //dispatch(postPet(input, token));
       setIsIncomplete(false)
       setInfoSend(true)
 

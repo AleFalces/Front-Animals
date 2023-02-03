@@ -7,9 +7,9 @@ import { Button, Box } from "@chakra-ui/react";
 const TopNav = () => {
   return (
     <nav className={styles.topNav}>
-      <h5 className={styles.brand}>Panel Admin</h5>
+      <h5 className={styles.brand}>Administrar sitio Web</h5>
       <Link to="/home">
-        <button>Home</button>
+        <button>Ir atrás</button>
       </Link>
       <Button
         loadingText="Publicar el producto"
