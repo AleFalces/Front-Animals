@@ -19,6 +19,7 @@ import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
 import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
 import VetsDetails from "./Componets/VetsDetail/VetsDetail";
+import { MyPets } from "./Componets/MyPets/MyPets";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
 import CreateUserAuth0 from "./Componets/CreateUserAuth0/CreateUserAuth0";
@@ -35,6 +36,7 @@ function App() {
 		};
 		validator();
 	}, [getAccessTokenSilently]);
+
 
 	return isAuthenticated ? (
 		<div className="App">
@@ -109,6 +111,7 @@ function App() {
 			</Routes>
 		</div>
 	);
+
 }
 
 export default App;
