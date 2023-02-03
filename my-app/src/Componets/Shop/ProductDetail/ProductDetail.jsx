@@ -5,17 +5,39 @@ import { useParams } from "react-router-dom";
 import "./ProductDetail.css";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
+import axios from "axios";
+
 
 export default function ProductDetail(props) {
 	const { productId } = useParams();
 	const dispatch = useDispatch();
 	const detail = useSelector((state) => state.productDetail);
+
+
 	useEffect(() => {
 		dispatch(getProductDetail(productId));
-		console.log("DETAIL", detail);
 	}, [dispatch]);
 
-	console.log(detail);
+	
+	const payMp = async ()=>{
+		axios.post(`http://localhost:3001/donation`,
+		 {
+		  unit_price: detail[0].price,
+		  title : detail[0].name,
+		})
+		.then(response => {
+		  window.open(response.data, '_blank');
+		  })
+		  .catch(error => {
+		  console.error(error);
+		  });
+	  }
+	  
+	
+	
+	
+	
+	
 	return (
 		<div className="detailProductContainerAll">
 			<Navbar />
@@ -43,6 +65,7 @@ export default function ProductDetail(props) {
 						<img src={detail[0].image} alt="" />
 						<div>
 							<button>Agregar</button>
+							<button onClick={()=>payMp()}>Comprar</button>
 						</div>
 					</div>
 				</div>
