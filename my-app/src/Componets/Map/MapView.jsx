@@ -6,7 +6,7 @@ import logo from "../../assets/imagenes/logo_negro.png";
 
 const myIcon = new L.icon({
   iconUrl: logo,
-  iconSize: [32, 45],
+  iconSize: [50, 60],
   className: "leaftlet-div-icon",
 });
 
@@ -15,16 +15,16 @@ const MapView = ({ veterinaries }) => {
     <MapContainer
       center={[-34.70361367132336, -58.50179249999761]}
       zoom={10}
-      scrollWheelZoom={true}
+      scrollWheelZoom={false}
       className="mapContainer"
-      zoomControl={false}
+      // zoomControl={false}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {veterinaries.length > 0
         ? veterinaries?.map((ele, ind) => {
             return (
               <Marker key={ind} position={ele.location} icon={myIcon}>
-                <Popup className="prueba">
+                <Popup>
                   <p className="title">
                     {ele.name.charAt(0).toUpperCase() + ele.name.substring(1)}
                   </p>
