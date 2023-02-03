@@ -2,14 +2,14 @@ import React from "react";
 import styles from "./TopNav.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 
 const TopNav = () => {
   return (
     <nav className={styles.topNav}>
-      <h5 className={styles.brand}>Panel Admin</h5>
+      <h5 className={styles.brand}>Administrar sitio Web</h5>
       <Link to="/home">
-        <button>Home</button>
+        <button>Ir atrás</button>
       </Link>
       <Button
         loadingText="Publicar el producto"
@@ -20,9 +20,26 @@ const TopNav = () => {
           bg: "blue.500",
         }}
       >
-        <Link to={"/dashboard/createProduct"}>
-          <button>Publicar producto </button>
-        </Link>
+        <Box>
+          <Link to={"/dashboard/createProduct"}>
+            <button>Publicar producto </button>
+          </Link>
+        </Box>
+      </Button>
+      <Button
+        loadingText="Afiliar Veterinaria"
+        size="lg"
+        bg={"blue.400"}
+        color={"white"}
+        _hover={{
+          bg: "blue.500",
+        }}
+      >
+        <Box>
+          <Link to={"/dashboard/createVet"}>
+            <button>Afiliar Veterinaria </button>
+          </Link>
+        </Box>
       </Button>
       <SearchBar />
     </nav>

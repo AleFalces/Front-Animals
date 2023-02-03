@@ -1,0 +1,11 @@
+.mapContainer {
+  width: 100%;
+  height: 40em;
+  /* border-radius: 50%; */
+}
+div.leaflet-popup-content {
+  text-align: center;
+}
+div.leaflet-popup-content > .title {
+  font-weight: bold;
+}

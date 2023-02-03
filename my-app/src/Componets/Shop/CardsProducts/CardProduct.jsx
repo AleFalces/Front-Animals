@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductDetail } from "../../../Redux/Actions";
 
-export default function CardProduct({id, name, image, price, description, handlerSetCart}) {
+export default function CardProduct({id, name, image, price, description, handlerSetCart, handleRemoveItemCart}) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handleNavigateProduct = (e) => {
     e.preventDefault()
-    let obj = {id, handlerSetCart: handlerSetCart}
+    let obj = {id, handlerSetCart, handleRemoveItemCart}
     dispatch(getProductDetail(obj))
     setTimeout(()=>navigate(`/shop/product/${id}`), 200)
   }

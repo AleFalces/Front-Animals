@@ -6,6 +6,7 @@ import {
   POST_PET,
   POST_USER,
   POST_PRODUCT,
+  POST_VET,
   FILTER_SPECIE_ADOPTION,
   FILTER_SEX_ADOPTION,
   FILTER_AGE_ADOPTION,
@@ -26,9 +27,10 @@ import {
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
   GET_ALL_USERS,
-  UP_FUNCTION_SET_CART,
-  GET_CART,
-  SET_STATUS_USER
+  SET_STATUS_USER,
+  UPDATE_PRODUCT,
+  MODIFY_PRODUCT,
+  OUT_OF_STOCK
 } from "../ActionTypes";
 
 const initialState = {
@@ -40,12 +42,13 @@ const initialState = {
   allProducts: [],
   products: [],
   productDetail: {},
+  modifyProduct: {},
   actualPage: 1,
   allVets: [],
   vetsDetail: {},
   allUsers: [],
   cart: [],
-  handlerSetCart: {},
+  functions: {},
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -90,6 +93,10 @@ const RootReducer = (state = initialState, action) => {
         ...state,
       };
     case POST_PRODUCT:
+      return {
+        ...state,
+      };
+    case POST_VET:
       return {
         ...state,
       };
@@ -208,20 +215,34 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         vetsDetail: action.payload,
       };
-    case UP_FUNCTION_SET_CART:
-      return {
-        ...state,
-        handlerSetCart: { handlerSetCart: action.payload },
-      };
-    case GET_CART:
-      return {
-        ...state,
-        cart: action.payload,
-      };
     case SET_STATUS_USER:
       return {
-        ...state
+        ...state,
+      };
+    case UPDATE_PRODUCT:
+      return {
+        ...state,
       }
+    case MODIFY_PRODUCT:
+      return {
+        ...state,
+        modifyProduct: action.payload
+      }
+    // case OUT_OF_STOCK:
+    //   const askIfEmptyProduct = action.payload
+    //   const haveStock = []
+    //   askIfEmptyProduct.forEach((p) => {
+    //     if(p.stock > 1){
+    //       haveStock.push(p)
+    //       return alert("Aún tenes stock disponible de este producto")
+    //     }else if(p.stock <= 1){
+        
+    //   }}
+    // )
+    //   return {
+    //     ...state,
+    //     allProducts: haveStock
+    //   }
     default:
       return state;
   }

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { postProduct } from "../../../Redux/Actions";
+import { postVet } from "../../../Redux/Actions";
 
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Flex,
   Box,
@@ -18,64 +17,64 @@ import {
   useColorModeValue,
   Select,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
 
-export default function FormPostProduct() {
+export default function FormAffiliateVets() {
   const dispatch = useDispatch();
 
   const [input, setInput] = useState({
     name: "",
     description: "",
-    Category: "",
     image: "",
-    price: 0,
-    stock: 0,
+    phone: "",
+    address: "",
+    email: "",
   });
 
   const errors = {
     name: "",
     description: "",
-    Category: "",
     image: "",
-    price: 0,
-    stock: 0,
+    phone: "",
+    address: "",
+    email: "",
   };
 
   function handlerErrors(e) {
     e.preventDefault();
 
     if (input.name === "") {
-      errors.name = "Ingresá el nombre del producto.";
+      errors.name = "Ingresar el nombre de Veterinaria";
     }
     if (input.description === "") {
-      errors.description = "¡Se debe agregar una descripcion del producto!";
-    }
-    if (input.Category === "") {
-      errors.Category = "Falta elegir la categoría.";
+      errors.description = "Dejar un comentario sobre algo";
     }
     if (input.image === "") {
-      errors.image = "Selecciona una imagen.";
+      errors.image = "Seleccionar una imagen.";
     }
-    if (input.price < 0) {
-      errors.price = "Los numeros de precios no deben ser negativos.";
+    if (input.phone === "") {
+      errors.price = "Ingresar su teléfono";
     }
-    if (input.stock < 0) {
-      errors.stock = "No se puede pasar stock con numero negativo.";
+    if (input.address === "") {
+      errors.stock = "Escribir la ubicación de la Veterinaria";
+    }
+    if (input.email === "") {
+      errors.stock = "Agregar un email de contacto";
     }
     if (
       !errors.name &&
       !errors.description &&
-      !errors.Category &&
       !errors.image &&
-      !errors.price &&
-      !errors.stock
+      !errors.phone &&
+      !errors.address &&
+      !errors.email
     ) {
       handlerSubmit(e);
     } else {
-      alert("Falta rellenar algun campo");
+      alert("Falta rellenar algun campo.");
     }
   }
 
+  
   function handlerChange(e) {
     setInput({
       ...input,
@@ -85,31 +84,24 @@ export default function FormPostProduct() {
     console.log("error", errors);
   }
 
-  function handlerSubmit(e, input) {
+  function handlerSubmit(e) {
     e.preventDefault();
-    dispatch(postProduct(input));
-    console.log("EXISTEE", input)
-    
-    alert("Producto agregado a la tienda.");
 
-    //↓↓↓ FALTA RESET CORRECTLY EL INPUT UNA VEZ AÑADIDO EL PRODUCT ↓↓↓
-    setInput({
-      name: "",
-      description: "",
-      Category: "",
-      image: "",
-      price: 0,
-      stock: 0,
-    });
+    dispatch(postVet(input));
+    alert("Veterinaria afiliada exitosamente.");
 
-    // window.location.reload()
+    // ↓↓↓ FALTA RESET CORRECTLY EL INPUT UNA VEZ AÑADIDA LA VETERINARIA ↓↓↓
+    // setInput({
+    //   name: "",
+    //   description: "",
+    //   email: "",
+    //   image: "",
+    //   phone: "",
+    //   address: "",
+    //   
+    // });
   }
 
-  useEffect(()=>{
-
-  },[input])
-
-    //Revisar xq la categoria "alimentos" me tira error si el name del product tiene espacios en el campo
   return (
     <div>
       <form onSubmit={handlerSubmit}>
@@ -122,7 +114,7 @@ export default function FormPostProduct() {
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
             <Stack align={"center"}>
               <Heading fontSize={"4xl"} textAlign={"center"}>
-                Añadir producto a la tienda
+                Afiliar una Veterinaria
               </Heading>
             </Stack>
 
@@ -136,9 +128,9 @@ export default function FormPostProduct() {
                 <HStack>
                   <Box>
                     <FormControl id="name" isRequired>
-                      <FormLabel>Nombre: </FormLabel>
+                      <FormLabel>Veterinaria: </FormLabel>
                       <Input
-                        placeholder="¿Que vas a vender?"
+                        placeholder="¿Cómo se llama?" //el input name solo acepta palabras sin espacios!!.
                         type="text"
                         name="name"
                         onChange={(e) => handlerChange(e)}
@@ -148,67 +140,42 @@ export default function FormPostProduct() {
                   </Box>
 
                   <Box>
-                    <FormControl id="price" isRequired>
-                      <FormLabel>Precio: $</FormLabel>
+                    <FormControl id="description">
+                      <FormLabel>Descripción: </FormLabel>
                       <Input
-                        placeholder="¿Cuanto cuesta?"
-                        name="price"
-                        type="number"
-                        key="price"
+                        placeholder="Algún comentario sobre la afiliación..."
+                        name="description"
+                        type="text"
+                        key="description"
                         onChange={(e) => handlerChange(e)}
                       />
                     </FormControl>
                   </Box>
                 </HStack>
-
-                <FormControl id="Category" isRequired>
-                  <Select
-                    name="Category"
-                    key="Category"
-                    onChange={(e) => handlerChange(e)}
-                  >
-                    <option value="default" key="defaultCategory">
-                      Categoria del producto
-                    </option>
-                    <option value="indumentaria" key="indumentaria">
-                      Indumentaria
-                    </option>
-                    <option value="tazas" key="tazas">
-                      Tazas
-                    </option>
-                    <option value="alimentos" key="alimentos">
-                      Alimentos
-                    </option>
-                    <option value="otros" key="otros">
-                      Otros
-                    </option>
-                  </Select>
-                </FormControl>
-
-                <FormControl id="stock" isRequired>
-                  <FormLabel>Stock: </FormLabel>
+                <FormControl id="phone" isRequired>
+                  <FormLabel>Teléfono de contacto: </FormLabel>
                   <Input
-                    placeholder="Cantidad disponible"
-                    name="stock"
-                    key="stock"
+                    placeholder="Fijo/Celular"
+                    name="phone"
+                    key="phone"
                     type="number"
                     onChange={(e) => handlerChange(e)}
                   />
                 </FormControl>
 
-                <FormControl id="description">
-                  <FormLabel>Descripcion: </FormLabel>
+                <FormControl id="address">
+                  <FormLabel>Ubicación: </FormLabel>
                   <Input
-                    placeholder="Algún comentario sobre el producto"
-                    name="description"
-                    key="description"
+                    placeholder="¿Dónde se encuetra la Veterinaria?"
+                    name="address"
+                    key="address"
                     type="text"
                     onChange={(e) => handlerChange(e)}
                   />
                 </FormControl>
 
                 <FormControl id="image" isRequired>
-                  <label>Imagen del producto:</label>
+                  <label>Imágenes del local/espacio de trabajo: </label>
                   <Input
                     type="text"
                     name="image"
@@ -216,10 +183,20 @@ export default function FormPostProduct() {
                     onChange={(e) => handlerChange(e)}
                   />
                 </FormControl>
+
+                <FormControl id="email" isRequired>
+                  <label>Email de contacto: </label>
+                  <Input
+                    type="text"
+                    name="email"
+                    placeholder="example@gmail.com"
+                    onChange={(e) => handlerChange(e)}
+                  />
+                </FormControl>
                 <Stack spacing={10} pt={2}>
                   <Button
                     onClick={(e) => handlerErrors(e)}
-                    loadingText="Publicar el producto"
+                    loadingText="Afiliar Veterinaria"
                     size="lg"
                     bg={"blue.400"}
                     color={"white"}
@@ -227,7 +204,7 @@ export default function FormPostProduct() {
                       bg: "blue.500",
                     }}
                   >
-                    Publicar producto
+                    Afiliar Veterinaria
                   </Button>
                 </Stack>
               </Stack>

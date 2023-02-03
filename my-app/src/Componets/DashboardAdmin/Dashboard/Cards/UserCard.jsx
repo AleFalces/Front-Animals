@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect  }  from "react";
 import {
   Card,
   CardBody,
@@ -10,19 +10,22 @@ import {
   Box,
   Button,
 } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
-import { setStatusUser } from "../../../../Redux/Actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers, setStatusUser } from "../../../../Redux/Actions";
 
-export default function UserCard({ id, name, surname, email, phone, role }) {
+export default function UserCard({ id, name, surname, email, phone, status }) {
   const dispatch = useDispatch();
+  // const [statusUser, setStatus] = useState(status);
+  const users = useSelector((state) => state.allUsers)
 
-  function handlerSetActiveUser() {
-    // dispatch(setStatusUser(id)) averiguar como despachar la data
+  function handlerSetStatusUser(id) {
+    dispatch(setStatusUser(id));
+  
   }
 
-  function handlerSetInactiveUser() {
-    dispatch(setStatusUser(id)); //averiguar como despachar la data
-  }
+  useEffect(()=>{
+      
+  },[users])
 
   return (
     <div>
@@ -58,34 +61,37 @@ export default function UserCard({ id, name, surname, email, phone, role }) {
                   {phone}
                 </Text>
                 <Heading size="xs" textTransform="uppercase">
-                  Role:
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {role}
-                </Text>
-                <Heading size="xs" textTransform="uppercase">
                   ID:
                 </Heading>
                 <Text pt="2" fontSize="sm">
                   {id}
                 </Text>
+                <Heading size="xs" textTransform="uppercase">
+                  Estado:
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {status}
+                </Text>
                 
-                <Button
+                {status === "banned" ? <Button
+                onClick={() => {handlerSetStatusUser(id)}}
                 bg={"green"}
                 color={"white"}
                   _hover={{
                     bg: "green.400",
                   }}
-                >Activo</Button>
+                >Activar</Button>
+              :
                 <Button
+                  onClick={() => handlerSetStatusUser(id)}
                   bg={"red"}
                   color={"white"}
                   _hover={{
                     bg: "red.400",
                   }}
                 >
-                  Inactivo
-                </Button>
+                  Bloquear
+                </Button>}
               </Box>
             </Stack>
           </CardBody>
