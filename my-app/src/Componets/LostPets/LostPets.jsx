@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
 import FilterBarLost from "./FilterBarLost";
+import FilterBar from "../Adoption/FilterBarAdoption";
 import Footer from "../Footer/Footer";
 import Card from "../Card/Card";
 import { getLostPets } from "../../Redux/Actions/index";
@@ -33,7 +34,7 @@ const LostPets = () => {
 			<Navbar />
 			<br />
 			<div className="example">
-				<FilterBarLost />
+				<FilterBarLost value={"lostPets"}/>
 			</div>
 			<div className="Pagination">
 				<Pagination pets={pets} PetPerPage={PetPerPage} />

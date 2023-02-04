@@ -46,14 +46,11 @@ const Adoption = () => {
             (
               <Link to={`/pets/${el.id}`} key={el.id}>
                 <Card data={el} />
-
-                {/*  </div> */}
               </Link>
             ))
           )}
       </SimpleGrid>
       <Footer />
-      {/*  </div> */}
     </>
   );
 };

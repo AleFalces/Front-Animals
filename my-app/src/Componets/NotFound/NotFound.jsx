@@ -7,10 +7,10 @@ import img5 from "../../assets/imagenes/img5.png";
 
 const NotFound = () => {
 	const navigate = useNavigate();
-	const redirect = () => setTimeout(() => navigate("/home"), 5000);
+	// const redirect = () => setTimeout(() => navigate("/home"), 5000);
 
 	useEffect(() => {
-		redirect();
+		// redirect();
 	}, []);
 	return (
 		<div>

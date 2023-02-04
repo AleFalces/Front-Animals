@@ -7,6 +7,7 @@ import {
   POST_USER,
   POST_PRODUCT,
   POST_VET,
+  FILTER_ADOPTION_VALUES,
   FILTER_SPECIE_ADOPTION,
   FILTER_SEX_ADOPTION,
   FILTER_AGE_ADOPTION,
@@ -30,7 +31,7 @@ import {
   SET_STATUS_USER,
   UPDATE_PRODUCT,
   MODIFY_PRODUCT,
-  OUT_OF_STOCK
+  OUT_OF_STOCK,
 } from "../ActionTypes";
 
 const initialState = {
@@ -99,6 +100,34 @@ const RootReducer = (state = initialState, action) => {
     case POST_VET:
       return {
         ...state,
+      };
+    case FILTER_ADOPTION_VALUES:
+      let all = state.adoptionPets;
+      action.payload.forEach((filterValue) => {
+        if (filterValue === "macho" || filterValue === "hembra") {
+          all = all.filter((pet) => pet.sex === filterValue);
+        }
+        if (filterValue === "perro" || filterValue === "gato") {
+          all = all.filter((pet) => pet.species === filterValue);
+        }
+        if (
+          filterValue === "cachorro" ||
+          filterValue === "joven" ||
+          filterValue === "adulto"
+        ) {
+          all = all.filter((pet) => pet.age === filterValue);
+        }
+        if (
+          filterValue === "pequeño" ||
+          filterValue === "mediano" ||
+          filterValue === "grande"
+        ) {
+          all = all.filter((pet) => pet.size === filterValue);
+        }
+      });
+      return {
+        ...state,
+        pets: all,
       };
     case FILTER_SPECIE_ADOPTION:
       return {
@@ -222,12 +251,12 @@ const RootReducer = (state = initialState, action) => {
     case UPDATE_PRODUCT:
       return {
         ...state,
-      }
+      };
     case MODIFY_PRODUCT:
       return {
         ...state,
-        modifyProduct: action.payload
-      }
+        modifyProduct: action.payload,
+      };
     // case OUT_OF_STOCK:
     //   const askIfEmptyProduct = action.payload
     //   const haveStock = []
@@ -236,7 +265,7 @@ const RootReducer = (state = initialState, action) => {
     //       haveStock.push(p)
     //       return alert("Aún tenes stock disponible de este producto")
     //     }else if(p.stock <= 1){
-        
+
     //   }}
     // )
     //   return {
