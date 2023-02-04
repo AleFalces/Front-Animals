@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
-import FilterBarAdoption from "./FilterBarAdoption";
+import FilterBar from "./FilterBar";
 import Footer from "../Footer/Footer";
 import Card from "../Card/Card";
-import { getAdoptionPets } from "../../Redux/Actions/index";
+import { getPets } from "../../Redux/Actions/index";
 import { Link } from "react-router-dom";
 import "./Cards.css";
 import "./FilterBar.css";
-import { Box, SimpleGrid, } from '@chakra-ui/react'
+import { SimpleGrid, } from '@chakra-ui/react'
 import Pagination from "../Pagination/Pagination";
 
-const Adoption = () => {
+const Adoption = ({value}) => {
   const pets = useSelector((state) => state.pets);
   const actualPage = useSelector((state) => state.actualPage);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAdoptionPets());
-  }, [dispatch]);
+    dispatch(getPets(value))
+  }, [dispatch, value]);
 
   const [PetPerPage] = useState(9);
 
@@ -32,7 +32,7 @@ const Adoption = () => {
       <Navbar />
       <br />
       <div class="example">
-        <FilterBarAdoption />
+        <FilterBar value={value}/>
       </div>
 
       <div className="Pagination">

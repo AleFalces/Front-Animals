@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  filterBySearchArea,
+  filterAdoptionPets,
+  getPets
+} from "../../Redux/Actions";
 
-import { filterLostSearchArea, filterLostSpecies, filterLostSex, filterLostAge, filterLostSize, getLostPets, getPets } from "../../Redux/Actions";
-
-export default function FilterBar ({value})  {
+const FilterBar = ({value}) => {
   const dispatch = useDispatch();
   const defaultValue = "defaultValue";
   const [input, setInput] = useState("");
-console.log(value);
+console.log(value)
   const handlerInputChange = (e) => {
     e.preventDefault()
     setInput(e.target.value)
@@ -268,16 +271,17 @@ let selectAgeValue = document.getElementById("size")
 let selectSizeValue = document.getElementById("sex")
 function handlerFilterButton (e) {
   e.preventDefault();
-  // dispatch(filterAdoptionPets(arrayFilterValues));
+  dispatch(filterAdoptionPets(arrayFilterValues, value));
   selectSpeciesValue.value = defaultValue
   selectSexValue.value = defaultValue
   selectAgeValue.value = defaultValue
   selectSizeValue.value = defaultValue 
 }
-function handlerSearchByArea (e) {
+function handlerSearchByArea (e, value) {
   e.preventDefault();
+  console.log("SEARCH AREA VALUE :",value);
   if (input !== "" && input.trim() !== "") {
-    dispatch(filterLostSearchArea(input.trim()));
+    dispatch(filterBySearchArea(input.trim(), value));
   } else {
     alert("Debes especificar un area para que podamos buscar!");
   }
@@ -285,11 +289,10 @@ function handlerSearchByArea (e) {
 
 function handlerRefreshPets (e) {
   e.preventDefault();
-  dispatch(getLostPets());
+  dispatch(getPets(value))
 };
 
 useEffect(() => {
-  dispatch(getLostPets());
 }, [dispatch]);
 
 return (
@@ -386,7 +389,7 @@ return (
         />
         <button
           className="buttonSearch"
-          onClick={(e) => handlerSearchByArea(e)}
+          onClick={(e) => handlerSearchByArea(e, value)}
         >
           Buscar
         </button>
@@ -394,3 +397,6 @@ return (
     </div>
   );
 };
+
+export default FilterBar;
+
