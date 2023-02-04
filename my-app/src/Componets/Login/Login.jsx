@@ -148,13 +148,13 @@ const Login = () => {
 							bg={"orange.300"}
 							color={"white"}
 							w='40%'
-							px="3rem"
+							px={{ base: '6rem', sm: '6rem', md: '6rem', lg: '6rem' }}
 							_hover={{
 								bg: "orange.400",
 							}}
 
 							onClick={() => loginWithRedirect()}>
-							<Text fontSize='1rem'>Ingresar Con Google{" "}</Text>
+							<Text fontSize={{ base: '16px', sm: '16px', md: '16px', lg: '1rem' }}>Ingresar Con Google{" "}</Text>
 						</Button>
 					</Box>
 				</div>

@@ -27,13 +27,11 @@ import {
   Heading,
   Text,
   Container,
-  Input,
-  Button,
   SimpleGrid,
   Avatar,
   AvatarGroup,
   useBreakpointValue,
-  IconProps,
+
   Icon,
   Center
 } from '@chakra-ui/react';
@@ -76,23 +74,16 @@ const LandingPage = () => {
           <Heading
             lineHeight={0.5}
             fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '5xl' }}>
-            {/*           <Text as={'span'} fontFamily="heading" fontWeight={'bold'} bgGradient="linear(to-r, brand.green.100,orange.400)" bgClip="text">Buddy{' '}</Text>  */}
+          
             <Center >
               <img src={logo} alt="logo" width="70%" name="logo" />
             </Center >
-            {/*             <Text
-              as={'span'}
-              bg="orange.400"
-              bgClip="text">
-             ong
-            </Text>{' '} */}
 
 
-
-            <Text fontFamily="body" fontWeight={'light'} fontSize={{ base: '1xl', sm: '2xl', md: '3xl', lg: '4xl' }}> tu ayuda suma</Text>
+            <Text fontFamily="body" fontWeight={'light'} fontSize={{ base: '2xl', sm: '3xl', md: '4xl', lg: '4xl' }}> tu ayuda suma</Text>
 
             <Center>
-              <Stack direction={'row'} spacing={4} align={'center'} mt='1.5rem'>
+              <Stack direction={'row'} spacing={4} align={'center'} mt='2rem' >
                 <Icon as={GiSittingDog} color="orange" boxShadow="lg" />
                 <Icon as={RiHeartAddLine} color="brand.green.300" boxShadow="lg" />
                 <Icon as={GiCat} color="orange" boxShadow="lg" />
@@ -100,8 +91,10 @@ const LandingPage = () => {
             </Center>
 
           </Heading>
-          <Center>
-            <Stack direction={'row'} spacing={4} align={'center'}>
+       
+        
+          <Center >
+            <Stack direction={'row'} spacing={4} align={'center'} >
               <AvatarGroup>
                 {avatars.map((avatar) => (
                   <Avatar
@@ -139,10 +132,15 @@ const LandingPage = () => {
                 boxShadow="lg"
                 color={'white'}
                 rounded={'full'}
-                minWidth={useBreakpointValue({ base: '44px', md: '60px' })}
-                minHeight={useBreakpointValue({ base: '44px', md: '60px' })}
-                position={'relative'}>
-                VOS
+                minWidth={useBreakpointValue({ base: '60px', md: '75px' })}
+                minHeight={useBreakpointValue({ base: '60px', md: '75px' })}
+                position={'relative'}
+                borderStyle='dotted'
+                borderWidth={'0.2rem'}
+                borderColor="orange.200"
+             >
+                  
+               <Text fontWeight={'bold'} textShadow={'1rem'}>VOS</Text>
               </Flex>
             </Stack>
           </Center>
