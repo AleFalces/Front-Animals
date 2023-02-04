@@ -62,7 +62,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <Box h={"1800"} bg="brand.backgorund">
+      <Box minHeight={"100vh"} bg="brand.backgorund" paddingBottom={"3rem"}>
         <Flex
           w={"full"}
           h={"90vh"}

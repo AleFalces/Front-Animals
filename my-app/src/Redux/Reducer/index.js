@@ -27,10 +27,12 @@ import {
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
   GET_ALL_USERS,
+  GET_USER_ID,
   SET_STATUS_USER,
   UPDATE_PRODUCT,
   MODIFY_PRODUCT,
-  OUT_OF_STOCK
+  OUT_OF_STOCK,
+  GGET_USER_ID,
 } from "../ActionTypes";
 
 const initialState = {
@@ -47,6 +49,7 @@ const initialState = {
   allVets: [],
   vetsDetail: {},
   allUsers: [],
+  user: [],
   cart: [],
   functions: {},
 };
@@ -57,6 +60,11 @@ const RootReducer = (state = initialState, action) => {
       return {
         ...state,
         allUsers: action.payload,
+      };
+    case GET_USER_ID:
+      return {
+        ...state,
+        user: action.payload,
       };
     case GET_ALL_PETS:
       return {
@@ -222,12 +230,12 @@ const RootReducer = (state = initialState, action) => {
     case UPDATE_PRODUCT:
       return {
         ...state,
-      }
+      };
     case MODIFY_PRODUCT:
       return {
         ...state,
-        modifyProduct: action.payload
-      }
+        modifyProduct: action.payload,
+      };
     // case OUT_OF_STOCK:
     //   const askIfEmptyProduct = action.payload
     //   const haveStock = []
@@ -236,7 +244,7 @@ const RootReducer = (state = initialState, action) => {
     //       haveStock.push(p)
     //       return alert("Aún tenes stock disponible de este producto")
     //     }else if(p.stock <= 1){
-        
+
     //   }}
     // )
     //   return {
