@@ -4,8 +4,204 @@ import logo from "../../assets/imagenes/logo_negro.png";
 import Login from "../Login/Login";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./LandingPage.css";
+import { GiSittingDog } from 'react-icons/gi';
+import { GiCat } from 'react-icons/gi';
+import { RiHeartAddLine } from 'react-icons/ri';
+import { RxDoubleArrowDown } from 'react-icons/rx'
+
+import magui from "./utils/magui.png"
+import lucho from "./utils/lucho.png"
+import lau from "./utils/lau.png"
+
+
+
+// const { isAuthenticated, user } = useAuth0();
+// const navigate = useNavigate();
+/* const profilePics = [ lau, lucho, magui] */
+
+
+import {
+  Box,
+  Flex,
+  Stack,
+  Heading,
+  Text,
+  Container,
+  Input,
+  Button,
+  SimpleGrid,
+  Avatar,
+  AvatarGroup,
+  useBreakpointValue,
+  IconProps,
+  Icon,
+  Center
+} from '@chakra-ui/react';
+
+const avatars = [
+  {
+    name: 'Magdalena Aliaga ',
+    url: magui,
+  },
+  {
+    name: 'Luciano Navarro',
+    url: lucho,
+  },
+  {
+    name: 'Laura Coló',
+    url: lau,
+  },
+  {
+    name: 'Prosper Otemuyiwa',
+    url: 'https://bit.ly/prosper-baba',
+  },
+  {
+    name: 'Christian Nwamba',
+    url: 'https://bit.ly/code-beast',
+  },
+];
 
 const LandingPage = () => {
+
+
+  return (
+    <Box position={'relative'}>
+      <Container bg="brand.green.100"
+        as={SimpleGrid}
+        maxW={'7xl'}
+        columns={{ base: 1, md: 2 }}
+        spacing={{ base: 10, lg: 32 }}
+        py={{ base: 10, sm: 20, lg: 45 }}>
+        <Stack spacing={{ base: 10, md: 20 }}>
+          <Heading
+            lineHeight={0.5}
+            fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '5xl' }}>
+            {/*           <Text as={'span'} fontFamily="heading" fontWeight={'bold'} bgGradient="linear(to-r, brand.green.100,orange.400)" bgClip="text">Buddy{' '}</Text>  */}
+            <Center >
+              <img src={logo} alt="logo" width="70%" name="logo" />
+            </Center >
+            {/*             <Text
+              as={'span'}
+              bg="orange.400"
+              bgClip="text">
+             ong
+            </Text>{' '} */}
+
+
+
+            <Text fontFamily="body" fontWeight={'light'} fontSize={{ base: '1xl', sm: '2xl', md: '3xl', lg: '4xl' }}> tu ayuda suma</Text>
+
+            <Center>
+              <Stack direction={'row'} spacing={4} align={'center'} mt='1.5rem'>
+                <Icon as={GiSittingDog} color="orange" boxShadow="lg" />
+                <Icon as={RiHeartAddLine} color="brand.green.300" boxShadow="lg" />
+                <Icon as={GiCat} color="orange" boxShadow="lg" />
+              </Stack>
+            </Center>
+
+          </Heading>
+          <Center>
+            <Stack direction={'row'} spacing={4} align={'center'}>
+              <AvatarGroup>
+                {avatars.map((avatar) => (
+                  <Avatar
+                    key={avatar.name}
+                    name={avatar.name}
+                    src={avatar.url}
+                    /* size={useBreakpointValue({ base: 'md', md: 'lg' })} */
+                    position={'relative'}
+                    zIndex={2}
+                    boxShadow="lg"
+                    _before={{
+                      content: '""',
+                      width: 'full',
+                      height: 'full',
+                      rounded: 'full',
+                      transform: 'scale(1.125)',
+                      bgGradient: 'linear(to-bl, red.400,orange.400)',
+                      position: 'absolute',
+                      zIndex: -1,
+                      top: 0,
+                      left: 0,
+                    }}
+                  />
+                ))}
+              </AvatarGroup>
+              <Text fontFamily={'heading'} fontSize={{ base: '4xl', md: '6xl' }}>
+                +
+              </Text>
+              <Flex
+                align={'center'}
+                justify={'center'}
+                fontFamily={'heading'}
+                fontSize={{ base: 'sm', md: 'lg' }}
+                bg={'brand.green.300'}
+                boxShadow="lg"
+                color={'white'}
+                rounded={'full'}
+                minWidth={useBreakpointValue({ base: '44px', md: '60px' })}
+                minHeight={useBreakpointValue({ base: '44px', md: '60px' })}
+                position={'relative'}>
+                VOS
+              </Flex>
+            </Stack>
+          </Center>
+        </Stack>
+
+        <Stack
+          bg={'gray.50'}
+          rounded={'xl'}
+          p={{ base: 4, sm: 6, md: 8 }}
+          spacing={{ base: 8 }}
+          maxW={{ lg: 'lg' }}>
+          <Stack spacing={4}>
+            <Heading
+              color={'gray.800'}
+              lineHeight={1.1}
+              fontFamily={"heading"}
+              fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}>
+              Sé parte de Buddy{" "}
+              <Text
+                as={'span'}
+                bg="brand.green.300"
+                bgClip="text">
+                !
+              </Text>
+            </Heading>
+
+            <Center>
+              <Box w='70%'>
+                <Text noOfLines={[4, 4, 3]} color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
+                  Estamos buscando personas que amen los animales, como vos!
+                </Text>
+                <Icon as={RxDoubleArrowDown} mt='2rem' fontSize={'4rem'} color="brand.green.300" />
+              </Box>
+            </Center>
+          </Stack>
+
+          <Box as={'form'} mt={2}>
+            <Stack spacing={1}>
+              <Login name="Login" />
+            </Stack>
+          </Box>
+
+
+        </Stack>
+      </Container>
+    </Box>
+  );
+}
+
+export default LandingPage;
+
+
+
+
+
+
+
+
+/* const LandingPage = () => {
   // const { isAuthenticated, user } = useAuth0();
   // const navigate = useNavigate();
 
@@ -30,4 +226,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default LandingPage; */
