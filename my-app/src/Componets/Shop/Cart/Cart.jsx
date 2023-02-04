@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from "react";
 import CartCards from "./CartCards";
 import "./CartCards.css";
+import axios from "axios";
+
 
 export default function Cart () {
     const [cartFlag, setCartFlag] = useState(false)
     const cart = JSON.parse(window.localStorage.getItem("cart"))
+    console.log(cart)
     
     function handleStateChange() {
     if (cartFlag === true) {
@@ -122,6 +125,22 @@ const handlerSetCart = (e, id, price, image, name) => {
   //     return accRecursion(array, --index)
   //   }
   // }
+
+  const total = cart.reduce((acc, el) => acc + el.total ,0);
+  const payMp = ()=>{
+    axios.post(`http://localhost:3001/donation`,
+     {
+      unit_price:total,
+      title : "Gracias por su compra"
+    })
+    .then(response => {
+      window.open(response.data, '_blank');
+      })
+      .catch(error => {
+      console.error(error);
+      });
+  }
+
     useEffect(() => {
     }, [cartFlag])
     return (
@@ -131,7 +150,7 @@ const handlerSetCart = (e, id, price, image, name) => {
             {
             !cart
             ? <h1>NO CART</h1>
-            : <h1 className="total">Total: {cart.reduce((acc, el) => acc + el.total ,0)}</h1>
+            : <h1 className="total">Total: {total}</h1>
             }
           </div>
           <div>
@@ -140,6 +159,7 @@ const handlerSetCart = (e, id, price, image, name) => {
               ? <h1>Tu carrito esta vacio</h1>
               : <div>
                   {cart.map((pr) => <CartCards amount={pr.amount} id={pr.id} image={pr.image} name={pr.name} price={pr.price} total={pr.total} handlerSetCart={handlerSetCart} handleRemoveItemCart={handleRemoveItemCart}/>)}
+                  <button onClick={()=>payMp()}>Pagar</button>
                 </div> 
               }
           </div>
