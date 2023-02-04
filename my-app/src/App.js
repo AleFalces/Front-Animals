@@ -53,19 +53,19 @@ function App() {
 					path="/shop/product/:productId"
 					element={<ProductDetail />}></Route>
 				<Route exact path="/pets/:paramsId" element={<Details />}></Route>
-				<Route exact path="/dashboard" element={<DashboardAdmin />}></Route>
+				<Route exact path="/dashboard" element={<DashboardAdmin token={token}/>}></Route>
 				<Route
 					exact
 					path="/dashboard/createProduct"
-					element={<FormPostProduct />}></Route>
+					element={<FormPostProduct token={token}/>}></Route>
 				<Route
 					exact
 					path="/dashboard/createVet"
-					element={<FormAffiliateVets />}></Route>
+					element={<FormAffiliateVets token={token}/>}></Route>
 				<Route
 					exact
 					path="/dashboard/updateProduct"
-					element={<FormUpdateProduct />}></Route>
+					element={<FormUpdateProduct token={token}/>}></Route>
 				<Route exact path="/adoptions" element={<Adoption />}></Route>
 				<Route exact path="/lostPets" element={<LostPets />}></Route>
 				<Route exact path="/veterinary" element={<Veterinaries />}></Route>
@@ -84,10 +84,19 @@ function App() {
 		/*  </ChakraProvider> */
 		<div className="App">
 			<Routes>
+			<Route exact path="/dashboard" element={<DashboardAdmin token={token}/>}></Route>
 				<Route
 					exact
-					path="/dashboard"
-					element={<DashboardAdmin token={token} />}></Route>
+					path="/dashboard/createProduct"
+					element={<FormPostProduct token={token}/>}></Route>
+				<Route
+					exact
+					path="/dashboard/createVet"
+					element={<FormAffiliateVets token={token}/>}></Route>
+				<Route
+					exact
+					path="/dashboard/updateProduct"
+					element={<FormUpdateProduct token={token}/>}></Route>
 				<Route exact path="/donate" element={<Donate />}></Route>
 				<Route
 					exact

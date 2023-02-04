@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ShowUsers from "./ShowUsers";
 import ShowPets from "./ShowPets";
 import ShowProducts from "./ShowProducts";
+import RecaudacionTotal from "./RecaudacionTotal";
+import ShowVets from "./ShowVets";
 
 
 const Dashboard = () => {
@@ -13,6 +15,7 @@ const Dashboard = () => {
   const [selection, setSelection] = useState("");
   const usersArray = useSelector((state) => state.allUsers)
   const productsArray = useSelector((state) => state.allProducts)
+  const vetsArray = useSelector((state) => state.allVets)
 
   function handlerShowDataUsers(e) {
     e.preventDefault();
@@ -28,6 +31,10 @@ const Dashboard = () => {
     e.preventDefault();
     setSelection("products");
   }
+  function handlerShowDataVets(e) {
+    e.preventDefault();
+    setSelection("vets");
+  }
 
  
   useEffect(() => {
@@ -39,21 +46,27 @@ const Dashboard = () => {
   return (
     <div>
       <div>
-        <button onClick={(e) => handlerShowDataUsers(e)}>Ver usuarios</button>
-        <button onClick={(e) => handlerShowDataPets(e)}>Ver mascotas</button>
-        <button onClick={(e) => handlerShowDataProducts(e)}>Ver productos</button>
+        <button onClick={(e) => handlerShowDataUsers(e)}>Usuarios registrados</button>
+        <button onClick={(e) => handlerShowDataPets(e)}>Mascotas</button>
+        <button onClick={(e) => handlerShowDataProducts(e)}>Productos</button>
+        <button onClick={(e) => handlerShowDataVets(e)}>Veterinarias</button>
       </div>
       <div>
       
         {selection === "users" ? (
           <ShowUsers users={usersArray}/>
         ) : selection === "products" ? (
-          <><ShowProducts products={productsArray}/></>
+          <ShowProducts products={productsArray}/>
         ) : selection === "pets" ? (
           <ShowPets/>
+        ) : selection === "vets" ? (
+          <ShowVets vets={vetsArray}/>
         ) : (
           <>{null}</>
         )}
+      </div>
+      <div>
+      <RecaudacionTotal />
       </div>
 
     </div>
