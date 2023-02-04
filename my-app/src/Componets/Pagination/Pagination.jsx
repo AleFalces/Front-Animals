@@ -9,7 +9,6 @@ const Pagination = ({ PetPerPage, pets }) => {
 	for (let i = 1; i <= Math.ceil(pets.length / PetPerPage); i++) {
 		pages.push(i);
 	}
-	console.log(pages);
 	return (
 		<>
 			<ul className="Pages">
