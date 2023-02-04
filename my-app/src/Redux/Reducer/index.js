@@ -1,4 +1,5 @@
 import {
+  GET_PETS,
   GET_ALL_PETS,
   GET_ADOPTION_PETS,
   GET_PET_ID,
@@ -59,11 +60,33 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         allUsers: action.payload,
       };
+    case GET_PETS:
+      if (action.payload.value === undefined) {
+        return {
+          ...state,
+          allPets: action.payload.allPets,
+        };
+      }
+      if (action.payload.value === "lostPets") {
+        return {
+          ...state,
+          lostPets: action.payload.lostPets,
+          pets: action.payload.lostPets,
+        };
+      }
+      if (action.payload.value === "adoptions") {
+        return {
+          ...state,
+          adoptionPets: action.payload.adoptionPets,
+          pets: action.payload.adoptionPets,
+        };
+      }
+
     case GET_ALL_PETS:
       return {
         ...state,
         allPets: action.payload,
-        pets: action.payload,
+        // pets: action.payload,
       };
     case GET_ADOPTION_PETS:
       return {
@@ -102,8 +125,13 @@ const RootReducer = (state = initialState, action) => {
         ...state,
       };
     case FILTER_ADOPTION_VALUES:
-      let all = state.adoptionPets;
-      action.payload.forEach((filterValue) => {
+      if (action.payload.value === "adoptions") {
+        var all = state.adoptionPets;
+      } else {
+        var all = state.lostPets;
+      }
+
+      action.payload.arrayFilterValues.forEach((filterValue) => {
         if (filterValue === "macho" || filterValue === "hembra") {
           all = all.filter((pet) => pet.sex === filterValue);
         }

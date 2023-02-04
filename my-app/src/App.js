@@ -14,7 +14,7 @@ import FormPostUser from "./Componets/FormPostUser/FormPostUser";
 import FormPostProduct from "./Componets/DashboardAdmin/Dashboard/FormPostProduct";
 import FormAffiliateVets from "./Componets/DashboardAdmin/Dashboard/FormAffiliateVets";
 import FormUpdateProduct from "./Componets/DashboardAdmin/Dashboard/FormUpdateProduct";
-import LostPets from "./Componets/LostPets/LostPets";
+// import LostPets from "./Componets/LostPets/LostPets";
 import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
 import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
@@ -73,8 +73,16 @@ function App() {
           path="/dashboard/updateProduct"
           element={<FormUpdateProduct />}
         ></Route>
-        <Route exact path="/adoptions" element={<Adoption />}></Route>
-        <Route exact path="/lostPets" element={<LostPets />}></Route>
+        <Route
+          exact
+          path="/adoptions"
+          element={<Adoption value={"adoptions"} />}
+        ></Route>
+        <Route
+          exact
+          path="/lostPets"
+          element={<Adoption value={"lostPets"} />}
+        ></Route>
         <Route exact path="/veterinary" element={<Veterinaries />}></Route>
         <Route
           exact
@@ -105,8 +113,16 @@ function App() {
         <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/aboutUs" element={<AboutUs />}></Route>
         <Route exact path="/pets/:paramsId" element={<Details />}></Route>
-        <Route exact path="/adoptions" element={<Adoption />}></Route>
-        <Route exact path="/lostPets" element={<LostPets />}></Route>
+        <Route
+          exact
+          path="/adoptions"
+          element={<Adoption value={"adoptions"} />}
+        ></Route>
+        <Route
+          exact
+          path="/lostPets"
+          element={<Adoption value={"lostPets"} />}
+        ></Route>
         <Route exact path="/veterinary" element={<Veterinaries />}></Route>
         <Route exact path="/shop" element={<Shop />}></Route>
         <Route

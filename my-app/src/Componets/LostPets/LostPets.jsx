@@ -5,22 +5,23 @@ import FilterBarLost from "./FilterBarLost";
 import FilterBar from "../Adoption/FilterBarAdoption";
 import Footer from "../Footer/Footer";
 import Card from "../Card/Card";
-import { getLostPets } from "../../Redux/Actions/index";
+import { getLostPets, getPets } from "../../Redux/Actions/index";
 import { Link } from "react-router-dom";
 import "../Adoption/Cards.css";
 import Pagination from "../Pagination/Pagination";
 
-const LostPets = () => {
+const LostPets = ({value}) => {
 
 	const pets = useSelector((state) => state.pets);
 	const actualPage = useSelector((state) => state.actualPage);
+	const dispatch = useDispatch();
+console.log("COMPONENTE LOST",value)
 
-
-  const dispatch = useDispatch();
 
 
 	useEffect(() => {
-		dispatch(getLostPets());
+		// dispatch(getLostPets());
+		dispatch(getPets(value))
 	}, [dispatch]);
 
 	const [PetPerPage] = useState(9);

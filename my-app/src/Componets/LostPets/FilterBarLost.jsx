@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { filterLostSearchArea, filterLostSpecies, filterLostSex, filterLostAge, filterLostSize, getLostPets, getPets } from "../../Redux/Actions";
+import { filterLostSearchArea, filterLostSpecies, filterLostSex, filterLostAge, filterLostSize, getLostPets,filterAdoptionPets, getPets } from "../../Redux/Actions";
 
 export default function FilterBar ({value})  {
   const dispatch = useDispatch();
@@ -268,7 +268,7 @@ let selectAgeValue = document.getElementById("size")
 let selectSizeValue = document.getElementById("sex")
 function handlerFilterButton (e) {
   e.preventDefault();
-  // dispatch(filterAdoptionPets(arrayFilterValues));
+  dispatch(filterAdoptionPets(arrayFilterValues, value));
   selectSpeciesValue.value = defaultValue
   selectSexValue.value = defaultValue
   selectAgeValue.value = defaultValue
@@ -285,11 +285,12 @@ function handlerSearchByArea (e) {
 
 function handlerRefreshPets (e) {
   e.preventDefault();
-  dispatch(getLostPets());
+  // dispatch(getLostPets());
+  dispatch(getPets(value))
 };
 
 useEffect(() => {
-  dispatch(getLostPets());
+  // dispatch(getLostPets());
 }, [dispatch]);
 
 return (

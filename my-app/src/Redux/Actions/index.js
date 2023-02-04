@@ -1,4 +1,5 @@
 import {
+  GET_PETS,
   GET_ALL_PETS,
   GET_ADOPTION_PETS,
   GET_LOST_PETS,
@@ -58,6 +59,51 @@ export function getAllPets() {
         type: GET_ALL_PETS,
         payload: json.data,
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getPets(value) {
+  return async function (dispatch) {
+    try {
+      if (value === undefined) {
+        const json = await axios.get(`${HOST}/pets`);
+        const payload = {
+          allPets: json.data,
+          value,
+        };
+        return dispatch({
+          type: GET_PETS,
+          payload,
+        });
+      }
+      if (value === "lostPets") {
+        const json = await axios.get(`${HOST}/pets`);
+        const lostPets = json.data.filter((pet) => pet.status === "perdido");
+        const payload = {
+          lostPets,
+          value,
+        };
+        return dispatch({
+          type: GET_PETS,
+          payload,
+        });
+      }
+      if (value === "adoptions") {
+        const json = await axios.get(`${HOST}/pets`);
+        const adoptionPets = json.data.filter(
+          (pet) => pet.status === "encontrado"
+        );
+        const payload = {
+          adoptionPets,
+          value,
+        };
+        return dispatch({
+          type: GET_PETS,
+          payload,
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -156,12 +202,16 @@ export function postVet(formInput) {
     }
   };
 }
-export function filterAdoptionPets(arrayFilterValues) {
+export function filterAdoptionPets(arrayFilterValues, value) {
   return async function (dispatch) {
     try {
+      const payload = {
+        arrayFilterValues,
+        value,
+      };
       dispatch({
         type: FILTER_ADOPTION_VALUES,
-        payload: arrayFilterValues,
+        payload: payload,
       });
     } catch (error) {
       console.log(error);

@@ -7,14 +7,15 @@ import {
   filterBySize,
   filterBySearchArea,
   getAdoptionPets,
-  filterAdoptionPets
+  filterAdoptionPets,
+  getPets
 } from "../../Redux/Actions";
 
 const FilterBar = ({value}) => {
   const dispatch = useDispatch();
   const defaultValue = "defaultValue";
   const [input, setInput] = useState("");
-
+console.log(value)
   const handlerInputChange = (e) => {
     e.preventDefault()
     setInput(e.target.value)
@@ -275,7 +276,7 @@ let selectAgeValue = document.getElementById("size")
 let selectSizeValue = document.getElementById("sex")
 function handlerFilterButton (e) {
   e.preventDefault();
-  dispatch(filterAdoptionPets(arrayFilterValues));
+  dispatch(filterAdoptionPets(arrayFilterValues, value));
   selectSpeciesValue.value = defaultValue
   selectSexValue.value = defaultValue
   selectAgeValue.value = defaultValue
@@ -292,11 +293,13 @@ function handlerSearchByArea (e) {
 
 function handlerRefreshPets (e) {
   e.preventDefault();
-  dispatch(getAdoptionPets());
+  // dispatch(getAdoptionPets());
+  dispatch(getPets(value))
 };
 
 useEffect(() => {
-  dispatch(getAdoptionPets());
+  // dispatch(getAdoptionPets());
+  // dispatch(getPets("adoptions"))
 }, [dispatch]);
 
 return (

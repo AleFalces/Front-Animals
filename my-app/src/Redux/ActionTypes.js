@@ -1,3 +1,4 @@
+export const GET_PETS = "GET_PETS";
 export const GET_ALL_PETS = "GET_ALL_PETS";
 export const GET_PET_ID = "GET_PET_ID";
 export const GET_ADOPTION_PETS = "GET_ADOPTION_PETS_ADOPTION";
