@@ -1,7 +1,7 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "../src/Componets/Home/Home";
-import Adoption from "../src/Componets/Adoption/Adoption";
+import Pets from "../src/Componets/Adoption/Pets";
 import Details from "../src/Componets/Details/Details";
 import Login from "../src/Componets/Login/Login";
 import LandingPage from "../src/Componets/LandingPage/LandingPage";
@@ -14,7 +14,6 @@ import FormPostUser from "./Componets/FormPostUser/FormPostUser";
 import FormPostProduct from "./Componets/DashboardAdmin/Dashboard/FormPostProduct";
 import FormAffiliateVets from "./Componets/DashboardAdmin/Dashboard/FormAffiliateVets";
 import FormUpdateProduct from "./Componets/DashboardAdmin/Dashboard/FormUpdateProduct";
-// import LostPets from "./Componets/LostPets/LostPets";
 import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
 import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
@@ -76,12 +75,12 @@ function App() {
         <Route
           exact
           path="/adoptions"
-          element={<Adoption value={"adoptions"} />}
+          element={<Pets value={"adoptions"} />}
         ></Route>
         <Route
           exact
           path="/lostPets"
-          element={<Adoption value={"lostPets"} />}
+          element={<Pets value={"lostPets"} />}
         ></Route>
         <Route exact path="/veterinary" element={<Veterinaries />}></Route>
         <Route
@@ -116,12 +115,12 @@ function App() {
         <Route
           exact
           path="/adoptions"
-          element={<Adoption value={"adoptions"} />}
+          element={<Pets value={"adoptions"} />}
         ></Route>
         <Route
           exact
           path="/lostPets"
-          element={<Adoption value={"lostPets"} />}
+          element={<Pets value={"lostPets"} />}
         ></Route>
         <Route exact path="/veterinary" element={<Veterinaries />}></Route>
         <Route exact path="/shop" element={<Shop />}></Route>

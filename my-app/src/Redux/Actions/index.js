@@ -1,6 +1,5 @@
 import {
   GET_PETS,
-  GET_ALL_PETS,
   GET_ADOPTION_PETS,
   GET_LOST_PETS,
   GET_PET_ID,
@@ -14,18 +13,9 @@ import {
   POST_PRODUCT,
   POST_VET,
   FILTER_ADOPTION_VALUES,
-  FILTER_SPECIE_ADOPTION,
-  FILTER_SEX_ADOPTION,
-  FILTER_AGE_ADOPTION,
-  FILTER_SIZE_ADOPTION,
-  FILTER_BY_SEARCH_AREA_ADOPTION,
-  FILTER_SPECIE_LOST,
-  FILTER_LOST_SEX,
-  FILTER_LOST_AGE,
-  FILTER_LOST_SIZE,
+  FILTER_BY_SEARCH_AREA,
   SHOP_SEARCH_INPUT_NAME,
   SHOP_FILTER_VALUE,
-  FILTER_LOST_SEARCH_AREA,
   NEXT_PAGE,
   PREV_PAGE,
   ACTUAL_PAGE,
@@ -51,19 +41,6 @@ export function getAllUsers() {
   };
 }
 
-export function getAllPets() {
-  return async function (dispatch) {
-    try {
-      const json = await axios.get("http://localhost:3001/pets");
-      return dispatch({
-        type: GET_ALL_PETS,
-        payload: json.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
 export function getPets(value) {
   return async function (dispatch) {
     try {
@@ -218,116 +195,17 @@ export function filterAdoptionPets(arrayFilterValues, value) {
     }
   };
 }
-export function filterBySpecie(value) {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: FILTER_SPECIE_ADOPTION,
-        payload: value,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
 
-export function filterBySex(value) {
+export function filterBySearchArea(inputValue, value) {
   return async function (dispatch) {
     try {
+      let payload = {
+        inputValue,
+        value,
+      };
       return dispatch({
-        type: FILTER_SEX_ADOPTION,
-        payload: value,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function filterByAge(value) {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: FILTER_AGE_ADOPTION,
-        payload: value,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function filterBySize(value) {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: FILTER_SIZE_ADOPTION,
-        payload: value,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function filterBySearchArea(inputValue) {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: FILTER_BY_SEARCH_AREA_ADOPTION,
-        payload: inputValue,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function filterLostSpecies(value) {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: FILTER_SPECIE_LOST,
-        payload: value,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function filterLostSex(value) {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: FILTER_LOST_SEX,
-        payload: value,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function filterLostAge(value) {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: FILTER_LOST_AGE,
-        payload: value,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function filterLostSize(value) {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: FILTER_LOST_SIZE,
-        payload: value,
+        type: FILTER_BY_SEARCH_AREA,
+        payload: payload,
       });
     } catch (error) {
       console.log(error);
@@ -371,18 +249,6 @@ export function shopSearchInputName(input) {
       return dispatch({
         type: SHOP_SEARCH_INPUT_NAME,
         payload: input,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-export function filterLostSearchArea(inputValue) {
-  return async function (dispatch) {
-    try {
-      return dispatch({
-        type: FILTER_LOST_SEARCH_AREA,
-        payload: inputValue,
       });
     } catch (error) {
       console.log(error);

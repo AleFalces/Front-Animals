@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  filterBySpecie,
-  filterBySex,
-  filterByAge,
-  filterBySize,
   filterBySearchArea,
-  getAdoptionPets,
   filterAdoptionPets,
   getPets
 } from "../../Redux/Actions";
@@ -282,10 +277,11 @@ function handlerFilterButton (e) {
   selectAgeValue.value = defaultValue
   selectSizeValue.value = defaultValue 
 }
-function handlerSearchByArea (e) {
+function handlerSearchByArea (e, value) {
   e.preventDefault();
+  console.log("SEARCH AREA VALUE :",value);
   if (input !== "" && input.trim() !== "") {
-    dispatch(filterBySearchArea(input.trim()));
+    dispatch(filterBySearchArea(input.trim(), value));
   } else {
     alert("Debes especificar un area para que podamos buscar!");
   }
@@ -293,13 +289,10 @@ function handlerSearchByArea (e) {
 
 function handlerRefreshPets (e) {
   e.preventDefault();
-  // dispatch(getAdoptionPets());
   dispatch(getPets(value))
 };
 
 useEffect(() => {
-  // dispatch(getAdoptionPets());
-  // dispatch(getPets("adoptions"))
 }, [dispatch]);
 
 return (
@@ -396,7 +389,7 @@ return (
         />
         <button
           className="buttonSearch"
-          onClick={(e) => handlerSearchByArea(e)}
+          onClick={(e) => handlerSearchByArea(e, value)}
         >
           Buscar
         </button>
