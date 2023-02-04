@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import ShowUsers from "./ShowUsers";
 import ShowPets from "./ShowPets";
 import ShowProducts from "./ShowProducts";
-import RecaudacionTotal from "./RecaudacionTotal";
 import ShowVets from "./ShowVets";
 
 
@@ -65,10 +64,6 @@ const Dashboard = () => {
           <>{null}</>
         )}
       </div>
-      <div>
-      <RecaudacionTotal />
-      </div>
-
     </div>
   );
 };
