@@ -28,7 +28,6 @@ function App() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const [token, setToken] = useState("");
 
-
   useEffect(() => {
     const validator = async () => {
       const isVerify = await getAccessTokenSilently();
