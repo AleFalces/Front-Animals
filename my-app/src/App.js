@@ -44,6 +44,7 @@ function App() {
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/aboutUs" element={<AboutUs />}></Route>
         <Route exact path="/donate" element={<Donate />}></Route>
+        <Route exact path="/myPets" element={<MyPets />}></Route>
         <Route exact path="/shop" element={<Shop />}></Route>
         <Route exact path="/createAuth0" element={<CreateUserAuth0 />}></Route>
         <Route exact path="/shop/cart" element={<Cart />}></Route>
@@ -123,6 +124,7 @@ function App() {
           path="/lostPets"
           element={<Pets value={"lostPets"} />}
         ></Route>
+        <Route exact path="/myPets" element={<MyPets />}></Route>
         <Route exact path="/veterinary" element={<Veterinaries />}></Route>
         <Route exact path="/shop" element={<Shop />}></Route>
         <Route

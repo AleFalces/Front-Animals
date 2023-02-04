@@ -19,6 +19,7 @@ import {
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
   GET_ALL_USERS,
+  GET_USER_ID,
   SET_STATUS_USER,
   UPDATE_PRODUCT,
   MODIFY_PRODUCT,
@@ -39,6 +40,7 @@ const initialState = {
   allVets: [],
   vetsDetail: {},
   allUsers: [],
+  user: [],
   cart: [],
   functions: {},
 };
@@ -71,6 +73,12 @@ const RootReducer = (state = initialState, action) => {
           pets: action.payload.adoptionPets,
         };
       }
+    case GET_USER_ID:
+      return {
+        ...state,
+        user: action.payload,
+      };
+
     case GET_ADOPTION_PETS:
       return {
         ...state,
@@ -108,10 +116,11 @@ const RootReducer = (state = initialState, action) => {
         ...state,
       };
     case FILTER_ADOPTION_VALUES:
+      let all;
       if (action.payload.value === "adoptions") {
-        var all = state.adoptionPets;
+        all = state.adoptionPets;
       } else {
-        var all = state.lostPets;
+        all = state.lostPets;
       }
 
       action.payload.arrayFilterValues.forEach((filterValue) => {

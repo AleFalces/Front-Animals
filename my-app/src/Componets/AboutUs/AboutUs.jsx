@@ -6,24 +6,46 @@ import {
   SimpleGrid,
   Text,
   Stack,
-  // Flex,
-  HStack,
-  // Icon,
-  VStack,
-  // createIcon,
+  Flex,
+  Icon,
+  AspectRatio,
 } from "@chakra-ui/react";
-// import { CheckIcon } from "@chakra-ui/icons";
+
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
+import {
+  BiMessageRoundedAdd,
+  BiDonateHeart,
+  BiHomeHeart,
+} from "react-icons/bi";
 
 const AboutUs = () => {
+  const Feature = ({ title, text, icon }) => {
+    return (
+      <Stack alignItems={"center"}>
+        <Flex
+          w={16}
+          h={16}
+          align={"center"}
+          justify={"center"}
+          color={"white"}
+          rounded={"full"}
+          bg={"gray.100"}
+          mb={1}
+        >
+          {icon}
+        </Flex>
+        <Text fontWeight={600}>{title}</Text>
+        <Text color={"gray.600"}>{text}</Text>
+      </Stack>
+    );
+  };
   return (
     <>
       <Navbar />
-      {/* <Box h={"25px"} bg="brand.backgorund" /> */}
-      <Box h={"1800"} bg="brand.backgorund">
+      <Box minHeight={"80vh"} bg="brand.backgorund" paddingBottom={"3rem"}>
         <Box maxW="20xl" mx={"auto"} pt={20} px={{ base: 2, sm: 12, md: 17 }}>
-          <SimpleGrid columns={{ base: 1, sm: 1, md: 2 }}>
+          <SimpleGrid columns={{ base: 1, md: 2 }}>
             <Box
               w={"2xl"}
               h={"80vh"}
@@ -66,55 +88,64 @@ const AboutUs = () => {
           </SimpleGrid>
         </Box>
 
-        <Box p={9}>
+        <Box pb={"100px"} p={20}>
           <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
             <Heading fontSize={"3xl"}>Nuestros Objetivos</Heading>
           </Stack>
-
-          <Container maxW={"6xl"} mt={10}>
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
-              <HStack align={"top"}>
-                <VStack align={"start"}>
-                  <Text fontWeight={600}></Text>
-                  <Text color={"gray.600"}>
-                    Educar sobre el respeto por la vida de los animales a través
-                    de charlas y talleres educativos en lugares públicos y
-                    privados.
-                  </Text>
-                </VStack>
-              </HStack>
-              <HStack align={"top"}>
-                <VStack align={"start"}>
-                  <Text fontWeight={600}></Text>
-                  <Text color={"gray.600"}>
-                    Asistir a animales en situación de riesgo de muerte,
-                    brindarles la atención médica necesaria para recuperarlos y
-                    encontrar familias responsables para su adopción.
-                  </Text>
-                </VStack>
-              </HStack>
-              <HStack align={"top"}>
-                <VStack align={"start"}>
-                  <Text fontWeight={600}></Text>
-                  <Text color={"gray.600"}>
-                    Luchar contra el abandono, el maltrato y el sufrimiento
-                    animal
-                  </Text>
-                </VStack>
-              </HStack>
-              <HStack align={"top"}>
-                <VStack align={"start"}>
-                  <Text fontWeight={600}></Text>
-                  <Text color={"gray.600"}>
-                    Organizar campañas de castración gratuitas y/o a bajo costo
-                    en las zonas vulnerables donde el Estado está ausente y los
-                    perros y gatos se reproducen sin control.
-                  </Text>
-                </VStack>
-              </HStack>
-            </SimpleGrid>
-          </Container>
         </Box>
+        <Box p={4} bgColor={"brand.orange"}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
+            <Feature
+              icon={
+                <Icon
+                  as={BiMessageRoundedAdd}
+                  w={10}
+                  h={10}
+                  color={"brand.orange"}
+                />
+              }
+              title={"Lucha por los animales"}
+              text={
+                "Luchar contra el abandono, el maltrato y el sufrimiento animal.Educar sobre el respeto por la vida de los animales a través de charlas y talleres educativos en lugares públicos y privados"
+              }
+            />
+            <Feature
+              icon={
+                <Icon as={BiHomeHeart} w={10} h={10} color={"brand.orange"} />
+              }
+              title={"Asistencia"}
+              text={
+                "Asistir a animales en situación de riesgo de muerte, brindarles la atención médica necesaria para recuperarlos y encontrar familias responsables para su adopción."
+              }
+            />
+            <Feature
+              icon={
+                <Icon
+                  as={BiDonateHeart}
+                  w={10}
+                  h={10}
+                  color={"brand.orange"}
+                  alignItems={"center"}
+                />
+              }
+              title={"Donación"}
+              text={
+                "Organizar campañas de castración gratuitas y/o a bajo costo en las zonas vulnerables"
+              }
+            />
+          </SimpleGrid>
+        </Box>
+        <AspectRatio maxW="500px" ratio={1}>
+          <iframe
+            width="720"
+            height="405"
+            src="https://www.youtube.com/embed/rOW_cTjVleg"
+            title="BuddyVid"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </AspectRatio>
       </Box>
       {/* </Stack>
       </Container> */}
@@ -124,47 +155,3 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
-
-//   <h1>Nuestros objetivos</h1>
-//   <ul>• Luchar contra el abandono, el maltrato y el sufrimiento animal.</ul>
-//   <ul>
-//     • Educar sobre el respeto por la vida de los animales a través de charlas y
-//     talleres educativos en lugares públicos y privados.
-//   </ul>
-//   <ul>
-//     • Organizar campañas de castración gratuitas y/o a bajo costo en las zonas
-//     vulnerables donde el Estado está ausente y los perros y gatos se reproducen
-//     sin control.
-//   </ul>
-//   <ul>
-//     • Asistir a animales en situación de riesgo de muerte, brindarles la
-//     atención médica necesaria para recuperarlos y encontrar familias
-//     responsables para su adopción.
-//   </ul>
-//   <ul>
-//     • Asesorar a la población respecto a cómo actuar en casos de maltrato
-//     animal.
-//   </ul>
-
-//   <h1>¿Cómo trabajamos?</h1>
-//   <ul>
-//     • La acción directa: asistir a animales abandonados en situación de riesgo,
-//     promoviendo su adopción y tenencia por parte de hogares responsables que
-//     estén en condiciones de brindarles albergue, atención y afecto.
-//   </ul>
-//   <ul>
-//     • La acción preventiva: fomentar entre el público general la necesidad y la
-//     importancia de castrar machos y esterilizar las hembras antes del primer
-//     celo y exigiendo a las autoridades la aplicación de las leyes que los
-//     obligan a realizar campañas de castración masivas, gratuitas, extendidas,
-//     sistemáticas y permanentes, como único medio humanitario, sustentable y no
-//     eutanásico de control de la superpoblación animal.
-//   </ul>
-//   <ul>
-//     • Las actividades asistenciales: rescatar animales en situación de riesgo
-//     con el fin de recuperarlos y darles la posibilidad de formar parte de una
-//     familia que le brinde lo que necesita.
-//   </ul>
-
-//   <Footer />
-// </div>;
