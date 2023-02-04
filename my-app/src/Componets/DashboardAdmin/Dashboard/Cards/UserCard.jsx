@@ -1,4 +1,4 @@
-import React, { useState, useEffect  }  from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardBody,
@@ -11,21 +11,17 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, setStatusUser } from "../../../../Redux/Actions";
+import { setStatusUser } from "../../../../Redux/Actions";
 
 export default function UserCard({ id, name, surname, email, phone, status }) {
   const dispatch = useDispatch();
-  // const [statusUser, setStatus] = useState(status);
-  const users = useSelector((state) => state.allUsers)
+  const users = useSelector((state) => state.allUsers);
 
   function handlerSetStatusUser(id) {
     dispatch(setStatusUser(id));
-  
   }
 
-  useEffect(()=>{
-      
-  },[users])
+  useEffect(() => {}, [users]);
 
   return (
     <div>
@@ -72,26 +68,32 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
                 <Text pt="2" fontSize="sm">
                   {status}
                 </Text>
-                
-                {status === "banned" ? <Button
-                onClick={() => {handlerSetStatusUser(id)}}
-                bg={"green"}
-                color={"white"}
-                  _hover={{
-                    bg: "green.400",
-                  }}
-                >Activar</Button>
-              :
-                <Button
-                  onClick={() => handlerSetStatusUser(id)}
-                  bg={"red"}
-                  color={"white"}
-                  _hover={{
-                    bg: "red.400",
-                  }}
-                >
-                  Bloquear
-                </Button>}
+
+                {status === "banned" ? (
+                  <Button
+                    onClick={() => {
+                      handlerSetStatusUser(id);
+                    }}
+                    bg={"green"}
+                    color={"white"}
+                    _hover={{
+                      bg: "green.400",
+                    }}
+                  >
+                    Activar
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => handlerSetStatusUser(id)}
+                    bg={"red"}
+                    color={"white"}
+                    _hover={{
+                      bg: "red.400",
+                    }}
+                  >
+                    Bloquear
+                  </Button>
+                )}
               </Box>
             </Stack>
           </CardBody>

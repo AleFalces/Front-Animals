@@ -15,13 +15,14 @@ import {
   Button,
   Heading,
   Text,
-//   useColorModeValue,
+  //   useColorModeValue,
   Select,
 } from "@chakra-ui/react";
 
-export default function FormUpdateProduct() {//deberia recibir el objeto con los datos actuales
-const dispatch = useDispatch();
-const dataProduct = useSelector((state) => state.modifyProduct)
+export default function FormUpdateProduct() {
+  //deberia recibir el objeto con los datos actuales
+  const dispatch = useDispatch();
+  const dataProduct = useSelector((state) => state.modifyProduct);
 
   const [input, setInput] = useState({
     name: dataProduct.name,
@@ -39,7 +40,6 @@ const dataProduct = useSelector((state) => state.modifyProduct)
     image: "",
     price: 0,
     stock: 0,
-    
   };
 
   function handlerErrors(e) {
@@ -91,7 +91,7 @@ const dataProduct = useSelector((state) => state.modifyProduct)
     dispatch(updateProduct(dataProduct.id, input));
     alert("Producto actualizado.");
   }
-    //Revisar xq la categoria "alimentos" me tira error si el name del product tiene espacios en el campo
+  //Revisar xq la categoria "alimentos" me tira error si el name del product tiene espacios en el campo
   return (
     <div>
       <form onSubmit={handlerSubmit}>
@@ -99,7 +99,7 @@ const dataProduct = useSelector((state) => state.modifyProduct)
           minH={"100vh"}
           align={"center"}
           justify={"center"}
-        //   bg={useColorModeValue("gray.50", "gray.800")}
+          //   bg={useColorModeValue("gray.50", "gray.800")}
         >
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
             <Stack align={"center"}>
@@ -110,7 +110,7 @@ const dataProduct = useSelector((state) => state.modifyProduct)
 
             <Box
               rounded={"lg"}
-            //   bg={useColorModeValue("white", "gray.700")}
+              //   bg={useColorModeValue("white", "gray.700")}
               boxShadow={"lg"}
               p={8}
             >
@@ -206,25 +206,26 @@ const dataProduct = useSelector((state) => state.modifyProduct)
                   />
                 </FormControl>
                 <Stack spacing={10} pt={2}>
-                  <Button
-                    onClick={(e) => handlerErrors(e)}
-                    loadingText="Publicar el producto"
-                    size="lg"
-                    bg={"blue.400"}
-                    color={"white"}
-                    _hover={{
-                      bg: "blue.500",
-                    }}
-                  >
-                    Guardar producto
-                  </Button>
+                    <Button
+                      onClick={(e) => handlerErrors(e)}
+                      loadingText="Publicar el producto"
+                      size="lg"
+                      bg={"blue.400"}
+                      color={"white"}
+                      _hover={{
+                        bg: "blue.500",
+                      }}
+                    >
+                  <Link to={"/dashboard"}>
+                      Guardar producto
+                  </Link>
+                    </Button>
                 </Stack>
               </Stack>
             </Box>
-
             <Link to={"/dashboard"}>
-              <button>Atrás</button>
-            </Link>
+            <button>Atrás</button>
+                  </Link>
           </Stack>
         </Flex>
       </form>

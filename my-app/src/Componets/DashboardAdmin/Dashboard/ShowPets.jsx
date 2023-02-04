@@ -1,21 +1,23 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import Card from "../../Card/Card";
-
-const ShowPets = () => {
-  const pets = useSelector((state) => state.allPets);
+import PetCard from "./Cards/PetCard";
 
 
+export default function ShowPets({pets}) {
 
   return (
-    <div>
-      {pets.map((pet) => (
-        <div>
-            <Card data={pet}/>
-        </div>
-      ))}
-    </div>
+    pets.map((pet) => (
+      <PetCard
+      image={pet.image}
+      id={pet.id}
+      size={pet.size}
+      species={pet.species}
+      age={pet.age}
+      area={pet.area}
+      status={pet.status}
+      detail={pet.detail}
+      userId={pet.userId}
+      ></PetCard>
+    ))
   );
 };
 
-export default ShowPets

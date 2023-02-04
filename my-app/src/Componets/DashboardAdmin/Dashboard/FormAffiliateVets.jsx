@@ -96,12 +96,23 @@ export default function FormAffiliateVets() {
     });
     console.log(input);
     dispatch(postVet(input));
+    setInput({
+      name: "",
+      description: "",
+      phone: "",
+      address: "",
+      image: "",
+      email: "",
+      location: [],
+    });
+
+    document.getElementById("myForm").reset();
     alert("Veterinaria afiliada exitosamente.");
   }
 
   return (
     <div>
-      <form onSubmit={handlerSubmit}>
+      <form id="myForm">
         <Flex
           minH={"100vh"}
           align={"center"}

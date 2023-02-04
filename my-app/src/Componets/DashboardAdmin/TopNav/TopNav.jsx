@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./TopNav.module.css";
-import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import { Button, Box } from "@chakra-ui/react";
 
@@ -41,7 +40,6 @@ const TopNav = () => {
           </Link>
         </Box>
       </Button>
-      <SearchBar />
     </nav>
   );
 };
