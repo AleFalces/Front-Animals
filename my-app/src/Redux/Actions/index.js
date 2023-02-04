@@ -4,6 +4,7 @@ import {
   GET_LOST_PETS,
   GET_PET_ID,
   GET_ALL_USERS,
+  GET_USER_ID,
   GET_ALL_PRODUCTS,
   GET_PRODUCT_DETAIL,
   GET_VETERINARIES,
@@ -21,8 +22,8 @@ import {
   ACTUAL_PAGE,
   UPDATE_PRODUCT,
   MODIFY_PRODUCT,
-  OUT_OF_STOCK,
-  // SET_STATUS_USER
+  //OUT_OF_STOCK,
+  // SET_STATUS_USER,
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -81,6 +82,17 @@ export function getPets(value) {
           payload,
         });
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getUserId(id) {
+  return async function (dispatch) {
+    try {
+      const json = await axios.get(`http://localhost:3001/users/${id}`);
+      return dispatch({ type: GET_USER_ID, payload: json.data });
     } catch (error) {
       console.log(error);
     }
@@ -214,17 +226,17 @@ export function filterBySearchArea(inputValue, value) {
 }
 
 export function getAllProducts() {
-	return async function (dispatch) {
-		try {
-			const allProducts = await axios.get(`${HOST}/products`);
-			return dispatch({
-				type: GET_ALL_PRODUCTS,
-				payload: allProducts.data,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  return async function (dispatch) {
+    try {
+      const allProducts = await axios.get(`${HOST}/products`);
+      return dispatch({
+        type: GET_ALL_PRODUCTS,
+        payload: allProducts.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function getProductDetail(obj) {
@@ -329,47 +341,46 @@ export const VeterinaryDetails = (id) => async (dispatch) => {
 };
 
 export function setStatusUser(id) {
-
-	//preguntar si se manda en obj o array la data
-	return async function (dispatch) {
-		try {
-			await axios.put(`${HOST}/users/setStatusUser/${id}`);
-			const updatedUsers = await axios.get(`${HOST}/users`);
-			dispatch({
-				type: GET_ALL_USERS,
-				payload: updatedUsers.data,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  //preguntar si se manda en obj o array la data
+  return async function (dispatch) {
+    try {
+      await axios.put(`${HOST}/users/setStatusUser/${id}`);
+      const updatedUsers = await axios.get(`${HOST}/users`);
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: updatedUsers.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function updateProduct(id, formInput) {
-	return async function (dispatch) {
-		try {
-			console.log("Action updateProduc", id);
-			await axios.put(`${HOST}/products/${id}`, formInput);
-			// const updatedProduct = await axios.get(`${HOST}/products`)
-			dispatch({
-				type: UPDATE_PRODUCT,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  return async function (dispatch) {
+    try {
+      console.log("Action updateProduc", id);
+      await axios.put(`${HOST}/products/${id}`, formInput);
+      // const updatedProduct = await axios.get(`${HOST}/products`)
+      dispatch({
+        type: UPDATE_PRODUCT,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function modifyProduct(obj) {
-	return async function (dispatch) {
-		try {
-			console.log("modifyProduct", obj);
-			return dispatch({
-				type: MODIFY_PRODUCT,
-				payload: obj,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  return async function (dispatch) {
+    try {
+      console.log("modifyProduct", obj);
+      return dispatch({
+        type: MODIFY_PRODUCT,
+        payload: obj,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
