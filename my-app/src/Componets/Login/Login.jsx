@@ -12,6 +12,21 @@ import { Link } from "react-router-dom";
 //   Cerrar Sesion
 // </button>
 
+
+
+
+
+
+import {
+	Box,
+	Stack,
+	Text,
+	Input,
+	Button,
+	Divider,
+
+} from '@chakra-ui/react';
+
 const Login = () => {
 	const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 	const navegate = useNavigate();
@@ -62,35 +77,86 @@ const Login = () => {
 					{" "}
 					<div>
 						<form>
-							<input
-								type="email"
-								name="email"
-								placeholder="Ingrese su Email"
-								onChange={handleChange}></input>
+							<Box as={'form'} mt={1}>
+								<Stack spacing={4}>
+									<Input
+										type="email"
+										name="email"
+										bg={'gray.100'}
+										placeholder="Ingresa tu Email"
+										border={0}
+										color={'gray.500'}
+										_placeholder={{
+											color: 'gray.500',
+										}}
+										onChange={handleChange}></Input>
 
-							<input
-								type="password"
-								name="password"
-								placeholder="Ingrese su contraseña"
-								onChange={handleChange}
-							/>
+									<Input
+										type="password"
+										name="password"
+										bg={'gray.100'}
+										placeholder="Ingresa tu contraseña"
+										border={0}
+										color={'gray.500'}
+										_placeholder={{
+											color: 'gray.500',
+										}}
+										onChange={handleChange}
+									/>
+								</Stack>
+
+							</Box>
 						</form>
-						<button
-							onClick={handlerSubmit}
-							className="formButtom"
-							type="submit">
-							Ingresar
-						</button>
-						<Link to={`/createUser`}>
-							<p>Registrar Usuario</p>
-						</Link>
+						<Box py='1rem'>
+							<Button
+								onClick={handlerSubmit}
+								className="formButtom"
+								type="submit"
+								fontFamily={"body"}
+								size="lg"
+								bg={"orange.300"}
+								color={"white"}
+								w='40%'
+								px="3rem"
+								_hover={{
+									bg: "orange.400",
+								}}
+							>
+								Ingresar
+							</Button>
+						</Box>
+						<Box py='1rem'>
+							<Text fontFamily={'body'}>No estás registrado?</Text>
+							<Link to={`/createUser`}>
+								<p>hazlo aquí</p>
+							</Link>
+						</Box>
 					</div>
+
+
+					<Divider
+						orientation="horizontal"
+						mt="1rem"
+						pt="6px"
+						bg="gray.200"
+						borderRadius="7px"
+					/>
 					<Link />
-					<button
-						className="btn btn-success"
-						onClick={() => loginWithRedirect()}>
-						Ingresar Con Google{" "}
-					</button>
+					<Box mt="1rem">
+						<Button fontFamily={"body"}
+							size="lg"
+							bg={"orange.300"}
+							color={"white"}
+							w='40%'
+							px="3rem"
+							_hover={{
+								bg: "orange.400",
+							}}
+
+							onClick={() => loginWithRedirect()}>
+							<Text fontSize='1rem'>Ingresar Con Google{" "}</Text>
+						</Button>
+					</Box>
 				</div>
 			)}
 		</>
