@@ -1,5 +1,6 @@
 import React from "react";
 import { getAllProducts, getAllUsers, getAllPets, getAllVeterinaries } from "../../../Redux/Actions";
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ShowUsers from "./ShowUsers";
@@ -40,7 +41,7 @@ const Dashboard = () => {
  
   useEffect(() => {
     dispatch(getAllUsers());
-    dispatch(getAllPets())
+    dispatch(getPets())
     dispatch(getAllProducts())
     dispatch(getAllVeterinaries())
   }, [dispatch]);

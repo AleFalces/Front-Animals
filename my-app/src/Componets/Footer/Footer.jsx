@@ -12,6 +12,7 @@ import {
   // Input,
   // IconButton,
   useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
 import logo from "../../assets/imagenes/logo_negro.png";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
@@ -74,8 +75,11 @@ export default function LargeWithNewsletter() {
       bg="brand.green.100"
       color={useColorModeValue("gray.700", "gray.200")}
       p={10}
+      //position="absolute" //pierde sus medidas reales x eso ponerle un width del 100%
+      w={"100%"}
+      bottom={0}
     >
-      <Container as={Stack} maxW={"6xl"} py={10}>
+      <Container as={VStack} maxW={"6xl"} py={10}>
         <SimpleGrid
           templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 2fr" }}
           spacing={5}

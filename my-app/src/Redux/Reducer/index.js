@@ -1,5 +1,5 @@
 import {
-  GET_ALL_PETS,
+  GET_PETS,
   GET_ADOPTION_PETS,
   GET_PET_ID,
   GET_LOST_PETS,
@@ -7,16 +7,8 @@ import {
   POST_USER,
   POST_PRODUCT,
   POST_VET,
-  FILTER_SPECIE_ADOPTION,
-  FILTER_SEX_ADOPTION,
-  FILTER_AGE_ADOPTION,
-  FILTER_SIZE_ADOPTION,
-  FILTER_BY_SEARCH_AREA_ADOPTION,
-  FILTER_SPECIE_LOST,
-  FILTER_LOST_SEX,
-  FILTER_LOST_AGE,
-  FILTER_LOST_SIZE,
-  FILTER_LOST_SEARCH_AREA,
+  FILTER_ADOPTION_VALUES,
+  FILTER_BY_SEARCH_AREA,
   GET_ALL_PRODUCTS,
   GET_PRODUCT_DETAIL,
   SHOP_SEARCH_INPUT_NAME,
@@ -27,10 +19,11 @@ import {
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
   GET_ALL_USERS,
+  GET_USER_ID,
   SET_STATUS_USER,
   UPDATE_PRODUCT,
   MODIFY_PRODUCT,
-  OUT_OF_STOCK
+  OUT_OF_STOCK,
 } from "../ActionTypes";
 
 const initialState = {
@@ -47,6 +40,7 @@ const initialState = {
   allVets: [],
   vetsDetail: {},
   allUsers: [],
+  user: [],
   cart: [],
   functions: {},
 };
@@ -58,12 +52,33 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         allUsers: action.payload,
       };
-    case GET_ALL_PETS:
+    case GET_PETS:
+      if (action.payload.value === undefined) {
+        return {
+          ...state,
+          allPets: action.payload.allPets,
+        };
+      }
+      if (action.payload.value === "lostPets") {
+        return {
+          ...state,
+          lostPets: action.payload.lostPets,
+          pets: action.payload.lostPets,
+        };
+      }
+      if (action.payload.value === "adoptions") {
+        return {
+          ...state,
+          adoptionPets: action.payload.adoptionPets,
+          pets: action.payload.adoptionPets,
+        };
+      }
+    case GET_USER_ID:
       return {
         ...state,
-        allPets: action.payload,
-        pets: action.payload,
+        user: action.payload,
       };
+
     case GET_ADOPTION_PETS:
       return {
         ...state,
@@ -100,64 +115,61 @@ const RootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-    case FILTER_SPECIE_ADOPTION:
+    case FILTER_ADOPTION_VALUES:
+      let all;
+      if (action.payload.value === "adoptions") {
+        all = state.adoptionPets;
+      } else {
+        all = state.lostPets;
+      }
+
+      action.payload.arrayFilterValues.forEach((filterValue) => {
+        if (filterValue === "macho" || filterValue === "hembra") {
+          all = all.filter((pet) => pet.sex === filterValue);
+        }
+        if (filterValue === "perro" || filterValue === "gato") {
+          all = all.filter((pet) => pet.species === filterValue);
+        }
+        if (
+          filterValue === "cachorro" ||
+          filterValue === "joven" ||
+          filterValue === "adulto"
+        ) {
+          all = all.filter((pet) => pet.age === filterValue);
+        }
+        if (
+          filterValue === "pequeño" ||
+          filterValue === "mediano" ||
+          filterValue === "grande"
+        ) {
+          all = all.filter((pet) => pet.size === filterValue);
+        }
+      });
       return {
         ...state,
-        pets: state.adoptionPets.filter(
-          (pet) => pet.species === action.payload
-        ),
-        actualPage: 1,
+        pets: all,
       };
-    case FILTER_SEX_ADOPTION:
-      return {
-        ...state,
-        pets: state.adoptionPets.filter((pet) => pet.sex === action.payload),
-        actualPage: 1,
-      };
-    case FILTER_AGE_ADOPTION:
-      return {
-        ...state,
-        pets: state.adoptionPets.filter((pet) => pet.age === action.payload),
-        actualPage: 1,
-      };
-    case FILTER_SIZE_ADOPTION:
-      return {
-        ...state,
-        pets: state.adoptionPets.filter((pet) => pet.size === action.payload),
-        actualPage: 1,
-      };
-    case FILTER_BY_SEARCH_AREA_ADOPTION:
-      return {
-        ...state,
-        pets: state.adoptionPets.filter((pet) =>
-          pet.area.toLowerCase().includes(action.payload.toLowerCase())
-        ),
-        actualPage: 1,
-      };
-    case FILTER_SPECIE_LOST:
-      return {
-        ...state,
-        pets: state.lostPets.filter((pet) => pet.species === action.payload),
-        actualPage: 1,
-      };
-    case FILTER_LOST_SEX:
-      return {
-        ...state,
-        pets: state.lostPets.filter((pet) => pet.sex === action.payload),
-        actualPage: 1,
-      };
-    case FILTER_LOST_AGE:
-      return {
-        ...state,
-        pets: state.lostPets.filter((pet) => pet.age === action.payload),
-        actualPage: 1,
-      };
-    case FILTER_LOST_SIZE:
-      return {
-        ...state,
-        pets: state.lostPets.filter((pet) => pet.size === action.payload),
-        actualPage: 1,
-      };
+    case FILTER_BY_SEARCH_AREA:
+      if (action.payload.value === "adoptions") {
+        return {
+          ...state,
+          pets: state.adoptionPets.filter((pet) =>
+            pet.area
+              .toLowerCase()
+              .includes(action.payload.inputValue.toLowerCase())
+          ),
+          actualPage: 1,
+        };
+      } else {
+        return {
+          ...state,
+          pets: state.lostPets.filter((pet) =>
+            pet.area
+              .toLowerCase()
+              .includes(action.payload.inputValue.toLowerCase())
+          ),
+        };
+      }
     case GET_ALL_PRODUCTS:
       return {
         ...state,
@@ -174,13 +186,6 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         products: state.allProducts.filter((product) =>
           product.name.toLowerCase().includes(action.payload.toLowerCase())
-        ),
-      };
-    case FILTER_LOST_SEARCH_AREA:
-      return {
-        ...state,
-        pets: state.lostPets.filter((pet) =>
-          pet.area.toLowerCase().includes(action.payload.toLowerCase())
         ),
       };
     case SHOP_FILTER_VALUE:
@@ -222,12 +227,12 @@ const RootReducer = (state = initialState, action) => {
     case UPDATE_PRODUCT:
       return {
         ...state,
-      }
+      };
     case MODIFY_PRODUCT:
       return {
         ...state,
-        modifyProduct: action.payload
-      }
+        modifyProduct: action.payload,
+      };
     // case OUT_OF_STOCK:
     //   const askIfEmptyProduct = action.payload
     //   const haveStock = []
@@ -236,7 +241,7 @@ const RootReducer = (state = initialState, action) => {
     //       haveStock.push(p)
     //       return alert("Aún tenes stock disponible de este producto")
     //     }else if(p.stock <= 1){
-        
+
     //   }}
     // )
     //   return {

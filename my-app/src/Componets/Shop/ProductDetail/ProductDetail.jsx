@@ -8,21 +8,12 @@ import Footer from "../../Footer/Footer";
 import axios from "axios";
 
 
-export default function ProductDetail(props) {
+export default function ProductDetail() {
 	const dispatch = useDispatch();
 	const detail = useSelector((state) => state.productDetail);
 
+	useEffect(() => {}, [dispatch]);
 
-	useEffect(() => {
-
-		dispatch(getProductDetail(productId));
-
-
-		console.log("DETAIL", detail);
-
-	}, [dispatch]);
-
-	
 	const payMp = async ()=>{
 		axios.post(`http://localhost:3001/donation`,
 		 {
@@ -37,11 +28,6 @@ export default function ProductDetail(props) {
 		  });
 	  }
 	  
-	
-	
-	
-	
-	
 	return (
 		<div className="detailProductContainerAll">
 			<Navbar />
