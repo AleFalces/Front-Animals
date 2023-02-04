@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+// import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { postProduct } from "../../../Redux/Actions";
-
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Flex,
   Box,
@@ -20,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 
+
 export default function FormPostProduct() {
   const dispatch = useDispatch();
 
@@ -31,6 +31,18 @@ export default function FormPostProduct() {
     price: 0,
     stock: 0,
   });
+
+  // const [images, setImages] = useState([])
+  // const [imageToRemove, setImageToRemove] = useState(null)
+
+  // function handleRemoveImg(imgObj){
+
+  // }
+
+  // function handleOpenWidget(){
+  //   var myWidget = cloudinary.createUploadWidget({ 
+  //     cloudName : ' my_cloud_name ' , uploadPreset : ' my_preset ' }, (error, resultado) => { if (!error && result && result.event === " éxito " ) {       console.log( ' ¡Listo! Aquí está la información de la imagen: ' , result.info);     }   } )
+  // }
 
   const errors = {
     name: "",
@@ -70,7 +82,7 @@ export default function FormPostProduct() {
       !errors.price &&
       !errors.stock
     ) {
-      alert("CACONAAA")
+      
       handlerSubmit(e);
     } else {
       alert("Falta rellenar algun campo");
@@ -90,7 +102,6 @@ export default function FormPostProduct() {
     // e.preventDefault();
     dispatch(postProduct(input));
     // console.log("EXISTEE", input)
-    //↓↓↓ FALTA RESET CORRECTLY EL INPUT UNA VEZ AÑADIDO EL PRODUCT ↓↓↓
     setInput({
       name: "",
       description: "",
@@ -102,7 +113,6 @@ export default function FormPostProduct() {
     
     document.getElementById("myForm").reset();
     alert("Producto agregado a la tienda.");
-    // window.location.reload()
   }
 
   useEffect(()=>{
@@ -117,8 +127,7 @@ export default function FormPostProduct() {
           minH={"100vh"}
           align={"center"}
           justify={"center"}
-          bg={useColorModeValue("gray.50", "gray.800")}
-        >
+          bg={useColorModeValue("gray.50", "gray.800")}>
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
             <Stack align={"center"}>
               <Heading fontSize={"4xl"} textAlign={"center"}>

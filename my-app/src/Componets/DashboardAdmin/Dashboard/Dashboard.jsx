@@ -1,11 +1,12 @@
 import React from "react";
-import { getAllProducts, getAllUsers, getAllPets } from "../../../Redux/Actions";
+import { getAllProducts, getAllUsers, getAllPets, getAllVeterinaries } from "../../../Redux/Actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ShowUsers from "./ShowUsers";
 import ShowPets from "./ShowPets";
 import ShowProducts from "./ShowProducts";
 import ShowVets from "./ShowVets";
+import { Button } from "@chakra-ui/react";
 
 
 const Dashboard = () => {
@@ -15,6 +16,7 @@ const Dashboard = () => {
   const usersArray = useSelector((state) => state.allUsers)
   const productsArray = useSelector((state) => state.allProducts)
   const vetsArray = useSelector((state) => state.allVets)
+  const petsArray = useSelector((state) => state.allPets)
 
   function handlerShowDataUsers(e) {
     e.preventDefault();
@@ -40,14 +42,21 @@ const Dashboard = () => {
     dispatch(getAllUsers());
     dispatch(getAllPets())
     dispatch(getAllProducts())
+    dispatch(getAllVeterinaries())
   }, [dispatch]);
 
   return (
     <div>
       <div>
         <button onClick={(e) => handlerShowDataUsers(e)}>Usuarios registrados</button>
+      </div>
+      <div>
         <button onClick={(e) => handlerShowDataPets(e)}>Mascotas</button>
+      </div>
+      <div>
         <button onClick={(e) => handlerShowDataProducts(e)}>Productos</button>
+      </div>
+      <div>
         <button onClick={(e) => handlerShowDataVets(e)}>Veterinarias</button>
       </div>
       <div>
@@ -57,7 +66,7 @@ const Dashboard = () => {
         ) : selection === "products" ? (
           <ShowProducts products={productsArray}/>
         ) : selection === "pets" ? (
-          <ShowPets/>
+          <ShowPets pets={petsArray}/>
         ) : selection === "vets" ? (
           <ShowVets vets={vetsArray}/>
         ) : (
@@ -69,8 +78,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-//componente para agregar, quitar o editar productos de la tienda
-//componente para cargar imagenes
-//componente para controlar usuarios: bloquear o desbloqeuar
-//componente de solicitudes de cambios generados por el usuario
 
