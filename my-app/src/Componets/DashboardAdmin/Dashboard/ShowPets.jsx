@@ -12,8 +12,6 @@ const ShowPets = () => {
       {pets.map((pet) => (
         <div>
             <Card data={pet}/>
-            <button>Editar</button>
-            <button>Quitar</button>
         </div>
       ))}
     </div>

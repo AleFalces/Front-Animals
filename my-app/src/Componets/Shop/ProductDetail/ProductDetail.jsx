@@ -9,13 +9,17 @@ import axios from "axios";
 
 
 export default function ProductDetail(props) {
-	const { productId } = useParams();
 	const dispatch = useDispatch();
 	const detail = useSelector((state) => state.productDetail);
 
 
 	useEffect(() => {
+
 		dispatch(getProductDetail(productId));
+
+
+		console.log("DETAIL", detail);
+
 	}, [dispatch]);
 
 	
@@ -64,8 +68,11 @@ export default function ProductDetail(props) {
 					<div className="imgxbutton">
 						<img src={detail[0].image} alt="" />
 						<div>
-							<button>Agregar</button>
+
 							<button onClick={()=>payMp()}>Comprar</button>
+
+							<button onClick={(e)=>detail[0].handlerSetCart(e, detail[0].id, detail[0].price, detail[0].image, detail[0].name )}>Agregar</button>
+
 						</div>
 					</div>
 				</div>

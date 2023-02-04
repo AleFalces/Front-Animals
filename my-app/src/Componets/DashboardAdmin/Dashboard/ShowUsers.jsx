@@ -1,19 +1,19 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import UserCard from "./Cards/UserCard";
 
 
-const ShowUsers = () => {
-
-  const users = useSelector((state) => state.allUsers);
-  console.log(users);
-
+export default function ShowUsers({ users }) {
+  
   return (
-    <div>
-        {users.map((user) => (
-            <>{user.name}<br /></>
-        ))}
-    </div>
+      users.map((user) => (
+        <UserCard
+          id={user.id}
+          name={user.name}
+          surname={user.surname}
+          email={user.email}
+          phone={user.phone}
+          status={user.status}
+        ></UserCard>
+      ))
   );
-};
-
-export default ShowUsers;
+}

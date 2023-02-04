@@ -3,11 +3,14 @@
 #ffd4ac
 #dce0ac Beige
 */
-
+.divNavbarInputContainer {
+    width: 100%;
+    height: 100%;
+}
 .shopNavbarContainer {
     background-color: #bae8e8;
     box-shadow: 15px 10px .7rem .5rem #1616164d;
-    height: 5rem;
+    height: 6rem;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -22,14 +25,28 @@
 .shopNavbarContainer2 button {
     height: 40px;
     border: none;
-    background-color: rgba(150, 29, 29, 0);
-
+    background-color: rgba(29, 47, 150, 0.555);
+    border-radius: 20px 20px 20px 20px;
     width: 140px;
     font-size: 22px;
 }
 .shopNavbarContainer2 button:hover {
-    transition: .3s;
-    color: rgb(75, 78, 255);
+    transition: .4s;
+    color: #fffb;
+}
+.divCartAndInput {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 3%;
+}
+.divCartAndInput button {
+    background-color: rgba(29, 47, 150, 0.555);
+    border-radius: 20px 20px 20px 20px;
+    padding: 0 10px 0 10px;
+}
+.divCartAndInput :hover{
+    color: #fffb;
+    transition: .4s;
 }
 .divNavbarInput {
     padding-top: 10px;
@@ -37,6 +54,11 @@
     display: flex;
     justify-content: flex-end;
     padding-right: 5%;
+}
+.divNavbarInput :nth-child(1) {
+    color: red;
+    display: flex;
+    align-self: flex-end
 }
 .divNavbarInput input{
     background-color: rgba(255, 255, 255, 0.897);
@@ -51,8 +73,6 @@
 }
 
 @media screen and (max-width: 600px) {
-.shopNavbarContainer button:hover {
-}
 .shopNavbarContainer2 button {
     font-size: 16px;
     font-weight: 700;

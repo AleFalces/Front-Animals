@@ -1,0 +1,55 @@
+.total {
+    padding-top: 2%;
+    width: 100%;
+}
+.divContainerCartAll {
+    width: 100vw;
+    /* background: rgba(217, 255, 0, 0.555); */
+    display: flex;
+    justify-content: center;
+    padding-top: 1%;
+}
+.divContainerCart {
+    border: 2px solid #bae8e8;
+    border-radius: 20px 20px 20px 20px;
+}
+.divContainerCart {
+    /* background-color: rgba(0, 255, 255, 0.5); */
+    display: flex;
+    width: 60%;
+    height: 100%;
+}
+.img {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 20px 20px 20px 20px;
+}
+.divDrescriptionCart {
+    /* background-color: brown; */
+    width: 80%;
+
+}
+.divDrescriptionCart div{
+    /* background-color: antiquewhite; */
+    width: 100%;
+    padding-left: 10%;
+    display: flex;
+    justify-content: space-between;
+}
+.divContainerCart :nth-child(5) {
+    justify-content: flex-end;
+}
+.divContainerCart :nth-child(5) button {
+    color: black;
+    background-color: rgb(199, 230, 255);
+    border-radius: 20px 20px 20px 20px;
+    padding: 0 5px 0 5px;    
+}
+.divContainerCart h2 {
+    font-weight: 600;
+
+}
+.divContainerCart h3 {
+    color: rgba(0, 68, 255, 0.849);
+    font-weight: 600;
+}

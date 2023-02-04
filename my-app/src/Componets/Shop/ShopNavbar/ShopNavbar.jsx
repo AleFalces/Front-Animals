@@ -8,7 +8,8 @@ import {
 import "./ShopNavbar.css";
 import { useNavigate } from "react-router-dom";
 
-export default function ShopNavbar() {
+export default function ShopNavbar({handlerSetCart, handleRemoveItemCart}) {
+	const navigate = useNavigate()
 	const dispatch = useDispatch();
 	const [input, setInput] = useState("");
 	const inputSearch = document.getElementById("inputSearch");
@@ -34,24 +35,28 @@ export default function ShopNavbar() {
 			: dispatch(getAllProducts());
 	};
 
-	// const [userCart, setUserCart] = useState({});
-	// const handlerAddProduct = (value) => {
-	// 	window.localStorage;
-	// };
+	function handlerClick (e) {
+		e.preventDefault()
+		setTimeout(() => navigate("/shop/cart"),500)
+	}
+
 	return (
 		<div className="shopNavbarContainer">
 			<div className="divNavbarInputContainer">
-				<div className="divNavbarInput">
-					<input
+				<div className="divCartAndInput">
+				    <button onClick={(e) => { handlerClick(e) }}>Carrito</button>
+					<div className="divNavbarInput">
+
+					  <input
 						id="inputSearch"
 						onChange={(e) => handlerInputChange(e)}
 						type="text"
 						placeholder="Busqueda por nombre"
-					/>
-					<button onClick={(e) => handlerClickSearch(e)}>Buscar</button>
+						/>
+					  <button onClick={(e) => handlerClickSearch(e)}>Buscar</button>
+				 	</div>
 				</div>
 			</div>
-
 			<div className="shopNavbarContainer2">
 				<button value="alimentos" onClick={(e) => handlerShopFilterValue(e)}>
 					Alimentos

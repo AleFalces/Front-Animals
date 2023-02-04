@@ -1,15 +1,18 @@
 import React from "react";
 import { getAllProducts, getAllUsers, getAllPets } from "../../../Redux/Actions";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ShowUsers from "./ShowUsers";
 import ShowPets from "./ShowPets";
+import ShowProducts from "./ShowProducts";
 
 
 const Dashboard = () => {
   const dispatch = useDispatch();
 
   const [selection, setSelection] = useState("");
+  const usersArray = useSelector((state) => state.allUsers)
+  const productsArray = useSelector((state) => state.allProducts)
 
   function handlerShowDataUsers(e) {
     e.preventDefault();
@@ -23,7 +26,7 @@ const Dashboard = () => {
   
   function handlerShowDataProducts(e) {
     e.preventDefault();
-    setSelection("product");
+    setSelection("products");
   }
 
  
@@ -39,23 +42,20 @@ const Dashboard = () => {
         <button onClick={(e) => handlerShowDataUsers(e)}>Ver usuarios</button>
         <button onClick={(e) => handlerShowDataPets(e)}>Ver mascotas</button>
         <button onClick={(e) => handlerShowDataProducts(e)}>Ver productos</button>
-        
       </div>
       <div>
       
         {selection === "users" ? (
-          <ShowUsers/>
+          <ShowUsers users={usersArray}/>
         ) : selection === "products" ? (
-          <>"products"</>
+          <><ShowProducts products={productsArray}/></>
         ) : selection === "pets" ? (
           <ShowPets/>
         ) : (
-          <>"Elegir una de las opciones"</>
+          <>{null}</>
         )}
       </div>
-      <div>
-        <button>Ver Productos</button>
-      </div>
+
     </div>
   );
 };

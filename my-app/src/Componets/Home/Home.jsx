@@ -12,7 +12,8 @@ import {
   Stack,
   Flex,
   Button,
-  Image,
+  //Image,
+  Link,
   Text,
   VStack,
   useBreakpointValue,
@@ -22,7 +23,6 @@ import {
   StatLabel,
   StatNumber,
   useColorModeValue,
-  HStack,
 } from "@chakra-ui/react";
 
 function StatsCard({ icon, title, stat }) {
@@ -62,7 +62,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <Box h={"1600"} bg="brand.backgorund">
+      <Box h={"1800"} bg="brand.backgorund">
         <Flex
           w={"full"}
           h={"90vh"}
@@ -141,41 +141,90 @@ const Home = () => {
           </SimpleGrid>
         </Box>
         <Box maxW="7xl" mx={"auto"} pt={20} px={{ base: 2, sm: 12, md: 17 }}>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
-            <Flex
-              w={800}
-              h={"30vh"}
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+            <Box
+              h={"80"}
               backgroundImage={
                 "url(https://mestizos.cl/wp-content/uploads/2022/03/pexels-helena-lopes-1904105.jpg)"
               }
               backgroundSize={"cover"}
               backgroundPosition={"center center"}
               borderRadius={20}
-            ></Flex>
-            <Box>
-              <Text w={200} h={"30vh"} textAlign={"left"}>
-                Adopta los animales que necesitan un hogar!
+              boxShadow="2xl"
+              // _hover={}
+            />
+            <Box alignItems="left" py={20}>
+              <chakra.h4
+                textAlign={"left"}
+                fontSize={"2xl"}
+                py={3}
+                fontWeight={"bold"}
+                color={"brand.orange"}
+              >
+                Adopta tu mascota / Pone en adopción
+              </chakra.h4>
+              <Link
+                mt={1}
+                textAlign={"left"}
+                display="block"
+                fontSize="lg"
+                lineHeight="normal"
+                fontWeight="semibold"
+                to="/adoptions"
+              >
+                Encontra más información sobre las mascotas en adopción
+              </Link>
+              <Text mt={2} color="gray.500" textAlign={"left"}>
+                Nuestra comunidad busca alcanzar a las mascotas a su nuevo
+                hogar. Enterate de más en nuestro feed de animales en adopción!
               </Text>
             </Box>
-
-            <Flex
-              w={800}
-              h={"30vh"}
+          </SimpleGrid>
+        </Box>
+        <Box maxW="7xl" mx={"auto"} pt={20} px={{ base: 2, sm: 12, md: 17 }}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+            <Box alignItems="right" py={20}>
+              <chakra.h4
+                textAlign={"right"}
+                fontSize={"2xl"}
+                py={3}
+                fontWeight={"bold"}
+                color={"brand.orange"}
+              >
+                Animales perdidos
+              </chakra.h4>
+              <Link
+                mt={1}
+                textAlign={"right"}
+                display="block"
+                fontSize="lg"
+                lineHeight="normal"
+                fontWeight="semibold"
+                to="/lostPets"
+              >
+                Encontra más información sobre los animales perdidos
+              </Link>
+              <Text mt={2} color="gray.500" textAlign={"right"}>
+                Queremos ayudarte a encontrar a tu mascota, facilitamos la
+                busqueda por zonas, edad, tamaño, etc. Tendrás un numero con el
+                cual contactarte!
+              </Text>
+            </Box>
+            <Box
+              h={"80"}
               backgroundImage={
                 "url(https://www.catit.com/wp-content/uploads/2021/10/Why-does-my-cat-need-a-collar.jpg)"
               }
               backgroundSize={"cover"}
               backgroundPosition={"center center"}
               borderRadius={20}
-            ></Flex>
-            <Text textAlign={"left"}>
-              Ayudanos a difundir a las mascotas perdidas para que tengan mas
-              alcance a sus familias
-            </Text>
+              boxShadow="2xl"
+              alignItems={"right"}
+              // _hover={}
+            />
           </SimpleGrid>
         </Box>
       </Box>
-
       <Footer />
     </>
   );
@@ -189,3 +238,74 @@ export default Home;
 
 //bg={"brand.orange"}
 //"brand.green.200";
+
+//  <Box p={4} maxW="7xl" mx={"auto"} pt={5}>
+//    <Box flexShrink={0}>
+//      <Image
+//        borderRadius="20px"
+//        width={{ md: 40 }}
+//        src="https://mestizos.cl/wp-content/uploads/2022/03/pexels-helena-lopes-1904105.jpg"
+//        alt="Dog adopted"
+//      />
+//    </Box>
+//    <Box mt={{ base: 4, md: 0 }} ml={{ md: 6 }}>
+//      <Text
+//        fontWeight="bold"
+//        textTransform="uppercase"
+//        fontSize="sm"
+//        letterSpacing="wide"
+//        color="teal.600"
+//      >
+//        Marketing
+//      </Text>
+//  <Link
+//    mt={1}
+//    display="block"
+//    fontSize="lg"
+//    lineHeight="normal"
+//    fontWeight="semibold"
+//    href="#"
+//  >
+//    Finding customers for your new business
+//  </Link>
+//  <Text mt={2} color="gray.500">
+//    Getting a new business off the ground is a lot of hard work. Here are
+//    five ideas you can use to find your first customers.
+//  </Text>
+//    </Box>
+//  </Box>;
+
+/* <Box maxW="7xl" mx={"auto"} pt={20} px={{ base: 2, sm: 12, md: 17 }}>
+  <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
+    <Flex
+      w={800}
+      h={"30vh"}
+      backgroundImage={
+        "url(https://mestizos.cl/wp-content/uploads/2022/03/pexels-helena-lopes-1904105.jpg)"
+      }
+      backgroundSize={"cover"}
+      backgroundPosition={"center center"}
+      borderRadius={20}
+    ></Flex>
+    <Box>
+      <Text w={200} h={"30vh"} textAlign={"left"}>
+        Adopta los animales que necesitan un hogar!
+      </Text>
+    </Box>
+
+    <Flex
+      w={800}
+      h={"30vh"}
+      backgroundImage={
+        "url(https://www.catit.com/wp-content/uploads/2021/10/Why-does-my-cat-need-a-collar.jpg)"
+      }
+      backgroundSize={"cover"}
+      backgroundPosition={"center center"}
+      borderRadius={20}
+    ></Flex>
+    <Text textAlign={"left"}>
+      Ayudanos a difundir a las mascotas perdidas para que tengan mas alcance a
+      sus familias
+    </Text>
+  </SimpleGrid>
+</Box>; */

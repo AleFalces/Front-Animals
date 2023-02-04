@@ -5,9 +5,7 @@
     align-items: center;
     justify-content: center;
 }
-.productCardItems :hover {
-    cursor: pointer;
-}
+
 .productCard {
     border: 2px solid #bae8e8;
     border-radius: 3%;
@@ -21,8 +19,8 @@
 }
 .productCard img {
     border-radius: 3%;
-    width: 180px;
-    height: 200px;
+    width: 9rem;
+    height: 9rem;
 }
 .productCardItems {
     padding: 16px;
@@ -34,22 +32,27 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .productCard div {
-    width: 95%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 .productCard div button{
     background-color: #bae8e8;
     border-radius: 8px;
     border: none;
-    font-size: 16px;
-    width: 80px;
-    height: 32px;
+    font-weight: 700;
+    font-size: .6rem;
+    width: 4rem;
+    height: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.productCard div button:hover {
+    background-color: #1bc7c7bd;
+    transition: .3s;
 }
 .productCard h6 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
