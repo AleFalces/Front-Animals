@@ -70,6 +70,7 @@ export default function FormPostProduct() {
       !errors.price &&
       !errors.stock
     ) {
+      alert("CACONAAA")
       handlerSubmit(e);
     } else {
       alert("Falta rellenar algun campo");
@@ -81,17 +82,14 @@ export default function FormPostProduct() {
       ...input,
       [e.target.name]: e.target.value.trim(),
     });
-    console.log("input", input);
-    console.log("error", errors);
+    // console.log("input", input);
+    // console.log("error", errors);
   }
 
-  function handlerSubmit(e, input) {
-    e.preventDefault();
+  function handlerSubmit(e) {
+    // e.preventDefault();
     dispatch(postProduct(input));
-    console.log("EXISTEE", input)
-    
-    alert("Producto agregado a la tienda.");
-
+    // console.log("EXISTEE", input)
     //↓↓↓ FALTA RESET CORRECTLY EL INPUT UNA VEZ AÑADIDO EL PRODUCT ↓↓↓
     setInput({
       name: "",
@@ -101,18 +99,20 @@ export default function FormPostProduct() {
       price: 0,
       stock: 0,
     });
-
+    
+    document.getElementById("myForm").reset();
+    alert("Producto agregado a la tienda.");
     // window.location.reload()
   }
 
   useEffect(()=>{
-
+    // console.log("soy el useEFFECT",input)
   },[input])
 
     //Revisar xq la categoria "alimentos" me tira error si el name del product tiene espacios en el campo
   return (
     <div>
-      <form onSubmit={handlerSubmit}>
+      <form id="myForm">
         <Flex
           minH={"100vh"}
           align={"center"}
