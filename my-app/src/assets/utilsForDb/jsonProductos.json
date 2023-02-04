@@ -1,0 +1,91 @@
+[
+  {
+    "image": "https://faunatown.com.ar/wp-content/uploads/2021/07/E-commerce-product.png",
+    "name": "Nutrique Perros Adultos",
+    "description": "Comida Nutrique sabor pollo para perros adultos medianos.",
+    "price": 2500,
+    "Category": "alimentos",
+    "stock": 0
+  },
+  {
+    "image": "http://d3ugyf2ht6aenh.cloudfront.net/stores/979/500/products/dog-chow-cach-rm1-95b551e2330c1fa90316583245115578-640-0.webp",
+    "name": "Purina Dog Chow",
+    "description": "Comida para perros cachorros medianos y grandes.",
+    "price": 1500,
+    "Category": "alimentos",
+    "stock": 0
+  },
+  {
+    "image": "http://d3ugyf2ht6aenh.cloudfront.net/stores/001/961/189/products/d_813302-mla43970070424_112020-o-fc1938a8dc4f1f2b2716386629928374-640-0.jpg",
+    "name": "Maintenance Criadores",
+    "description": "Comida para perros sabor carne y pollo para perros adultos. Contiene 22kg",
+    "price": 7200,
+    "Category": "alimentos",
+    "stock": 3
+  },
+  {
+    "image": "https://www.timberline.com.ar/5388-home_default/cat-chow-adulto-carne-y-pollo-x-15-kg.jpg",
+    "name": "Purina Cat Chow",
+    "description": "Comida para gatos adultos sabor carne.",
+    "price": 2700,
+    "Category": "alimentos",
+    "stock": 4
+  },
+  {
+    "image": "https://www.timberline.com.ar/3681-home_default/pro-plan-cat-kitten-x-75-kg.jpg",
+    "name": "Purina Pro Plan Kitten",
+    "description": "Comida para gatos cachorros.",
+    "price": 3700,
+    "Category": "alimentos",
+    "stock": 1
+  },
+
+  {
+    "image": "https://www.sonrisasdegato.com/wp-content/uploads/2016/05/HTB1NwGVIFXXXXbnXFXXq6xXFXXXF.jpg",
+    "name": "Taza de gatos artesanal",
+    "description": "Taza de ceramica artesanal.",
+    "price": 950,
+    "Category": "tazas",
+    "stock": 6
+  },
+  {
+    "image": "https://bidilafragua.mx/wp-content/uploads/Tazas-de-cafe-o-te-de-ceramica.jpg",
+    "name": "Taza de gatos artesanal",
+    "description": "Taza de ceramica artesanal gato negro.",
+    "price": 1150,
+    "Category": "tazas",
+    "stock": 2
+  },
+  {
+    "image": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/070/999/products/perros-32-clara-vertical1811811811811811811811811-ba9bb1ca4edcbfa8af16299917011798-1024-10241-6403628476ba2aac5616636267761525-1024-1024.webp",
+    "name": "Remera estampada",
+    "description": "Remera de algodon con estampado de perro.",
+    "price": 1850,
+    "Category": "indumentaria",
+    "stock": 2
+  },
+  {
+    "image": "http://d3ugyf2ht6aenh.cloudfront.net/stores/001/268/672/products/11a1-cf1cebeec03e197be516129968821849-640-0.jpg",
+    "name": "Remera estampada",
+    "description": "Remera de algodon con estampado de colores.",
+    "price": 2150,
+    "Category": "indumentaria",
+    "stock": 3
+  },
+  {
+    "image": "https://http2.mlstatic.com/D_NQ_NP_705822-MLA46771792922_072021-W.jpg",
+    "name": "Remera estampada",
+    "description": "Remera de algodon con estampado de colores.",
+    "price": 2150,
+    "Category": "indumentaria",
+    "stock": 4
+  },
+  {
+    "image": "https://w7.pngwing.com/pngs/696/1010/png-transparent-dog-collar-dog-collar-bracelet-dog-animals-bracelet-dog-collar-thumbnail.png",
+    "name": "Collar para perros",
+    "description": "Collar para perro grande.",
+    "price": 450,
+    "Category": "otros",
+    "stock": 5
+  }
+]

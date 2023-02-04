@@ -28,6 +28,7 @@ export default function FormAffiliateVets() {
     phone: "",
     address: "",
     email: "",
+    location: [],
   });
 
   const errors = {
@@ -37,6 +38,7 @@ export default function FormAffiliateVets() {
     phone: "",
     address: "",
     email: "",
+    location: [],
   };
 
   function handlerErrors(e) {
@@ -74,7 +76,6 @@ export default function FormAffiliateVets() {
     }
   }
 
-  
   function handlerChange(e) {
     setInput({
       ...input,
@@ -86,20 +87,16 @@ export default function FormAffiliateVets() {
 
   function handlerSubmit(e) {
     e.preventDefault();
+    let result = input.location.split(", ");
+    let finalResult = [Number(result[0]), Number(result[1])];
 
+    setInput({
+      ...input,
+      location: (input.location = finalResult),
+    });
+    console.log(input);
     dispatch(postVet(input));
     alert("Veterinaria afiliada exitosamente.");
-
-    // ↓↓↓ FALTA RESET CORRECTLY EL INPUT UNA VEZ AÑADIDA LA VETERINARIA ↓↓↓
-    // setInput({
-    //   name: "",
-    //   description: "",
-    //   email: "",
-    //   image: "",
-    //   phone: "",
-    //   address: "",
-    //   
-    // });
   }
 
   return (
@@ -190,6 +187,16 @@ export default function FormAffiliateVets() {
                     type="text"
                     name="email"
                     placeholder="example@gmail.com"
+                    onChange={(e) => handlerChange(e)}
+                  />
+                </FormControl>
+
+                <FormControl id="location" isRequired>
+                  <label>Location: </label>
+                  <Input
+                    type="text"
+                    name="location"
+                    placeholder="Latitud de tu veterinaria"
                     onChange={(e) => handlerChange(e)}
                   />
                 </FormControl>

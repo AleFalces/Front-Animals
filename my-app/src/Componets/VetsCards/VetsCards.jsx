@@ -4,7 +4,7 @@ const VetsCard = ({ data: { img, name, phone, address, dirección } }) => {
   return (
     <div className="card2">
       <div className="face front">
-        <img src={img} alt="img not found" width={200} />
+        <img src={img} alt="img not found" />
       </div>
       <div className="face back">
         <h3> {name}</h3>

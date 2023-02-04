@@ -8,16 +8,14 @@ import Card from "../Card/Card";
 import { getLostPets } from "../../Redux/Actions/index";
 import { Link } from "react-router-dom";
 import "../Adoption/Cards.css";
+import { Box, SimpleGrid, } from '@chakra-ui/react'
 import Pagination from "../Pagination/Pagination";
 
 const LostPets = () => {
 
 	const pets = useSelector((state) => state.pets);
 	const actualPage = useSelector((state) => state.actualPage);
-
-
   const dispatch = useDispatch();
-
 
 	useEffect(() => {
 		dispatch(getLostPets());
@@ -28,6 +26,7 @@ const LostPets = () => {
 	const lastIndex = actualPage * PetPerPage;
 	const firstIndex = lastIndex - PetPerPage;
 	const currentPetPerPage = pets.slice(firstIndex, lastIndex);
+
 
 	return (
 		<>
@@ -54,10 +53,11 @@ const LostPets = () => {
 				)}
 				<Footer />
 			</div>
-			
 		</>
-	);
-
-};
+	  );
+	};
+	
 
 export default LostPets;
+
+

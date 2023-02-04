@@ -71,8 +71,9 @@ export default function Simple() {
 
 						<HStack
 							as={"nav"}
-							spacing={7}
-							display={{ base: "none", md: "flex" }}>
+							spacing={8}
+							display={{ base: "none", md: "flex" }}
+							padding="140px">
 							<NavLink
 								px={2}
 								py={1}
@@ -173,7 +174,10 @@ export default function Simple() {
 							</MenuButton>
 							<MenuList>
 								<NavLink to="/dashboard">
-									<MenuItem>Administrar cuenta</MenuItem>
+									<MenuItem
+										hidden={usuario[0]?.role === "admin" ? false : true}>
+										Administrar cuenta
+									</MenuItem>
 								</NavLink>
 								<MenuDivider />
 								{usuario.length ? (
