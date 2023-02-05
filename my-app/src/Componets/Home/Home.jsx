@@ -164,7 +164,7 @@ const Home = () => {
             <Box
               h={"80"}
               backgroundImage={
-                "url(https://mestizos.cl/wp-content/uploads/2022/03/pexels-helena-lopes-1904105.jpg)"
+                "url(https://apadrinaunperro.org/wp-content/uploads/2022/02/perros-en-adopcion-pequenos.jpg)"
               }
               backgroundSize={"cover"}
               backgroundPosition={"center center"}
