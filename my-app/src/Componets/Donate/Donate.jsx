@@ -6,22 +6,36 @@ import Footer from "../Footer/Footer";
 import axios from "axios";
 const Donate = () => {
 
+	const url = `http://localhost:3001`
 
-const payMp = async (e)=>{
-	const value= e.target.value;
-	const unit_price = parseInt(value);
-	axios.post(`http://localhost:3001/donation`,
-	 {
-		unit_price: unit_price,
-		title : 'Gracias por su colaboración'
-	})
-	.then(response => {
-		window.open(response.data, '_blank');
-	  })
-	  .catch(error => {
-		console.error(error);
-	  });
-}
+	const payMp = async (e)=>{
+		const value= e.target.value;
+		const unit_price = parseInt(value);
+		axios.post(`${url}/donation`,
+		 {
+			unit_price: unit_price,
+			title : 'Gracias por su colaboración'
+		})
+		.then(response => {
+			window.open(response.data, '_blank');
+		  })
+		  .catch(error => {
+			console.error(error);
+		  });
+	};
+
+	const subscription = async () => {
+		const user = JSON.parse(window.localStorage.getItem("loggedUser"));
+		const email = user.map(e=>e.email);
+		axios.post(`${url}/donation/subscription`, {
+			email: email[0],
+		}).then(response => {
+			console.log("LINK" +response.data);
+			window.open(response.data, '_blank');
+		}).catch(error => {
+			console.log(error)
+		})
+	}
 
 
 
@@ -49,7 +63,9 @@ const payMp = async (e)=>{
 					<button onClick={(e)=>payMp(e)} value="2000">2000</button>
 				</div>
 				<div>
-					<button>Suscribite para ayudarnos mensualmente</button>
+					<button onClick={() => subscription()}>
+						Suscribite para ayudarnos mensualmente
+						</button>
 				</div>
 			</div>
 			<Footer />
