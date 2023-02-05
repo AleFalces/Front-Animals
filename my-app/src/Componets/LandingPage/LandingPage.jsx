@@ -174,7 +174,7 @@ const LandingPage = () => {
                 <Text noOfLines={[4, 4, 3]} color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
                   Estamos buscando personas que amen los animales, como vos!
                 </Text>
-                <Icon as={RxDoubleArrowDown} mt='2rem' fontSize={'4rem'} color="brand.green.300" />
+                <Icon as={RxDoubleArrowDown} mt='1rem' fontSize={'4rem'} color="brand.green.300" />
               </Box>
             </Center>
           </Stack>
