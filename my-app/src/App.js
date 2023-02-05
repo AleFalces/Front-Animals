@@ -111,6 +111,7 @@ function App() {
         <Route exact path="/createAuth0" element={<CreateUserAuth0 />}></Route>
         <Route exact path="/" element={<LandingPage />}></Route>
         <Route exact path="/createUser" element={<FormPostUser />}></Route>
+        <Route exact path="/updateUser" element={<FormPostUser value={"update"}/>}></Route>
         <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/aboutUs" element={<AboutUs />}></Route>
         <Route exact path="/pets/:paramsId" element={<Details />}></Route>

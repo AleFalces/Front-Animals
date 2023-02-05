@@ -94,7 +94,7 @@ export default function FormUpdateProduct() {
   //Revisar xq la categoria "alimentos" me tira error si el name del product tiene espacios en el campo
   return (
     <div>
-      <form onSubmit={handlerSubmit}>
+      <form>
         <Flex
           minH={"100vh"}
           align={"center"}

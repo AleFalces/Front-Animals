@@ -21,10 +21,9 @@ import {
   PREV_PAGE,
   ACTUAL_PAGE,
   UPDATE_PRODUCT,
+  UPDATE_USER,
   MODIFY_PRODUCT,
   SET_IMAGE,
-  //OUT_OF_STOCK,
-  // SET_STATUS_USER,
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -160,6 +159,21 @@ export function postUser(formInput) {
       const newUser = await axios.post(`${HOST}/users`, formInput);
       return dispatch({
         type: POST_USER,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function updateUser(id, formInput) {
+  return async function (dispatch) {
+    try {
+      console.log("Action updateUSER", id);
+      await axios.put(`${HOST}/users/${id}`, formInput);
+      // const updatedProduct = await axios.get(`${HOST}/products`)
+      dispatch({
+        type: UPDATE_USER,
       });
     } catch (error) {
       console.log(error);

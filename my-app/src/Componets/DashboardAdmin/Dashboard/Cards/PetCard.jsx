@@ -9,29 +9,9 @@ import {
   Box,
   // Button,
 } from "@chakra-ui/react";
-// import { useDispatch} from "react-redux";
-// import { useNavigate } from "react-router-dom";
 
-export default function PetCard({ id, size, species, age, img, detail, area, status, userId }) {
-// const dispatch = useDispatch();
-// const navigate = useNavigate()
 
-//   function recievedDataProduct(e, id, size, species, age, img, detail, area, status, userId){
-//     e.preventDefault()
-//     const obj = {
-//       id,
-//       size,
-//       species,
-//       age,
-//       img,
-//       detail,
-//       area,
-//       status,
-//       userId
-//     }
-//     console.log("receivedData", obj)
-//     dispatch(modifyProduct(obj))
-//   }
+export default function PetCard({ id, size, species, age, img, detail, area, status }) {
 
   return (
     <div>
@@ -92,15 +72,6 @@ export default function PetCard({ id, size, species, age, img, detail, area, sta
                 <Text pt="2" fontSize="sm">
                   {status}
                 </Text>
-{/*pensar en agregar un boton para cambiarle estado de la mascota*/}
-                {/* <Button
-                onClick={(e) => {recievedDataProduct(e, id, name, image, stock, price, description, Category); navigate("/dashboard/updateProduct")}}
-                bg={"green"}
-                color={"white"}
-                  _hover={{
-                    bg: "green.400",
-                  }}
-                >Modificar</Button> */}
               </Box>
             </Stack>
           </CardBody>
