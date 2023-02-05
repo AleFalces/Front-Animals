@@ -1,10 +1,12 @@
+import { SimpleGrid } from '@chakra-ui/react';
 import React from 'react'
 import VetCard from './Cards/VetCard';
 
 export default function ShowVets({vets}) {
  
     return (
-        vets.map((vet) => (
+      <SimpleGrid columns={[1, 2, 3]} spacing='10px' >
+       { vets.map((vet) => (
           <VetCard
             id={vet.id}
             name={vet.name}
@@ -12,7 +14,8 @@ export default function ShowVets({vets}) {
             email={vet.email}
             address={vet.address}
           ></VetCard>
-        ))
+        ))}
+        </SimpleGrid>
     );
   }
 
