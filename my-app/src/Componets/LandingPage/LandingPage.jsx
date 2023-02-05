@@ -63,8 +63,9 @@ const LandingPage = () => {
 
 
   return (
-    <Box position={'relative'}>
-      <Container bg="brand.green.100"
+    <Box bg="brand.green.100">
+    <Box position={'relative'} vH= '100%' vW='100%'>
+      <Container 
         as={SimpleGrid}
         maxW={'7xl'}
         columns={{ base: 1, md: 2 }}
@@ -186,6 +187,7 @@ const LandingPage = () => {
 
         </Stack>
       </Container>
+    </Box>
     </Box>
   );
 }
