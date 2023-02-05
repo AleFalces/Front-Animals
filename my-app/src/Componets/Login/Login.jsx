@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -17,12 +17,24 @@ import { Box, Stack, Text, Input, Button, Divider } from "@chakra-ui/react";
 const Login = () => {
 	const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 	const navegate = useNavigate();
+	const [usuario, setUsuario] = useState([]);
+
+	useEffect(() => {
+		const loggedUser = localStorage.getItem("loggedUser");
+		if (loggedUser) {
+			const logged = JSON.parse(loggedUser);
+			setUsuario(logged);
+		}
+	}, []);
 
 	const [input, setInput] = useState({
 		email: "",
 		password: "",
 	});
-
+	const cerrarSesion = () => {
+		localStorage.removeItem("loggedUser");
+		logout();
+	};
 	const handleChange = (e) => {
 		setInput({
 			...input,
@@ -59,8 +71,8 @@ const Login = () => {
 
 	return (
 		<>
-			{isAuthenticated ? (
-				<button className="btn btn-danger" onClick={() => logout()}>
+			{usuario.length > 0 ? (
+				<button className="btn btn-danger" onClick={() => cerrarSesion()}>
 					Cerrar Sesion
 				</button>
 			) : (
