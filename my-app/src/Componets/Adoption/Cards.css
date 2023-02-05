@@ -1,9 +1,0 @@
-.cardsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  height: 100vh;
-}
-.cardsContainerPadding {
-  padding: 150px;
-}

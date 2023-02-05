@@ -6,12 +6,10 @@ import Footer from "../Footer/Footer";
 import Card from "../Card/Card";
 import { getPets } from "../../Redux/Actions/index";
 import { Link } from "react-router-dom";
-import "./Cards.css";
-import "./FilterBar.css";
-import { SimpleGrid, } from '@chakra-ui/react'
+import { SimpleGrid, Box  } from '@chakra-ui/react'
 import Pagination from "../Pagination/Pagination";
 
-const Adoption = ({value}) => {
+const Adoption = ({ value }) => {
   const pets = useSelector((state) => state.pets);
   const actualPage = useSelector((state) => state.actualPage);
 
@@ -21,7 +19,7 @@ const Adoption = ({value}) => {
     dispatch(getPets(value))
   }, [dispatch, value]);
 
-  const [PetPerPage] = useState(9);
+  const [PetPerPage] = useState(3);
 
   const lastIndex = actualPage * PetPerPage;
   const firstIndex = lastIndex - PetPerPage;
@@ -30,14 +28,38 @@ const Adoption = ({value}) => {
   return (
     <>
       <Navbar />
-      <br />
-      <div class="example">
-        <FilterBar value={value}/>
-      </div>
 
-      <div className="Pagination">
+        <FilterBar value={value} />
+
+
+      <Box my='1rem'>
         <Pagination pets={pets} PetPerPage={PetPerPage} />
-      </div>
+      </Box> 
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <SimpleGrid columns={[1, 2, 3]} spacing='40px' >
         {!pets?.length ? (
           <p>No hay mascotas</p>

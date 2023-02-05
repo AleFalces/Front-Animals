@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postPet } from "../../Redux/Actions";
+import { petDetails, postPet } from "../../Redux/Actions";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -61,16 +61,13 @@ const validateForm = (input) => {
 	return inputError;
 };
 
-export default function FormPostPet({ token }) {
+export default function FormPostPet({ token, value }) {
 	/* let isIncomplete = true; */
 	const dispatch = useDispatch();
-
-	useEffect(() => {}, []);
-
 	const [isIncomplete, setIsIncomplete] = useState(false);
 	const [infoSend, setInfoSend] = useState(false);
-
 	const [inputError, setInputError] = useState({});
+	const [usuario, setUsuario] = useState([]);
 	const [input, setInput] = useState({
 		species: "",
 		sex: "",
@@ -82,24 +79,14 @@ export default function FormPostPet({ token }) {
 		img: "",
 		userId: "",
 	});
-	const [usuario, setUsuario] = useState([]);
-	useEffect(() => {
-		const loggedUser = localStorage.getItem("loggedUser");
-		if (loggedUser) {
-			const logged = JSON.parse(loggedUser);
-			setUsuario(logged);
-		}
-	}, []);
-
+	const pet = useSelector((state) => state.Detail)
+	const params = useParams("id")
 	const handlerChange = (e) => {
 		setInput({
 			...input,
 			[e.target.name]: e.target.value.trim(),
 			userId: usuario[0]?.id,
 		});
-		console.log("input", input);
-		console.log("inputError", inputError);
-
 		//control errores
 		setInputError(
 			validateForm({
@@ -108,11 +95,9 @@ export default function FormPostPet({ token }) {
 			})
 		);
 	};
-	console.log(input);
+	console.log("INPUT FORM",input);
 	const handlerSubmit = (e) => {
 		e.preventDefault();
-		console.log(input);
-
 		if (
 			input.species &&
 			input.sex &&
@@ -123,20 +108,31 @@ export default function FormPostPet({ token }) {
 			input.detail &&
 			input.img !== ""
 		) {
-			dispatch(postPet(input));
-
+			// value=== undefined         			 DESCOMENTAR Y HACER ACTION UPDATE
+			// ?dispatch(postPet(input))        	 DESCOMENTAR Y HACER ACTION UPDATE
+			// :dispatch(updatePet(input))        		 DESCOMENTAR Y HACER ACTION UPDATE
+			console.log("LOGGED USER FORM PET",JSON.parse(window.localStorage.getItem("loggedUser")));
 			//dispatch(postPet(input, token));
 			setIsIncomplete(false);
 			setInfoSend(true);
 
 			document.getElementById("myForm").reset();
 		} else {
-			console.log(inputError);
 			setIsIncomplete(true);
 			setInfoSend(false);
 		}
 	};
 
+useEffect(() => {
+    const loggedUser = localStorage.getItem("loggedUser");
+    if (loggedUser) {
+	    const logged = JSON.parse(loggedUser);
+	    setUsuario(logged);
+		console.log("LOGGED USER", logged);
+    }
+	// if(params.id){dispatch(petDetails(params.id))} // funciona pero llega tarde
+	// console.log("PET DETAILS FORM ",pet);
+}, []);
 	return (
 		<div>
 			<Navbar />
@@ -161,7 +157,7 @@ export default function FormPostPet({ token }) {
 						</Stack>
 						<Box
 							rounded={"lg"}
-							/*  bg={useColorModeValue('white', 'gray.700')} */
+							bg={'white'} 
 							boxShadow={"lg"}
 							p={8}>
 							<Stack spacing={4}>
@@ -327,24 +323,6 @@ export default function FormPostPet({ token }) {
 									)}
 								</FormControl>
 
-								{/* <FormControl>
-									<Text fontFamily={"body"} fontSize="14px">
-										ID de Usuario:
-									</Text>
-									<Input
-										fontFamily={"body"}
-										variant="flushed"
-										focusBorderColor={"brand.green.300"}
-										placeholder="UUID del usuario.."
-										size="md"
-										onChange={(e) => handlerChange(e)}
-										name="userId"
-									/>
-									{inputError.userId && (
-										<Text className="text_inputError">{inputError.userId}</Text>
-									)}
-								</FormControl> */}
-
 								<FormControl>
 									<Text fontFamily={"body"} fontSize="14px">
 										Imagen:
@@ -363,7 +341,9 @@ export default function FormPostPet({ token }) {
 									)}
 								</FormControl>
 								<Stack spacing={10} pt={2}>
-									<Button
+									{
+									value===undefined
+								   ?<Button
 										onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
 										loadingText="Post mascota"
 										fontFamily={"body"}
@@ -376,6 +356,20 @@ export default function FormPostPet({ token }) {
 										}}>
 										Post mascota
 									</Button>
+									:<Button
+										onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
+										loadingText="Post mascota"
+										fontFamily={"body"}
+										size="lg"
+										bg={"orange.300"}
+										color={"white"}
+										_hover={{
+											bg: "orange.400",
+											/* color:"brand.green.100" */
+										}}>
+										Modificar mascota
+									</Button>
+									}
 								</Stack>
 							</Stack>
 						</Box>

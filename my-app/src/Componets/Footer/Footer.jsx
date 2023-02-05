@@ -9,16 +9,22 @@ import {
   Text,
   VisuallyHidden,
   Avatar,
-  // Input,
-  // IconButton,
   useColorModeValue,
   VStack,
+  Wrap,
+  WrapItem,
+  Center,
 } from "@chakra-ui/react";
 import logo from "../../assets/imagenes/logo_negro.png";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import magui from "../../assets/imagenes/magui.png";
 import lau from "../../assets/imagenes/lau.png";
 import lucho from "../../assets/imagenes/lucho.png";
+import ale from "../../assets/imagenes/ale.png";
+import marian from "../../assets/imagenes/marian.png";
+import juli from "../../assets/imagenes/juli.png";
+import igna from "../../assets/imagenes/igna.png";
+import andy from "../../assets/imagenes/andy.png";
 
 const Logo = () => {
   return (
@@ -68,7 +74,8 @@ const ListHeader = ({ children }) => {
 };
 
 export default function LargeWithNewsletter() {
-  const profiles = [magui, lau, lucho];
+  const profiles1 = [magui, lau, lucho, ale];
+  const profiles2 = [juli, marian, igna, andy];
 
   return (
     <Box
@@ -143,20 +150,36 @@ export default function LargeWithNewsletter() {
               Andres Salom
             </Link>
           </Stack>
-          <Stack align={"flex-start"} spacing={6}>
+          <Stack align={"flex-start"} spacing={6} px={10}>
             <ListHeader>Proyecto</ListHeader>
-            <Stack direction={"row"}>
-              {profiles?.map((photos) => (
-                <Avatar
-                  size={"lg"}
-                  borderBlockEndColor={"brand.orange"}
-                  src={photos}
-                />
-              ))}
-            </Stack>
+            <Wrap spacing={"50x"}>
+              <WrapItem>
+                <Center w="300px" p={"20px"}>
+                  {profiles1?.map((photos) => (
+                    <Avatar
+                      size={"lg"}
+                      borderBlockEndColor={"brand.orange"}
+                      src={photos}
+                    />
+                  ))}
+                </Center>
+              </WrapItem>
+              <WrapItem>
+                <Center w="300px">
+                  {profiles2?.map((photos) => (
+                    <Avatar
+                      size={"lg"}
+                      borderBlockEndColor={"brand.orange"}
+                      src={photos}
+                    />
+                  ))}
+                </Center>
+              </WrapItem>
+            </Wrap>
           </Stack>
         </SimpleGrid>
       </Container>
     </Box>
   );
 }
+//direction={"row"}

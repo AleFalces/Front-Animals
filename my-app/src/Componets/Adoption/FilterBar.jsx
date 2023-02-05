@@ -6,11 +6,13 @@ import {
   getPets
 } from "../../Redux/Actions";
 
-const FilterBar = ({value}) => {
+import { Box, SimpleGrid, Center, Stack, FormControl, FormLabel, Select, Text, Button, Heading, Input } from '@chakra-ui/react'
+import Simple from "../Navbar/Navbar";
+
+const FilterBar = ({ value }) => {
   const dispatch = useDispatch();
   const defaultValue = "defaultValue";
   const [input, setInput] = useState("");
-console.log(value)
   const handlerInputChange = (e) => {
     e.preventDefault()
     setInput(e.target.value)
@@ -20,382 +22,419 @@ console.log(value)
   function handlerFilterBySpecie(e) {
     e.preventDefault();
     if (e.target.value === defaultValue) {
-      if(arrayFilterValues.includes("gato") || arrayFilterValues.includes("perro")) {
+      if (arrayFilterValues.includes("gato") || arrayFilterValues.includes("perro")) {
         let index;
-        arrayFilterValues.forEach((el, i) => el === "perro" || el === "gato" ? index = i:null) 
-        if(index === 0)  return arrayFilterValues.shift();
-        if(index === arrayFilterValues.length-1)  return arrayFilterValues.pop();
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
+        arrayFilterValues.forEach((el, i) => el === "perro" || el === "gato" ? index = i : null)
+        if (index === 0) return arrayFilterValues.shift();
+        if (index === arrayFilterValues.length - 1) return arrayFilterValues.pop();
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
         return arrayFilterValues = result;
       }
     }
-    if(e.target.value === "gato") {
-      if(arrayFilterValues.includes("perro")) {
+    if (e.target.value === "gato") {
+      if (arrayFilterValues.includes("perro")) {
         let index;
-        arrayFilterValues.forEach((el, i) => el === "perro"? index = i:null) 
-        if(index === 0) {
+        arrayFilterValues.forEach((el, i) => el === "perro" ? index = i : null)
+        if (index === 0) {
           arrayFilterValues.shift();
           return arrayFilterValues.push(e.target.value)
         };
-        if(index === arrayFilterValues.length-1)  {
+        if (index === arrayFilterValues.length - 1) {
           arrayFilterValues.pop();
           return arrayFilterValues.push(e.target.value);
         };
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
         result.push(e.target.value)
         return arrayFilterValues = result
       } else {
         arrayFilterValues.push(e.target.value)
       }
     }
-    if(e.target.value === "perro") {
-      if(arrayFilterValues.includes("gato")) {
+    if (e.target.value === "perro") {
+      if (arrayFilterValues.includes("gato")) {
         let index;
-        arrayFilterValues.forEach((el, i) => el === "gato"? index = i:null) 
-        if(index === 0) {
+        arrayFilterValues.forEach((el, i) => el === "gato" ? index = i : null)
+        if (index === 0) {
           arrayFilterValues.shift();
           return arrayFilterValues.push(e.target.value)
         };
-        if(index === arrayFilterValues.length-1)  {
+        if (index === arrayFilterValues.length - 1) {
           arrayFilterValues.pop();
           return arrayFilterValues.push(e.target.value);
         };
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
         result.push(e.target.value)
         return arrayFilterValues = result
-      }  else {
+      } else {
         arrayFilterValues.push(e.target.value)
-      }     
+      }
     }
   }
 
 
-  function handlerFilterBySex (e) {
+  function handlerFilterBySex(e) {
     e.preventDefault();
     if (e.target.value === defaultValue) {
-      if(arrayFilterValues.includes("macho") || arrayFilterValues.includes("hembra")) {
+      if (arrayFilterValues.includes("macho") || arrayFilterValues.includes("hembra")) {
         let index;
-        arrayFilterValues.forEach((el, i) => el === "macho" || el === "hembra" ? index = i:null) 
-        if(index === 0)  return arrayFilterValues.shift();
-        if(index === arrayFilterValues.length-1)  return arrayFilterValues.pop();
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
+        arrayFilterValues.forEach((el, i) => el === "macho" || el === "hembra" ? index = i : null)
+        if (index === 0) return arrayFilterValues.shift();
+        if (index === arrayFilterValues.length - 1) return arrayFilterValues.pop();
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
         return arrayFilterValues = result;
       }
     }
-    if(e.target.value === "macho") {
-      if(arrayFilterValues.includes("hembra")) {
+    if (e.target.value === "macho") {
+      if (arrayFilterValues.includes("hembra")) {
         let index;
-        arrayFilterValues.forEach((el, i) => el === "hembra"? index = i:null) 
-        if(index === 0) {
+        arrayFilterValues.forEach((el, i) => el === "hembra" ? index = i : null)
+        if (index === 0) {
           arrayFilterValues.shift();
           return arrayFilterValues.push(e.target.value)
         };
-        if(index === arrayFilterValues.length-1)  {
+        if (index === arrayFilterValues.length - 1) {
           arrayFilterValues.pop();
           return arrayFilterValues.push(e.target.value);
         };
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
         result.push(e.target.value)
         return arrayFilterValues = result
       } else {
         arrayFilterValues.push(e.target.value)
       }
     }
-    if(e.target.value === "hembra") {
-      if(arrayFilterValues.includes("macho")) {
+    if (e.target.value === "hembra") {
+      if (arrayFilterValues.includes("macho")) {
         let index;
-        arrayFilterValues.forEach((el, i) => el === "macho"? index = i:null) 
-        if(index === 0) {
+        arrayFilterValues.forEach((el, i) => el === "macho" ? index = i : null)
+        if (index === 0) {
           arrayFilterValues.shift();
           return arrayFilterValues.push(e.target.value)
         };
-        if(index === arrayFilterValues.length-1)  {
+        if (index === arrayFilterValues.length - 1) {
           arrayFilterValues.pop();
           return arrayFilterValues.push(e.target.value);
         };
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
         result.push(e.target.value)
         return arrayFilterValues = result
-      }  else {
+      } else {
         arrayFilterValues.push(e.target.value)
-      }     
+      }
     }
   }
 
 
-function handlerFilterByAge(e) {
-  e.preventDefault();
+  function handlerFilterByAge(e) {
+    e.preventDefault();
     if (e.target.value === defaultValue) {
-      if(arrayFilterValues.includes("cachorro") || arrayFilterValues.includes("joven") || arrayFilterValues.includes("adulto")) {
+      if (arrayFilterValues.includes("cachorro") || arrayFilterValues.includes("joven") || arrayFilterValues.includes("adulto")) {
         let index;
-        arrayFilterValues.forEach((el, i) => el === "cachorro" || el === "joven" || el === "adulto" ? index = i:null) 
-        if(index === 0)  return arrayFilterValues.shift();
-        if(index === arrayFilterValues.length-1)  return arrayFilterValues.pop();
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
+        arrayFilterValues.forEach((el, i) => el === "cachorro" || el === "joven" || el === "adulto" ? index = i : null)
+        if (index === 0) return arrayFilterValues.shift();
+        if (index === arrayFilterValues.length - 1) return arrayFilterValues.pop();
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
         return arrayFilterValues = result;
       }
     }
-    if(e.target.value === "cachorro") {
-      if(arrayFilterValues.includes("joven") || arrayFilterValues.includes("adulto")) {
+    if (e.target.value === "cachorro") {
+      if (arrayFilterValues.includes("joven") || arrayFilterValues.includes("adulto")) {
         let index;
-        arrayFilterValues.forEach((el, i) => el === "joven" || el === "adulto"? index = i:null) 
-        if(index === 0) {
+        arrayFilterValues.forEach((el, i) => el === "joven" || el === "adulto" ? index = i : null)
+        if (index === 0) {
           arrayFilterValues.shift();
           return arrayFilterValues.push(e.target.value)
         };
-        if(index === arrayFilterValues.length-1)  {
+        if (index === arrayFilterValues.length - 1) {
           arrayFilterValues.pop();
           return arrayFilterValues.push(e.target.value);
         };
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
         result.push(e.target.value)
         return arrayFilterValues = result
       } else {
         arrayFilterValues.push(e.target.value)
       }
     }
-    if(e.target.value === "joven") {
-      if(arrayFilterValues.includes("cachorro") || arrayFilterValues.includes("adulto")) {
+    if (e.target.value === "joven") {
+      if (arrayFilterValues.includes("cachorro") || arrayFilterValues.includes("adulto")) {
         let index;
-        arrayFilterValues.forEach((el, i) => el === "cachorro" || el === "adulto"? index = i:null) 
-        if(index === 0) {
+        arrayFilterValues.forEach((el, i) => el === "cachorro" || el === "adulto" ? index = i : null)
+        if (index === 0) {
           arrayFilterValues.shift();
           return arrayFilterValues.push(e.target.value)
         };
-        if(index === arrayFilterValues.length-1)  {
+        if (index === arrayFilterValues.length - 1) {
           arrayFilterValues.pop();
           return arrayFilterValues.push(e.target.value);
         };
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
-        result.push(e.target.value)
-        return arrayFilterValues = result
-      }  else {
-        arrayFilterValues.push(e.target.value)
-      }     
-    }
-    if(e.target.value === "adulto") {
-      if(arrayFilterValues.includes("cachorro") || arrayFilterValues.includes("joven")) {
-        let index;
-        arrayFilterValues.forEach((el, i) => el === "cachorro" || el === "joven"? index = i:null) 
-        if(index === 0) {
-          arrayFilterValues.shift();
-          return arrayFilterValues.push(e.target.value)
-        };
-        if(index === arrayFilterValues.length-1)  {
-          arrayFilterValues.pop();
-          return arrayFilterValues.push(e.target.value);
-        };
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
-        result.push(e.target.value)
-        return arrayFilterValues = result
-      }  else {
-        arrayFilterValues.push(e.target.value)
-      }     
-    }
-}
-
-function handlerFilterBySize(e) {
-  e.preventDefault();
-    if (e.target.value === defaultValue) {
-      if(arrayFilterValues.includes("pequeño") || arrayFilterValues.includes("mediano") || arrayFilterValues.includes("grande")) {
-        let index;
-        arrayFilterValues.forEach((el, i) => el === "pequeño" || el === "mediano" || el === "grande" ? index = i:null) 
-        if(index === 0)  return arrayFilterValues.shift();
-        if(index === arrayFilterValues.length-1)  return arrayFilterValues.pop();
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
-        return arrayFilterValues = result;
-      }
-    }
-    if(e.target.value === "pequeño") {
-      if(arrayFilterValues.includes("mediano") || arrayFilterValues.includes("grande")) {
-        let index;
-        arrayFilterValues.forEach((el, i) => el === "mediano" || el === "grande"? index = i:null) 
-        if(index === 0) {
-          arrayFilterValues.shift();
-          return arrayFilterValues.push(e.target.value)
-        };
-        if(index === arrayFilterValues.length-1)  {
-          arrayFilterValues.pop();
-          return arrayFilterValues.push(e.target.value);
-        };
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
         result.push(e.target.value)
         return arrayFilterValues = result
       } else {
         arrayFilterValues.push(e.target.value)
       }
     }
-    if(e.target.value === "mediano") {
-      if(arrayFilterValues.includes("pequeño") || arrayFilterValues.includes("grande")) {
+    if (e.target.value === "adulto") {
+      if (arrayFilterValues.includes("cachorro") || arrayFilterValues.includes("joven")) {
         let index;
-        arrayFilterValues.forEach((el, i) => el === "pequeño" || el === "grande"? index = i:null) 
-        if(index === 0) {
+        arrayFilterValues.forEach((el, i) => el === "cachorro" || el === "joven" ? index = i : null)
+        if (index === 0) {
           arrayFilterValues.shift();
           return arrayFilterValues.push(e.target.value)
         };
-        if(index === arrayFilterValues.length-1)  {
+        if (index === arrayFilterValues.length - 1) {
           arrayFilterValues.pop();
           return arrayFilterValues.push(e.target.value);
         };
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
         result.push(e.target.value)
         return arrayFilterValues = result
-      }  else {
+      } else {
         arrayFilterValues.push(e.target.value)
-      }     
+      }
     }
-    if(e.target.value === "grande") {
-      if(arrayFilterValues.includes("pequeño") || arrayFilterValues.includes("mediano")) {
-        let index;
-        arrayFilterValues.forEach((el, i) => el === "pequeño" || el === "mediano"? index = i:null) 
-        if(index === 0) {
-          arrayFilterValues.shift();
-          return arrayFilterValues.push(e.target.value)
-        };
-        if(index === arrayFilterValues.length-1)  {
-          arrayFilterValues.pop();
-          return arrayFilterValues.push(e.target.value);
-        };
-        let result = [...arrayFilterValues.slice(0, index),  ...arrayFilterValues.slice(index+1)];
-        result.push(e.target.value)
-        return arrayFilterValues = result
-      }  else {
-        arrayFilterValues.push(e.target.value)
-      }     
-    }
-}
-
-let selectSpeciesValue = document.getElementById("species")
-let selectSexValue = document.getElementById("age")
-let selectAgeValue = document.getElementById("size")
-let selectSizeValue = document.getElementById("sex")
-function handlerFilterButton (e) {
-  e.preventDefault();
-  dispatch(filterAdoptionPets(arrayFilterValues, value));
-  selectSpeciesValue.value = defaultValue
-  selectSexValue.value = defaultValue
-  selectAgeValue.value = defaultValue
-  selectSizeValue.value = defaultValue 
-}
-function handlerSearchByArea (e, value) {
-  e.preventDefault();
-  console.log("SEARCH AREA VALUE :",value);
-  if (input !== "" && input.trim() !== "") {
-    dispatch(filterBySearchArea(input.trim(), value));
-  } else {
-    alert("Debes especificar un area para que podamos buscar!");
   }
-};
 
-function handlerRefreshPets (e) {
-  e.preventDefault();
-  dispatch(getPets(value))
-};
+  function handlerFilterBySize(e) {
+    e.preventDefault();
+    if (e.target.value === defaultValue) {
+      if (arrayFilterValues.includes("pequeño") || arrayFilterValues.includes("mediano") || arrayFilterValues.includes("grande")) {
+        let index;
+        arrayFilterValues.forEach((el, i) => el === "pequeño" || el === "mediano" || el === "grande" ? index = i : null)
+        if (index === 0) return arrayFilterValues.shift();
+        if (index === arrayFilterValues.length - 1) return arrayFilterValues.pop();
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
+        return arrayFilterValues = result;
+      }
+    }
+    if (e.target.value === "pequeño") {
+      if (arrayFilterValues.includes("mediano") || arrayFilterValues.includes("grande")) {
+        let index;
+        arrayFilterValues.forEach((el, i) => el === "mediano" || el === "grande" ? index = i : null)
+        if (index === 0) {
+          arrayFilterValues.shift();
+          return arrayFilterValues.push(e.target.value)
+        };
+        if (index === arrayFilterValues.length - 1) {
+          arrayFilterValues.pop();
+          return arrayFilterValues.push(e.target.value);
+        };
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
+        result.push(e.target.value)
+        return arrayFilterValues = result
+      } else {
+        arrayFilterValues.push(e.target.value)
+      }
+    }
+    if (e.target.value === "mediano") {
+      if (arrayFilterValues.includes("pequeño") || arrayFilterValues.includes("grande")) {
+        let index;
+        arrayFilterValues.forEach((el, i) => el === "pequeño" || el === "grande" ? index = i : null)
+        if (index === 0) {
+          arrayFilterValues.shift();
+          return arrayFilterValues.push(e.target.value)
+        };
+        if (index === arrayFilterValues.length - 1) {
+          arrayFilterValues.pop();
+          return arrayFilterValues.push(e.target.value);
+        };
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
+        result.push(e.target.value)
+        return arrayFilterValues = result
+      } else {
+        arrayFilterValues.push(e.target.value)
+      }
+    }
+    if (e.target.value === "grande") {
+      if (arrayFilterValues.includes("pequeño") || arrayFilterValues.includes("mediano")) {
+        let index;
+        arrayFilterValues.forEach((el, i) => el === "pequeño" || el === "mediano" ? index = i : null)
+        if (index === 0) {
+          arrayFilterValues.shift();
+          return arrayFilterValues.push(e.target.value)
+        };
+        if (index === arrayFilterValues.length - 1) {
+          arrayFilterValues.pop();
+          return arrayFilterValues.push(e.target.value);
+        };
+        let result = [...arrayFilterValues.slice(0, index), ...arrayFilterValues.slice(index + 1)];
+        result.push(e.target.value)
+        return arrayFilterValues = result
+      } else {
+        arrayFilterValues.push(e.target.value)
+      }
+    }
+  }
 
-useEffect(() => {
-}, [dispatch]);
+  let selectSpeciesValue = document.getElementById("species")
+  let selectSexValue = document.getElementById("age")
+  let selectAgeValue = document.getElementById("size")
+  let selectSizeValue = document.getElementById("sex")
+  function handlerFilterButton(e) {
+    e.preventDefault();
+    dispatch(filterAdoptionPets(arrayFilterValues, value));
+    selectSpeciesValue.value = defaultValue
+    selectSexValue.value = defaultValue
+    selectAgeValue.value = defaultValue
+    selectSizeValue.value = defaultValue
+  }
+  function handlerSearchByArea(e, value) {
+    e.preventDefault();
+    console.log("SEARCH AREA VALUE :", value);
+    if (input !== "" && input.trim() !== "") {
+      dispatch(filterBySearchArea(input.trim(), value));
+    } else {
+      alert("Debes especificar un area para que podamos buscar!");
+    }
+  };
 
-return (
-    <div className="filterBarContainer">
-      <h2>Mascotas en Adopcion</h2>
-      <div className="selectsContainer">
-        <div>
-        <h1>Especie</h1>
-        <select
-          className="selectsFilter"
-          name="species"
-          id="species"
-          onChange={(e) => handlerFilterBySpecie(e)}
-          >
-          <option value="defaultValue" key="default">
-            Ninguno
-          </option>
-          <option value="gato">Gato/a</option>
-          <option value="perro">Perro/a</option>
-        </select>
-          </div>
+  function handlerRefreshPets(e) {
+    e.preventDefault();
+    dispatch(getPets(value))
+  };
 
-        <div>
-          <h1>Sexo</h1>
-        <select
-          className="selectsFilter"
-          name="sex"
-          id="sex"
-          onChange={(e) => handlerFilterBySex(e)}
-          >
-          <option value="defaultValue" key="default">
-            Ninguno
-          </option>
-          <option value="hembra">Hembra</option>
-          <option value="macho">Macho</option>
-        </select>
-        </div>
+  useEffect(() => {
+  }, [dispatch]);
 
-        <div>
-        <h1>Edad</h1>
-        <select
-          className="selectsFilter"
-          name="age"
-          id="age"
-          onChange={(e) => handlerFilterByAge(e)}
-          >
-          <option value="defaultValue" key="default">
-            Ninguno
-          </option>
-          <option value="cachorro">Cachorro/a</option>
-          <option value="joven">Joven</option>
-          <option value="adulto">Adulto/a</option>
-        </select>
-        </div>
-        <div>
-        <h1>Tamaño</h1>
-        <select
-          className="selectsFilter"
-          name="size"
-          id="size"
-          onChange={(e) => handlerFilterBySize(e)}
-          >
-          <option value="defaultValue" key="default">
-            Ninguno
-          </option>
-          <option value="pequeño">Pequeño</option>
-          <option value="mediano">Mediano/a</option>
-          <option value="grande">Grande</option>
-        </select>
-        </div>
+  return (
+    <Box bg={'brand.green.200'} pt='1rem'>
+      <Heading >Mascotas en Adopción</Heading>
 
-        <div>
-          <button
-            className="selectsFilter"
-            onClick={(e) => handlerFilterButton(e)}
+      {/* //SearchBar */}
+
+      <Box bg={'brand.green.200'}>
+        <Center>
+          <Box w='50%' mt={['2rem', '2rem', '3rem']} mr={['0rem', '0rem', '1rem']} ml={['0rem', '6rem', '0']}>
+            <Input variant='filled' bg={'white'} focusBorderColor={"brand.green.300"} type="text"
+              onChange={(e) => handlerInputChange(e)}
+              placeholder="Buscar por área..." />
+          </Box>
+
+          <Box mt={['2rem', '2rem', '3rem']} ml={['1rem', '1rem', '1rem']}>
+            <Button
+
+              onClick={(e) => handlerSearchByArea(e, value)}
+              fontFamily={"body"}
+              size="lg"
+              bg={"orange.300"}
+              color={"white"}
+              _hover={{
+                bg: "orange.400",
+              }}
             >
-            Filtrar
-          </button>
-          <button
-            className="selectsFilter"
-            onClick={(e) => handlerRefreshPets(e)}
+              Buscar
+            </Button>
+          </Box>
+        </Center>
+
+        <SimpleGrid w="100%" my={['1rem', '1rem', '1rem']} columns={[2, 2, 4]}/* direction={['column', 'row']}  */ spacing='4px'>
+
+          <Center>
+            <Box w="60%" my={['0.5rem', '0.5rem', '1rem']}>
+              <FormControl  >
+                <Center>
+                  <FormLabel fontFamily={'heading'} textTransform={'uppercase'} fontWeight={"bold"} color={"orange.400"}>Especie</FormLabel>
+                </Center>
+                <Select focusBorderColor={"brand.green.300"} name="species"
+                  id="species"
+                  placeholder='-' onChange={(e) => handlerFilterBySpecie(e)}>
+                  <option value="gato">Gato/a</option>
+                  <option value="perro">Perro/a</option>
+                </Select>
+
+              </FormControl>
+            </Box>
+          </Center>
+
+          <Center>
+            <Box w="60%" my={['0.5rem', '0.5rem', '1rem']}>
+              <FormControl>
+                <Center>
+                  <FormLabel fontFamily={'heading'} textTransform={'uppercase'} fontWeight={"bold"} color={"orange.400"}>Sexo</FormLabel>
+                </Center>
+                <Select focusBorderColor={"brand.green.300"}
+                  name="sex"
+                  id="sex"
+                  onChange={(e) => handlerFilterBySex(e)} placeholder="-">
+                  <option value="hembra">Hembra</option>
+                  <option value="macho">Macho</option>
+                </Select>
+              </FormControl>
+            </Box>
+          </Center>
+
+
+          <Center>
+            <Box w="60%" my={['0.5rem', '0.5rem', '1rem']}>
+              <FormControl>
+                <Center>
+                  <FormLabel fontFamily={'heading'} textTransform={'uppercase'} fontWeight={"bold"} color={"orange.400"}>Edad</FormLabel>
+                </Center>
+                <Select focusBorderColor={"brand.green.300"}
+                  name="age"
+                  id="age"
+                  onChange={(e) => handlerFilterByAge(e)} placeholder="-">
+                  <option value="cachorro">Cachorro/a</option>
+                  <option value="joven">Joven</option>
+                  <option value="adulto">Adulto/a</option>
+                </Select>
+              </FormControl>
+            </Box>
+          </Center>
+
+          <Center>
+            <Box w="60%" my={['0.5rem', '0.5rem', '1rem']}>
+              <FormControl>
+                <Center>
+                  <FormLabel fontFamily={'heading'} textTransform={'uppercase'} fontWeight={"bold"} color={"orange.400"}>Tamaño</FormLabel>
+                </Center>
+                <Select name="size" focusBorderColor={"brand.green.300"}
+                  id="size"
+                  onChange={(e) => handlerFilterBySize(e)} placeholder='-'>
+                  <option value="pequeño">Pequeño</option>
+                  <option value="mediano">Mediano/a</option>
+                  <option value="grande">Grande</option>
+                </Select>
+              </FormControl>
+            </Box>
+          </Center>
+        </SimpleGrid>
+
+
+        <SimpleGrid w='100%' pb='2rem'>
+          <Center>
+            <Button w='4rem' mx='1rem'
+              className="selectsFilter"
+              onClick={(e) => handlerFilterButton(e)}
+              fontFamily={"body"}
+              size="lg"
+              bg={"orange.300"}
+              color={"white"}
+              _hover={{
+                bg: "orange.400",
+              }}
             >
-            Todos
-          </button>
-        </div>
-      </div>
-      <div className="searchBar">
-        <label className="titleSearch">Buscar por area:</label>
-        <input
-          className="inputSearch"
-          type="text"
-          onChange={(e) => handlerInputChange(e)}
-          placeholder="Ej: La plata..."
-        />
-        <button
-          className="buttonSearch"
-          onClick={(e) => handlerSearchByArea(e, value)}
-        >
-          Buscar
-        </button>
-      </div>
-    </div>
-  );
+              Filtrar
+            </Button>
+            <Button w='4rem'
+              className="selectsFilter"
+              onClick={(e) => handlerRefreshPets(e)}
+              fontFamily={"body"}
+              size="lg"
+              bg={"orange.300"}
+              color={"white"}
+              _hover={{
+                bg: "orange.400",
+              }}
+            >
+              Todos
+            </Button>
+          </Center>
+        </SimpleGrid>
+      </Box>
+    </Box>
+  )
 };
 
 export default FilterBar;
