@@ -23,7 +23,7 @@ import {
   SET_STATUS_USER,
   UPDATE_PRODUCT,
   MODIFY_PRODUCT,
-  OUT_OF_STOCK,
+  SET_IMAGE
 } from "../ActionTypes";
 
 const initialState = {
@@ -43,6 +43,7 @@ const initialState = {
   user: [],
   cart: [],
   functions: {},
+  imageUrl: ""
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -233,21 +234,11 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         modifyProduct: action.payload,
       };
-    // case OUT_OF_STOCK:
-    //   const askIfEmptyProduct = action.payload
-    //   const haveStock = []
-    //   askIfEmptyProduct.forEach((p) => {
-    //     if(p.stock > 1){
-    //       haveStock.push(p)
-    //       return alert("Aún tenes stock disponible de este producto")
-    //     }else if(p.stock <= 1){
-
-    //   }}
-    // )
-    //   return {
-    //     ...state,
-    //     allProducts: haveStock
-    //   }
+    case SET_IMAGE:
+      return{
+        ...state,
+        imageUrl: action.payload
+      }
     default:
       return state;
   }

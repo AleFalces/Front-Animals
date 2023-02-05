@@ -22,6 +22,7 @@ import {
   ACTUAL_PAGE,
   UPDATE_PRODUCT,
   MODIFY_PRODUCT,
+  SET_IMAGE,
   //OUT_OF_STOCK,
   // SET_STATUS_USER,
 } from "../ActionTypes";
@@ -384,3 +385,33 @@ export function modifyProduct(obj) {
     }
   };
 }
+
+export function setImageAsync(obj) {
+  console.log("OBJJJ",obj)
+  return async function (dispatch) {
+    try {
+        const files = obj;
+        const data = new FormData();
+        data.append("file", files[0]);
+        data.append("upload_preset", "buddycare");
+        
+        const res = await fetch(
+          "https://api.cloudinary.com/v1_1/lucho123/image/upload/",
+          {
+            method: "POST",
+            body: data,
+          }
+        );
+        const file = await res.json();
+        console.log("SECURE_URL",file.url)
+          return dispatch({
+            type: SET_IMAGE,
+            payload: file.url
+          })
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { postProduct } from "../../../Redux/Actions";
+import UploadImage from "./UploadImage";
 import {
   Flex,
   Box,
@@ -23,6 +24,8 @@ import { useEffect } from "react";
 export default function FormPostProduct() {
   const dispatch = useDispatch();
 
+  const imageUrl = useSelector((state) => state.imageUrl)
+  const [image, setImage] = useState("");
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -43,6 +46,12 @@ export default function FormPostProduct() {
   //   var myWidget = cloudinary.createUploadWidget({ 
   //     cloudName : ' my_cloud_name ' , uploadPreset : ' my_preset ' }, (error, resultado) => { if (!error && result && result.event === " éxito " ) {       console.log( ' ¡Listo! Aquí está la información de la imagen: ' , result.info);     }   } )
   // }
+  useEffect(()=>{
+    setInput({
+      ...input,
+      image: imageUrl
+    })
+  },[imageUrl])
 
   const errors = {
     name: "",
@@ -94,12 +103,16 @@ export default function FormPostProduct() {
       ...input,
       [e.target.name]: e.target.value.trim(),
     });
-    // console.log("input", input);
+    console.log("input", input);
     // console.log("error", errors);
   }
 
   function handlerSubmit(e) {
     // e.preventDefault();
+    setInput({
+      ...input,
+      // image: (input.image = )
+    })
     dispatch(postProduct(input));
     // console.log("EXISTEE", input)
     setInput({
@@ -217,14 +230,17 @@ export default function FormPostProduct() {
                 </FormControl>
 
                 <FormControl id="image" isRequired>
-                  <label>Imagen del producto:</label>
-                  <Input
+                   <button><UploadImage image={image} setImage={setImage}/></button>
+                  {/* <Input
                     type="text"
                     name="image"
                     placeholder="https://urlDeLaImagen.jpg"
                     onChange={(e) => handlerChange(e)}
-                  />
+                  /> */}
                 </FormControl>
+                  {/* <Button
+                  onChange={(e) => UploadImage(e)}
+                  >Cargar imagenes</Button> */}
                 <Stack spacing={10} pt={2}>
                   <Button
                     onClick={(e) => handlerErrors(e)}
