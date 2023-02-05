@@ -22,8 +22,9 @@ import {
   GET_USER_ID,
   SET_STATUS_USER,
   UPDATE_PRODUCT,
+  UPDATE_USER,
   MODIFY_PRODUCT,
-  SET_IMAGE
+  SET_IMAGE,
 } from "../ActionTypes";
 
 const initialState = {
@@ -43,7 +44,7 @@ const initialState = {
   user: [],
   cart: [],
   functions: {},
-  imageUrl: ""
+  imageUrl: "",
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -79,7 +80,6 @@ const RootReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
-
     case GET_ADOPTION_PETS:
       return {
         ...state,
@@ -229,16 +229,20 @@ const RootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case UPDATE_USER:
+      return {
+        ...state,
+      };
     case MODIFY_PRODUCT:
       return {
         ...state,
         modifyProduct: action.payload,
       };
     case SET_IMAGE:
-      return{
+      return {
         ...state,
-        imageUrl: action.payload
-      }
+        imageUrl: action.payload,
+      };
     default:
       return state;
   }

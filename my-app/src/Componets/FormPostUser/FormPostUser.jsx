@@ -3,123 +3,224 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postUser } from "../../Redux/Actions";
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  HStack,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  //   useColorModeValue,
+} from "@chakra-ui/react";
 
-export default function FormPostUser() {
-	const dispatch = useDispatch();
+export default function FormPostUser({ value }) {
+  const dispatch = useDispatch();
 
-	useEffect(() => {}, []);
-	const [input, setInput] = useState({
-		name: "",
-		surname: "",
-		email: "",
-		username: "",
-		phone: "",
-		role: "user",
-	});
-	const errors = {
-		name: "",
-		surname: "",
-		email: "",
-		username: "",
-		phone: "",
-	};
+  useEffect(() => {}, []);
+  const [input, setInput] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    username: "",
+    phone: "",
+    role: "user",
+  });
+  const errors = {
+    name: "",
+    surname: "",
+    email: "",
+    username: "",
+    phone: "",
+  };
 
-	const handlerChange = (e) => {
-		setInput({
-			...input,
-			[e.target.name]: e.target.value.trim(),
-		});
-		console.log("input", input);
-		console.log("error", errors);
-	};
+  function handlerErrors(e) {
+    e.preventDefault();
+    if (input.name === "") {
+      errors.name = "Debes ingresar tu nombre";
+    }
+    if (input.surname === "") {
+      errors.surname = `Debes ingresar tu apellido`;
+    }
+    if (input.email === "") {
+      errors.email = "Debes ingresar tu e-mail";
+    }
+    if (input.username === "") {
+      errors.username = "Debes ingresar un nombre de usuario";
+    }
+    if (input.phone !== "") {
+      if (input.phone.length !== 8) {
+        errors.phone = "Debe ser un numero de 10 digitos";
+      }
+    }
+    if (
+      !errors.name &&
+      !errors.surname &&
+      !errors.email &&
+      !errors.username &&
+      !errors.phone
+    ) {
+      handlerSubmit(e);
+    } else {
+      alert("Falta rellenar algun campo");
+    }
+  }
 
-	function handlerErrors(e) {
-		e.preventDefault();
-		if (input.name === "") {
-			errors.name = "Debes ingresar tu nombre";
-		}
-		if (input.surname === "") {
-			errors.surname = `Debes ingresar tu apellido`;
-		}
-		if (input.email === "") {
-			errors.email = "Debes ingresar tu e-mail";
-		}
-		if (input.username === "") {
-			errors.username = "Debes ingresar un nombre de usuario";
-		}
-		if (input.phone !== "") {
-			if (input.phone.length !== 8) {
-				errors.phone = "Debe ser un numero de 10 digitos";
-			}
-		}
+  const handlerChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value.trim(),
+    });
+    console.log("input", input);
+    // console.log("error", errors);
+  };
 
-		{
-			alert("Falta rellenar algun campo");
-		}
-	}
+  const handlerSubmit = (e) => {
+    e.preventDefault();
 
-	const handlerSubmit = (e) => {
-		e.preventDefault();
+    dispatch(postUser(input));
+    alert("Usuario creado con éxito!");
+  };
 
-		dispatch(postUser(input));
-		alert("Usuario creado con éxito!");
-	};
+  return (
+    <form>
+      <Flex
+        minH={"100vh"}
+        align={"center"}
+        justify={"center"}
+        //   bg={useColorModeValue("gray.50", "gray.800")}
+      >
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          {value === undefined ? (
+            <Stack align={"center"}>
+              <Heading fontSize={"4xl"} textAlign={"center"}>
+                Crear cuenta en Buddy
+              </Heading>
+            </Stack>
+          ) : (
+            <Stack align={"center"}>
+              <Heading fontSize={"4xl"} textAlign={"center"}>
+                Actualizá la información de perfil
+              </Heading>
+            </Stack>
+          )}
 
-	return (
-		<div>
-			<form onSubmit={(e) => handlerErrors(e)}>
-				<h1>Completa el formulario para crear tu usuario</h1>
+          <Box
+            rounded={"lg"}
+            //   bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+            p={8}
+          >
+            <Stack spacing={4}>
+              <HStack>
+                <Box>
+                  <FormControl id="name" isRequired>
+                    <FormLabel>Nombre: </FormLabel>
+                    <Input
+                      type="text"
+                      name="name"
+                      key="name"
+                      //   value={input.name}
+                      onChange={(e) => handlerChange(e)}
+                    />
+                    {errors.name && <Text>{errors.name}</Text>}
+                  </FormControl>
+                </Box>
 
-				<div>
-					<label>Nombre: </label>
-					<input
-						type="text"
-						name="name"
-						onChange={(e) => handlerChange(e)}
-						placeholder="Nicolas"
-					/>
-				</div>
-				<div>
-					<label>Apellido:</label>
-					<input
-						type="text"
-						name="surname"
-						placeholder="Fernandez"
-						onChange={(e) => handlerChange(e)}
-					/>
-				</div>
-				<div>
-					<label>Nombre de usuario:</label>
-					<input
-						type="text"
-						name="username"
-						placeholder="NombreDeUsuario"
-						onChange={(e) => handlerChange(e)}
-					/>
-				</div>
-				<div>
-					<label>E-mail:</label>
-					<input
-						type="text"
-						name="email"
-						placeholder="ejemplo@gmail.com"
-						onChange={(e) => handlerChange(e)}
-					/>
-				</div>
-				<div>
-					<label>Telefono:</label>
-					<input
-						type="number"
-						name="phone"
-						placeholder="11 2233-2233 (solo numeros) "
-						onChange={(e) => handlerChange(e)}
-					/>
-				</div>
-				<Link to={"/home"}>
-					<button>Atras</button>
-				</Link>
-				<button onClick={(e) => handlerSubmit(e)}>Registrarse</button>
-			</form>
-		</div>
-	);
+                <Box>
+                  <FormControl id="surname" isRequired>
+                    <FormLabel>Apellido: </FormLabel>
+                    <Input
+                      name="surname"
+                      type="text"
+                      key="surname"
+                      onChange={(e) => handlerChange(e)}
+                    />
+                  </FormControl>
+                </Box>
+              </HStack>
+
+              <FormControl id="username" isRequired>
+                <FormLabel>Apodo: </FormLabel>
+                <Input
+                  name="username"
+                  value={input.description}
+                  key="username"
+                  type="text"
+                  onChange={(e) => handlerChange(e)}
+                />
+              </FormControl>
+
+              <FormControl id="email" isRequired>
+                <FormLabel>Email: </FormLabel>
+                <Input
+                  name="email"
+                  type="text"
+                  value={input.email}
+                  key="email"
+                  onChange={(e) => handlerChange(e)}
+                ></Input>
+              </FormControl>
+
+              <FormControl id="password" isRequired>
+                <FormLabel>Contraseña: </FormLabel>
+                <Input
+                  placeholder="Ingresar una contraseña"
+                  name="password"
+                  key="password"
+                  type="text"
+                  onChange={(e) => handlerChange(e)}
+                />
+              </FormControl>
+
+              <FormControl id="phone" isRequired>
+                <FormLabel>Cel/Teléfono:</FormLabel>
+                <Input
+                  type="number"
+                  name="phone"
+                  value={input.phone}
+                  onChange={(e) => handlerChange(e)}
+                />
+              </FormControl>
+              <Stack spacing={10} pt={2}>
+                {value === undefined ? (
+                  <Button
+                    onClick={(e) => handlerErrors(e)}
+                    loadingText="Registrar usuario"
+                    size="lg"
+                    bg={"blue.400"}
+                    color={"white"}
+                    _hover={{
+                      bg: "blue.500",
+                    }}
+                  >
+                    Registrarse
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={(e) => handlerErrors(e)}
+                    loadingText="Guardar cambios"
+                    size="lg"
+                    bg={"blue.400"}
+                    color={"white"}
+                    _hover={{
+                      bg: "blue.500",
+                    }}
+                  >
+                    Guardar cambios
+                  </Button>
+                )}
+              </Stack>
+            </Stack>
+          </Box>
+          <Link to={"/"}>
+            <Button>Atrás</Button>
+          </Link>
+        </Stack>
+      </Flex>
+    </form>
+  );
 }
