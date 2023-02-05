@@ -1,21 +1,48 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import {
+  Heading,
+  Image,
+  Box,
+  Center,
+  Card,
+  CardBody,
+  Text,
+  Stack,
+} from "@chakra-ui/react";
 
-const VetsCard = ({ data: { img, name, phone, address, dirección } }) => {
+const VetsCard = ({ data: { image, name, phone, id, description } }) => {
   return (
-    <div className="card2">
-      <div className="face front">
-        <img src={img} alt="img not found" />
-      </div>
-      <div className="face back">
-        <h3> {name}</h3>
-        <h3>Telefono: {phone}</h3>
-        <h3>Dirección: {address}</h3>
-        <h3>Email: {dirección}</h3>
-        <div className="link2">
-          <a href="#">Click for details</a>
-        </div>
-      </div>
-    </div>
+    <Box>
+      <Card>
+        <CardBody>
+          <Center>
+            <Image
+              src={image}
+              alt={name}
+              borderRadius="2xl"
+              h={"15em"}
+              maxW="75%"
+            />
+          </Center>
+          <Stack mt="6" spacing="3">
+            <Heading size="md">
+              <Link to={`/veterinary/${id}`}>{name}</Link>
+            </Heading>
+            <Text
+              fontWeight={500}
+              color={"gray.500"}
+              fontFamily={"body"}
+              maxWidth="25em"
+            >
+              {description.charAt(0).toUpperCase() + description.substring(1)}
+            </Text>
+            <Text color="blue.600" fontSize="2xl">
+              Telefono: {phone}
+            </Text>
+          </Stack>
+        </CardBody>
+      </Card>
+    </Box>
   );
 };
 

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 import { BsPerson } from "react-icons/bs";
 import { MdOutlinePets } from "react-icons/md";
 import { GoLocation } from "react-icons/go";
@@ -24,6 +24,8 @@ import {
   StatNumber,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllVeterinaries } from "../../Redux/Actions";
 
 function StatsCard({ icon, title, stat }) {
   return (
@@ -55,9 +57,13 @@ function StatsCard({ icon, title, stat }) {
     </Stat>
   );
 }
-
 const Home = () => {
-  const { user } = useAuth0();
+  // const { user } = useAuth0();
+  const dispatch = useDispatch();
+  const veterinaries = useSelector((state) => state.allVets);
+  useEffect(() => {
+    dispatch(getAllVeterinaries());
+  }, [dispatch]);
 
   return (
     <>
@@ -135,7 +141,7 @@ const Home = () => {
             />
             <StatsCard
               title={"Veterinarias amigas"}
-              stat={"7"}
+              stat={veterinaries.length}
               icon={<GoLocation size={"3em"} />}
             />
           </SimpleGrid>
