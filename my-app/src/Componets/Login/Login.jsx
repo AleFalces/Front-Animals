@@ -157,6 +157,24 @@ const Login = () => {
 							<Text fontSize={{ base: '16px', sm: '16px', md: '16px', lg: '1rem' }}>Ingresar Con Google{" "}</Text>
 						</Button>
 					</Box>
+
+					<Divider
+						orientation="horizontal"
+						mt="1rem"
+						pt="6px"
+						bg="gray.200"
+						borderRadius="7px"
+					/>
+
+					<Box py='1rem' mt="1rem" borderRadius={7}_hover={{
+								bg: "orange.100",
+							}}>						
+						<Link to={`/home`}>
+						<Text fontFamily={'body'} color={'brand.green.300'} fontWeight={"bold"} >Usuarios sin registro</Text>
+						</Link>
+					</Box>
+
+
 				</div>
 			)}
 		</>
