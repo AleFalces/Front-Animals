@@ -16,8 +16,15 @@ import {
 
 import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
-const Card = ({ data: { size, img, sex, species, age, area } }) => {
+const Card = ({ data: { id, size, img, sex, species, age, area }, value} ) => {
+  const navigate = useNavigate()
+  console.log(id);
+function handlerNavigateUpdate(e) {
+  e.preventDefault();
+  navigate(`/updatePet/${id}`)
+}
   return (
     <Box>
       <Center py={6}>
@@ -91,6 +98,7 @@ const Card = ({ data: { size, img, sex, species, age, area } }) => {
               {area}
             </Badge>
           </Stack>
+          {value=== "update"?<button className="modifyButton" onClick={(e) => handlerNavigateUpdate(e)}>Modificar</button>:null}
 
           <Stack mt={4} direction={"column"} spacing={4}>
             <Center>

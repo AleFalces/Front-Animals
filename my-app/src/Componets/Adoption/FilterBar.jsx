@@ -10,7 +10,6 @@ const FilterBar = ({value}) => {
   const dispatch = useDispatch();
   const defaultValue = "defaultValue";
   const [input, setInput] = useState("");
-console.log(value)
   const handlerInputChange = (e) => {
     e.preventDefault()
     setInput(e.target.value)
