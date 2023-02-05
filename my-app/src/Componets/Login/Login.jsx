@@ -12,20 +12,7 @@ import { Link } from "react-router-dom";
 //   Cerrar Sesion
 // </button>
 
-
-
-
-
-
-import {
-	Box,
-	Stack,
-	Text,
-	Input,
-	Button,
-	Divider,
-
-} from '@chakra-ui/react';
+import { Box, Stack, Text, Input, Button, Divider } from "@chakra-ui/react";
 
 const Login = () => {
 	const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
@@ -49,7 +36,11 @@ const Login = () => {
 				.post("http://localhost:3001/users/login", formData)
 				.then(({ data }) => {
 					localStorage.setItem("loggedUser", JSON.stringify(data));
+					// if (data[0]?.status === "banned") {
+					// 	navegate("/banned");
+					// } else {
 					navegate("/home");
+
 					alert("Usuario Logueado");
 				})
 				.catch(({ response }) => {
@@ -77,37 +68,36 @@ const Login = () => {
 					{" "}
 					<div>
 						<form>
-							<Box as={'form'} mt={1}>
+							<Box as={"form"} mt={1}>
 								<Stack spacing={4}>
 									<Input
 										type="email"
 										name="email"
-										bg={'gray.100'}
+										bg={"gray.100"}
 										placeholder="Ingresa tu Email"
 										border={0}
-										color={'gray.500'}
+										color={"gray.500"}
 										_placeholder={{
-											color: 'gray.500',
+											color: "gray.500",
 										}}
 										onChange={handleChange}></Input>
 
 									<Input
 										type="password"
 										name="password"
-										bg={'gray.100'}
+										bg={"gray.100"}
 										placeholder="Ingresa tu contraseña"
 										border={0}
-										color={'gray.500'}
+										color={"gray.500"}
 										_placeholder={{
-											color: 'gray.500',
+											color: "gray.500",
 										}}
 										onChange={handleChange}
 									/>
 								</Stack>
-
 							</Box>
 						</form>
-						<Box py='1rem'>
+						<Box py="1rem">
 							<Button
 								onClick={handlerSubmit}
 								className="formButtom"
@@ -116,24 +106,21 @@ const Login = () => {
 								size="lg"
 								bg={"orange.300"}
 								color={"white"}
-								w='40%'
+								w="40%"
 								px="3rem"
 								_hover={{
 									bg: "orange.400",
-								}}
-							>
+								}}>
 								Ingresar
 							</Button>
 						</Box>
-						<Box py='1rem'>
-							<Text fontFamily={'body'}>No estás registrado?</Text>
+						<Box py="1rem">
+							<Text fontFamily={"body"}>No estás registrado?</Text>
 							<Link to={`/createUser`}>
 								<p>hazlo aquí</p>
 							</Link>
 						</Box>
 					</div>
-
-
 					<Divider
 						orientation="horizontal"
 						mt="1rem"
@@ -143,21 +130,23 @@ const Login = () => {
 					/>
 					<Link />
 					<Box mt="1rem">
-						<Button fontFamily={"body"}
+						<Button
+							fontFamily={"body"}
 							size="lg"
 							bg={"orange.300"}
 							color={"white"}
-							w='40%'
-							px={{ base: '6rem', sm: '6rem', md: '6rem', lg: '6rem' }}
+							w="40%"
+							px={{ base: "6rem", sm: "6rem", md: "6rem", lg: "6rem" }}
 							_hover={{
 								bg: "orange.400",
 							}}
-
 							onClick={() => loginWithRedirect()}>
-							<Text fontSize={{ base: '16px', sm: '16px', md: '16px', lg: '1rem' }}>Ingresar Con Google{" "}</Text>
+							<Text
+								fontSize={{ base: "16px", sm: "16px", md: "16px", lg: "1rem" }}>
+								Ingresar Con Google{" "}
+							</Text>
 						</Button>
 					</Box>
-
 					<Divider
 						orientation="horizontal"
 						mt="1rem"
@@ -165,16 +154,22 @@ const Login = () => {
 						bg="gray.200"
 						borderRadius="7px"
 					/>
-
-					<Box py='1rem' mt="1rem" borderRadius={7}_hover={{
-								bg: "orange.100",
-							}}>						
+					<Box
+						py="1rem"
+						mt="1rem"
+						borderRadius={7}
+						_hover={{
+							bg: "orange.100",
+						}}>
 						<Link to={`/home`}>
-						<Text fontFamily={'body'} color={'brand.green.300'} fontWeight={"bold"} >Usuarios sin registro</Text>
+							<Text
+								fontFamily={"body"}
+								color={"brand.green.300"}
+								fontWeight={"bold"}>
+								Usuarios sin registro
+							</Text>
 						</Link>
 					</Box>
-
-
 				</div>
 			)}
 		</>

@@ -4,6 +4,7 @@ import { GiSittingDog } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import {
 	Box,
 	Flex,
@@ -27,47 +28,47 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
 export default function Simple() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { user, isAuthenticated, logout } = useAuth0();
-  const [usuario, setUsuario] = useState([]);
-  const navegate = useNavigate();
-  useEffect(() => {
-    const loggedUser = localStorage.getItem("loggedUser");
-    if (loggedUser) {
-      const logged = JSON.parse(loggedUser);
-      setUsuario(logged);
-    }
-  }, []);
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { user, isAuthenticated, logout } = useAuth0();
+	const [usuario, setUsuario] = useState([]);
+	const navigate = useNavigate();
 
-  const cerrarSesion = () => {
-    logout({ returnTo: "/" });
-    localStorage.removeItem("loggedUser");
-    // navegate("/");
-  };
+	useEffect(() => {
+		const loggedUser = localStorage.getItem("loggedUser");
+		if (loggedUser) {
+			const logged = JSON.parse(loggedUser);
+			setUsuario(logged);
+		}
+	}, []);
 
-  return (
-    <>
-      <Box bg="brand.green.100" px={100} py="10px">
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <IconButton
-            size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          />
-          <HStack spacing={8} alignItems={"center"}>
-            <Box>
-              <NavLink to="/home">
-                <Image
-                  src={logo}
-                  // alt="Dan Abramov"
-                  boxSize="70px"
-                  mx="2rem"
-                  mt="1rem"
-                />
-              </NavLink>
-            </Box>
+	const cerrarSesion = () => {
+		localStorage.removeItem("loggedUser");
+		logout({ returnTo: "/" });
+	};
+
+	return (
+		<>
+			<Box bg="brand.green.100" px={100} py="10px">
+				<Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+					<IconButton
+						size={"md"}
+						icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+						aria-label={"Open Menu"}
+						display={{ md: "none" }}
+						onClick={isOpen ? onClose : onOpen}
+					/>
+					<HStack spacing={8} alignItems={"center"}>
+						<Box>
+							<NavLink to="/home">
+								<Image
+									src={logo}
+									// alt="Dan Abramov"
+									boxSize="70px"
+									mx="2rem"
+									mt="1rem"
+								/>
+							</NavLink>
+						</Box>
 
 						<HStack
 							as={"nav"}
@@ -135,107 +136,109 @@ export default function Simple() {
 								<Text fontFamily={"body"}>Veterinarias</Text>
 							</NavLink>
 
-              <Menu>
-                <MenuButton>
-                  <GiSittingDog size="20px" />
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>
-                    <NavLink to="/adoptions">
-                      <Text fontFamily={"body"}>Adopcion</Text>
-                    </NavLink>
-                  </MenuItem>
-                  <MenuItem>
-                    <NavLink to="/lostPets">
-                      <Text fontFamily={"body"}>Perdidos</Text>
-                    </NavLink>
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            </HStack>
-          </HStack>
-          <Flex alignItems={"center"}>
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-              >
-                <Avatar
-                  size={"sm"}
-                  borderBlockEndColor={"brand.orange"}
-                  src={
-                    isAuthenticated
-                      ? user?.picture
-                      : "https://st2.depositphotos.com/19428878/44645/v/450/depositphotos_446453832-stock-illustration-default-avatar-profile-icon-social.jpg"
-                  }
-                />
-              </MenuButton>
-              <MenuList>
-                <NavLink to="/dashboard">
-                  <MenuItem>Administrar cuenta</MenuItem>
-                </NavLink>
-                <MenuDivider />
-                {usuario.length ? (
-                  <MenuList>
-                    <MenuItem>Perfil</MenuItem>
-                    <NavLink to="/myPets">
-                      <MenuItem>Mis mascotas</MenuItem>
-                    </NavLink>
-                    <MenuItem onClick={() => cerrarSesion()}>
-                      {" "}
-                      Cerrar Sesión
-                    </MenuItem>
-                  </MenuList>
-                ) : (
-                  <NavLink to="/">Ingresar</NavLink>
-                )}
-              </MenuList>
-            </Menu>
-          </Flex>
-        </Flex>
+							<Menu>
+								<MenuButton>
+									<GiSittingDog size="20px" />
+								</MenuButton>
+								<MenuList>
+									<MenuItem>
+										<NavLink to="/adoptions">
+											<Text fontFamily={"body"}>Adopcion</Text>
+										</NavLink>
+									</MenuItem>
+									<MenuItem>
+										<NavLink to="/lostPets">
+											<Text fontFamily={"body"}>Perdidos</Text>
+										</NavLink>
+									</MenuItem>
+								</MenuList>
+							</Menu>
+						</HStack>
+					</HStack>
+					<Flex alignItems={"center"}>
+						<Menu>
+							<MenuButton
+								as={Button}
+								rounded={"full"}
+								variant={"link"}
+								cursor={"pointer"}
+								minW={0}>
+								<Avatar
+									size={"sm"}
+									borderBlockEndColor={"brand.orange"}
+									src={
+										isAuthenticated
+											? user?.picture
+											: "https://st2.depositphotos.com/19428878/44645/v/450/depositphotos_446453832-stock-illustration-default-avatar-profile-icon-social.jpg"
+									}
+								/>
+							</MenuButton>
+							<MenuList>
+								<NavLink to="/dashboard">
+									<MenuItem
+										hidden={usuario[0]?.role === "admin" ? false : true}>
+										Administrar cuenta
+									</MenuItem>
+								</NavLink>
+								<MenuDivider />
+								{usuario.length ? (
+									<MenuList>
+										<MenuItem>Perfil</MenuItem>
+										<NavLink to="/myPets">
+											<MenuItem>Mis mascotas</MenuItem>
+										</NavLink>
+										<MenuItem onClick={() => cerrarSesion()}>
+											{" "}
+											Cerrar Sesión
+										</MenuItem>
+									</MenuList>
+								) : (
+									<NavLink to="/">Ingresar</NavLink>
+								)}
+							</MenuList>
+						</Menu>
+					</Flex>
+				</Flex>
 
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} p={4} spacing={4} alignItems={"center"}>
-              <NavLink to="/aboutUs">
-                <Text fontFamily={"body"}>Nosotros</Text>
-              </NavLink>
-              <NavLink to="/donate">
-                <Text fontFamily={"body"}>Donaciones</Text>
-              </NavLink>
-              <NavLink to="/shop">
-                <Text fontFamily={"body"}>Tienda</Text>
-              </NavLink>
-              <NavLink to="/createPet">
-                <Text fontFamily={"body"}>Publicar Mascota</Text>
-              </NavLink>
-              <NavLink to="/veterinary">
-                <Text fontFamily={"body"}>Veterinarias</Text>
-              </NavLink>
-              <Menu>
-                <MenuButton>
-                  <GiSittingDog size="20px" />
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>
-                    <NavLink to="/adoptions">
-                      <Text fontFamily={"body"}>Adopcion</Text>
-                    </NavLink>
-                  </MenuItem>
-                  <MenuItem>
-                    <NavLink to="/lostPets">
-                      <Text fontFamily={"body"}>Perdidos</Text>
-                    </NavLink>
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            </Stack>
-          </Box>
-        ) : null}
-      </Box>
-    </>
-  );
+				{isOpen ? (
+					<Box pb={4} display={{ md: "none" }}>
+						<Stack as={"nav"} p={4} spacing={4} alignItems={"center"}>
+							<NavLink to="/aboutUs">
+								<Text fontFamily={"body"}>Nosotros</Text>
+							</NavLink>
+							<NavLink to="/donate">
+								<Text fontFamily={"body"}>Donaciones</Text>
+							</NavLink>
+							<NavLink to="/shop">
+								<Text fontFamily={"body"}>Tienda</Text>
+							</NavLink>
+							<NavLink to="/createPet">
+								<Text fontFamily={"body"}>Publicar Mascota</Text>
+							</NavLink>
+							<NavLink to="/veterinary">
+								<Text fontFamily={"body"}>Veterinarias</Text>
+							</NavLink>
+							<Menu>
+								<MenuButton>
+									<GiSittingDog size="20px" />
+								</MenuButton>
+								<MenuList>
+									<MenuItem>
+										<NavLink to="/adoptions">
+											<Text fontFamily={"body"}>Adopcion</Text>
+										</NavLink>
+									</MenuItem>
+									<MenuItem>
+										<NavLink to="/lostPets">
+											<Text fontFamily={"body"}>Perdidos</Text>
+										</NavLink>
+									</MenuItem>
+								</MenuList>
+							</Menu>
+						</Stack>
+					</Box>
+				) : null}
+			</Box>
+		</>
+	);
 }
