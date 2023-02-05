@@ -146,19 +146,20 @@ const Details = () => {
               </Heading>
 
               {/* DETAIL */}
+              <Container>
               <Text
                 fontFamily={"body"}
                 fontWeight={"300"}
-                noOfLines={[4, 4, 3]}
+                /* noOfLines={[4, 4, 3]} */
                 px="1rem"
                 py={["2rem", "1rem", "2rem"]}
                 my="0rem"
-                fontSize={{ base: "14px", md: "18px", lg: "20px" }}
+                 fontSize={{ base: "14px", md: "18px", lg: "20px" }}
                 color="gray.500"
               >
                 {Det.detail}
               </Text>
-
+              </Container>
               {/* AGE */}
               <Text
                 noOfLines={[1, 2, 3]}

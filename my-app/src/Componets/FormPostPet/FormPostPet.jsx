@@ -157,7 +157,7 @@ useEffect(() => {
 						</Stack>
 						<Box
 							rounded={"lg"}
-							/*  bg={useColorModeValue('white', 'gray.700')} */
+							bg={'white'} 
 							boxShadow={"lg"}
 							p={8}>
 							<Stack spacing={4}>
@@ -322,24 +322,6 @@ useEffect(() => {
 										<Text className="text_inputError">{inputError.detail}</Text>
 									)}
 								</FormControl>
-
-								{/* <FormControl>
-									<Text fontFamily={"body"} fontSize="14px">
-										ID de Usuario:
-									</Text>
-									<Input
-										fontFamily={"body"}
-										variant="flushed"
-										focusBorderColor={"brand.green.300"}
-										placeholder="UUID del usuario.."
-										size="md"
-										onChange={(e) => handlerChange(e)}
-										name="userId"
-									/>
-									{inputError.userId && (
-										<Text className="text_inputError">{inputError.userId}</Text>
-									)}
-								</FormControl> */}
 
 								<FormControl>
 									<Text fontFamily={"body"} fontSize="14px">
