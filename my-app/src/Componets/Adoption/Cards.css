@@ -7,3 +7,16 @@
 .cardsContainerPadding {
   padding: 150px;
 }
+.modifyButton {
+  color: #969696d7;
+  background-color: rgba(180, 225, 255, 0.822);
+  border-radius: 4px 4px 4px 4px;
+  position: relative;
+  bottom:1.7%;
+  width: 100%;
+}
+.modifyButton:hover {
+  transition: .4s;
+  color: #6e6e6ed7;
+  background-color: rgba(173, 255, 214, 0.884);
+}

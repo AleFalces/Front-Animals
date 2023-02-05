@@ -35,7 +35,6 @@ function App() {
     };
     validator();
   }, [getAccessTokenSilently]);
-
   return isAuthenticated ? (
     <div className="App">
       <Routes>
@@ -58,6 +57,11 @@ function App() {
           exact
           path="/createPet"
           element={<FormPostPet token={token} />}
+        ></Route>
+        <Route
+          exact
+          path="updatePet/:id"
+          element={<FormPostPet token={token} value={"update"} />}
         ></Route>
         <Route
           exact
