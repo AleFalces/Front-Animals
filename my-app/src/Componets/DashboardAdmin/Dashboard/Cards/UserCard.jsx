@@ -9,6 +9,7 @@ import {
   StackDivider,
   Box,
   Button,
+  Center
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setStatusUser } from "../../../../Redux/Actions";
@@ -25,7 +26,7 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
 
   return (
     <div>
-      <Card w="400px">
+      <Card w="400px" >
         <Box>
           <CardHeader>
             <Heading size="md">Info de usuario</Heading>
@@ -99,6 +100,7 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
           </CardBody>
         </Box>
       </Card>
+      
     </div>
   );
 }

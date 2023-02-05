@@ -1,3 +1,4 @@
+import { SimpleGrid, Center } from "@chakra-ui/react";
 import React from "react";
 import UserCard from "./Cards/UserCard";
 
@@ -5,7 +6,10 @@ import UserCard from "./Cards/UserCard";
 export default function ShowUsers({ users }) {
   
   return (
-      users.map((user) => (
+    
+    <SimpleGrid columns={[1, 2, 2]} spacing='10px' >
+      {users.map((user) => (
+       
         <UserCard
           id={user.id}
           name={user.name}
@@ -14,6 +18,8 @@ export default function ShowUsers({ users }) {
           phone={user.phone}
           status={user.status}
         ></UserCard>
-      ))
+))}
+      </SimpleGrid>
+    
   );
 }
