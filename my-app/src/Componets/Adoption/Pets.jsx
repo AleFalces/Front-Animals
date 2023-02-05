@@ -11,7 +11,7 @@ import "./FilterBar.css";
 import { SimpleGrid, } from '@chakra-ui/react'
 import Pagination from "../Pagination/Pagination";
 
-const Adoption = ({value}) => {
+const Adoption = ({ value }) => {
   const pets = useSelector((state) => state.pets);
   const actualPage = useSelector((state) => state.actualPage);
 
@@ -31,9 +31,9 @@ const Adoption = ({value}) => {
     <>
       <Navbar />
       <br />
-      <div class="example">
-        <FilterBar value={value}/>
-      </div>
+      {/* <div class="example"> */}
+        <FilterBar value={value} />
+      {/* </div> */}
 
       <div className="Pagination">
         <Pagination pets={pets} PetPerPage={PetPerPage} />
