@@ -9,6 +9,7 @@ import {
   Box,
   Button,
   CardHeader,
+  Image, Center, Divider
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { modifyProduct } from "../../../../Redux/Actions";
@@ -52,43 +53,47 @@ export default function ProductCard({
 
   return (
     <div>
-      <Card w="400px">
+      <Card >
         <Box>
           <CardBody>
             <Stack divider={<StackDivider />} spacing="4">
               <Box>
-                <CardHeader>
-                  <Heading size="sm">Producto:</Heading>
-                </CardHeader>
-                <Text pt="2" fontSize="md">
+                <Text pt="2" fontWeight={'bold'} fontSize="md">
                   {name}
                 </Text>
               </Box>
               <Box>
                 <Heading size="sm">Fotos:</Heading>
                 <Text pt="2" fontSize="md">
-                  {image}{" "}
-                  {/**Tira error si le paso la etiqueta Image de Chakra*/}
                 </Text>
+                <Center>
+                <Image
+                  boxSize='100px'
+                  objectFit='cover'
+                  src={image}
+                  alt='Dan Abramov'
+                />
+                </Center>
               </Box>
               <Box>
-                <Heading size="xs" textTransform="uppercase">
+                <Heading size="xs"textTransform="uppercase">
                   Stock:
                 </Heading>
-                <Text pt="2" fontSize="md">
+                <Text fontSize="md">
                   {stock}
                 </Text>
-                <Heading size="xs" textTransform="uppercase">
+              <Divider height='10px'/> 
+                <Heading mt='1rem'size="xs" textTransform="uppercase">
                   ID:
                 </Heading>
-                <Text pt="2" fontSize="md">
+                <Text mt="1rem" fontSize="md">
                   {id}
                 </Text>
                 <Heading size="sm">Precio:</Heading>
                 <Text pt="2" fontSize="md">
                   {price}
                 </Text>
-                <Button
+                <Button my='1rem'
                   onClick={(e) => {
                     recievedDataProduct(
                       e,

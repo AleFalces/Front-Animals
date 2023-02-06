@@ -9,6 +9,7 @@ export const GET_DETAILS_VETERINARIES = "GET_DETAILS_VETERINARIES";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
 export const POST_PET = "POST_PET";
+export const UPDATE_PET = "UPDATE_PET";
 export const POST_USER = "POST_USER";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const POST_VET = "POST_VET";

@@ -1,11 +1,10 @@
 import React from "react";
 import styles from "./TopNav.module.css";
 import { Link } from "react-router-dom";
+
 import { Button, Box, Icon, SimpleGrid} from "@chakra-ui/react";
+
 import { MdArrowBackIosNew } from 'react-icons/md';
-
-
-
 
 
 
@@ -57,6 +56,7 @@ const TopNav = () => {
         </Box>
 
         <Box>
+
           <Link to={"/dashboard/createProduct"}>
             <Button
               loadingText="Publicar el producto"
@@ -68,10 +68,12 @@ const TopNav = () => {
               }}
             >Publicar producto
             </Button>
+
           </Link>
         </Box>
 
         <Box>
+
           <Link to={"/dashboard/createVet"}>
             <Button
               loadingText="Afiliar Veterinaria"
@@ -83,6 +85,7 @@ const TopNav = () => {
               }}
             >Afiliar Veterinaria
             </Button>
+
           </Link>
         </Box>
       </SimpleGrid>
