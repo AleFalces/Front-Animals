@@ -18,7 +18,7 @@ const Veterinaries = () => {
   }, [dispatch]);
 
   return (
-    <Box>
+    <Box bg="brand.green.200">
       <Navbar />
       <Box>
         <Box>

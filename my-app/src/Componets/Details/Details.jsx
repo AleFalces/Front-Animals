@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { petDetails } from "../../Redux/Actions/index";
 /* import "./Detail.css"; */
 
-import { extendTheme } from "@chakra-ui/react";
+// import { extendTheme } from "@chakra-ui/react";
 
 import {
   Box,
@@ -39,7 +39,13 @@ const messages = [
   "Preparación para la llegada: Prepara tu hogar para la llegada del animal, con un lugar cómodo para dormir, juguetes y alimentación adecuada.",
 ];
 
-const titulo = ["Espacio y tiempo disponible", "Costos asociados", "Responsabilidades a largo plazo", "Compatibilidad con tu estilo de vida", "Preparación para la llegada"]
+const titulo = [
+  "Espacio y tiempo disponible",
+  "Costos asociados",
+  "Responsabilidades a largo plazo",
+  "Compatibilidad con tu estilo de vida",
+  "Preparación para la llegada",
+];
 const features = messages.map(function (x, i) {
   return {
     id: i,
@@ -57,14 +63,13 @@ const Details = () => {
 
   useEffect(() => {
     dispatch(petDetails(paramsId));
-  }, [dispatch]);
+  }, [dispatch, paramsId]);
 
   return (
     <div className="detailContainer">
       <Navbar />
       {window.scrollTo(0, 0)}
-      <Box bg="brand.green.200" mt="1rem"
-        pb={["1rem", "2rem", "2rem"]}>
+      <Box bg="brand.green.200" pb={["1rem", "2rem", "2rem"]}>
         <SimpleGrid columns={[1, 1, 2, 2]} spacing={["10px", "10px", "30px"]}>
           {/* Info1 Titulos*/}
           <Center w="100%" h="100%">
@@ -78,14 +83,35 @@ const Details = () => {
               borderRadius="15px"
             >
               {/*  Info1  */}
-              <Heading as="h1" size="3xl" textTransform="uppercase" color="gray.500">
+              <Heading
+                as="h1"
+                size="3xl"
+                textTransform="uppercase"
+                color="gray.500"
+              >
                 {Det.species}{" "}
               </Heading>
-              <Heading as="h2" size="lg" textTransform="uppercase" color="gray.500">
+              <Heading
+                as="h2"
+                size="lg"
+                textTransform="uppercase"
+                color="gray.500"
+              >
                 {Det.sex}{" "}
               </Heading>
-              <Box pt='0px'> {Det.species === "perro" ? <Icon as={GiSittingDog} color="orange" boxSize={14} mt="1rem" /> : <Icon as={GiCat} color="orange" boxSize={14} mt={"1rem"} />}</Box>
-
+              <Box pt="0px">
+                {" "}
+                {Det.species === "perro" ? (
+                  <Icon
+                    as={GiSittingDog}
+                    color="orange"
+                    boxSize={14}
+                    mt="1rem"
+                  />
+                ) : (
+                  <Icon as={GiCat} color="orange" boxSize={14} mt={"1rem"} />
+                )}
+              </Box>
 
               <Divider
                 orientation="horizontal"
@@ -118,7 +144,6 @@ const Details = () => {
             </Box>
           </Center>
         </SimpleGrid>
-
 
         {/*  Info2 Detail */}
         <SimpleGrid
@@ -164,8 +189,13 @@ const Details = () => {
               <Text
                 noOfLines={[1, 2, 3]}
                 fontSize={{ base: "14px", md: "18px", lg: "18px" }}
-                color="orange.500" textTransform={'uppercase'} fontFamily={'heading'} fontWeight="bold" pb={["0rem", "0rem", "1rem"]}>{Det.age}
-
+                color="orange.500"
+                textTransform={"uppercase"}
+                fontFamily={"heading"}
+                fontWeight="bold"
+                pb={["0rem", "0rem", "1rem"]}
+              >
+                {Det.age}
               </Text>
 
               {/* Area */}
@@ -176,9 +206,16 @@ const Details = () => {
                 fontSize={{ base: "14px", md: "16px", lg: "18px" }}
                 color="gray.500"
                 py={["3rem", "2rem", "0rem"]}
-
               >
-                Se encuentra en la zona de: <Text color="orange.500" textTransform={'uppercase'} fontFamily={'heading'} fontWeight="bold">{Det.area} </Text>
+                Se encuentra en la zona de:{" "}
+                <Text
+                  color="orange.500"
+                  textTransform={"uppercase"}
+                  fontFamily={"heading"}
+                  fontWeight="bold"
+                >
+                  {Det.area}{" "}
+                </Text>
               </Text>
             </Box>
           </Center>
@@ -259,7 +296,7 @@ const Details = () => {
           </Container>
         </Box>
       </Box>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };

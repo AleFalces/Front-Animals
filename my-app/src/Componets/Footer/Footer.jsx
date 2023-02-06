@@ -95,7 +95,9 @@ export default function LargeWithNewsletter() {
             <Box>
               <Logo color={useColorModeValue("gray.700", "white")} />
             </Box>
-            <Text fontSize={"sm"}>© 2023 Buddy ONG. All rights reserved</Text>
+            <Text fontSize={"sm"} display="flex">
+              © 2023 Buddy ONG. All rights reserved
+            </Text>
             <Stack direction={"row"} spacing={6}>
               <SocialButton label={"Twitter"} href={"#"}>
                 <FaTwitter />
