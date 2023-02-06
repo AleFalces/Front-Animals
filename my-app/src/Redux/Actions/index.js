@@ -10,6 +10,7 @@ import {
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
   POST_PET,
+  UPDATE_PET,
   POST_USER,
   POST_PRODUCT,
   POST_VET,
@@ -379,6 +380,32 @@ export function modifyProduct(obj) {
         type: MODIFY_PRODUCT,
         payload: obj,
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function postOrUpdatePet(formInput, value, petId) {
+  return async function (dispatch) {
+    try {
+      let payload = {
+        formInput,
+        value,
+      };
+      if (value === "update") {
+        let json = await axios.put(`${HOST}/pets/${petId}`, formInput);
+        return dispatch({
+          type: UPDATE_PET,
+          payload,
+        });
+      } else {
+        let json = await axios.post(`${HOST}/pets`, formInput); // PUEDE ESTAR MAL (VER ACTION postPet (FALTA TOKEN))
+        return dispatch({
+          type: POST_PET,
+          payload,
+        });
+      }
     } catch (error) {
       console.log(error);
     }

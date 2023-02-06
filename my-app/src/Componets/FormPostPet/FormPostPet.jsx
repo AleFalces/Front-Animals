@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Link, redirect, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { petDetails, postPet } from "../../Redux/Actions";
+import { petDetails, postOrUpdatePet, postPet } from "../../Redux/Actions";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -55,37 +55,40 @@ const validateForm = (input) => {
 	if (input.img === "") {
 		inputError.img = "Inserta el link de una imagen";
 	}
-	if (input.userId.trim() === "") {
+	if (input.userId === "") {
 		inputError.userId = "Ingresa el UUID del usuario";
 	}
 	return inputError;
 };
 
 export default function FormPostPet({ token, value }) {
-	/* let isIncomplete = true; */
 	const dispatch = useDispatch();
 	const [isIncomplete, setIsIncomplete] = useState(false);
 	const [infoSend, setInfoSend] = useState(false);
 	const [inputError, setInputError] = useState({});
 	const [usuario, setUsuario] = useState([]);
+	const paramsId = useParams("id");
+	const petData = JSON.parse(localStorage.getItem("loggedUser"))[0].pet.filter((pet) => pet.id === paramsId.id)[0];
+	const userId = JSON.parse(localStorage.getItem("loggedUser"))[0].id
+
+
 	const [input, setInput] = useState({
-		species: "",
-		sex: "",
-		age: "",
-		size: "",
-		status: "",
-		area: "",
-		detail: "",
-		img: "",
-		userId: "",
-	});
-	const pet = useSelector((state) => state.Detail)
-	const params = useParams("id")
+		species: petData?.species || "", 
+		sex: petData?.sex || "",
+		age: petData?.age || "",
+		size: petData?.size || "",
+		status: petData?.status || "",
+		area: petData?.area || "",
+		detail: petData?.detail || "",
+		img: petData?.img || "",
+		userId: userId
+	})
+
 	const handlerChange = (e) => {
 		setInput({
 			...input,
-			[e.target.name]: e.target.value.trim(),
-			userId: usuario[0]?.id,
+			[e.target.name]: e.target.value,
+			userId: userId
 		});
 		//control errores
 		setInputError(
@@ -93,9 +96,9 @@ export default function FormPostPet({ token, value }) {
 				...input,
 				[e.target.name]: e.target.value,
 			})
-		);
+			);
+		console.log("CHANGE: INPUT", input);	
 	};
-	console.log("INPUT FORM",input);
 	const handlerSubmit = (e) => {
 		e.preventDefault();
 		if (
@@ -108,14 +111,13 @@ export default function FormPostPet({ token, value }) {
 			input.detail &&
 			input.img !== ""
 		) {
-			// value=== undefined         			 DESCOMENTAR Y HACER ACTION UPDATE
-			// ?dispatch(postPet(input))        	 DESCOMENTAR Y HACER ACTION UPDATE
-			// :dispatch(updatePet(input))        		 DESCOMENTAR Y HACER ACTION UPDATE
-			console.log("LOGGED USER FORM PET",JSON.parse(window.localStorage.getItem("loggedUser")));
-			//dispatch(postPet(input, token));
+			value === undefined         			
+			? dispatch(postPet(input, token))      	
+			:dispatch(postOrUpdatePet(input, value, paramsId.id))        	
+			// console.log("LOGGED USER FORM PET",JSON.parse(window.localStorage.getItem("loggedUser")));
+			//;dispatch(postOrUpdatePet(input))
 			setIsIncomplete(false);
 			setInfoSend(true);
-
 			document.getElementById("myForm").reset();
 		} else {
 			setIsIncomplete(true);
@@ -123,15 +125,12 @@ export default function FormPostPet({ token, value }) {
 		}
 	};
 
+
 useEffect(() => {
-    const loggedUser = localStorage.getItem("loggedUser");
-    if (loggedUser) {
-	    const logged = JSON.parse(loggedUser);
-	    setUsuario(logged);
-		console.log("LOGGED USER", logged);
-    }
-	// if(params.id){dispatch(petDetails(params.id))} // funciona pero llega tarde
-	// console.log("PET DETAILS FORM ",pet);
+	console.log("PARAMS ID",paramsId);
+	console.log("userId ",userId);
+	console.log("RESULT ", petData);
+	console.log("INPUT FORM",input);
 }, []);
 	return (
 		<div>
@@ -140,7 +139,7 @@ useEffect(() => {
 			{isIncomplete ? <ErrorForm /> : null}
 			{infoSend ? <SuccedForm /> : null}
 
-			<form onSubmit={handlerSubmit} id="myForm">
+			<form onSubmit={(e)=>handlerSubmit(e)} id="myForm">
 				<Flex
 					minH={"100vh"}
 					align={"center"}
@@ -148,9 +147,13 @@ useEffect(() => {
 					bg="brand.green.200">
 					<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
 						<Stack align={"center"}>
-							<Heading fontSize={"4xl"} textAlign={"center"}>
-								Registra tu mascota
+							{value==="update"
+							?<Heading fontSize={"4xl"} textAlign={"center"}>
+								Edita tu mascota
 							</Heading>
+							:<Heading fontSize={"4xl"} textAlign={"center"}>
+								Registra tu mascota
+							</Heading>}
 							<Text fontSize={"lg"} color={"gray.600"}>
 								Gracias por cuidar a los animales ✌️
 							</Text>
@@ -168,6 +171,7 @@ useEffect(() => {
 												focusBorderColor={"brand.green.300"}
 												fontFamily={"body"}
 												name="species"
+												value={input.species}
 												onChange={(e) => handlerChange(e)}>
 												<option
 													value="default"
@@ -194,6 +198,7 @@ useEffect(() => {
 										<FormControl id="sex">
 											<Select
 												focusBorderColor={"brand.green.300"}
+												value={input.sex}
 												fontFamily={"body"}
 												name="sex"
 												key="sex"
@@ -220,6 +225,7 @@ useEffect(() => {
 								<FormControl id="age" isRequired>
 									<Select
 										focusBorderColor={"brand.green.300"}
+										value={input.age}
 										fontFamily={"body"}
 										name="age"
 										key="age"
@@ -244,6 +250,7 @@ useEffect(() => {
 								<FormControl id="size" isRequired>
 									<Select
 										focusBorderColor={"brand.green.300"}
+										value={input.size}
 										fontFamily={"body"}
 										name="size"
 										key="size"
@@ -268,6 +275,7 @@ useEffect(() => {
 								<FormControl id="status" isRequired>
 									<Select
 										focusBorderColor={"brand.green.300"}
+										value={input.status}
 										fontFamily={"body"}
 										name="status"
 										key="status"
@@ -292,6 +300,7 @@ useEffect(() => {
 										Área:
 									</Text>
 									<Input
+										value={input.area}
 										type="text"
 										fontFamily={"body"}
 										name="area"
@@ -310,6 +319,7 @@ useEffect(() => {
 										Detalles:
 									</Text>
 									<Input
+										value={input.detail}
 										fontFamily={"body"}
 										variant="flushed"
 										focusBorderColor={"brand.green.300"}
@@ -346,6 +356,7 @@ useEffect(() => {
 										Imagen:
 									</Text>
 									<Input
+										value={input.img}
 										type="text"
 										fontFamily={"body"}
 										name="img"
