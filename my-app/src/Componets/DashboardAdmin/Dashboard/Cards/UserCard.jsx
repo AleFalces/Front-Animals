@@ -26,7 +26,7 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
 
   return (
     <div>
-      <Card w="400px" >
+      <Card >
         <Box>
           <CardHeader>
             <Heading size="md">Info de usuario</Heading>
