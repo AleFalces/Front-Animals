@@ -1,14 +1,16 @@
 import React from "react";
 import styles from "./TopNav.module.css";
 import { Link } from "react-router-dom";
-import { Button, Box, Icon, SimpleGrid } from "@chakra-ui/react";
+
+import { Button, Box, Icon, SimpleGrid} from "@chakra-ui/react";
+
 import { MdArrowBackIosNew } from 'react-icons/md';
+
 
 
 
 const TopNav = () => {
   return (
-
 
     <nav /* className={styles.topNav} */>
       <SimpleGrid columns={[2, 4]} pt='2rem' bg={"brand.green.100"} pb={'1rem'}>
@@ -54,32 +56,36 @@ const TopNav = () => {
         </Box>
 
         <Box>
-        <Link to={"/dashboard/createProduct"}>
-          <Button
-            loadingText="Publicar el producto"
-            size="lg"
-            bg={"brand.green.300"} 
-            color={"white"}
-            _hover={{
-              bg: "blue.500",
-            }}
-          >Publicar producto
-          </Button>
+
+          <Link to={"/dashboard/createProduct"}>
+            <Button
+              loadingText="Publicar el producto"
+              size="lg"
+              bg={"brand.green.300"}
+              color={"white"}
+              _hover={{
+                bg: "blue.500",
+              }}
+            >Publicar producto
+            </Button>
+
           </Link>
         </Box>
 
         <Box>
-        <Link to={"/dashboard/createVet"}>
-          <Button
-            loadingText="Afiliar Veterinaria"
-            size="lg"
-           bg={"brand.green.300"} 
-            color={"white"}
-            _hover={{
-              bg: "blue.500",
-            }}
-          >Afiliar Veterinaria 
-          </Button>
+
+          <Link to={"/dashboard/createVet"}>
+            <Button
+              loadingText="Afiliar Veterinaria"
+              size="lg"
+              bg={"brand.green.300"}
+              color={"white"}
+              _hover={{
+                bg: "blue.500",
+              }}
+            >Afiliar Veterinaria
+            </Button>
+
           </Link>
         </Box>
       </SimpleGrid>
