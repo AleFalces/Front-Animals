@@ -76,7 +76,10 @@ function App() {
 				<Route exact path="/createAuth0" element={<CreateUserAuth0 />}></Route>
 				<Route exact path="/" element={<LandingPage />}></Route>
 				<Route exact path="/createUser" element={<FormPostUser />}></Route>
-        <Route exact path="/updateUser" element={<FormPostUser value={"update"}/>}></Route>
+				<Route
+					exact
+					path="/updateUser"
+					element={<FormPostUser value={"update"} />}></Route>
 				<Route exact path="/home" element={<Home />}></Route>
 				<Route exact path="/aboutUs" element={<AboutUs />}></Route>
 				<Route exact path="/pets/:paramsId" element={<Details />}></Route>
@@ -107,6 +110,10 @@ function App() {
 					exact
 					path="/dashboard/updateProduct"
 					element={<FormUpdateProduct />}></Route>
+				<Route
+					exact
+					path="/updatePet/:id"
+					element={<FormPostPet value={"update"} />}></Route>
 				<Route path="*" element={<NotFound />}></Route>
 			</Routes>
 		</div>
