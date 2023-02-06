@@ -51,16 +51,16 @@ const Dashboard = () => {
     <Box bg="brand.green.200" w="100%" h='100%'>
       <SimpleGrid columns={[2, 4, 4]} mb='2rem'>
       <Box>
-        <Button bg="orange.100" onClick={(e) => handlerShowDataUsers(e)}>Usuarios registrados</Button>
+        <Button bg="orange.100"  onClick={(e) => handlerShowDataUsers(e)}>Usuarios registrados</Button>
       </Box>
       <Box>
         <Button  bg="orange.100" onClick={(e) => handlerShowDataPets(e)}>Mascotas</Button>
       </Box>
       <Box>
-        <Button bg="orange.100" onClick={(e) => handlerShowDataProducts(e)}>Productos</Button>
+        <Button bg="orange.100"  mt={['1rem', 0, 0]} onClick={(e) => handlerShowDataProducts(e)}>Productos</Button>
       </Box>
       <Box>
-        <Button bg="orange.100" onClick={(e) => handlerShowDataVets(e)}>Veterinarias</Button>
+        <Button bg="orange.100"  mt={['1rem', 0, 0]} onClick={(e) => handlerShowDataVets(e)}>Veterinarias</Button>
       </Box>
       </SimpleGrid>
 

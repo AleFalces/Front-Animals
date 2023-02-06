@@ -95,7 +95,7 @@ export default function FormPostPet({ token, value }) {
 			})
 		);
 	};
-	console.log("INPUT FORM",input);
+	console.log("INPUT FORM", input);
 	const handlerSubmit = (e) => {
 		e.preventDefault();
 		if (
@@ -111,7 +111,7 @@ export default function FormPostPet({ token, value }) {
 			// value=== undefined         			 DESCOMENTAR Y HACER ACTION UPDATE
 			// ?dispatch(postPet(input))        	 DESCOMENTAR Y HACER ACTION UPDATE
 			// :dispatch(updatePet(input))        		 DESCOMENTAR Y HACER ACTION UPDATE
-			console.log("LOGGED USER FORM PET",JSON.parse(window.localStorage.getItem("loggedUser")));
+			console.log("LOGGED USER FORM PET", JSON.parse(window.localStorage.getItem("loggedUser")));
 			//dispatch(postPet(input, token));
 			setIsIncomplete(false);
 			setInfoSend(true);
@@ -123,16 +123,16 @@ export default function FormPostPet({ token, value }) {
 		}
 	};
 
-useEffect(() => {
-    const loggedUser = localStorage.getItem("loggedUser");
-    if (loggedUser) {
-	    const logged = JSON.parse(loggedUser);
-	    setUsuario(logged);
-		console.log("LOGGED USER", logged);
-    }
-	// if(params.id){dispatch(petDetails(params.id))} // funciona pero llega tarde
-	// console.log("PET DETAILS FORM ",pet);
-}, []);
+	useEffect(() => {
+		const loggedUser = localStorage.getItem("loggedUser");
+		if (loggedUser) {
+			const logged = JSON.parse(loggedUser);
+			setUsuario(logged);
+			console.log("LOGGED USER", logged);
+		}
+		// if(params.id){dispatch(petDetails(params.id))} // funciona pero llega tarde
+		// console.log("PET DETAILS FORM ",pet);
+	}, []);
 	return (
 		<div>
 			<Navbar />
@@ -157,7 +157,7 @@ useEffect(() => {
 						</Stack>
 						<Box
 							rounded={"lg"}
-							bg={'white'} 
+							bg={'white'}
 							boxShadow={"lg"}
 							p={8}>
 							<Stack spacing={4}>
@@ -342,33 +342,33 @@ useEffect(() => {
 								</FormControl>
 								<Stack spacing={10} pt={2}>
 									{
-									value===undefined
-								   ?<Button
-										onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
-										loadingText="Post mascota"
-										fontFamily={"body"}
-										size="lg"
-										bg={"orange.300"}
-										color={"white"}
-										_hover={{
-											bg: "orange.400",
-											/* color:"brand.green.100" */
-										}}>
-										Post mascota
-									</Button>
-									:<Button
-										onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
-										loadingText="Post mascota"
-										fontFamily={"body"}
-										size="lg"
-										bg={"orange.300"}
-										color={"white"}
-										_hover={{
-											bg: "orange.400",
-											/* color:"brand.green.100" */
-										}}>
-										Modificar mascota
-									</Button>
+										value === undefined
+											? <Button
+												onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
+												loadingText="Post mascota"
+												fontFamily={"body"}
+												size="lg"
+												bg={"orange.300"}
+												color={"white"}
+												_hover={{
+													bg: "orange.400",
+													/* color:"brand.green.100" */
+												}}>
+												Post mascota
+											</Button>
+											: <Button
+												onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
+												loadingText="Post mascota"
+												fontFamily={"body"}
+												size="lg"
+												bg={"orange.300"}
+												color={"white"}
+												_hover={{
+													bg: "orange.400",
+													/* color:"brand.green.100" */
+												}}>
+												Modificar mascota
+											</Button>
 									}
 								</Stack>
 							</Stack>

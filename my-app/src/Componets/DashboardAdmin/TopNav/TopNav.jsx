@@ -47,6 +47,14 @@ const TopNav = () => {
 
 
 
+<<<<<<< Updated upstream
+=======
+    <nav /* className={styles.topNav} */>
+      <SimpleGrid columns={[2,2, 4]} pt='2rem' bg={"brand.green.100"} pb={'1rem'}>
+        <Box>
+          <h5 className={styles.brand}>Administrar sitio Web</h5>
+        </Box>
+>>>>>>> Stashed changes
 
 
 
