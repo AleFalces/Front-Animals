@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-
-import { Link, redirect, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { petDetails, postOrUpdatePet, postPet } from "../../Redux/Actions";
+import { postOrUpdatePet, postPet, getUserId } from "../../Redux/Actions";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -18,7 +17,6 @@ import {
 	Button,
 	Heading,
 	Text,
-	useColorModeValue,
 	Icon,
 	/*  Link, */
 	Select,
@@ -63,17 +61,31 @@ const validateForm = (input) => {
 
 export default function FormPostPet({ token, value }) {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const [isIncomplete, setIsIncomplete] = useState(false);
 	const [infoSend, setInfoSend] = useState(false);
 	const [inputError, setInputError] = useState({});
-	const [usuario, setUsuario] = useState([]);
-	const paramsId = useParams("id");
-	const petData = JSON.parse(localStorage.getItem("loggedUser"))[0].pet.filter((pet) => pet.id === paramsId.id)[0];
-	const userId = JSON.parse(localStorage.getItem("loggedUser"))[0].id
+	const userInfo = useSelector((state) => state.user);
 
+	const paramsId = useParams("id");
+	const petData = JSON.parse(localStorage.getItem("loggedUser"))[0].pet.filter(
+		(pet) => pet.id === paramsId.id
+	)[0];
+	const userId = JSON.parse(localStorage.getItem("loggedUser"))[0].id;
+
+	useEffect(() => {
+		dispatch(getUserId(userId));
+	}, [dispatch, userId]);
+
+	// if (userInfo[0]?.phone === "123456789") {
+	//   alert("anda cambia el celu");
+	//   navigate("/updateUser");
+	// } else {
+	//   navigate("/createPets");
+	// }
 
 	const [input, setInput] = useState({
-		species: petData?.species || "", 
+		species: petData?.species || "",
 		sex: petData?.sex || "",
 		age: petData?.age || "",
 		size: petData?.size || "",
@@ -81,14 +93,14 @@ export default function FormPostPet({ token, value }) {
 		area: petData?.area || "",
 		detail: petData?.detail || "",
 		img: petData?.img || "",
-		userId: userId
-	})
+		userId: userId,
+	});
 
 	const handlerChange = (e) => {
 		setInput({
 			...input,
 			[e.target.name]: e.target.value,
-			userId: userId
+			userId: userId,
 		});
 		//control errores
 		setInputError(
@@ -96,8 +108,8 @@ export default function FormPostPet({ token, value }) {
 				...input,
 				[e.target.name]: e.target.value,
 			})
-			);
-		console.log("CHANGE: INPUT", input);	
+		);
+		console.log("CHANGE: INPUT", input);
 	};
 	const handlerSubmit = (e) => {
 		e.preventDefault();
@@ -111,9 +123,9 @@ export default function FormPostPet({ token, value }) {
 			input.detail &&
 			input.img !== ""
 		) {
-			value === undefined         			
-			? dispatch(postPet(input, token))      	
-			:dispatch(postOrUpdatePet(input, value, paramsId.id))        	
+			value === undefined
+				? dispatch(postPet(input, token))
+				: dispatch(postOrUpdatePet(input, value, paramsId.id));
 			// console.log("LOGGED USER FORM PET",JSON.parse(window.localStorage.getItem("loggedUser")));
 			//;dispatch(postOrUpdatePet(input))
 			setIsIncomplete(false);
@@ -125,13 +137,12 @@ export default function FormPostPet({ token, value }) {
 		}
 	};
 
-
-useEffect(() => {
-	console.log("PARAMS ID",paramsId);
-	console.log("userId ",userId);
-	console.log("RESULT ", petData);
-	console.log("INPUT FORM",input);
-}, []);
+	useEffect(() => {
+		console.log("PARAMS ID", paramsId);
+		console.log("userId ", userId);
+		console.log("RESULT ", petData);
+		console.log("INPUT FORM", input);
+	}, []);
 	return (
 		<div>
 			<Navbar />
@@ -139,7 +150,7 @@ useEffect(() => {
 			{isIncomplete ? <ErrorForm /> : null}
 			{infoSend ? <SuccedForm /> : null}
 
-			<form onSubmit={(e)=>handlerSubmit(e)} id="myForm">
+			<form onSubmit={(e) => handlerSubmit(e)} id="myForm">
 				<Flex
 					minH={"100vh"}
 					align={"center"}
@@ -147,22 +158,20 @@ useEffect(() => {
 					bg="brand.green.200">
 					<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
 						<Stack align={"center"}>
-							{value==="update"
-							?<Heading fontSize={"4xl"} textAlign={"center"}>
-								Edita tu mascota
-							</Heading>
-							:<Heading fontSize={"4xl"} textAlign={"center"}>
-								Registra tu mascota
-							</Heading>}
+							{value === "update" ? (
+								<Heading fontSize={"4xl"} textAlign={"center"}>
+									Edita tu mascota
+								</Heading>
+							) : (
+								<Heading fontSize={"4xl"} textAlign={"center"}>
+									Registra tu mascota
+								</Heading>
+							)}
 							<Text fontSize={"lg"} color={"gray.600"}>
 								Gracias por cuidar a los animales ✌️
 							</Text>
 						</Stack>
-						<Box
-							rounded={"lg"}
-							bg={'white'} 
-							boxShadow={"lg"}
-							p={8}>
+						<Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
 							<Stack spacing={4}>
 								<HStack>
 									<Box>
@@ -352,35 +361,35 @@ useEffect(() => {
 									)}
 								</FormControl>
 								<Stack spacing={10} pt={2}>
-									{
-									value===undefined
-								   ?<Button
-										onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
-										loadingText="Post mascota"
-										fontFamily={"body"}
-										size="lg"
-										bg={"orange.300"}
-										color={"white"}
-										_hover={{
-											bg: "orange.400",
-											/* color:"brand.green.100" */
-										}}>
-										Post mascota
-									</Button>
-									:<Button
-										onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
-										loadingText="Post mascota"
-										fontFamily={"body"}
-										size="lg"
-										bg={"orange.300"}
-										color={"white"}
-										_hover={{
-											bg: "orange.400",
-											/* color:"brand.green.100" */
-										}}>
-										Modificar mascota
-									</Button>
-									}
+									{value === undefined ? (
+										<Button
+											onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
+											loadingText="Post mascota"
+											fontFamily={"body"}
+											size="lg"
+											bg={"orange.300"}
+											color={"white"}
+											_hover={{
+												bg: "orange.400",
+												/* color:"brand.green.100" */
+											}}>
+											Post mascota
+										</Button>
+									) : (
+										<Button
+											onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
+											loadingText="Post mascota"
+											fontFamily={"body"}
+											size="lg"
+											bg={"orange.300"}
+											color={"white"}
+											_hover={{
+												bg: "orange.400",
+												/* color:"brand.green.100" */
+											}}>
+											Modificar mascota
+										</Button>
+									)}
 								</Stack>
 							</Stack>
 						</Box>
