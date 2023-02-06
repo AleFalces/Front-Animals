@@ -1,0 +1,30 @@
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 100vh;
+}
+.cardsContainerPadding {
+  padding: 150px;
+}
+.modifyButton {
+  color: #fff;
+  background-color: #fda85dde;
+  border-radius: 4px 4px 4px 4px;
+  position: relative;
+  
+  width: 100%;
+}
+.modifyButton:hover {
+  transition: .3s;
+  color: #fff;
+  background-color: #db8a42de;
+}
+.boxButtonDelete {    
+  /* background-color: red; */
+  width: 110%;
+}
+ .buttonDeletePet {  
+  position: relative;
+  left: 45%
+}

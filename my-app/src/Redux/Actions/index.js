@@ -10,6 +10,7 @@ import {
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
   POST_PET,
+  UPDATE_PET,
   POST_USER,
   POST_PRODUCT,
   POST_VET,
@@ -400,32 +401,55 @@ export function modifyProduct(obj) {
   };
 }
 
-export function setImageAsync(obj) {
-  console.log("OBJJJ",obj)
+export function postOrUpdatePet(formInput, value, petId) {
   return async function (dispatch) {
     try {
-        const files = obj;
-        const data = new FormData();
-        data.append("file", files[0]);
-        data.append("upload_preset", "buddycare");
-        
-        const res = await fetch(
-          "https://api.cloudinary.com/v1_1/lucho123/image/upload/",
-          {
-            method: "POST",
-            body: data,
-          }
-        );
-        const file = await res.json();
-        console.log("SECURE_URL",file.url)
-          return dispatch({
-            type: SET_IMAGE,
-            payload: file.url
-          })
+      let payload = {
+        formInput,
+        value,
+      };
+      if (value === "update") {
+        let json = await axios.put(`${HOST}/pets/${petId}`, formInput);
+        return dispatch({
+          type: UPDATE_PET,
+          payload,
+        });
+      } else {
+        let json = await axios.post(`${HOST}/pets`, formInput); // PUEDE ESTAR MAL (VER ACTION postPet (FALTA TOKEN))
+        return dispatch({
+          type: POST_PET,
+          payload,
+        });
+      }
     } catch (error) {
       console.log(error);
     }
   };
 }
+export function setImageAsync(obj) {
+  console.log("OBJJJ", obj);
+  return async function (dispatch) {
+    try {
+      const files = obj;
+      const data = new FormData();
+      data.append("file", files[0]);
+      data.append("upload_preset", "buddycare");
 
-
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/lucho123/image/upload/",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+      const file = await res.json();
+      console.log("SECURE_URL", file.url);
+      return dispatch({
+        type: SET_IMAGE,
+        payload: file.url,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

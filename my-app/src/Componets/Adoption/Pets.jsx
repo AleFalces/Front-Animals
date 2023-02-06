@@ -13,29 +13,30 @@ import Pagination from "../Pagination/Pagination";
 
 const Adoption = ({ value }) => {
   const pets = useSelector((state) => state.pets);
-  const actualPage = useSelector((state) => state.actualPage);
-
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getPets(value))
+    setCurrentPage(1)
   }, [dispatch, value]);
 
-  const [PetPerPage] = useState(3);
-
-  const lastIndex = actualPage * PetPerPage;
-  const firstIndex = lastIndex - PetPerPage;
-  const currentPetPerPage = pets.slice(firstIndex, lastIndex);
+const [currentPage, setCurrentPage] = useState(1);
+const [petsPerPage, setPetsPerPage] = useState(3);
+const indexOfLastPet = currentPage * petsPerPage;
+const indexOfFirstPet = indexOfLastPet - petsPerPage;
+const currentPets = pets.slice(indexOfFirstPet, indexOfLastPet);
+const paginate = (number) => {
+    setCurrentPage(number);
+};
 
   return (
     <>
       <Navbar />
 
-      <FilterBar value={value} />
+      <FilterBar value={value} paginate={paginate}/>
 
 
       <Box my='1rem'>
-        <Pagination pets={pets} PetPerPage={PetPerPage} />
+        <Pagination paginate={paginate} petsPerPage={petsPerPage} allPets={pets.length} currentPage={currentPage} />
       </Box>
 
       <SimpleGrid columns={[1, 2, 3]} spacing='40px' >
@@ -50,7 +51,7 @@ const Adoption = ({ value }) => {
             </Stack>
           </Center>
         ) :
-          currentPetPerPage?.map((el) => (
+          currentPets?.map((el) => (
             (
               <Link to={`/pets/${el.id}`} key={el.id}>
                 <Card data={el} />

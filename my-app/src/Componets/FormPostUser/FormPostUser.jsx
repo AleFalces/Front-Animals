@@ -61,7 +61,7 @@ const validateForm = (input) => {
 
 
 export default function FormPostUser({ value }) {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
   useEffect(() => { }, []);
 

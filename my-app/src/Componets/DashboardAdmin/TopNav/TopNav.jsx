@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./TopNav.module.css";
 import { Link } from "react-router-dom";
-import { Button, Box, Icon } from "@chakra-ui/react";
+import { Button, Box, Icon, SimpleGrid } from "@chakra-ui/react";
 import { MdArrowBackIosNew } from 'react-icons/md';
 
 
@@ -85,6 +85,7 @@ const TopNav = () => {
       </nav>
 
       );
+
 };
 
       export default TopNav;
