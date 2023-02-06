@@ -3,7 +3,6 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./MapView.css";
 import logo from "../../assets/imagenes/marcador.png";
-import { Box, Container } from "@chakra-ui/react";
 
 const myIcon = new L.icon({
   iconUrl: logo,
@@ -19,7 +18,6 @@ const MapView = ({ veterinaries }) => {
         zoom={10}
         scrollWheelZoom={false}
         className="mapContainer"
-        // zoomControl={false}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {veterinaries.length > 0

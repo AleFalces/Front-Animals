@@ -22,9 +22,9 @@ import {
   PREV_PAGE,
   ACTUAL_PAGE,
   UPDATE_PRODUCT,
+  UPDATE_USER,
   MODIFY_PRODUCT,
-  //OUT_OF_STOCK,
-  // SET_STATUS_USER,
+  SET_IMAGE,
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -160,6 +160,21 @@ export function postUser(formInput) {
       const newUser = await axios.post(`${HOST}/users`, formInput);
       return dispatch({
         type: POST_USER,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function updateUser(id, formInput) {
+  return async function (dispatch) {
+    try {
+      console.log("Action updateUSER", id);
+      await axios.put(`${HOST}/users/${id}`, formInput);
+      // const updatedProduct = await axios.get(`${HOST}/products`)
+      dispatch({
+        type: UPDATE_USER,
       });
     } catch (error) {
       console.log(error);
@@ -406,6 +421,33 @@ export function postOrUpdatePet(formInput, value, petId) {
           payload,
         });
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function setImageAsync(obj) {
+  console.log("OBJJJ", obj);
+  return async function (dispatch) {
+    try {
+      const files = obj;
+      const data = new FormData();
+      data.append("file", files[0]);
+      data.append("upload_preset", "buddycare");
+
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/lucho123/image/upload/",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+      const file = await res.json();
+      console.log("SECURE_URL", file.url);
+      return dispatch({
+        type: SET_IMAGE,
+        payload: file.url,
+      });
     } catch (error) {
       console.log(error);
     }

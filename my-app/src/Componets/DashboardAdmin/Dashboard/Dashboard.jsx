@@ -7,7 +7,8 @@ import ShowUsers from "./ShowUsers";
 import ShowPets from "./ShowPets";
 import ShowProducts from "./ShowProducts";
 import ShowVets from "./ShowVets";
-import { Button } from "@chakra-ui/react";
+import { Button, Box, Center , SimpleGrid} from "@chakra-ui/react";
+
 
 
 const Dashboard = () => {
@@ -23,12 +24,12 @@ const Dashboard = () => {
     e.preventDefault();
     setSelection("users");
   }
-  
+
   function handlerShowDataPets(e) {
     e.preventDefault();
     setSelection("pets");
   }
-  
+
   function handlerShowDataProducts(e) {
     e.preventDefault();
     setSelection("products");
@@ -38,7 +39,7 @@ const Dashboard = () => {
     setSelection("vets");
   }
 
- 
+
   useEffect(() => {
     dispatch(getAllUsers());
     dispatch(getPets())
@@ -47,34 +48,38 @@ const Dashboard = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <div>
-        <button onClick={(e) => handlerShowDataUsers(e)}>Usuarios registrados</button>
-      </div>
-      <div>
-        <button onClick={(e) => handlerShowDataPets(e)}>Mascotas</button>
-      </div>
-      <div>
-        <button onClick={(e) => handlerShowDataProducts(e)}>Productos</button>
-      </div>
-      <div>
-        <button onClick={(e) => handlerShowDataVets(e)}>Veterinarias</button>
-      </div>
-      <div>
-      
-        {selection === "users" ? (
-          <ShowUsers users={usersArray}/>
-        ) : selection === "products" ? (
-          <ShowProducts products={productsArray}/>
-        ) : selection === "pets" ? (
-          <ShowPets pets={petsArray}/>
-        ) : selection === "vets" ? (
-          <ShowVets vets={vetsArray}/>
-        ) : (
-          <>{null}</>
-        )}
-      </div>
-    </div>
+    <Box bg="brand.green.200" pb='100px'pt='1rem'>
+      <SimpleGrid columns={[2, 4, 4]} mb='2rem'>
+      <Box>
+        <Button bg="orange.100" onClick={(e) => handlerShowDataUsers(e)}>Usuarios registrados</Button>
+      </Box>
+      <Box>
+        <Button  bg="orange.100" onClick={(e) => handlerShowDataPets(e)}>Mascotas</Button>
+      </Box>
+      <Box>
+        <Button bg="orange.100" onClick={(e) => handlerShowDataProducts(e)}>Productos</Button>
+      </Box>
+      <Box>
+        <Button bg="orange.100" onClick={(e) => handlerShowDataVets(e)}>Veterinarias</Button>
+      </Box>
+      </SimpleGrid>
+
+      <Center>
+        <Box>
+          {selection === "users" ? (
+            <ShowUsers users={usersArray} />
+          ) : selection === "products" ? (
+            <ShowProducts products={productsArray} />
+          ) : selection === "pets" ? (
+            <ShowPets pets={petsArray} />
+          ) : selection === "vets" ? (
+            <ShowVets vets={vetsArray} />
+          ) : (
+            <>{null}</>
+          )}
+        </Box>
+      </Center>
+    </Box>
   );
 };
 

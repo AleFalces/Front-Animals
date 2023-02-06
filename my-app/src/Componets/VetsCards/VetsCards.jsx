@@ -13,7 +13,7 @@ import {
 const VetsCard = ({ data: { image, name, phone, id, description } }) => {
   return (
     <Box>
-      <Card>
+      <Card boxShadow={"2xl"}>
         <CardBody>
           <Center>
             <Image
@@ -25,7 +25,7 @@ const VetsCard = ({ data: { image, name, phone, id, description } }) => {
             />
           </Center>
           <Stack mt="6" spacing="3">
-            <Heading size="md">
+            <Heading size="md" fontFamily={"heading"}>
               <Link to={`/veterinary/${id}`}>{name}</Link>
             </Heading>
             <Text
@@ -36,7 +36,7 @@ const VetsCard = ({ data: { image, name, phone, id, description } }) => {
             >
               {description.charAt(0).toUpperCase() + description.substring(1)}
             </Text>
-            <Text color="blue.600" fontSize="2xl">
+            <Text color="blue.600" fontSize="2xl" fontFamily={"body"}>
               Telefono: {phone}
             </Text>
           </Stack>

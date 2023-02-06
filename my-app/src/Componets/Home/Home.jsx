@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -6,14 +6,13 @@ import Footer from "../Footer/Footer";
 import { BsPerson } from "react-icons/bs";
 import { MdOutlinePets } from "react-icons/md";
 import { GoLocation } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 import {
   Box,
   Stack,
   Flex,
   Button,
-  //Image,
-  Link,
   Text,
   VStack,
   useBreakpointValue,
@@ -64,6 +63,19 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllVeterinaries());
   }, [dispatch]);
+  const [usuario, setUsuario] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedUser = localStorage.getItem("loggedUser");
+    if (loggedUser) {
+      const logged = JSON.parse(loggedUser);
+      setUsuario(logged);
+    }
+  }, []);
+  if (usuario[0]?.status === "banned") {
+    navigate("/banned");
+  }
 
   return (
     <>
@@ -103,6 +115,7 @@ const Home = () => {
                   rounded={"full"}
                   color={"white"}
                   _hover={{ bg: "brand.darkBlue" }}
+                  fontFamily={"body"}
                 >
                   <NavLink to="/aboutUs">Conoce sobre nosotros!</NavLink>
                 </Button>
@@ -141,7 +154,7 @@ const Home = () => {
             />
             <StatsCard
               title={"Veterinarias amigas"}
-              stat={veterinaries.length}
+              stat={"7"}
               icon={<GoLocation size={"3em"} />}
             />
           </SimpleGrid>
@@ -151,7 +164,7 @@ const Home = () => {
             <Box
               h={"80"}
               backgroundImage={
-                "url(https://mestizos.cl/wp-content/uploads/2022/03/pexels-helena-lopes-1904105.jpg)"
+                "url(https://apadrinaunperro.org/wp-content/uploads/2022/02/perros-en-adopcion-pequenos.jpg)"
               }
               backgroundSize={"cover"}
               backgroundPosition={"center center"}
@@ -166,20 +179,23 @@ const Home = () => {
                 py={3}
                 fontWeight={"bold"}
                 color={"brand.orange"}
+                fontFamily={"heading"}
               >
                 Adopta tu mascota / Pone en adopción
               </chakra.h4>
-              <Link
-                mt={1}
-                textAlign={"left"}
-                display="block"
-                fontSize="lg"
-                lineHeight="normal"
-                fontWeight="semibold"
-                to="/adoptions"
-              >
-                Encontra más información sobre las mascotas en adopción
-              </Link>
+              <NavLink to="/adoptions">
+                <Text
+                  mt={1}
+                  textAlign={"left"}
+                  display="block"
+                  fontSize="lg"
+                  lineHeight="normal"
+                  fontWeight="semibold"
+                  fontFamily={"body"}
+                >
+                  Encontra más infromación sobre las mascotas en adopción
+                </Text>
+              </NavLink>
               <Text mt={2} color="gray.500" textAlign={"left"}>
                 Nuestra comunidad busca alcanzar a las mascotas a su nuevo
                 hogar. Enterate de más en nuestro feed de animales en adopción!
@@ -193,27 +209,35 @@ const Home = () => {
               <chakra.h4
                 textAlign={"right"}
                 fontSize={"2xl"}
+                fontFamily={"heading"}
                 py={3}
                 fontWeight={"bold"}
                 color={"brand.orange"}
               >
                 Animales perdidos
               </chakra.h4>
-              <Link
-                mt={1}
+              <NavLink to="/lostPets">
+                <Text
+                  textAlign={"right"}
+                  mt={1}
+                  display="block"
+                  fontSize="lg"
+                  lineHeight="normal"
+                  fontWeight="semibold"
+                  fontFamily={"body"}
+                >
+                  Encontra más información sobre los animales perdidos
+                </Text>
+              </NavLink>
+              <Text
+                mt={2}
+                color="gray.500"
                 textAlign={"right"}
-                display="block"
-                fontSize="lg"
-                lineHeight="normal"
-                fontWeight="semibold"
-                to="/lostPets"
+                fontFamily={"body"}
               >
-                Encontra más información sobre los animales perdidos
-              </Link>
-              <Text mt={2} color="gray.500" textAlign={"right"}>
                 Queremos ayudarte a encontrar a tu mascota, facilitamos la
-                busqueda por zonas, edad, tamaño, etc. Tendrás un numero con el
-                cual contactarte!
+                busqueda por zonas, edad, tamaño, etc. Tendrás formas de
+                contactarte vía WhatsApp!
               </Text>
             </Box>
             <Box
