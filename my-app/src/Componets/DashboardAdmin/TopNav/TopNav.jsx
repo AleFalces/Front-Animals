@@ -20,40 +20,55 @@ const TopNav = () => {
 
 
 
-        <Box>
-          <Link to={"/home"}>
-            <Icon
-              as={MdArrowBackIosNew}
-              color="orange.400"
-              boxSize={5}
-              _hover={{
-                color: "grey",
-                boxSize: "7",
-              }}
-            />
-            <Icon
-              as={MdArrowBackIosNew}
-              color="orange.400"
-              boxSize={5}
-              _hover={{
-                color: "grey",
-                boxSize: "7",
-              }}
-            />
-            <Button
-              fontFamily={"body"}
-              bg="base.green.100"
-              color={"grey"}
-              _hover={{
-                color: "orange.400",
-              }}
-              p="0"
-              mr="1rem">
-              {" "}
-              Atrás
-            </Button>
-          </Link>
-        </Box>
+          <Box>
+            <Link to={"/home"}>
+              <Icon
+                as={MdArrowBackIosNew}
+                color="orange.400"
+                boxSize={5}
+                _hover={{
+                  color: "grey",
+                  boxSize: "7",
+                }}
+              />
+              <Icon
+                as={MdArrowBackIosNew}
+                color="orange.400"
+                boxSize={5}
+                _hover={{
+                  color: "grey",
+                  boxSize: "7",
+                }}
+              />
+              <Button
+                fontFamily={"body"}
+                bg="base.green.100"
+                color={"grey"}
+                _hover={{
+                  color: "orange.400",
+                }}
+                p="0"
+                mr="1rem">
+                {" "}
+                Atrás
+              </Button>
+            </Link>
+          </Box>
+
+          <Box>
+            <Link to={"/dashboard/createProduct"}>
+              <Button
+                loadingText="Publicar el producto"
+                size="lg"
+                bg={"brand.green.300"}
+                color={"white"}
+                _hover={{
+                  bg: "blue.500",
+                }}
+              >Publicar producto
+              </Button>
+            </Link>
+          </Box>
 
         <Box>
 
@@ -91,7 +106,7 @@ const TopNav = () => {
       </SimpleGrid>
     </nav>
 
-  );
+
 };
 
-export default TopNav;
+      export default TopNav;
