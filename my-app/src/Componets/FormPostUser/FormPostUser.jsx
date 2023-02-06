@@ -7,6 +7,7 @@ import { ErrorForm, SuccedForm } from "../FormPostPet/AlertForm/AlertForm";
 import { MdArrowBackIosNew } from "react-icons/md";
 import logo from '../../assets/imagenes/logo_negro.png'
 import {
+
   Flex,
   Box,
   FormControl,
@@ -21,7 +22,7 @@ import {
   InputRightElement,
   InputLeftAddon,
   Icon, Image
-  //   useColorModeValue,
+
 } from "@chakra-ui/react";
 
 
@@ -58,10 +59,8 @@ const validateForm = (input) => {
 }
 
 
-
-
 export default function FormPostUser({ value }) {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
   useEffect(() => { }, []);
 
@@ -353,4 +352,4 @@ export default function FormPostUser({ value }) {
       </form>
     </div>
   );
-}
+

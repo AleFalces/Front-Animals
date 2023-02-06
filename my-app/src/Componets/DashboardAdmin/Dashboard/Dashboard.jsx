@@ -48,7 +48,7 @@ const Dashboard = () => {
   }, [dispatch]);
 
   return (
-    <Box bg="brand.green.200" w="100%" h='100%'>
+    <Box bg="brand.green.200" pb='100px'pt='1rem'>
       <SimpleGrid columns={[2, 4, 4]} mb='2rem'>
       <Box>
         <Button bg="orange.100"  onClick={(e) => handlerShowDataUsers(e)}>Usuarios registrados</Button>

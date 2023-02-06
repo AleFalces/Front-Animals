@@ -5,11 +5,9 @@ import {
   filterAdoptionPets,
   getPets
 } from "../../Redux/Actions";
+import { Box, SimpleGrid, Center, FormControl, FormLabel, Select, Button, Heading, Input } from '@chakra-ui/react'
 
-import { Box, SimpleGrid, Center, Stack, FormControl, FormLabel, Select, Text, Button, Heading, Input } from '@chakra-ui/react'
-import Simple from "../Navbar/Navbar";
-
-const FilterBar = ({ value }) => {
+const FilterBar = ({ value, paginate }) => {
   const dispatch = useDispatch();
   const defaultValue = "defaultValue";
   const [input, setInput] = useState("");
@@ -274,6 +272,7 @@ const FilterBar = ({ value }) => {
   function handlerFilterButton(e) {
     e.preventDefault();
     dispatch(filterAdoptionPets(arrayFilterValues, value));
+    paginate(1)
     selectSpeciesValue.value = defaultValue
     selectSexValue.value = defaultValue
     selectAgeValue.value = defaultValue
@@ -284,6 +283,7 @@ const FilterBar = ({ value }) => {
     console.log("SEARCH AREA VALUE :", value);
     if (input !== "" && input.trim() !== "") {
       dispatch(filterBySearchArea(input.trim(), value));
+      paginate(1)
     } else {
       alert("Debes especificar un area para que podamos buscar!");
     }
@@ -292,6 +292,7 @@ const FilterBar = ({ value }) => {
   function handlerRefreshPets(e) {
     e.preventDefault();
     dispatch(getPets(value))
+    paginate(1)
   };
 
   useEffect(() => {
@@ -438,4 +439,3 @@ const FilterBar = ({ value }) => {
 };
 
 export default FilterBar;
-
