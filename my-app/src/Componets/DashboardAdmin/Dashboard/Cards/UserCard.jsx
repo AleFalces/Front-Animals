@@ -13,9 +13,12 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setStatusUser } from "../../../../Redux/Actions";
+import { useNavigate } from "react-router-dom";
+
 
 export default function UserCard({ id, name, surname, email, phone, status }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const users = useSelector((state) => state.allUsers);
 
   function handlerSetStatusUser(id) {
@@ -98,6 +101,16 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
                     Bloquear
                   </Button>
                 )}
+                <Button
+                    onClick={() => navigate(`/updateUser/${id}`)}
+                    bg={"grey"}
+                    color={"white"}
+                    _hover={{
+                      bg: "red.400",
+                    }}
+                  >
+                    Editar
+                  </Button>
               </Box>
             
           </CardBody>

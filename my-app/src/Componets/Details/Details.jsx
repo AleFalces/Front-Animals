@@ -33,7 +33,6 @@ import { PhoneIcon, CheckIcon } from "@chakra-ui/icons";
 
 const messages = [
   "Asegúrate de tener suficiente espacio y tiempo para dedicar al cuidado del animal.",
-  "Adopción de un animal de compañía conlleva costos relacionados con alimentación, atención veterinaria, juguetes, etc.",
   " Debes estar dispuesto a asumir la gran responsabilidad de cuidar y brindar amor a un animal por el resto de su vida.",
   "Compatibilidad con tu estilo de vida: Considera si tu horario de trabajo, viajes, etc. son compatibles con el cuidado de un animal.",
   "Preparación para la llegada: Prepara tu hogar para la llegada del animal, con un lugar cómodo para dormir, juguetes y alimentación adecuada.",
@@ -41,7 +40,6 @@ const messages = [
 
 const titulo = [
   "Espacio y tiempo disponible",
-  "Costos asociados",
   "Responsabilidades a largo plazo",
   "Compatibilidad con tu estilo de vida",
   "Preparación para la llegada",
@@ -266,7 +264,10 @@ const Details = () => {
             </Box>
           </Center>
         </SimpleGrid>
-        <Box p={4} pt="7rem">
+
+
+        {/* Adoption Tips */}
+        <Box p={4} pt="3rem" bg="white" mt="6rem" pb='4rem'>
           <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
             <Heading fontSize={"3xl"}>
               Antes de adoptar, tené en cuenta estos consejos
