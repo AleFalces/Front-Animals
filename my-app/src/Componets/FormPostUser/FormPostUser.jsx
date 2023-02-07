@@ -135,9 +135,6 @@ export default function FormPostUser({ value }) {
   };
 
 
-
-
-
   return (
     <div>
       {isIncomplete ? <ErrorForm /> : null}
