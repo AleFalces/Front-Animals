@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductDetail } from "../../../Redux/Actions";
 
-
 import {
   Box,
   useColorModeValue,
@@ -45,7 +44,6 @@ export default function CardProduct({
     dispatch(getProductDetail(obj));
     setTimeout(() => navigate(`/shop/product/${id}`), 200);
   };
-
 
   return (
     <>
@@ -115,10 +113,11 @@ export default function CardProduct({
                     bg={"brand.green.300"}
                     color={"white"}
                     _hover={{
-                      bg: "brand.green.100",
+                      transform: "translateY(2px)",
+                      boxShadow: "lg",
                     }}
                   >
-                    Agregar
+                    +
                   </Button>
                   <AlertDialog
                     isOpen={isOpen}
