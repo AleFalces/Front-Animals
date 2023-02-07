@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../Adoption/Cards.css"
 import {
   Heading,
   Image,

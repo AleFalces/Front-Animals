@@ -16,10 +16,11 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Select,
+  Select, Icon
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 
+import { MdArrowBackIosNew } from "react-icons/md";
 
 export default function FormPostProduct() {
   const dispatch = useDispatch();
@@ -134,14 +135,14 @@ export default function FormPostProduct() {
 
     //Revisar xq la categoria "alimentos" me tira error si el name del product tiene espacios en el campo
   return (
-    <div>
+  <Box>
       <form id="myForm">
         <Flex
           minH={"100vh"}
           align={"center"}
           justify={"center"}
-          bg={useColorModeValue("gray.50", "gray.800")}>
-          <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          bg={"brand.green.100"}>
+          <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6} >
             <Stack align={"center"}>
               <Heading fontSize={"4xl"} textAlign={"center"}>
                 Añadir producto a la tienda
@@ -245,25 +246,55 @@ export default function FormPostProduct() {
                   <Button
                     onClick={(e) => handlerErrors(e)}
                     loadingText="Publicar el producto"
+                    fontFamily={"body"}
                     size="lg"
-                    bg={"blue.400"}
+                    bg={"orange.300"}
                     color={"white"}
                     _hover={{
-                      bg: "blue.500",
-                    }}
-                  >
+                      bg: "orange.400",
+                    }}>
                     Publicar producto
                   </Button>
                 </Stack>
               </Stack>
             </Box>
 
+
             <Link to={"/dashboard"}>
-              <button>Atrás</button>
-            </Link>
+							<Icon
+								as={MdArrowBackIosNew}
+								color="orange.400"
+								boxSize={5}
+								_hover={{
+									color: "grey",
+									boxSize: "7",
+								}}
+							/>
+							<Icon
+								as={MdArrowBackIosNew}
+								color="orange.400"
+								boxSize={5}
+								_hover={{
+									color: "grey",
+									boxSize: "7",
+								}}
+							/>
+							<Button
+								fontFamily={"body"}
+								bg="base.green.100"
+								color={"grey"}
+								_hover={{
+									color: "orange.400",
+								}}
+								p="0"
+								mr="1rem">
+								{" "}
+								Atrás
+							</Button>
+						</Link>
           </Stack>
         </Flex>
       </form>
-    </div>
+    </Box>
   );
 }

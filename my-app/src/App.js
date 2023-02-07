@@ -26,7 +26,8 @@ import Cart from "./Componets/Shop/Cart/Cart";
 import Banned from "./Componets/Banned/Banned";
 
 function App() {
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+
+  const { getAccessTokenSilently } = useAuth0();
   const [token, setToken] = useState("");
 
   useEffect(() => {

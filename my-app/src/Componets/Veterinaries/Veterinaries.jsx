@@ -18,19 +18,22 @@ const Veterinaries = () => {
   }, [dispatch]);
 
   return (
-    <Box>
+    <Box bg="brand.green.200">
       <Navbar />
       <Box>
         <Box>
           <Center>
             <chakra.h4
-              fontSize={"3xl"}
-              py={3}
+              fontSize={"4xl"}
+              py={10}
               fontWeight={"bold"}
               color={"brand.orange"}
               textAlign="center"
               maxW="20em"
               fontFamily={"heading"}
+              mt="1%"
+              mb="1%"
+              // py={10}
             >
               Bienvenidos a nuestra seccion de veterinarias en línea.
             </chakra.h4>
@@ -84,7 +87,7 @@ const Veterinaries = () => {
           </Box>
         )}
         <chakra.h4
-          fontSize={"3xl"}
+          fontSize={"4xl"}
           py={3}
           fontWeight={"bold"}
           color={"brand.orange"}

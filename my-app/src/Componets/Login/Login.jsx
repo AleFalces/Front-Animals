@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import { Box, Stack, Text, Input, Button, Divider } from "@chakra-ui/react";
 
 const Login = () => {
-	const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+	const { loginWithRedirect, logout } = useAuth0();
 	const navegate = useNavigate();
 	const [usuario, setUsuario] = useState([]);
 
@@ -27,10 +27,31 @@ const Login = () => {
 		}
 	}, []);
 
+	function handlerErrors(e) {
+		e.preventDefault();
+
+		if (input.password === "") {
+			errors.password = `Debes ingresar tu contraseña`;
+		}
+		if (input.email === "") {
+			errors.email = "Debes ingresar tu e-mail";
+		}
+
+		if (!errors.email && !errors.password) {
+			handlerSubmit(e);
+		} else {
+			alert("Debes ingresar tu e-mail y contraseña");
+		}
+	}
+
 	const [input, setInput] = useState({
 		email: "",
 		password: "",
 	});
+	const errors = {
+		email: "",
+		password: "",
+	};
 	const cerrarSesion = () => {
 		localStorage.removeItem("loggedUser");
 		logout();
@@ -41,26 +62,23 @@ const Login = () => {
 			[e.target.name]: e.target.value,
 		});
 	};
-	console.log(input);
+
 	const loginPost = async (formData) => {
 		try {
-			let login = await axios
-				.post("http://localhost:3001/users/login", formData)
-				.then(({ data }) => {
-					localStorage.setItem("loggedUser", JSON.stringify(data));
-					// if (data[0]?.status === "banned") {
-					// 	navegate("/banned");
-					// } else {
-					navegate("/home");
+			let login = await axios.post(
+				"http://localhost:3001/users/login",
+				formData
+			);
 
-					alert("Usuario Logueado");
-				})
-				.catch(({ response }) => {
-					alert(response.data);
-				});
-			console.log(login);
+			if (login.data.length >= 0) {
+				localStorage.setItem("loggedUser", JSON.stringify(login.data));
+				navegate("/home");
+				alert("Usuario Logueado");
+			} else {
+				alert("su usuario o contraseña son incorrectos");
+			}
 		} catch (err) {
-			return err.message;
+			alert("su usuario o contraseña son incorrectos");
 		}
 	};
 
@@ -111,7 +129,7 @@ const Login = () => {
 						</form>
 						<Box py="1rem">
 							<Button
-								onClick={handlerSubmit}
+								onClick={handlerErrors}
 								className="formButtom"
 								type="submit"
 								fontFamily={"body"}
