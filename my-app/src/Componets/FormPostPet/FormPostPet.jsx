@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+
+import { Link, redirect, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postOrUpdatePet, postPet, getUserId } from "../../Redux/Actions";
+import { petDetails, postOrUpdatePet, postPet } from "../../Redux/Actions";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -17,6 +18,7 @@ import {
 	Button,
 	Heading,
 	Text,
+	useColorModeValue,
 	Icon,
 	/*  Link, */
 	Select,
@@ -53,36 +55,23 @@ const validateForm = (input) => {
 	if (input.img === "") {
 		inputError.img = "Inserta el link de una imagen";
 	}
-	if (input.userId === "") {
-		inputError.userId = "Ingresa el UUID del usuario";
-	}
+	// if (input.userId === "") {
+	// 	inputError.userId = "Ingresa el UUID del usuario";
+	// }
 	return inputError;
 };
 
 export default function FormPostPet({ token, value }) {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const [isIncomplete, setIsIncomplete] = useState(false);
 	const [infoSend, setInfoSend] = useState(false);
 	const [inputError, setInputError] = useState({});
-	const userInfo = useSelector((state) => state.user);
-
+	const [usuario, setUsuario] = useState([]);
 	const paramsId = useParams("id");
 	const petData = JSON.parse(localStorage.getItem("loggedUser"))[0].pet.filter(
 		(pet) => pet.id === paramsId.id
 	)[0];
 	const userId = JSON.parse(localStorage.getItem("loggedUser"))[0].id;
-
-	useEffect(() => {
-		dispatch(getUserId(userId));
-	}, [dispatch, userId]);
-
-	// if (userInfo[0]?.phone === "123456789") {
-	//   alert("anda cambia el celu");
-	//   navigate("/updateUser");
-	// } else {
-	//   navigate("/createPets");
-	// }
 
 	const [input, setInput] = useState({
 		species: petData?.species || "",
@@ -100,7 +89,7 @@ export default function FormPostPet({ token, value }) {
 		setInput({
 			...input,
 			[e.target.name]: e.target.value,
-			userId: userId,
+			// userId: userId,
 		});
 		//control errores
 		setInputError(
@@ -142,6 +131,7 @@ export default function FormPostPet({ token, value }) {
 		console.log("userId ", userId);
 		console.log("RESULT ", petData);
 		console.log("INPUT FORM", input);
+		console.log("value FORM", value);
 	}, []);
 	return (
 		<div>
