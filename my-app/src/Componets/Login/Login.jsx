@@ -12,12 +12,34 @@ import { Link } from "react-router-dom";
 //   Cerrar Sesion
 // </button>
 
-import { Box, Stack, Text, Input, Button, Divider } from "@chakra-ui/react";
+import {
+	Box, Stack, Text, Input, Button, Divider, Center
+} from "@chakra-ui/react";
+
+function validateForm(input) {
+	let inputErrors = {}
+
+	if (input.password === "") {
+		inputErrors.password = `Debes ingresar tu contraseña`;
+	}
+	if (input.email === "") {
+		inputErrors.email = "Debes ingresar tu e-mail";
+	}
+	return inputErrors
+}
+
 
 const Login = () => {
 	const { loginWithRedirect, logout } = useAuth0();
 	const navegate = useNavigate();
 	const [usuario, setUsuario] = useState([]);
+	const [inputErrors, setInputErrors] = useState({});
+	const [input, setInput] = useState({
+		email: "",
+		password: "",
+	});
+
+
 
 	useEffect(() => {
 		const loggedUser = localStorage.getItem("loggedUser");
@@ -27,40 +49,26 @@ const Login = () => {
 		}
 	}, []);
 
-	function handlerErrors(e) {
-		e.preventDefault();
-
-		if (input.password === "") {
-			errors.password = `Debes ingresar tu contraseña`;
-		}
-		if (input.email === "") {
-			errors.email = "Debes ingresar tu e-mail";
-		}
-
-		if (!errors.email && !errors.password) {
-			handlerSubmit(e);
-		} else {
-			alert("Debes ingresar tu e-mail y contraseña");
-		}
-	}
-
-	const [input, setInput] = useState({
-		email: "",
-		password: "",
-	});
-	const errors = {
-		email: "",
-		password: "",
-	};
-	const cerrarSesion = () => {
-		localStorage.removeItem("loggedUser");
-		logout();
-	};
 	const handleChange = (e) => {
 		setInput({
 			...input,
 			[e.target.name]: e.target.value,
 		});
+
+		//control errors
+		setInputErrors(
+			validateForm({
+				...input,
+				[e.target.name]: e.target.value,
+			})
+		);
+	};
+
+
+
+	const cerrarSesion = () => {
+		localStorage.removeItem("loggedUser");
+		logout();
 	};
 
 	const loginPost = async (formData) => {
@@ -73,19 +81,25 @@ const Login = () => {
 			if (login.data.length >= 0) {
 				localStorage.setItem("loggedUser", JSON.stringify(login.data));
 				navegate("/home");
-				alert("Usuario Logueado");
+				alert("Usuario logueado");
 			} else {
-				alert("su usuario o contraseña son incorrectos");
+				alert("Ingrese usuario y contraseña")
 			}
 		} catch (err) {
-			alert("su usuario o contraseña son incorrectos");
+			alert("Su usuario o contraseña son incorrectos");
 		}
 	};
 
 	const handlerSubmit = (e) => {
 		e.preventDefault();
-		loginPost({ ...input });
-	};
+		if (input.email && input.password) {
+			loginPost({ ...input });
+		} else {
+			alert("Debes ingresar tu e-mail y contraseña");
+		}
+	}
+
+
 
 	return (
 		<>
@@ -106,12 +120,13 @@ const Login = () => {
 										bg={"gray.100"}
 										focusBorderColor={"brand.green.300"}
 										placeholder="Ingresa tu Email"
-										border={0}
+										border={1}
 										color={"gray.500"}
 										_placeholder={{
 											color: "gray.500",
 										}}
 										onChange={handleChange}></Input>
+									{inputErrors.email && (<Text className="text_inputError" fontSize={'0.8rem'}>{inputErrors.email}</Text>)}
 
 									<Input
 										type="password"
@@ -119,20 +134,20 @@ const Login = () => {
 										bg={"gray.100"}
 										focusBorderColor={"brand.green.300"}
 										placeholder="Ingresa tu contraseña"
-										border={0}
+										border={1}
 										color={"gray.500"}
 										_placeholder={{
 											color: "gray.500",
 										}}
 										onChange={handleChange}
-									/>
+									/>{inputErrors.password && (<Text className="text_inputError" fontSize={'0.8rem'}>{inputErrors.password}</Text>)}
 								</Stack>
 							</Box>
 						</form>
 						<Box py="1rem">
 							<Button
-								onClick={handlerErrors}
-								className="formButtom"
+								onClick={handlerSubmit}
+
 								type="submit"
 								fontFamily={"body"}
 								size="lg"
@@ -148,8 +163,12 @@ const Login = () => {
 						</Box>
 						<Box py="1rem">
 							<Text fontFamily={"body"}>No estás registrado?</Text>
-							<Link to={`/createUser`}>
-								<p>hazlo aquí</p>
+							<Link to={`/createUser`} >
+								<Text _hover={{
+									color: "brand.green.300",
+									fontWeight: 'bold'
+								}}>hazlo aquí</Text>
+
 							</Link>
 						</Box>
 					</div>
@@ -186,22 +205,32 @@ const Login = () => {
 						bg="gray.200"
 						borderRadius="7px"
 					/>
-					<Box
-						py="1rem"
-						mt="1rem"
-						borderRadius={7}
-						_hover={{
-							bg: "orange.100",
-						}}>
-						<Link to={`/home`}>
-							<Text
-								fontFamily={"body"}
-								color={"brand.green.300"}
-								fontWeight={"bold"}>
-								Usuarios sin registro
-							</Text>
-						</Link>
-					</Box>
+					<Center>
+						<Box
+							py="1rem"
+							mt="1rem"
+							borderRadius={7}
+							color={"brand.green.300"}
+							size="lg"
+							w="50%"
+							px="1rem"
+							_hover={{
+								bg: "orange.100",
+								fontWeight: 'bold'
+							}}>
+							<Link to={`/home`}>
+								<Text
+									fontFamily={"body"}
+									fontSize='1.2rem'
+									_hover={{
+										color: "brand.green.300",
+
+									}}>
+									Usuario invitado
+								</Text>
+							</Link>
+						</Box>
+					</Center>
 				</div>
 			)}
 		</>

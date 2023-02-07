@@ -5,17 +5,10 @@ import {
   filterAdoptionPets,
   getPets,
 } from "../../Redux/Actions";
-import {
-  Box,
-  SimpleGrid,
-  Center,
-  FormControl,
-  FormLabel,
-  Select,
-  Button,
-  Heading,
-  Input,
-} from "@chakra-ui/react";
+
+
+import { Box, SimpleGrid, Center, FormControl, FormLabel, Select, Button, Heading, Input } from '@chakra-ui/react'
+
 
 const FilterBar = ({ value, paginate }) => {
   const dispatch = useDispatch();
@@ -423,28 +416,17 @@ const FilterBar = ({ value, paginate }) => {
 
       <Box bg={"brand.green.200"}>
         <Center>
-          <Box
-            w="50%"
-            mt={["2rem", "2rem", "3rem"]}
-            mr={["0rem", "0rem", "1rem"]}
-            ml={["0rem", "6rem", "0"]}
-          >
-            <Input
-              variant="filled"
-              bg={"white"}
-              focusBorderColor={"brand.green.300"}
-              type="text"
-              borderRadius={"full"}
+          <Box w='50%' mt={['2rem', '2rem', '3rem']}  ml={['0rem', '0', '0']}>
+            <Input h="3rem" variant='filled' bg={'white'} focusBorderColor={"brand.green.300"} type="text" w={['100%', '100%', '60%', '60%']}
               onChange={(e) => handlerInputChange(e)}
-              placeholder="Buscar por área..."
-            />
-          </Box>
+              placeholder="Buscar por área..." />
 
-          <Box mt={["2rem", "2rem", "3rem"]} ml={["1rem", "1rem", "1rem"]}>
-            <Button
+
+            <Button mt={['1rem', '1rem', '0', '0']} ml={['0rem', '0', '1rem']}
               onClick={(e) => handlerSearchByArea(e, value)}
               fontFamily={"body"}
-              size="md"
+              w='6rem'
+              borderRadius="30px"
               bg={"orange.300"}
               color={"white"}
               borderRadius={"full"}
@@ -457,12 +439,8 @@ const FilterBar = ({ value, paginate }) => {
           </Box>
         </Center>
 
-        <SimpleGrid
-          w="100%"
-          my={["1rem", "1rem", "1rem"]}
-          columns={[2, 2, 4]}
-          /* direction={['column', 'row']}  */ spacing="4px"
-        >
+
+        <SimpleGrid w="100%" my={['1rem', '1rem', '1rem']} columns={[2, 2, 4, 4]} spacing='4px'>
           <Center>
             <Box w="60%" my={["0.5rem", "0.5rem", "1rem"]}>
               <FormControl>
@@ -576,9 +554,7 @@ const FilterBar = ({ value, paginate }) => {
 
         <SimpleGrid w="100%" pb="2rem">
           <Center>
-            <Button
-              w="4rem"
-              mx="1rem"
+            <Button w='5rem' mx='1rem' borderRadius="30px"
               className="selectsFilter"
               onClick={(e) => handlerFilterButton(e)}
               fontFamily={"body"}
@@ -592,8 +568,8 @@ const FilterBar = ({ value, paginate }) => {
             >
               Filtrar
             </Button>
-            <Button
-              w="4rem"
+
+            <Button w='5rem' borderRadius="30px"
               className="selectsFilter"
               onClick={(e) => handlerRefreshPets(e)}
               fontFamily={"body"}

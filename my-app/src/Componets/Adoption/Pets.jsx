@@ -41,27 +41,28 @@ const Adoption = ({ value }) => {
           currentPage={currentPage}
         />
       </Box>
-
-      <SimpleGrid columns={[1, 2, 3]} spacing="40px">
-        {!pets?.length ? (
-          <Center>
-            <Stack direction="row">
-              <Box h="10rem" bg="purple.100">
-                <Text px="4rem" fontFamily={"body"}>
-                  No hay mascotas en tu área
-                </Text>
-                <Icon boxSize={120} w="100px" as={SiDatadog}></Icon>
-              </Box>
-            </Stack>
-          </Center>
-        ) : (
-          currentPets?.map((el) => (
-            <Link to={`/pets/${el.id}`} key={el.id}>
-              <Card data={el} />
-            </Link>
-          ))
-        )}
-      </SimpleGrid>
+      <Center >
+        <SimpleGrid columns={[1, 1, 2, 3]} spacing={10}>
+          {!pets?.length ? (
+            <Center>
+              <Stack direction="row">
+                <Box bg="purple.100">
+                  <Text px="4rem" fontFamily={"body"}>
+                    No hay mascotas en tu área
+                  </Text>
+                  <Icon boxSize={120} w="100px" as={SiDatadog}></Icon>
+                </Box>
+              </Stack>
+            </Center>
+          ) : (
+            currentPets?.map((el) => (
+              <Link to={`/pets/${el.id}`} key={el.id}>
+                <Card data={el} />
+              </Link>
+            ))
+          )}
+        </SimpleGrid>
+      </Center>
       <Footer />
     </>
   );
