@@ -48,7 +48,7 @@ export default function Shop() {
 
 
   
-  const handlerSetCart = (e, id, price, image, name) => {
+  const handlerSetCart = (e, id, price, image, name, stock) => {
     e.preventDefault()
     try {
       let product = {
@@ -56,6 +56,7 @@ export default function Shop() {
         image,
         price,
         id,
+        stock,
         amount: 1,
       }
       let oldCart = JSON.parse(window.localStorage.getItem("cart"))
@@ -97,6 +98,7 @@ export default function Shop() {
 
   useEffect(() => {
     dispatch(getAllProducts())
+    console.log("SHOP: ", products);
   }, [cart])
 
     return (
