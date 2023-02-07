@@ -2,17 +2,27 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../../../Redux/Actions";
 import { useParams } from "react-router-dom";
-import "./ProductDetail.css";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
 import axios from "axios";
 
+import {
+  Box,
+  useColorModeValue,
+  Image,
+  Heading,
+  Text,
+  Center,
+  HStack,
+  Button,
+} from "@chakra-ui/react";
 
 export default function ProductDetail() {
-	const dispatch = useDispatch();
-	const detail = useSelector((state) => state.productDetail);
+  const dispatch = useDispatch();
+  const detail = useSelector((state) => state.productDetail);
 
-	useEffect(() => {}, [dispatch]);
+  useEffect(() => {}, [dispatch]);
+
 
 	const payMp = async ()=>{
 		axios.post(`http://localhost:3001/donation`,
@@ -55,42 +65,61 @@ console.log("DETAIL PRODUCT STOCK :", detail[0].stock);
 					<div className="imgxbutton">
 						<img src={detail[0].image} alt="" />
 						<div>
-
-							<button onClick={()=>payMp()}>Comprar</button>
-
-							<button onClick={(e)=>detail[0].handlerSetCart(e, detail[0].id, detail[0].price, detail[0].image, detail[0].name, detail[0].stock )}>Agregar</button>
-
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="divTopReview"></div>
-			<div className="reviewsContainer">
-				Reseñas
-				<h1>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
-					consectetur quos sequi maiores id, cum voluptate saepe sint deleniti
-					dolorum nam necessitatibus velit optio earum. Rem quas fuga autem cum.
-				</h1>
-				<h1>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
-					consectetur quos sequi maiores id, cum voluptate saepe sint deleniti
-					dolorum nam necessitatibus velit optio earum. Rem quas fuga autem cum.
-				</h1>
-				<h1>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
-					consectetur quos sequi maiores id, cum voluptate saepe sint deleniti
-					dolorum nam necessitatibus velit optio earum. Rem quas fuga autem cum.
-				</h1>
-				<h1>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
-					consectetur quos sequi maiores id, cum voluptate saepe sint deleniti
-					dolorum nam necessitatibus velit optio earum. Rem quas fuga autem cum.
-				</h1>
-			</div>
-			<div className="footerProductDetail">
-				<Footer />
-			</div>
+              		<div className="footerProductDetail">
+			         <Footer />
 		</div>
-	);
-}
+              
+              )}
+
+					//		<button onClick={(e)=>detail[0].handlerSetCart(e, detail[0].id, detail[0].price, detail[0].image, detail[0].name, detail[0].stock )}>Agregar</button>
+
+//   return (
+//     <>
+//       <Navbar />
+//       <Box
+//         minHeight={"150vh"}
+//         bg="brand.backgorund"
+//         paddingBottom={"3rem"}
+//       ></Box>
+//     </>
+//   );
+// }
+
+
+
+
+// 						<button onClick={()=>payMp()}>Comprar</button>
+
+// 						<button onClick={(e)=>detail[0].handlerSetCart(e, detail[0].id, detail[0].price, detail[0].image, detail[0].name )}>Agregar</button>
+
+// 					</div>
+// 				</div>
+// 			</div>
+// 		</div>
+// 		<div className="divTopReview"></div>
+// 		<div className="reviewsContainer">
+// 			Reseñas
+// 			<h1>
+// 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+// 				consectetur quos sequi maiores id, cum voluptate saepe sint deleniti
+// 				dolorum nam necessitatibus velit optio earum. Rem quas fuga autem cum.
+// 			</h1>
+// 			<h1>
+// 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+// 				consectetur quos sequi maiores id, cum voluptate saepe sint deleniti
+// 				dolorum nam necessitatibus velit optio earum. Rem quas fuga autem cum.
+// 			</h1>
+// 			<h1>
+// 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+// 				consectetur quos sequi maiores id, cum voluptate saepe sint deleniti
+// 				dolorum nam necessitatibus velit optio earum. Rem quas fuga autem cum.
+// 			</h1>
+// 			<h1>
+// 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+// 				consectetur quos sequi maiores id, cum voluptate saepe sint deleniti
+// 				dolorum nam necessitatibus velit optio earum. Rem quas fuga autem cum.
+// 			</h1>
+// 		</div>
+// 		<div className="footerProductDetail">
+// 			<Footer />
+// 		</div>
