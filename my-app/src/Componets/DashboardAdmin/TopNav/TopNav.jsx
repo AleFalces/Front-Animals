@@ -64,6 +64,7 @@ const TopNav = () => {
 					</Link>
 				</Box>
 
+<<<<<<< Updated upstream
 				<Box>
 					<Link to={"/dashboard/createProduct"}>
 						<Button
@@ -96,6 +97,25 @@ const TopNav = () => {
 			</SimpleGrid>
 		</nav>
 	);
+=======
+        <Box>
+          <Link to={"/dashboard/createVet"}>
+            <Button
+              loadingText="Afiliar Veterinaria"
+              size="lg"
+              bg={"brand.green.300"}
+              color={"white"}
+              _hover={{
+                bg: "blue.500",
+              }}>
+              Afiliar Veterinaria
+            </Button>
+          </Link>
+        </Box>
+      </SimpleGrid>
+    </nav>
+  );
+>>>>>>> Stashed changes
 };
 
 export default TopNav;
