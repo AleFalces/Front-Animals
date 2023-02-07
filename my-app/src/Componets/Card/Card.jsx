@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import "../Adoption/Cards.css"
 import {
@@ -28,7 +28,7 @@ import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { deletePet } from "../../Redux/Actions";
-
+import { handlerDeletePet } from "../../utils";
 
 const Card = ({ data: { id, size, img, sex, species, age, area }, value} ) => {
   const dispatch = useDispatch()
@@ -39,11 +39,12 @@ function handlerNavigateUpdate(e) {
   e.preventDefault();
   navigate(`/updatePet/${id}`)
 }
-function handlerDeletePet(e, id) { // FUNCION DELETE PONER EN EL BOTON X
+
+function handlerDeletePet(e, id) {
 e.preventDefault();
-console.log("HANDLER DELETE PET!!!!!!!!!!!!!!!!!");
 dispatch(deletePet(id))
 }
+useEffect(()=>{},[dispatch])
   return (
     <Box>      
       <Center py={6}>
@@ -94,7 +95,7 @@ dispatch(deletePet(id))
                     <Button ref={cancelRef} onClick={onClose}>
                       Cancelar
                     </Button>
-                    <Button colorScheme="red" onClick={(e)=>{handlerDeletePet(e,id); onClose()}} ml={3}> {/* onClick={onClose}*/}
+                    <Button colorScheme="red" onClick={(e)=>{handlerDeletePet(e,id); onClose()}} ml={3}>
                       Borrar
                     </Button>
                   </AlertDialogFooter>
