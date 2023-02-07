@@ -464,7 +464,7 @@ export function setImageAsync(obj) {
 export function deletePet(id) {
   return async function (dispatch) {
     try {
-      const json = await axios.delete(`${HOST}/${id}`);
+      const json = await axios.delete(`${HOST}/pets/${id}`);
       return dispatch({
         type: DELETE_PET,
       });
