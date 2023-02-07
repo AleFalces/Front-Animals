@@ -61,7 +61,7 @@ dispatch(deletePet(id))
 
           {/* ↓↓↓↓↓↓   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↓↓↓↓↓↓ */}
 {value === "update"?
-           <Box paddingRight={3} p={2} className="boxButtonDelete">
+           <Box paddingRight={3} p={2}>
             <Button
               fontFamily={"body"}
               size="sm"
@@ -175,10 +175,6 @@ dispatch(deletePet(id))
           
 {/*       ↓↓↓↓↓↓↓↓   BOTON EDITAR   ↓↓↓↓↓↓↓↓       */}
 {value=== "update"?<button className="modifyButton" onClick={(e) => handlerNavigateUpdate(e)}>Editar</button>:null}
-
-
-
-
           <Stack mt={4} direction={"column"} spacing={4}>
             <Center>
             </Center>

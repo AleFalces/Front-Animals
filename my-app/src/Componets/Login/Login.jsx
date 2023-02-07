@@ -104,6 +104,7 @@ const Login = () => {
 										type="email"
 										name="email"
 										bg={"gray.100"}
+										focusBorderColor={"brand.green.300"}
 										placeholder="Ingresa tu Email"
 										border={0}
 										color={"gray.500"}
@@ -116,6 +117,7 @@ const Login = () => {
 										type="password"
 										name="password"
 										bg={"gray.100"}
+										focusBorderColor={"brand.green.300"}
 										placeholder="Ingresa tu contraseña"
 										border={0}
 										color={"gray.500"}
