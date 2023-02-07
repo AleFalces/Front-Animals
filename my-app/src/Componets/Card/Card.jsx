@@ -21,7 +21,7 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
 } from "@chakra-ui/react";
-
+import "../Adoption/Cards.css"
 import { useDisclosure } from "@chakra-ui/react";
 import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";

@@ -26,6 +26,7 @@ import Cart from "./Componets/Shop/Cart/Cart";
 import Banned from "./Componets/Banned/Banned";
 
 function App() {
+
   const { getAccessTokenSilently } = useAuth0();
   const [token, setToken] = useState("");
 
@@ -76,6 +77,11 @@ function App() {
           path="/createPet"
           element={<FormPostPet token={token} />}
         ></Route>
+        <Route
+          exact
+          path="/updatePet/:id"
+          element={<FormPostPet token={token} value={"update"} />}
+        ></Route>
         <Route exact path="/createAuth0" element={<CreateUserAuth0 />}></Route>
         <Route exact path="/" element={<LandingPage />}></Route>
         <Route exact path="/createUser" element={<FormPostUser />}></Route>
@@ -120,12 +126,6 @@ function App() {
           path="/dashboard/updateProduct"
           element={<FormUpdateProduct />}
         ></Route>
-        <Route
-          exact
-          path="/updatePet/:id"
-          element={<FormPostPet value={"update"} />}
-        ></Route>
-
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
