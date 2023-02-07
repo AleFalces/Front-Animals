@@ -17,6 +17,7 @@ import {
   Wrap,
   IconButton,
   Avatar,
+  Spinner,
 } from "@chakra-ui/react";
 import { PhoneIcon } from "@chakra-ui/icons";
 import { RiHospitalLine } from "react-icons/ri";
@@ -29,13 +30,28 @@ const VetsDetails = () => {
 
   useEffect(() => {
     dispatch(VeterinaryDetails(paramsId));
+    window.scrollTo(0, 0);
   }, [dispatch, paramsId]);
 
   return (
     <>
       <Navbar />
       {!Detail?.length ? (
-        <p>Cargando veterinaria</p>
+        <Box height="100vh" position="relative">
+          <Center>
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+              mt="15em"
+            />
+          </Center>
+          <Text fontFamily="heading" fontSize={"3xl"} mt="2em">
+            Cargando...
+          </Text>
+        </Box>
       ) : (
         <Box bg="brand.green.200" pb={["1rem", "2rem", "2rem"]}>
           <SimpleGrid columns={[1, 1, 2, 2]} spacing={["10px", "10px", "30px"]}>
