@@ -84,6 +84,7 @@ function App() {
         <Route exact path="/createAuth0" element={<CreateUserAuth0 />}></Route>
         <Route exact path="/" element={<LandingPage />}></Route>
         <Route exact path="/createUser" element={<FormPostUser />}></Route>
+        <Route exact path="/updateUser/:id" element={<FormPostUser value={"update"}/>}></Route>
         <Route
           exact
           path="/updateUser"
