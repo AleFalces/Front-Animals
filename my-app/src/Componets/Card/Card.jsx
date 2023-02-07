@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import "../Adoption/Cards.css"
+import "../Adoption/Cards.css";
 import {
   Heading,
   Image,
@@ -22,30 +22,30 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
 } from "@chakra-ui/react";
-import "../Adoption/Cards.css"
+import "../Adoption/Cards.css";
 import { useDisclosure } from "@chakra-ui/react";
 import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { deletePet } from "../../Redux/Actions";
 
-
-const Card = ({ data: { id, size, img, sex, species, age, area }, value} ) => {
-  const dispatch = useDispatch()
+const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
-  const navigate = useNavigate()
-function handlerNavigateUpdate(e) {
-  e.preventDefault();
-  navigate(`/updatePet/${id}`)
-}
-function handlerDeletePet(e, id) { // FUNCION DELETE PONER EN EL BOTON X
-e.preventDefault();
-console.log("HANDLER DELETE PET!!!!!!!!!!!!!!!!!");
-dispatch(deletePet(id))
-}
+  const navigate = useNavigate();
+  function handlerNavigateUpdate(e) {
+    e.preventDefault();
+    navigate(`/updatePet/${id}`);
+  }
+  function handlerDeletePet(e, id) {
+    // FUNCION DELETE PONER EN EL BOTON X
+    e.preventDefault();
+    console.log("HANDLER DELETE PET!!!!!!!!!!!!!!!!!");
+    dispatch(deletePet(id));
+  }
   return (
-    <Box>      
+    <Box>
       <Center py={6}>
         <Box
           maxW={"320px"}
@@ -57,54 +57,60 @@ dispatch(deletePet(id))
           p={6}
           textAlign={"center"}
         >
-
-
           {/* ↓↓↓↓↓↓   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↓↓↓↓↓↓ */}
-{value === "update"?
-           <Box paddingRight={3} p={2}>
-            <Button
-              fontFamily={"body"}
-              size="sm"
-              w="10%"
-              bg={"orange.300"}
-              color={"white"}
-              _hover={{
-                bg: "orange.400",
-              }}
-              onClick={onOpen}
-              className="buttonDeletePet"
-            >
-              X
-            </Button>
-            <AlertDialog
-              isOpen={isOpen}
-              leastDestructiveRef={cancelRef}
-              onClose={onClose}
-            >
-              <AlertDialogOverlay>
-                <AlertDialogContent>
-                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                    Borrar Mascota
-                  </AlertDialogHeader>
-                  <AlertDialogBody>
-                    ¿Estás seguro/a de querer borrar tu mascota? No podras
-                    volver atras una vez hecho.
-                  </AlertDialogBody>
-                  <AlertDialogFooter>
-                    <Button ref={cancelRef} onClick={onClose}>
-                      Cancelar
-                    </Button>
-                    <Button colorScheme="red" onClick={(e)=>{handlerDeletePet(e,id); onClose()}} ml={3}> {/* onClick={onClose}*/}
-                      Borrar
-                    </Button>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialogOverlay>
-            </AlertDialog>
-          </Box>:null
-}
+          {value === "update" ? (
+            <Box paddingRight={3} p={2}>
+              <Button
+                fontFamily={"body"}
+                size="sm"
+                w="10%"
+                bg={"orange.300"}
+                color={"white"}
+                _hover={{
+                  bg: "orange.400",
+                }}
+                onClick={onOpen}
+                className="buttonDeletePet"
+              >
+                X
+              </Button>
+              <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+              >
+                <AlertDialogOverlay>
+                  <AlertDialogContent>
+                    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                      Borrar Mascota
+                    </AlertDialogHeader>
+                    <AlertDialogBody>
+                      ¿Estás seguro/a de querer borrar tu mascota? No podras
+                      volver atras una vez hecho.
+                    </AlertDialogBody>
+                    <AlertDialogFooter>
+                      <Button ref={cancelRef} onClick={onClose}>
+                        Cancelar
+                      </Button>
+                      <Button
+                        colorScheme="red"
+                        onClick={(e) => {
+                          handlerDeletePet(e, id);
+                          onClose();
+                        }}
+                        ml={3}
+                      >
+                        {" "}
+                        {/* onClick={onClose}*/}
+                        Borrar
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialogOverlay>
+              </AlertDialog>
+            </Box>
+          ) : null}
           {/* ↑↑↑↑↑↑↑↑   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↑↑↑↑↑↑↑↑ */}
-
 
           <Center>
             <Image
@@ -142,22 +148,21 @@ dispatch(deletePet(id))
             </Box>
           </Text>
 
-{value!=="update"?<Text
-            fontWeight={"bold"}
-            textAlign={"center"}
-            color={"gray.500"}
-            fontFamily={"heading"}
-            px={3}
-          >
-            Tag{" "}
-            <Link href={"#"} color={"blue.400"}>
-              #adoptaun{species}
-            </Link>{" "}
-            en tus post!
-          </Text>
-    :null
-}
-
+          {value !== "update" ? (
+            <Text
+              fontWeight={"bold"}
+              textAlign={"center"}
+              color={"gray.500"}
+              fontFamily={"heading"}
+              px={3}
+            >
+              Tag{" "}
+              <Link href={"#"} color={"blue.400"}>
+                #adoptaun{species}
+              </Link>{" "}
+              en tus post!
+            </Text>
+          ) : null}
 
           <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
             <Badge
@@ -171,13 +176,17 @@ dispatch(deletePet(id))
             </Badge>
           </Stack>
 
-
-          
-{/*       ↓↓↓↓↓↓↓↓   BOTON EDITAR   ↓↓↓↓↓↓↓↓       */}
-{value=== "update"?<button className="modifyButton" onClick={(e) => handlerNavigateUpdate(e)}>Editar</button>:null}
+          {/*       ↓↓↓↓↓↓↓↓   BOTON EDITAR   ↓↓↓↓↓↓↓↓       */}
+          {value === "update" ? (
+            <button
+              className="modifyButton"
+              onClick={(e) => handlerNavigateUpdate(e)}
+            >
+              Editar
+            </button>
+          ) : null}
           <Stack mt={4} direction={"column"} spacing={4}>
-            <Center>
-            </Center>
+            <Center></Center>
           </Stack>
         </Box>
       </Center>
@@ -186,8 +195,3 @@ dispatch(deletePet(id))
 };
 
 export default Card;
-
-
-
-
-
