@@ -27,6 +27,7 @@ export default function ProductDetail() {
 		  console.error(error);
 		  });
 	  }
+console.log("DETAIL PRODUCT STOCK :", detail[0].stock);
 	  
 	return (
 		<div className="detailProductContainerAll">
@@ -57,7 +58,7 @@ export default function ProductDetail() {
 
 							<button onClick={()=>payMp()}>Comprar</button>
 
-							<button onClick={(e)=>detail[0].handlerSetCart(e, detail[0].id, detail[0].price, detail[0].image, detail[0].name )}>Agregar</button>
+							<button onClick={(e)=>detail[0].handlerSetCart(e, detail[0].id, detail[0].price, detail[0].image, detail[0].name, detail[0].stock )}>Agregar</button>
 
 						</div>
 					</div>

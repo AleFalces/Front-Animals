@@ -13,7 +13,6 @@ export default function CardProduct({id, name, image, price, description, stock,
     dispatch(getProductDetail(obj))
     setTimeout(()=>navigate(`/shop/product/${id}`), 200)
   }
-
     return(
       <div  className="productContainer">
       <div className="productContainer">
@@ -22,6 +21,7 @@ export default function CardProduct({id, name, image, price, description, stock,
               <img src={image} alt="img not found" />
               <h4>{name}</h4>
               <h6>Descripcion: {description}</h6>
+              <h3>Stock: {stock}</h3>
               <div>
                 <button onClick={(e)=> handleNavigateProduct(e)} className="buttonDetails">Ver detalles</button>
                 <button onClick={(e) => handlerSetCart(e, id, price, image, name, stock)}>Agregar</button>

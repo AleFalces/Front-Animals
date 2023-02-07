@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import "../Adoption/Cards.css"
 import {
   Heading,
@@ -26,15 +27,22 @@ import { useDisclosure } from "@chakra-ui/react";
 import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { deletePet } from "../../Redux/Actions";
+
 
 const Card = ({ data: { id, size, img, sex, species, age, area }, value} ) => {
+  const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const navigate = useNavigate()
-  console.log(id, "VALUE CARD MYPET",value);
 function handlerNavigateUpdate(e) {
   e.preventDefault();
   navigate(`/updatePet/${id}`)
+}
+function handlerDeletePet(e, id) { // FUNCION DELETE PONER EN EL BOTON X
+e.preventDefault();
+console.log("HANDLER DELETE PET!!!!!!!!!!!!!!!!!");
+dispatch(deletePet(id))
 }
   return (
     <Box>      
@@ -86,7 +94,7 @@ function handlerNavigateUpdate(e) {
                     <Button ref={cancelRef} onClick={onClose}>
                       Cancelar
                     </Button>
-                    <Button colorScheme="red" onClick={onClose} ml={3}>
+                    <Button colorScheme="red" onClick={(e)=>{handlerDeletePet(e,id); onClose()}} ml={3}> {/* onClick={onClose}*/}
                       Borrar
                     </Button>
                   </AlertDialogFooter>

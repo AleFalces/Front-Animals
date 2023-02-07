@@ -5,6 +5,7 @@ import {
   GET_LOST_PETS,
   POST_PET,
   UPDATE_PET,
+  DELETE_PET,
   POST_USER,
   POST_PRODUCT,
   POST_VET,
@@ -14,9 +15,9 @@ import {
   GET_PRODUCT_DETAIL,
   SHOP_SEARCH_INPUT_NAME,
   SHOP_FILTER_VALUE,
-  NEXT_PAGE,
-  PREV_PAGE,
-  ACTUAL_PAGE,
+  NEXT_PAGE, // se pueden sacar
+  PREV_PAGE, // se pueden sacar
+  ACTUAL_PAGE, // se pueden sacar
   GET_VETERINARIES,
   GET_DETAILS_VETERINARIES,
   GET_ALL_USERS,
@@ -247,6 +248,10 @@ const RootReducer = (state = initialState, action) => {
       return {
         ...state,
         imageUrl: action.payload,
+      };
+    case DELETE_PET:
+      return {
+        ...state,
       };
     default:
       return state;
