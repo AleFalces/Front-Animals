@@ -9,10 +9,14 @@ import { GiCat } from 'react-icons/gi';
 import { RiHeartAddLine } from 'react-icons/ri';
 import { RxDoubleArrowDown } from 'react-icons/rx'
 
-import magui from "./utils/magui.png"
-import lucho from "./utils/lucho.png"
-import lau from "./utils/lau.png"
-
+import magui from "../../assets/imagenes/magui.png"
+import lucho from "../../assets/imagenes/lucho.png"
+import marian from "../../assets/imagenes/marian.png"
+import lau from "../../assets/imagenes/lau.png"
+import juli from"../../assets/imagenes/juli.png"
+import ale from"../../assets/imagenes/ale.png"
+import igna from"../../assets/imagenes/igna.png"
+import andy from"../../assets/imagenes/andy.png"
 
 
 // const { isAuthenticated, user } = useAuth0();
@@ -37,25 +41,38 @@ import {
 } from '@chakra-ui/react';
 
 const avatars = [
+
   {
     name: 'Magdalena Aliaga ',
     url: magui,
   },
   {
-    name: 'Luciano Navarro',
-    url: lucho,
+    name: 'Ignacio Coria De Bernardi',
+    url: igna,
+  },
+  {
+    name: 'Mariana Maceira',
+    url: marian,
   },
   {
     name: 'Laura Coló',
     url: lau,
   },
   {
-    name: 'Prosper Otemuyiwa',
-    url: 'https://bit.ly/prosper-baba',
+    name: 'Alexis Falces',
+    url: ale,
   },
   {
-    name: 'Christian Nwamba',
-    url: 'https://bit.ly/code-beast',
+    name: 'Julian Navarro',
+    url: juli,
+  },
+  {
+    name: 'Andrés Solom',
+    url: andy,
+  },
+  {
+    name: 'Luciano Navarro',
+    url: lucho,
   },
 ];
 
@@ -95,7 +112,7 @@ const LandingPage = () => {
        
         
           <Center >
-            <Stack direction={'row'} spacing={4} align={'center'} >
+            <Stack direction={'row'} spacing={3} align={'center'} >
               <AvatarGroup>
                 {avatars.map((avatar) => (
                   <Avatar
