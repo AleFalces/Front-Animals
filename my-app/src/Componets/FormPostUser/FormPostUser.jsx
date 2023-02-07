@@ -137,10 +137,8 @@ export default function FormPostUser({ id, value }) {
       /*   document.getElementById("myForm").reset(); */
 
     } else {
-
       setIsIncomplete(true);
       setInfoSend(false);
-
     }
 
   };

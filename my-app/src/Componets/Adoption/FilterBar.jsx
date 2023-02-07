@@ -427,11 +427,10 @@ const FilterBar = ({ value, paginate }) => {
               fontFamily={"body"}
               w='6rem'
               borderRadius="30px"
-              bg={"orange.300"}
+              bg={"brand.green.300"}
               color={"white"}
-              borderRadius={"full"}
               _hover={{
-                bg: "orange.400",
+                bg: "brand.green.100",
               }}
             >
               Buscar
@@ -560,7 +559,6 @@ const FilterBar = ({ value, paginate }) => {
               fontFamily={"body"}
               size="md"
               bg={"orange.300"}
-              borderRadius={"full"}
               color={"white"}
               _hover={{
                 bg: "orange.400",
@@ -575,7 +573,6 @@ const FilterBar = ({ value, paginate }) => {
               fontFamily={"body"}
               size="md"
               bg={"orange.300"}
-              borderRadius={"full"}
               color={"white"}
               _hover={{
                 bg: "orange.400",
