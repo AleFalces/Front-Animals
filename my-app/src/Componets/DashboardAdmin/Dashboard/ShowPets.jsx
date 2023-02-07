@@ -5,7 +5,7 @@ import { SimpleGrid, Center } from "@chakra-ui/react";
 export default function ShowPets({ pets }) {
 	console.log(pets);
 	return (
-		<SimpleGrid columns={[1, 2, 3]} spacing="40px">
+		<SimpleGrid columns={[1, 1, 2, 3]} spacing="40px">
 			{pets.map((pet) => (
 				<PetCard
 					img={pet.img}

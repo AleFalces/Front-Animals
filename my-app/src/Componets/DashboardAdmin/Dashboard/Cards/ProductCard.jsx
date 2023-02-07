@@ -9,7 +9,7 @@ import {
   Box,
   Button,
   CardHeader,
-  Image, Center, Divider
+  Image, Center, Divider, Input, Select
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { modifyProduct } from "../../../../Redux/Actions";
@@ -54,44 +54,46 @@ export default function ProductCard({
   return (
     <div>
       <Card >
-        <Box>
+        <Box maxW="350px">
           <CardBody>
-            <Stack divider={<StackDivider />} spacing="4">
+          
               <Box>
                 <Text pt="2" fontWeight={'bold'} fontSize="md">
                   {name}
                 </Text>
               </Box>
               <Box>
-                <Heading size="sm">Fotos:</Heading>
+              <Divider h='0.2rem' bg='brand.green.100'mt='1rem' />
                 <Text pt="2" fontSize="md">
                 </Text>
                 <Center>
-                <Image
-                  boxSize='100px'
-                  objectFit='cover'
-                  src={image}
-                  alt='Dan Abramov'
-                />
+                  <Image
+                    boxSize='100px'
+                    objectFit='cover'
+                    src={image}
+                    alt='Dan Abramov'
+                  />
                 </Center>
               </Box>
               <Box>
-                <Heading size="xs"textTransform="uppercase">
-                  Stock:
+                <Heading size="xs">
+                  STOCK:
                 </Heading>
-                <Text fontSize="md">
+              <Text fontSize="md" my='0.5rem'>
                   {stock}
                 </Text>
-              <Divider height='10px'/> 
-                <Heading mt='1rem'size="xs" textTransform="uppercase">
-                  ID:
-                </Heading>
-                <Text mt="1rem" fontSize="md">
+                <Center>
+                <Select placeholder='ID' w='50%'>
+                    <option value= 'option'>{id}</option>
+                  </Select>
+                  </Center>
+                {/*                 <Text mt="1rem" fontSize="md">
                   {id}
-                </Text>
-                <Heading size="sm">Precio:</Heading>
+                </Text> */}
+                <Divider h='0.2rem' bg='brand.green.100'mt='1rem' />
+                <Heading size="sm" mt='1rem'>PRECIO:</Heading>
                 <Text pt="2" fontSize="md">
-                  {price}
+                  $ {price}
                 </Text>
                 <Button my='1rem'
                   onClick={(e) => {
@@ -116,7 +118,7 @@ export default function ProductCard({
                   Modificar
                 </Button>
               </Box>
-            </Stack>
+           {/*  </Stack> */}
           </CardBody>
         </Box>
       </Card>

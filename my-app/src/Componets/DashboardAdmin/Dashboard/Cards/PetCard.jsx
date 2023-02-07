@@ -7,7 +7,9 @@ import {
   Stack,
   StackDivider,
   Box,
-  Image, Divider, Center
+  Image, Divider, Center, Select
+
+
   // Button,
 } from "@chakra-ui/react";
 // import { useDispatch} from "react-redux";
@@ -39,30 +41,33 @@ export default function PetCard({ id, size, species, age, img, detail, area, sta
       <Card>
         <Box maxW="350px">
           <CardBody>
-            <Stack divider={<StackDivider />} spacing="2">
+         
               <Box>
                 <Heading size="xs">
                   ESPECIE <Text px='1.5rem' pt="2"> {species} </Text>
                 </Heading>
               </Box>
+              <Divider h='0.2rem' bg='brand.green.100'mt='1rem' />
               <Box>
-                <Center height='50px'>
-                  <Heading size="xs" >
-                    TAMAÑO: <Text px='1.5rem' pt="2"> {size} </Text>
-                  </Heading>
 
-                  <Divider orientation='vertical' />
+                <Heading size="xs" textTransform="uppercase">
+                  Especie:
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {species}
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Edad:
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {age}
+                </Text>
+                <Divider h= '1rem'/>
+                <Heading size="xs" textTransform="uppercase" pt='1rem'>
+                  ID:
 
-                  <Heading size="xs">
-                    EDAD: <Text px='1.5rem' pt="2"> {age}  </Text>
-                  </Heading>
-                </Center>
-
-                <Divider h='1rem' />
-                <Heading size="xs" pt='1rem'>
-                  ID: <Text pt="2" fontSize="sm">
-                    {id}
-                  </Text>
                 </Heading>
 
                 <Divider h='1rem' />
@@ -76,6 +81,30 @@ export default function PetCard({ id, size, species, age, img, detail, area, sta
                 <Heading size="xs" textTransform="uppercase" pt='1rem'>
                   Fotos:
                 </Heading>
+
+                <Image
+                  boxSize='100px'
+                  objectFit='cover'
+                  src={img}
+                  alt='mascotas'
+                />
+                <Text pt="2" fontSize="sm">
+                  {img}
+                </Text>
+                <Heading size="xs" textTransform="uppercase">
+                  Ubicacion:
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {area}
+                </Text>
+                <Heading size="xs" textTransform="uppercase">
+                  Estado:
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {status}
+                </Text>
+
+
                 <Center>
                   <Image
                     boxSize='100px'
@@ -92,12 +121,15 @@ export default function PetCard({ id, size, species, age, img, detail, area, sta
                     UBICACIÓN: <Text px='2rem' pt="2"> {area} </Text>
                   </Heading>
 
-                  <Divider orientation='vertical' />
+
+                  <Divider orientation='vertical' bg='brand.green.100' />
+
 
                   <Heading size="xs">
                     ESTADO: <Text px='1.5rem' pt="2"> {status}  </Text>
                   </Heading>
                 </Center>
+
 
 
                 {/*pensar en agregar un boton para cambiarle estado de la mascota*/}
@@ -110,7 +142,7 @@ export default function PetCard({ id, size, species, age, img, detail, area, sta
                   }}
                 >Modificar</Button> */}
               </Box>
-            </Stack>
+            
           </CardBody>
         </Box>
       </Card>
