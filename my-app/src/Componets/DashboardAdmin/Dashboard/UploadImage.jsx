@@ -15,9 +15,6 @@ export default function UploadImage({image, setImage}) {
 
   return (
     <div>
-      <Container>
-        <h1>Foto/s del producto</h1>
-      </Container>
       <FormGroup>
         <Input
           type="file"

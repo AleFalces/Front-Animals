@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postVet } from "../../../Redux/Actions";
+import UploadImage from "./UploadImage";
 
 import {
   Flex,
@@ -16,6 +17,7 @@ import {
   Text,
   useColorModeValue, Icon,
   Select,
+  Container
 } from "@chakra-ui/react";
 
 
@@ -24,6 +26,8 @@ import { MdArrowBackIosNew } from "react-icons/md";
 export default function FormAffiliateVets() {
   const dispatch = useDispatch();
 
+  const imageUrl = useSelector((state) => state.imageUrl)
+  const [image, setImage] = useState("")
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -43,6 +47,13 @@ export default function FormAffiliateVets() {
     email: "",
     location: [],
   };
+
+  useEffect(()=>{
+    setInput({
+      ...input,
+      image: imageUrl
+    })
+  },[imageUrl])
 
   function handlerErrors(e) {
     e.preventDefault();
@@ -186,13 +197,10 @@ export default function FormAffiliateVets() {
                 </FormControl>
 
                 <FormControl id="image" isRequired>
-                  <label>Imágenes del local/espacio de trabajo: </label>
-                  <Input
-                    type="text"
-                    name="image"
-                    placeholder="https://urlDeLaImagen.jpg"
-                    onChange={(e) => handlerChange(e)}
-                  />
+                <Container>
+                    <h1>Subir imagen de la Veterinaria</h1>
+                  </Container>
+                <button><UploadImage image={image} setImage={setImage}/></button>
                 </FormControl>
 
                 <FormControl id="email" isRequired>
