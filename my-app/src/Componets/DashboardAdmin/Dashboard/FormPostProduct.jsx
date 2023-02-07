@@ -16,7 +16,8 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Select, Icon
+  Select, Icon,
+  Container,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -36,23 +37,16 @@ export default function FormPostProduct() {
     stock: 0,
   });
 
-  // const [images, setImages] = useState([])
-  // const [imageToRemove, setImageToRemove] = useState(null)
-
-  // function handleRemoveImg(imgObj){
-
-  // }
-
-  // function handleOpenWidget(){
-  //   var myWidget = cloudinary.createUploadWidget({ 
-  //     cloudName : ' my_cloud_name ' , uploadPreset : ' my_preset ' }, (error, resultado) => { if (!error && result && result.event === " éxito " ) {       console.log( ' ¡Listo! Aquí está la información de la imagen: ' , result.info);     }   } )
-  // }
   useEffect(()=>{
     setInput({
       ...input,
       image: imageUrl
     })
   },[imageUrl])
+
+  // useEffect(()=>{
+  //   // console.log("soy el useEFFECT",input)
+  // },[input])
 
   const errors = {
     name: "",
@@ -112,7 +106,6 @@ export default function FormPostProduct() {
     // e.preventDefault();
     setInput({
       ...input,
-      // image: (input.image = )
     })
     dispatch(postProduct(input));
     // console.log("EXISTEE", input)
@@ -129,11 +122,6 @@ export default function FormPostProduct() {
     alert("Producto agregado a la tienda.");
   }
 
-  useEffect(()=>{
-    // console.log("soy el useEFFECT",input)
-  },[input])
-
-    //Revisar xq la categoria "alimentos" me tira error si el name del product tiene espacios en el campo
   return (
   <Box>
       <form id="myForm">
@@ -231,17 +219,13 @@ export default function FormPostProduct() {
                 </FormControl>
 
                 <FormControl id="image" isRequired>
-                   <button><UploadImage image={image} setImage={setImage}/></button>
-                  {/* <Input
-                    type="text"
-                    name="image"
-                    placeholder="https://urlDeLaImagen.jpg"
-                    onChange={(e) => handlerChange(e)}
-                  /> */}
+                <Container>
+                    <h1>Imagen del producto</h1>
+                  </Container>
+                  <button>
+                    <UploadImage image={image} setImage={setImage} />
+                  </button>
                 </FormControl>
-                  {/* <Button
-                  onChange={(e) => UploadImage(e)}
-                  >Cargar imagenes</Button> */}
                 <Stack spacing={10} pt={2}>
                   <Button
                     onClick={(e) => handlerErrors(e)}
