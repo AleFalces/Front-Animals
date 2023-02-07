@@ -26,7 +26,6 @@ import Cart from "./Componets/Shop/Cart/Cart";
 import Banned from "./Componets/Banned/Banned";
 
 function App() {
-
   const { getAccessTokenSilently } = useAuth0();
   const [token, setToken] = useState("");
 
@@ -47,7 +46,7 @@ function App() {
     }
   }, []);
 
-  console.log(usuario);
+  // console.log(usuario);
   return usuario[0]?.status === "banned" ? (
     <div className="App">
       <Routes>
