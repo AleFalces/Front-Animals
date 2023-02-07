@@ -31,10 +31,9 @@ export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, isAuthenticated, logout } = useAuth0();
   const [usuario, setUsuario] = useState([]);
-  const navigate = useNavigate();
+  const loggedUser = localStorage.getItem("loggedUser");
 
   useEffect(() => {
-    const loggedUser = localStorage.getItem("loggedUser");
     if (loggedUser) {
       const logged = JSON.parse(loggedUser);
       setUsuario(logged);
@@ -191,7 +190,7 @@ export default function Simple() {
                 <MenuDivider />
                 {usuario.length ? (
                   <MenuList>
-                    <NavLink to="/updateUser">
+                   <NavLink to="/updateUser">
                       <MenuItem>Modifica tus datos</MenuItem>
                     </NavLink>
 

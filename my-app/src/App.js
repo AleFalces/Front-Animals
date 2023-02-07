@@ -28,6 +28,10 @@ import Banned from "./Componets/Banned/Banned";
 function App() {
   const { getAccessTokenSilently } = useAuth0();
   const [token, setToken] = useState("");
+  const loggedUser = localStorage.getItem("loggedUser");
+
+  const [usuario, setUsuario] = useState([]);
+
 
   useEffect(() => {
     const validator = async () => {
@@ -36,15 +40,14 @@ function App() {
     };
     validator();
   }, [getAccessTokenSilently]);
-  const [usuario, setUsuario] = useState([]);
 
   useEffect(() => {
-    const loggedUser = localStorage.getItem("loggedUser");
     if (loggedUser) {
-      const logged = JSON.parse(loggedUser);
+      const [logged] = JSON.parse(loggedUser);
       setUsuario(logged);
     }
   }, []);
+  
 
   // console.log(usuario);
   return usuario[0]?.status === "banned" ? (
@@ -84,7 +87,7 @@ function App() {
         <Route exact path="/createAuth0" element={<CreateUserAuth0 />}></Route>
         <Route exact path="/" element={<LandingPage />}></Route>
         <Route exact path="/createUser" element={<FormPostUser />}></Route>
-        <Route exact path="/updateUser/:id" element={<FormPostUser value={"update"}/>}></Route>
+        <Route exact path="/updateUser" element={<FormPostUser id={usuario.id}  value={"update"}/>}></Route>
         <Route
           exact
           path="/updateUser"
