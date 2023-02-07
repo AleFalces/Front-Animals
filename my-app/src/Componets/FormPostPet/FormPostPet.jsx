@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+
+import { Link, redirect, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postOrUpdatePet, postPet, getUserId } from "../../Redux/Actions";
+import { petDetails, postOrUpdatePet, postPet } from "../../Redux/Actions";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -17,6 +18,7 @@ import {
 	Button,
 	Heading,
 	Text,
+	useColorModeValue,
 	Icon,
 	/*  Link, */
 	Select,
@@ -25,19 +27,19 @@ import {
 const validateForm = (input) => {
 	let inputError = {};
 
-	if (input.species === "default" || !input.species.length) {
+	if (input.species === "" || !input.species.length) {
 		inputError.species = "Selecciona gato o perro";
 	}
-	if (input.sex === "default" || !input.sex.length) {
+	if (input.sex === "" || !input.sex.length) {
 		inputError.sex = `Selecciona macho o hembra`;
 	}
-	if (input.age === "default" || !input.age.length) {
+	if (input.age === "" || !input.age.length) {
 		inputError.age = "Edad aproximada de la mascota";
 	}
-	if (input.size === "default" || !input.size.length) {
+	if (input.size === "" || !input.size.length) {
 		inputError.size = "Selecciona un tamaño aproximado";
 	}
-	if (input.status === "default" || !input.status.length) {
+	if (input.status === "" || !input.status.length) {
 		inputError.status = "Selecciona un estado";
 	}
 	if (input.area.trim() === "" || !input.area.length) {
@@ -53,38 +55,19 @@ const validateForm = (input) => {
 	if (input.img === "") {
 		inputError.img = "Inserta el link de una imagen";
 	}
-	if (input.userId === "") {
-		inputError.userId = "Ingresa el UUID del usuario";
-	}
 	return inputError;
 };
 
-export default function FormPostPet({ token, value }) {
+export default function FormPostPet({ value }) {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const [isIncomplete, setIsIncomplete] = useState(false);
 	const [infoSend, setInfoSend] = useState(false);
 	const [inputError, setInputError] = useState({});
-	const userInfo = useSelector((state) => state.user);
-
 	const paramsId = useParams("id");
 	const petData = JSON.parse(localStorage.getItem("loggedUser"))[0].pet.filter(
 		(pet) => pet.id === paramsId.id
 	)[0];
-	const userId = JSON.parse(localStorage.getItem("loggedUser"))[0].id;
-
-	useEffect(() => {
-		dispatch(getUserId(userId));
-	}, [dispatch, userId]);
-
-	// if (userInfo[0]?.phone === "123456789") {
-	//   alert("anda cambia el celu");
-	//   navigate("/updateUser");
-	// } else {
-	//   navigate("/createPets");
-	// }
-
-	const [input, setInput] = useState({
+		const [input, setInput] = useState({
 		species: petData?.species || "",
 		sex: petData?.sex || "",
 		age: petData?.age || "",
@@ -93,16 +76,16 @@ export default function FormPostPet({ token, value }) {
 		area: petData?.area || "",
 		detail: petData?.detail || "",
 		img: petData?.img || "",
-		userId: userId,
 	});
+
 
 	const handlerChange = (e) => {
 		setInput({
 			...input,
 			[e.target.name]: e.target.value,
-			userId: userId,
 		});
 		//control errores
+		console.log("INPUT ONCHANGE PET",input);
 		setInputError(
 			validateForm({
 				...input,
@@ -123,14 +106,17 @@ export default function FormPostPet({ token, value }) {
 			input.detail &&
 			input.img !== ""
 		) {
-			value === undefined
-				? dispatch(postPet(input, token))
-				: dispatch(postOrUpdatePet(input, value, paramsId.id));
-			// console.log("LOGGED USER FORM PET",JSON.parse(window.localStorage.getItem("loggedUser")));
-			//;dispatch(postOrUpdatePet(input))
-			setIsIncomplete(false);
-			setInfoSend(true);
-			document.getElementById("myForm").reset();
+			if(value === undefined) {
+				dispatch(postOrUpdatePet(input, value))
+				setIsIncomplete(false);
+				setInfoSend(true);
+				document.getElementById("myForm").reset();
+			} else {
+				dispatch(postOrUpdatePet(input, value, paramsId.id))
+				setIsIncomplete(false);
+				setInfoSend(true);
+				document.getElementById("myForm").reset();			
+			}
 		} else {
 			setIsIncomplete(true);
 			setInfoSend(false);
@@ -138,10 +124,6 @@ export default function FormPostPet({ token, value }) {
 	};
 
 	useEffect(() => {
-		console.log("PARAMS ID", paramsId);
-		console.log("userId ", userId);
-		console.log("RESULT ", petData);
-		console.log("INPUT FORM", input);
 	}, []);
 	return (
 		<div>
@@ -183,7 +165,7 @@ export default function FormPostPet({ token, value }) {
 												value={input.species}
 												onChange={(e) => handlerChange(e)}>
 												<option
-													value="default"
+													value=""
 													name="especie"
 													key="defaultSpecies">
 													Especie
@@ -212,7 +194,7 @@ export default function FormPostPet({ token, value }) {
 												name="sex"
 												key="sex"
 												onChange={(e) => handlerChange(e)}>
-												<option value="default" key="defaultSex">
+												<option value="" key="defaultSex">
 													Sexo
 												</option>
 												<option value="hembra" key="hembra">
@@ -239,7 +221,7 @@ export default function FormPostPet({ token, value }) {
 										name="age"
 										key="age"
 										onChange={(e) => handlerChange(e)}>
-										<option value="default" key="defaultAge">
+										<option value="" key="defaultAge">
 											Edad
 										</option>
 										<option value="cachorro" key="cachorro">
@@ -264,7 +246,7 @@ export default function FormPostPet({ token, value }) {
 										name="size"
 										key="size"
 										onChange={(e) => handlerChange(e)}>
-										<option value="default" key="defaultSize">
+										<option value="" key="defaultSize">
 											Tamaño
 										</option>
 										<option value="pequeño" key="pequeño">
@@ -289,7 +271,7 @@ export default function FormPostPet({ token, value }) {
 										name="status"
 										key="status"
 										onChange={(e) => handlerChange(e)}>
-										<option value="default" key="defaultStatus">
+										<option value="" key="defaultStatus">
 											Estado
 										</option>
 										<option value="encontrado" key="encontrado">

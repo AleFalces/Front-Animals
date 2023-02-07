@@ -78,7 +78,7 @@ function handleRemoveItemCart  (e, id) {
     }
   }
 
-const handlerSetCart = (e, id, price, image, name) => {
+const handlerSetCart = (e, id, price, image, name, stock) => {
     e.preventDefault()
     try {
       let product = {
@@ -86,6 +86,7 @@ const handlerSetCart = (e, id, price, image, name) => {
         image,
         price,
         id,
+        stock,
         amount: 1,
       }
       let oldCart = JSON.parse(window.localStorage.getItem("cart"))
@@ -97,19 +98,29 @@ const handlerSetCart = (e, id, price, image, name) => {
           }
         });
         if (index !== false) {
+        if(stock=== 0 || stock === oldCart[index].amount) {
+          return alert("Se llegó al limite de stock actual")
+        } else {
           oldCart[index].amount += 1;
           oldCart[index].total = oldCart[index].price * oldCart[index].amount
           window.localStorage.setItem("cart", JSON.stringify([...oldCart]))
-        alert(`Agregaste de nuevo el producto ${name}`)
+          console.log("OLDCART AMOUNT: ",oldCart[index].amount, "--- STOCK: ", stock);
+          alert(`Agregaste de nuevo el producto ${name}`)
+      return handleStateChange() //
+          
+        }
       } else {
         product.total = product.price
         window.localStorage.setItem("cart", JSON.stringify([...oldCart, product]))
         alert(`Agregaste el producto ${name}`)
+      return handleStateChange() //
+
       }
     } else {
       product.total = product.price
       window.localStorage.setItem("cart", JSON.stringify([product]))
       alert(`Agregaste el producto ${name}`)
+      return handleStateChange() //
     }
 
     handleStateChange()
@@ -126,7 +137,7 @@ const handlerSetCart = (e, id, price, image, name) => {
   //   }
   // }
 
-  const total = cart.reduce((acc, el) => acc + el.total ,0);
+  const total = cart?.reduce((acc, el) => acc + el.total ,0);
   const payMp = ()=>{
     axios.post(`http://localhost:3001/donation`,
      {
@@ -158,7 +169,7 @@ const handlerSetCart = (e, id, price, image, name) => {
               !cart
               ? <h1>Tu carrito esta vacio</h1>
               : <div>
-                  {cart.map((pr) => <CartCards amount={pr.amount} id={pr.id} image={pr.image} name={pr.name} price={pr.price} total={pr.total} handlerSetCart={handlerSetCart} handleRemoveItemCart={handleRemoveItemCart}/>)}
+                  {cart.map((pr) => <CartCards amount={pr.amount} id={pr.id} image={pr.image} name={pr.name} price={pr.price} total={pr.total} stock={pr.stock} handlerSetCart={handlerSetCart} handleRemoveItemCart={handleRemoveItemCart}/>)}
                   <button onClick={()=>payMp()}>Pagar</button>
                 </div> 
               }

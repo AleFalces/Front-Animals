@@ -48,14 +48,19 @@ export default function Shop() {
     }
   }
 
-  const handlerSetCart = (e, id, price, image, name) => {
-    e.preventDefault();
+
+
+  
+  const handlerSetCart = (e, id, price, image, name, stock) => {
+    e.preventDefault()
+
     try {
       let product = {
         name,
         image,
         price,
         id,
+        stock,
         amount: 1,
       };
       let oldCart = JSON.parse(window.localStorage.getItem("cart"));
@@ -68,52 +73,50 @@ export default function Shop() {
           }
         });
         if (index !== false) {
-          oldCart[index].amount += 1;
-          oldCart[index].total = oldCart[index].price * oldCart[index].amount;
-          let newCart = window.localStorage.setItem(
-            "cart",
-            JSON.stringify([...oldCart])
-          );
-          dispatch(getAllProducts);
-          console.log(
-            "CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",
-            JSON.parse(localStorage.getItem("cart"))
-          );
-          alert(`Agregaste de nuevo el producto ${name}`);
+        if(stock=== 0 || stock === oldCart[index].amount) {
+          return alert("Se llegó al limite de stock actual")
         } else {
-          product.total = product.price;
-          let newCart = window.localStorage.setItem(
-            "cart",
-            JSON.stringify([...oldCart, product])
-          );
-          dispatch(getAllProducts);
-          console.log(
-            "CASO SI EXISTE CARRITO Y NOOOOO TENGO INDEX",
-            JSON.parse(localStorage.getItem("cart"))
-          );
-          alert(`Agregaste el producto ${name}`);
+          oldCart[index].amount += 1;
+
+          oldCart[index].total = oldCart[index].price * oldCart[index].amount
+          let newCart = window.localStorage.setItem("cart", JSON.stringify([...oldCart]))
+          dispatch(getAllProducts)
+          console.log("CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",JSON.parse(localStorage.getItem("cart")));
+          return alert(`Agregaste de nuevo el producto ${name}`)
         }
       } else {
-        product.total = product.price;
-        let newCart = window.localStorage.setItem(
-          "cart",
-          JSON.stringify([product])
-        );
-        dispatch(getAllProducts);
-        console.log(
-          "CASO NO EXISTE CARRITO",
-          JSON.parse(localStorage.getItem("cart"))
-        );
-        alert(`Agregaste el producto ${name}`);
+        if(stock!== 0) {
+        product.total = product.price
+        let newCart = window.localStorage.setItem("cart", JSON.stringify([...oldCart, product]))
+        dispatch(getAllProducts)
+        console.log("CASO SI EXISTE CARRITO Y NOOOOO TENGO INDEX",JSON.parse(localStorage.getItem("cart")));
+        return alert(`Agregaste el producto ${name}`)
+      } else {
+        return alert("El producto no tiene stock :c")
       }
+      }
+    } else {
+      if(stock!== 0) {
+        product.total = product.price
+        let newCart = window.localStorage.setItem("cart", JSON.stringify([product]))
+        dispatch(getAllProducts)
+        console.log("CASO NO EXISTE CARRITO",JSON.parse(localStorage.getItem("cart")));
+        return alert(`Agregaste el producto ${name}`)
+      } else {
+        return alert("El producto no tiene stock :c")
+      }
+    }
+
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+
     dispatch(getAllProducts());
   }, [cart]);
+
 
   return (
     <>

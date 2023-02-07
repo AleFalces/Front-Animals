@@ -25,6 +25,7 @@ import {
   UPDATE_USER,
   MODIFY_PRODUCT,
   SET_IMAGE,
+  DELETE_PET,
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -404,25 +405,32 @@ export function modifyProduct(obj) {
 export function postOrUpdatePet(formInput, value, petId) {
   return async function (dispatch) {
     try {
-      let payload = {
-        formInput,
-        value,
-      };
       if (value === "update") {
+        console.log("ACTION CASO UPDATE");
+        console.log("FORM INPUT", formInput);
+        console.log("VALUE", value);
+        console.log("PETID", petId);
+        const userLocalstorage = JSON.parse(
+          localStorage.getItem("loggedUser")
+        )[0];
+        console.log("USERLOCALSTORAGE: ", userLocalstorage);
         let json = await axios.put(`${HOST}/pets/${petId}`, formInput);
         return dispatch({
           type: UPDATE_PET,
-          payload,
         });
       } else {
-        let json = await axios.post(`${HOST}/pets`, formInput); // PUEDE ESTAR MAL (VER ACTION postPet (FALTA TOKEN))
+        const userId = JSON.parse(localStorage.getItem("loggedUser"))[0].id;
+        console.log("USER ID ACTION CASO POST", userId);
+        formInput = { ...formInput, userId };
+        console.log("LOG ACTION CASO POST", formInput, value, petId);
+        let json = await axios.post(`${HOST}/pets`, formInput);
+        console.log(formInput, value, petId);
         return dispatch({
           type: POST_PET,
-          payload,
         });
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 }
@@ -447,6 +455,18 @@ export function setImageAsync(obj) {
       return dispatch({
         type: SET_IMAGE,
         payload: file.url,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function deletePet(id) {
+  return async function (dispatch) {
+    try {
+      const json = await axios.delete(`${HOST}/${id}`);
+      return dispatch({
+        type: DELETE_PET,
       });
     } catch (error) {
       console.log(error);

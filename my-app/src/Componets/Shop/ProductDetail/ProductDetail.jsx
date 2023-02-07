@@ -23,56 +23,70 @@ export default function ProductDetail() {
 
   useEffect(() => {}, [dispatch]);
 
-  const payMp = async () => {
-    axios
-      .post(`http://localhost:3001/donation`, {
-        unit_price: detail[0].price,
-        title: detail[0].name,
-      })
-      .then((response) => {
-        window.open(response.data, "_blank");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
-  return (
-    <>
-      <Navbar />
-      <Box
-        minHeight={"150vh"}
-        bg="brand.backgorund"
-        paddingBottom={"3rem"}
-      ></Box>
-    </>
-  );
-}
+	const payMp = async ()=>{
+		axios.post(`http://localhost:3001/donation`,
+		 {
+		  unit_price: detail[0].price,
+		  title : detail[0].name,
+		})
+		.then(response => {
+		  window.open(response.data, '_blank');
+		  })
+		  .catch(error => {
+		  console.error(error);
+		  });
+	  }
+console.log("DETAIL PRODUCT STOCK :", detail[0].stock);
+	  
+	return (
+		<div className="detailProductContainerAll">
+			<Navbar />
+			<div className="detailProductNavbarDivBottom"></div>
+			<div className="detailProductContainer">
+				<div className="divDetailProductDescription">
+					<div className="detailProductDescription">
+						<h1>{detail[0].name}</h1>
+						<h1>Puntuacion </h1>
+						<h4>★★★</h4>
+						<div className="detailDescription">
+							<div>
+								<h2>Categoria</h2> <h3>{detail[0].Category}</h3>
+							</div>
+							<div className="detailProductDescription2">
+								<h2>Descripcion:</h2> <h3>{detail[0].description}</h3>
+							</div>
+							<div>
+								<h2>Precio</h2> <h3>${detail[0].price}</h3>{" "}
+							</div>
+							<div><h2>Stock</h2> <h3>{detail[0].stock}u</h3></div>
+						</div>
+					</div>
+					<div className="imgxbutton">
+						<img src={detail[0].image} alt="" />
+						<div>
+              		<div className="footerProductDetail">
+			         <Footer />
+		</div>
+              
+              )}
 
-// <Navbar />
-// 		<div className="detailProductNavbarDivBottom"></div>
-// 		<div className="detailProductContainer">
-// 			<div className="divDetailProductDescription">
-// 				<div className="detailProductDescription">
-// 					<h1>{detail[0].name}</h1>
-// 					<h1>Puntuacion </h1>
-// 					<h4>★★★</h4>
-// 					<div className="detailDescription">
-// 						<div>
-// 							<h2>Categoria</h2> <h3>{detail[0].Category}</h3>
-// 						</div>
-// 						<div className="detailProductDescription2">
-// 							<h2>Descripcion:</h2> <h3>{detail[0].description}</h3>
-// 						</div>
-// 						<div>
-// 							<h2>Precio</h2> <h3>${detail[0].price}</h3>{" "}
-// 						</div>
-// 						<div><h2>Stock</h2> <h3>{detail[0].stock}u</h3></div>
-// 					</div>
-// 				</div>
-// 				<div className="imgxbutton">
-// 					<img src={detail[0].image} alt="" />
-// 					<div>
+					//		<button onClick={(e)=>detail[0].handlerSetCart(e, detail[0].id, detail[0].price, detail[0].image, detail[0].name, detail[0].stock )}>Agregar</button>
+
+//   return (
+//     <>
+//       <Navbar />
+//       <Box
+//         minHeight={"150vh"}
+//         bg="brand.backgorund"
+//         paddingBottom={"3rem"}
+//       ></Box>
+//     </>
+//   );
+// }
+
+
+
 
 // 						<button onClick={()=>payMp()}>Comprar</button>
 

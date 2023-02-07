@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductDetail } from "../../../Redux/Actions";
 
+
 import {
   Box,
   useColorModeValue,
@@ -44,6 +45,7 @@ export default function CardProduct({
     dispatch(getProductDetail(obj));
     setTimeout(() => navigate(`/shop/product/${id}`), 200);
   };
+
 
   return (
     <>

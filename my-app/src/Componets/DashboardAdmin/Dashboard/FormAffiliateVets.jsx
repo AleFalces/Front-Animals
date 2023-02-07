@@ -14,9 +14,12 @@ import {
   Button,
   Heading,
   Text,
-  useColorModeValue,
+  useColorModeValue, Icon,
   Select,
 } from "@chakra-ui/react";
+
+
+import { MdArrowBackIosNew } from "react-icons/md";
 
 export default function FormAffiliateVets() {
   const dispatch = useDispatch();
@@ -117,8 +120,8 @@ export default function FormAffiliateVets() {
           minH={"100vh"}
           align={"center"}
           justify={"center"}
-          bg={useColorModeValue("gray.50", "gray.800")}
-        >
+          bg={"brand.green.100"}>
+        
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
             <Stack align={"center"}>
               <Heading fontSize={"4xl"} textAlign={"center"}>
@@ -211,17 +214,19 @@ export default function FormAffiliateVets() {
                     onChange={(e) => handlerChange(e)}
                   />
                 </FormControl>
+
+                
                 <Stack spacing={10} pt={2}>
                   <Button
                     onClick={(e) => handlerErrors(e)}
                     loadingText="Afiliar Veterinaria"
+                    fontFamily={"body"}
                     size="lg"
-                    bg={"blue.400"}
+                    bg={"orange.300"}
                     color={"white"}
                     _hover={{
-                      bg: "blue.500",
-                    }}
-                  >
+                      bg: "orange.400",
+                    }}>
                     Afiliar Veterinaria
                   </Button>
                 </Stack>
@@ -229,8 +234,37 @@ export default function FormAffiliateVets() {
             </Box>
 
             <Link to={"/dashboard"}>
-              <button>Atrás</button>
-            </Link>
+							<Icon
+								as={MdArrowBackIosNew}
+								color="orange.400"
+								boxSize={5}
+								_hover={{
+									color: "grey",
+									boxSize: "7",
+								}}
+							/>
+							<Icon
+								as={MdArrowBackIosNew}
+								color="orange.400"
+								boxSize={5}
+								_hover={{
+									color: "grey",
+									boxSize: "7",
+								}}
+							/>
+							<Button
+								fontFamily={"body"}
+								bg="base.green.100"
+								color={"grey"}
+								_hover={{
+									color: "orange.400",
+								}}
+								p="0"
+								mr="1rem">
+								{" "}
+								Atrás
+							</Button>
+						</Link>
           </Stack>
         </Flex>
       </form>

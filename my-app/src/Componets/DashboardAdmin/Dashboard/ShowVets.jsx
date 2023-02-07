@@ -5,7 +5,7 @@ import VetCard from './Cards/VetCard';
 export default function ShowVets({vets}) {
  
     return (
-      <SimpleGrid columns={[1, 2, 3]} spacing='10px' >
+      <SimpleGrid columns={[1, 1,2, 3]} spacing='55px' >
        { vets.map((vet) => (
           <VetCard
             id={vet.id}
