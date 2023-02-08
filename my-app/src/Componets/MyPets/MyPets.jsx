@@ -33,7 +33,7 @@ export const MyPets = () => {
       <NavBar />
 
       <Box bg={'brand.green.200'} mb='3rem'>
-        <Heading as="h1" fontSize="3rem" pt="3rem" color="gray.600">
+        <Heading as="h1" fontSize="2.5rem" pt="3rem" color="gray.800">
           {" "}
           Mis mascotas
         </Heading>

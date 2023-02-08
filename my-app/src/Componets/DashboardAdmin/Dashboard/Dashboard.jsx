@@ -8,8 +8,8 @@ import ShowBannedUsers from "./ShowBannedUsers";
 import ShowPets from "./ShowPets";
 import ShowProducts from "./ShowProducts";
 import ShowVets from "./ShowVets";
-import { Button, Box, Center , SimpleGrid} from "@chakra-ui/react";
-
+import { Button, Box, Center, SimpleGrid } from "@chakra-ui/react";
+import logo from '../../../assets/imagenes/logo_negro.png'
 
 
 const Dashboard = () => {
@@ -64,32 +64,64 @@ const Dashboard = () => {
   }, [dispatch]);
 
   return (
-    <Box bg="brand.green.200" pb='100px'pt='1rem'>
+    <Box /* bg="brand.green.200" */ pb='50%' pt='1rem' backgroundImage={logo}
+      backgroundSize='50%'
+      backgroundPosition='center'
+      backgroundRepeat='no-repeat'
+    >
+
       <SimpleGrid columns={[2, 5, 5]} mb='2rem'>
-      <Box>
-        <Button bg="orange.100" onClick={(e) => handlerShowDataUsers(e)}>Usuarios registrados</Button>
-      </Box>
-      <Box>
-        <Button bg="orange.100" onClick={(e) => handlerShowBannedUsers(e)}>Bloqueados</Button>
-      </Box>
-      <Box>
-        <Button  bg="orange.100" onClick={(e) => handlerShowDataPets(e)}>Mascotas</Button>
-      </Box>
-      <Box>
-        <Button bg="orange.100" onClick={(e) => handlerShowDataProducts(e)}>Productos</Button>
-      </Box>
-      <Box>
-        <Button bg="orange.100" onClick={(e) => handlerShowDataVets(e)}>Veterinarias</Button>
-      </Box>
+        <Box>
+          <Button bg="orange.100" _hover={{
+            bg: "orange.300",
+          }} onClick={(e) => handlerShowDataUsers(e)}>Usuarios registrados</Button>
+        </Box>
+        <Box>
+          <Button bg="orange.100"
+            _hover={{
+              bg: "orange.300",
+            }}
+            onClick={(e) => handlerShowBannedUsers(e)}>Bloqueados</Button>
+        </Box>
+        <Box>
+          <Button bg="orange.100"
+            _hover={{
+              bg: "orange.300",
+            }} onClick={(e) => handlerShowDataPets(e)}>Mascotas</Button>
+        </Box>
+        <Box>
+          <Button bg="orange.100"
+            _hover={{
+              bg: "orange.300",
+            }} onClick={(e) => handlerShowDataProducts(e)}>Productos</Button>
+        </Box>
+        <Box>
+          <Button bg="orange.100"
+            _hover={{
+              bg: "orange.300",
+            }} onClick={(e) => handlerShowDataVets(e)}>Veterinarias</Button>
+        </Box>
       </SimpleGrid>
+      {/* <Center>
+      <Box w='100%'
+    p={55}
+    backgroundImage={logo}
+    backgroundSize='cover'
+    backgroundPosition='center'
+    zIndex={1}
+  >
+  </Box>
+
+  </Center> */}
+
 
       <Center>
-        <Box>
+        <Box zIndex={4}>
           {selection === "users" ? (
             <ShowUsers users={unbannedArray} />
           ) : selection === "bannedUser" ? (
-          <ShowBannedUsers bannedUsers={bannedArray}/>
-          ): selection === "products" ? (
+            <ShowBannedUsers bannedUsers={bannedArray} />
+          ) : selection === "products" ? (
             <ShowProducts products={productsArray} />
           ) : selection === "pets" ? (
             <ShowPets pets={petsArray} />

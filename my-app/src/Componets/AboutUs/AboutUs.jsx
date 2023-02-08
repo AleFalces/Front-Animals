@@ -8,7 +8,6 @@ import {
   Stack,
   Flex,
   Icon,
-  AspectRatio,
   Image,
   Center
 } from "@chakra-ui/react";

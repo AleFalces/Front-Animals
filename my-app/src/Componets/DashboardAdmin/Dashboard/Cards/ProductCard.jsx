@@ -4,12 +4,9 @@ import {
   CardBody,
   Text,
   Heading,
-  Stack,
-  StackDivider,
   Box,
   Button,
-  CardHeader,
-  Image, Center, Divider, Input, Select
+  Image, Center, Divider, Select
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { modifyProduct } from "../../../../Redux/Actions";
