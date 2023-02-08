@@ -461,12 +461,14 @@ export function setImageAsync(obj) {
     }
   };
 }
-export function deletePet(id) {
+export function deletePet(idPet, idUser) {
   return async function (dispatch) {
     try {
-      const json = await axios.delete(`${HOST}/pets/${id}`);
+      const json = await axios.delete(`${HOST}/pets/${idPet}`);
+      const json2 = await axios.get(`http://localhost:3001/users/${idUser}`);
       return dispatch({
         type: DELETE_PET,
+        payload: json2.data,
       });
     } catch (error) {
       console.log(error);

@@ -27,7 +27,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { deletePet } from "../../Redux/Actions";
+import { deletePet, getUserId } from "../../Redux/Actions";
 
 import { handlerDeletePet } from "../../utils";
 
@@ -36,6 +36,7 @@ const Card = ({ data: { id, size, img, sex, species, age, area }, value} ) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const navigate = useNavigate()
+  const [loggedUser] = JSON.parse(localStorage.getItem("loggedUser")) 
 function handlerNavigateUpdate(e) {
   e.preventDefault();
   navigate(`/updatePet/${id}`)
@@ -43,9 +44,11 @@ function handlerNavigateUpdate(e) {
 
 function handlerDeletePet(e, id) {
 e.preventDefault();
-dispatch(deletePet(id))
+dispatch(deletePet(id, loggedUser.id))
 }
-useEffect(()=>{},[dispatch])
+// useEffect(()=>{
+
+// },[dispatch])
 
   return (
     <Box>

@@ -9,22 +9,23 @@ import { getUserId } from "../../Redux/Actions"; //dispatch getUserId(aca le pas
 
 export const MyPets = () => {
   const dispatch = useDispatch();
-  const [usuario, setUsuario] = useState([]);
-  const userInfo = useSelector((state) => state.user); //userInfo[0].pet.map()
-  const userPets = userInfo[0]?.pet;
+  const [usuario, setUsuario] = useState({});
+  const userRedux = useSelector((state) => state.user); //userInfo[0].pet.map()
+  const userPets = userRedux[0]?.pet;
+  const loggedUser = localStorage.getItem("loggedUser");
+
 
   useEffect(() => {
-    const loggedUser = localStorage.getItem("loggedUser");
     if (loggedUser) {
-      var logged = JSON.parse(loggedUser);
+      var [logged] = JSON.parse(loggedUser);
       setUsuario(logged);
     }
-  }, []);
-
-  useEffect(() => {
-    dispatch(getUserId(usuario[0]?.id)); //del localStorage me traigo la info del usuario, desde su posicion 0 de array, por eso le pregunto si tiene algo con el "?", si tiene algo dentro que me traiga su id
-  }, [dispatch, usuario]);
-
+  }, [loggedUser, userPets]);
+  useEffect(()=>{
+    dispatch(getUserId(JSON.parse(loggedUser)[0].id)); //del localStorage me traigo la info del usuario, desde su posicion 0 de array, por eso le pregunto si tiene algo con el "?", si tiene algo dentro que me traiga su id
+    
+  },[])
+  
   console.log("userPets", userPets);
 
   return (
