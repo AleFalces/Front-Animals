@@ -1,6 +1,6 @@
 import React from "react";
 import ProductCard from "./Cards/ProductCard";
-import { SimpleGrid, Center, Container } from "@chakra-ui/react";
+import { SimpleGrid, Container } from "@chakra-ui/react";
 
 export default function ShowProduct({ products }) {
   return (

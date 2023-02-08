@@ -1,6 +1,6 @@
 import React from "react";
 import PetCard from "./Cards/PetCard";
-import { SimpleGrid, Center } from "@chakra-ui/react";
+import { SimpleGrid} from "@chakra-ui/react";
 import { useEffect } from "react";
 import { getPets } from "../../../Redux/Actions";
 import { useDispatch } from "react-redux";
