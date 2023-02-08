@@ -57,7 +57,7 @@ dispatch(deletePet(id, loggedUser.id))
           maxW={"320px"}
           w={"full"}
           h={"450px"}
-          bg={useColorModeValue("white", "gray.900")}
+          bg={"white"}
           boxShadow={"2xl"}
           rounded={"lg"}
           p={6}
@@ -66,13 +66,14 @@ dispatch(deletePet(id, loggedUser.id))
           {/* ↓↓↓↓↓↓   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↓↓↓↓↓↓ */}
 
 {value === "update"?
-           <Box paddingRight={3} p={2} className="boxButtonDelete">
+           <Box   pr={'1rem'} className="boxButtonDelete">
             <Button
               fontFamily={"body"}
               size="sm"
               w="10%"
               bg={"orange.300"}
               color={"white"}
+              mb={'1.5rem'}
               _hover={{
                 bg: "orange.400",
               }}
@@ -119,6 +120,7 @@ dispatch(deletePet(id, loggedUser.id))
               h={"150px"}
               alt={species}
               mb={4}
+
               pos={"relative"}
             />
           </Center>
@@ -167,7 +169,6 @@ dispatch(deletePet(id, loggedUser.id))
             <Badge
               px={2}
               py={1}
-              // bg={useColorModeValue("gray.50", "gray.800")}  /* Me rompe el renderizado condicional si dejo la funcion */
               bg={"gray.100"}
               fontWeight={"400"}
             >
@@ -177,12 +178,22 @@ dispatch(deletePet(id, loggedUser.id))
 
           {/*       ↓↓↓↓↓↓↓↓   BOTON EDITAR   ↓↓↓↓↓↓↓↓       */}
           {value === "update" ? (
-            <button
-              className="modifyButton"
+            <Button
+              fontFamily={"body"}
+              size="lg"
+              bg={"orange.300"}
+              color={"white"}
+              w='30%'
+              mt='1rem'
+              _hover={{
+                bg: "orange.400",
+                /* color:"brand.green.100" */
+                
+              }}
               onClick={(e) => handlerNavigateUpdate(e)}
             >
               Editar
-            </button>
+            </Button>
           ) : null}
           <Stack mt={4} direction={"column"} spacing={4}>
             <Center></Center>
