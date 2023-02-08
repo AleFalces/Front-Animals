@@ -29,7 +29,6 @@ export default function FormAffiliateVets({ value }) {
 
   const [isIncomplete, setIsIncomplete] = useState(false);
 	const [infoSend, setInfoSend] = useState(false);
-	// const [inputError, setInputError] = useState({});
 	const paramsId = useParams("id");
   const imageUrl = useSelector((state) => state.imageUrl)
   const vetDetail = useSelector((state) => state.vetsDetail)
@@ -72,30 +71,29 @@ export default function FormAffiliateVets({ value }) {
   function handlerErrors(e) {
     e.preventDefault();
 
-    const validateName = new RegExp(/^.{3,50}$/);
+    const validateName = new RegExp(/^.{3,60}$/);
     const validatePhoneNumber = new RegExp(/^15\d{6,10}$/); //arranque con 15 y contenga entre 6 y 10
-    const validateDescription = new RegExp(/^.{6,200}$/);
-    const validateAddress = new RegExp(/^.{5,40}$/);
-    const validateEmail = new RegExp(/^.{6,50}$/);
-
+    const validateDescription = new RegExp(/^.{10,200}$/);
+    const validateAddress = new RegExp(/^.{5,60}$/);
+    const validateEmail = new RegExp(/\w+([.-]?\w+)*(\.\w{2,10})+$/);
 
     if (input.name === "" || !validateName.test(input.name)) {
-      errors.name = "Ingresar el nombre de Veterinaria";
+      errors.name = "El nombre de la veterinaria debe tener entre 3 y 60 caracteres";
     }
     if (input.description === "" || !validateDescription.test(input.description)) {
-      errors.description = "Dejar un comentario sobre algo";
+      errors.description = "La descripcion debe tener entre 10 y 200 caracteres";
     }
     if (input.image === "") {
-      errors.image = "Seleccionar una imagen.";
+      errors.image = "Debes cargar una imagen.";
     }
     if (input.phone === "" || !validatePhoneNumber.test(input.phone)) {
-      errors.phone = "Ingresar su teléfono";
+      errors.phone = "Su telefono debe empezar con 15 y tener entre 6 y 10 digitos";
     }
     if (input.address === "" || !validateAddress.test(input.address)) {
-      errors.address = "Escribir la ubicación de la Veterinaria";
+      errors.address = "La ubicacion de la veterinaria debe tener entre 5 y 60 caracteres";
     }
     if (input.email === "" || !validateEmail.test(input.email)) {
-      errors.email = "Agregar un email de contacto";
+      errors.email = `El email debe contener un "@" y un "."`;
     }
     if (
       !errors.name &&
@@ -105,30 +103,26 @@ export default function FormAffiliateVets({ value }) {
       !errors.address &&
       !errors.email
     ) {
+			setIsIncomplete(false);
+			setInfoSend(true);
       handlerSubmit(e);
     } else {
+			setIsIncomplete(true);
+			setInfoSend(false);
       console.log(errors)
-      alert("Error: ", errors.name || errors.description || errors.image || errors.phone || errors.address || errors.email);
+      alert(`Error: ${ errors.name !== ""?errors.name:errors.description !== ""?errors.description:errors.image !== ""?errors.image:errors.phone !== ""?errors.phone:errors.address !== ""?errors.address:errors.email !== ""?errors.email:null}`
+      );
     }
   }
 
   function handlerChange(e) {
     setInput({
       ...input,
-      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value,
     });
-    // setInputError(
-		// 	handlerErrors({
-		// 		...input,
-		// 		[e.target.name]: e.target.value,
-		// 	})
-		// );
-    console.log("HANDLERCHANG", input);
-    console.log("error", errors);
   }
 
   function handlerSubmit(e) {
-    
     e.preventDefault();
     if(value === undefined){
       let result = input.location.split(", ");
@@ -138,34 +132,15 @@ export default function FormAffiliateVets({ value }) {
         location: (input.location = finalResult),
       });
     }
-   
-    // dispatch(postVet(input))
-
-    if (
-			input.name &&
-			input.description &&
-			input.phone &&
-			input.address &&
-			input.email &&
-      input.location &&
-			input.image
-      ) {
 			if(value === undefined) {
 				dispatch(postVet(input, value))
 				setIsIncomplete(false);
 				setInfoSend(true);
-				// document.getElementById("myForm").reset();
 			} else {
 				dispatch(updateVet( paramsId.id, input ))
 				setIsIncomplete(false);
 				setInfoSend(true);
-				// document.getElementById("myForm").reset();			
 			}
-		} else {
-			setIsIncomplete(true);
-			setInfoSend(false);
-		}
-    console.log("HANDLERSUBMIT",input);
 	};
   
   useEffect(() => {
@@ -236,7 +211,7 @@ export default function FormAffiliateVets({ value }) {
                   </Box>
 
                   <Box>
-                    <FormControl id="description">
+                    <FormControl id="description" isRequired>
                       <FormLabel>Descripción: </FormLabel>
                       <Input
                         placeholder="Algún comentario sobre la afiliación..."
@@ -261,7 +236,7 @@ export default function FormAffiliateVets({ value }) {
                   />
                 </FormControl>
 
-                <FormControl id="address">
+                <FormControl id="address" isRequired>
                   <FormLabel>Ubicación: </FormLabel>
                   <Input
                     placeholder="¿Dónde se encuentra la Veterinaria?"
@@ -274,7 +249,9 @@ export default function FormAffiliateVets({ value }) {
                 </FormControl>
                 
                 <FormControl id="email" isRequired>
-                  <label>Email de contacto: </label>
+                  {/* <label>Email de contacto: </label> */}
+                  <FormLabel>Email de contacto: </FormLabel>
+
                   <Input
                     value={input.email}
                     type="text"
@@ -284,7 +261,9 @@ export default function FormAffiliateVets({ value }) {
                   />
                 </FormControl>
               {value === undefined ?(<FormControl id="location" isRequired>
-                  <label>Locacion: </label>
+                  {/* <label>Locacion: </label> */}
+                  <FormLabel>Locacion: </FormLabel>
+
                   <Input
                     type="text"
                     name="location"
@@ -294,7 +273,9 @@ export default function FormAffiliateVets({ value }) {
                 </FormControl>): null}
                 
                 {value === undefined ? (<FormControl id="image" isRequired>
-                    <h1>Subir imagen de la Veterinaria: </h1>
+                    {/* <h1>Subir imagen de la Veterinaria: </h1> */}
+                  <FormLabel>Subir imagen de la Veterinaria: </FormLabel>
+
                 <Container>
                 <button><UploadImage image={image} setImage={setImage}/></button>
                   </Container>
