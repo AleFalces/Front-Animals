@@ -78,7 +78,9 @@ function handleRemoveItemCart  (e, id) {
     }
   }
 
-const handlerSetCart = (e, id, price, image, name, stock) => {
+
+const handlerSetCart = (e, id, price, image, name,stock) => {
+
     e.preventDefault()
     try {
       let product = {
@@ -88,6 +90,7 @@ const handlerSetCart = (e, id, price, image, name, stock) => {
         id,
         stock,
         amount: 1,
+        stock
       }
       let oldCart = JSON.parse(window.localStorage.getItem("cart"))
       if(oldCart) {
@@ -141,8 +144,7 @@ const handlerSetCart = (e, id, price, image, name, stock) => {
   const payMp = ()=>{
     axios.post(`http://localhost:3001/donation`,
      {
-      unit_price:total,
-      title : "Gracias por su compra"
+      cart
     })
     .then(response => {
       window.open(response.data, '_blank');
