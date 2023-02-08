@@ -5,7 +5,7 @@ import { getAllUsers } from "../../../Redux/Actions";
 import { useDispatch } from "react-redux";
 
 
-export default function ShowUsers({ users }) {
+export default function ShowBannedUsers({ bannedUsers }) {
   
   const dispatch = useDispatch()
 
@@ -16,7 +16,7 @@ export default function ShowUsers({ users }) {
   return (
     
     <SimpleGrid columns={[1, 1,2, 3]} spacing='25px' >
-      {users.map((user) => (
+      {bannedUsers.map((user) => (
        
         <UserCard
           id={user.id}
