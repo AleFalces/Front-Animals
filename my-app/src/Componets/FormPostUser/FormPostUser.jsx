@@ -91,7 +91,7 @@ export default function FormPostUser({ id, value }) {
 			});
 	}, []);
 
-	//Display login feedback rojo
+	//Display login feedback
 	const [isIncomplete, setIsIncomplete] = useState(false);
 	const [infoSend, setInfoSend] = useState(false);
 
@@ -121,7 +121,7 @@ export default function FormPostUser({ id, value }) {
 			input.username &&
 			input.phone
 		) {
-
+			/* handlerSubmit(e); */
 			if (value === undefined) {
 				dispatch(postUser(input));
 				// navigate("/");
@@ -175,16 +175,6 @@ export default function FormPostUser({ id, value }) {
 								<Heading fontSize={"4xl"} textAlign={"center"}>
 									Actualizá la información de perfil
 								</Heading>
-<<<<<<< Updated upstream
-=======
-
-								<Box>
-									<Image src={logo} width={20}></Image>
-								</Box>
-								<Text fontSize={"lg"} color={"gray.600"}>
-									Gracias por cuidar a los animales ✌️
-								</Text>
->>>>>>> Stashed changes
 							</Stack>
 						)}
 
