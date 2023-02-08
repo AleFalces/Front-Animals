@@ -11,7 +11,7 @@ export default function ShowPets({ pets }) {
 
 	useEffect(()=>{
 		dispatch(getPets())
-	},[pets])
+	},[])
 	return (
 		<SimpleGrid columns={[1, 1, 2, 3]} spacing="40px">
 			{pets.map((pet) => (
