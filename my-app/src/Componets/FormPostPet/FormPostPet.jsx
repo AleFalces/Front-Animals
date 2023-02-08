@@ -64,10 +64,10 @@ export default function FormPostPet({ value }) {
 	const [infoSend, setInfoSend] = useState(false);
 	const [inputError, setInputError] = useState({});
 	const paramsId = useParams("id");
-	const petData = JSON.parse(localStorage.getItem("loggedUser"))[0].pet.filter(
-		(pet) => pet.id === paramsId.id
-	)[0];
-		const [input, setInput] = useState({
+	const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))[0].id;//.id
+	// const petData = JSON.parse(loggedUser)[0].pet.find((pet)=>pet.id === paramsId.id)
+	let petData;
+	const [input, setInput] = useState({
 		species: petData?.species || "",
 		sex: petData?.sex || "",
 		age: petData?.age || "",
@@ -77,6 +77,14 @@ export default function FormPostPet({ value }) {
 		detail: petData?.detail || "",
 		img: petData?.img || "",
 	});
+
+
+
+	const loggedUserID = JSON.parse(localStorage.getItem("loggedUser"))[0].id;
+	console.log("LOGGED ID",loggedUserID);
+	console.log("PARAMS ID",paramsId);
+
+
 
 
 	const handlerChange = (e) => {

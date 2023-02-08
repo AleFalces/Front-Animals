@@ -252,6 +252,7 @@ const RootReducer = (state = initialState, action) => {
     case DELETE_PET:
       return {
         ...state,
+        user: action.payload,
       };
     default:
       return state;
