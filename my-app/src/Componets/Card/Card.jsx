@@ -51,7 +51,7 @@ const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
           maxW={"320px"}
           w={"full"}
           h={"450px"}
-          bg={useColorModeValue("white", "gray.900")}
+          bg={"white"}
           boxShadow={"2xl"}
           rounded={"lg"}
           p={6}
@@ -59,7 +59,7 @@ const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
         >
           {/* ↓↓↓↓↓↓   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↓↓↓↓↓↓ */}
           {value === "update" ? (
-            <Box paddingRight={3} p={2}>
+            <Box my={1}>
               <Button
                 fontFamily={"body"}
                 size="sm"
@@ -178,12 +178,21 @@ const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
 
           {/*       ↓↓↓↓↓↓↓↓   BOTON EDITAR   ↓↓↓↓↓↓↓↓       */}
           {value === "update" ? (
-            <button
+            <Button
               className="modifyButton"
+              fontFamily={"body"}
+              /* size="md" */
+              w='35%'
+              bg={"orange.300"}
+              color={"white"}
+              mt='1rem'
+              _hover={{
+                bg: "orange.400",
+              }}
               onClick={(e) => handlerNavigateUpdate(e)}
             >
               Editar
-            </button>
+            </Button>
           ) : null}
           <Stack mt={4} direction={"column"} spacing={4}>
             <Center></Center>

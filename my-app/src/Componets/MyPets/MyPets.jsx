@@ -30,14 +30,14 @@ export const MyPets = () => {
   return (
     <>
       <NavBar />
-      <br />
 
-      <Heading as="h4" size="lg" pt="2rem" color="gray.600">
+
+      <Heading as="h4" size="lg" pt="2rem" color="gray.600"  bg="brand.green.200" w='100%'>
         {" "}
         Mis mascotas
       </Heading>
       {/* DETAIL */}
-      <Container>
+      <Container bg="brand.green.200" w='100%'>
         <Text
           fontFamily={"body"}
           fontWeight={"300"}
