@@ -7,35 +7,22 @@ import {
   Stack,
   StackDivider,
   Box,
-  Image, Divider, Center, Select
+  Image, Divider, Center, Select,
+  Button
 
-
-  // Button,
 } from "@chakra-ui/react";
-// import { useDispatch} from "react-redux";
+import { deletePet } from "../../../../Redux/Actions";
+import { useDispatch} from "react-redux";
 // import { useNavigate } from "react-router-dom";
 
 export default function PetCard({ id, size, species, age, img, detail, area, status, userId }) {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate()
 
-  //   function recievedDataProduct(e, id, size, species, age, img, detail, area, status, userId){
-  //     e.preventDefault()
-  //     const obj = {
-  //       id,
-  //       size,
-  //       species,
-  //       age,
-  //       img,
-  //       detail,
-  //       area,
-  //       status,
-  //       userId
-  //     }
-  //     console.log("receivedData", obj)
-  //     dispatch(modifyProduct(obj))
-  //   }
+  const dispatch = useDispatch()
 
+function handlerDeletePet(e, id){
+  // e.preventDefault(e)
+  dispatch(deletePet(id))
+}
   return (
     <div>
       <Card>
@@ -86,20 +73,18 @@ export default function PetCard({ id, size, species, age, img, detail, area, sta
                     ESTADO: <Text px='1.5rem' pt="2"> {status}  </Text>
                   </Heading>
                 </Center>
-
-
-
-                {/*pensar en agregar un boton para cambiarle estado de la mascota*/}
-                {/* <Button
-                onClick={(e) => {recievedDataProduct(e, id, name, image, stock, price, description, Category); navigate("/dashboard/updateProduct")}}
-                bg={"green"}
+                <Center>
+                <Button
+                onClick={(e) => {handlerDeletePet(e, id)}}
+                bg={"#40c2bb"}
                 color={"white"}
                   _hover={{
                     bg: "green.400",
                   }}
-                >Modificar</Button> */}
+                >Dejar de publicar
+                </Button>
+                </Center>
               </Box>
-            
           </CardBody>
         </Box>
       </Card>
