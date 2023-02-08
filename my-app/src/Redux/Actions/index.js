@@ -23,6 +23,7 @@ import {
 	ACTUAL_PAGE,
 	UPDATE_PRODUCT,
 	UPDATE_USER,
+	UPDATE_VET,
 	MODIFY_PRODUCT,
 	SET_IMAGE,
 	DELETE_PET,
@@ -182,6 +183,20 @@ export function updateUser(userID, formInput) {
 		}
 	};
 }
+
+export function updateVet(vetId, formInput) {
+	return async function (dispatch) {
+		try {
+			await axios.put(`${HOST}/veterinary/${vetId}`, formInput);
+			dispatch({
+				type: UPDATE_VET,
+			});
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+}
+
 
 export function postProduct(formInput) {
 	return async function (dispatch) {

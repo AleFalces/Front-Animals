@@ -12,9 +12,11 @@ import {
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function VetCard({ id, name, email, phone, address }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {}, [dispatch]);
 
@@ -40,6 +42,7 @@ export default function VetCard({ id, name, email, phone, address }) {
           <Text>Ubicación: {address}</Text>
         </CardBody>
         <CardFooter>
+            <Button onClick={(e)=> navigate(`/dashboard/updateVet/${id}`)}>Editar</Button>
           <Link href={`http://localhost:3000/veterinary/${id}`}>
             <Button colorScheme="yellow"> Visitar </Button>
           </Link>

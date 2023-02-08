@@ -25,6 +25,7 @@ import {
   SET_STATUS_USER,
   UPDATE_PRODUCT,
   UPDATE_USER,
+  UPDATE_VET,
   MODIFY_PRODUCT,
   SET_IMAGE,
 } from "../ActionTypes";
@@ -236,6 +237,10 @@ const RootReducer = (state = initialState, action) => {
         ...state,
       };
     case UPDATE_USER:
+      return {
+        ...state,
+      };
+    case UPDATE_VET:
       return {
         ...state,
       };
