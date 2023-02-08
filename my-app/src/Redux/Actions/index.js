@@ -174,7 +174,7 @@ export function updateUser(userID, formInput) {
 		try {
 			console.log("Action updateUSER", userID);
 			await axios.put(`${HOST}/users/${userID}`, formInput);
-			// const updatedProduct = await axios.get(`${HOST}/products`)
+
 			dispatch({
 				type: UPDATE_USER,
 			});
@@ -196,7 +196,6 @@ export function updateVet(vetId, formInput) {
 		}
 	};
 }
-
 
 export function postProduct(formInput) {
 	return async function (dispatch) {
@@ -492,16 +491,16 @@ export function deletePet(idPet, idUser) {
 }
 
 export function deletePetAdmin(id) {
-  return async function (dispatch) {
-    try {
-      const json = await axios.delete(`${HOST}/pets/${id}`);
-      const json2 = await axios.get(`http://localhost:3001/pets`);
-      return dispatch({
-        type: GET_PETS,
-        payload: {allPets: json2.data},
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+	return async function (dispatch) {
+		try {
+			const json = await axios.delete(`${HOST}/pets/${id}`);
+			const json2 = await axios.get(`http://localhost:3001/pets`);
+			return dispatch({
+				type: GET_PETS,
+				payload: { allPets: json2.data },
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 }

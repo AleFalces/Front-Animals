@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postUser, updateUser, getUserId } from "../../Redux/Actions";
 import { ErrorForm, SuccedForm } from "../FormPostPet/AlertForm/AlertForm";
@@ -26,26 +26,25 @@ import {
 
 //Regular expressions for mail
 let isEmail = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
-
 const validateForm = (input) => {
 	let inputError = {};
 
-	if (input.name.trim() === "" || !input.name.length) {
+	if (input?.name === "" || !input.name.length) {
 		inputError.name = "Debes ingresar tu nombre";
 	}
-	if (input.surname === "") {
+	if (input?.surname === "" || !input.surname.length) {
 		inputError.surname = `Debes ingresar tu apellido`;
 	}
-	if (input.email === "" || !input.name.length) {
+	if (input?.email === "" || !input.email.length) {
 		inputError.email = "Debes ingresar tu e-mail";
-	} else if (!isEmail.test(input.email)) {
+	} else if (!isEmail.test(input?.email)) {
 		inputError.email = "ingresa formato de e-mail válido";
 	}
-	if (input.username === "") {
+	if (input.username === "" || !input.username.length) {
 		inputError.username = "Debes ingresar un nombre de usuario";
 	}
-	if (input.phone !== "") {
-		if (input.phone.length !== 10) {
+	if (input?.phone !== "" || !input.phone.length) {
+		if (input.phone?.length !== 10) {
 			inputError.phone = "Debe ser un numero de 10 digitos";
 		}
 	}
@@ -53,6 +52,7 @@ const validateForm = (input) => {
 };
 
 export default function FormPostUser({ id, value }) {
+	const navigate = useNavigate();
 	const [usuario, setUsuario] = useState([]);
 	const dispatch = useDispatch();
 	const loggedUser = localStorage.getItem("loggedUser");
@@ -75,21 +75,21 @@ export default function FormPostUser({ id, value }) {
 		}
 	}, []);
 	useEffect(() => {
-		dispatch(getUserId(usuario[0]?.id)); //del localStorage me traigo la info del usuario, desde su posicion 0 de array, por eso le pregunto si tiene algo con el "?", si tiene algo dentro que me traiga su id
+		if (value === "update") dispatch(getUserId(usuario[0]?.id)); //del localStorage me traigo la info del usuario, desde su posicion 0 de array, por eso le pregunto si tiene algo con el "?", si tiene algo dentro que me traiga su id
 	}, [dispatch, usuario]);
 
 	const userInfo = useSelector((state) => state.user);
-	const logged = userInfo[0];
 
 	useEffect(() => {
-		setInput({
-			name: logged?.name,
-			surname: logged?.surname,
-			email: logged?.email,
-			username: logged?.username,
-			role: "user",
-		});
-	}, [logged]);
+		if (value === "update")
+			setInput({
+				name: userInfo[0]?.name,
+				surname: userInfo[0]?.surname,
+				email: userInfo[0]?.email,
+				username: userInfo[0]?.username,
+				role: "user",
+			});
+	}, []);
 
 	//Display login feedback
 	const [isIncomplete, setIsIncomplete] = useState(false);
@@ -101,7 +101,6 @@ export default function FormPostUser({ id, value }) {
 			[e.target.name]: e.target.value.trim(),
 		});
 		console.log("input", input);
-		// console.log("error", errors);
 
 		//control errores
 		setInputError(
@@ -110,9 +109,8 @@ export default function FormPostUser({ id, value }) {
 				[e.target.name]: e.target.value,
 			})
 		);
+		console.log("input errer ", inputError, "inputError", inputError);
 	};
-	console.log("INPUT FORM", input);
-	const userID = userInfo[0]?.id;
 
 	const handlerSubmit = (e, value) => {
 		e.preventDefault();
@@ -126,8 +124,9 @@ export default function FormPostUser({ id, value }) {
 			/* handlerSubmit(e); */
 			if (value === undefined) {
 				dispatch(postUser(input));
+				// navigate("/");
 			} else {
-				dispatch(updateUser(userID, input));
+				dispatch(updateUser(userInfo[0]?.id, input));
 			}
 
 			setIsIncomplete(false);
@@ -260,7 +259,7 @@ export default function FormPostUser({ id, value }) {
 									)}
 								</FormControl>
 
-								{loggedUser ? null : (
+								{value === null ? null : (
 									<FormControl id="password" isRequired>
 										<FormLabel>Contraseña: </FormLabel>
 										<InputGroup size="md">
@@ -346,7 +345,7 @@ export default function FormPostUser({ id, value }) {
 								</Stack>
 							</Stack>
 						</Box>
-						<Link to={loggedUser ? "/home" : "/"}>
+						<Link to={value === "update" ? "/home" : "/"}>
 							<Icon
 								as={MdArrowBackIosNew}
 								color="orange.400"

@@ -44,6 +44,11 @@ export default function Simple() {
 			setUsuario(logged);
 		}
 	}, []);
+
+	// if (!userInfo?.length) {
+	// 	dispatch(getUserId(usuario[0]?.id));
+	// }
+
 	useEffect(() => {
 		dispatch(getUserId(usuario[0]?.id)); //del localStorage me traigo la info del usuario, desde su posicion 0 de array, por eso le pregunto si tiene algo con el "?", si tiene algo dentro que me traiga su id
 	}, [dispatch, usuario]);
@@ -52,8 +57,10 @@ export default function Simple() {
 		localStorage.removeItem("loggedUser");
 		logout();
 	};
+
 	const userPhone = (e) => {
 		e.preventDefault();
+		console.log(userInfo);
 		if (userInfo[0]?.phone === "123456789") {
 			navigate("/updateUser");
 			alert("Actualiza tu telefono para publicar");
