@@ -87,7 +87,6 @@ export default function FormPostUser({ id, value }) {
 			surname: logged?.surname,
 			email: logged?.email,
 			username: logged?.username,
-			phone: logged?.phone,
 			role: "user",
 		});
 	}, [logged]);
