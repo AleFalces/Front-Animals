@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   Card,
   CardBody,
@@ -11,18 +11,23 @@ import {
   Button
 
 } from "@chakra-ui/react";
-import { deletePet } from "../../../../Redux/Actions";
+import { deletePetAdmin } from "../../../../Redux/Actions";
 import { useDispatch} from "react-redux";
+import { getPets } from "../../../../Redux/Actions";
 // import { useNavigate } from "react-router-dom";
 
 export default function PetCard({ id, size, species, age, img, detail, area, status, userId }) {
 
-  const dispatch = useDispatch()
+const dispatch = useDispatch()
+const loggedUser = localStorage.getItem("loggedUser");
+const [logged] = JSON.parse(loggedUser);
+
 
 function handlerDeletePet(e, id){
   // e.preventDefault(e)
-  dispatch(deletePet(id))
+  dispatch(deletePetAdmin(id))
 }
+
   return (
     <div>
       <Card>
