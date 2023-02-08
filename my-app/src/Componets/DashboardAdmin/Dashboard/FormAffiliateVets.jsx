@@ -72,23 +72,30 @@ export default function FormAffiliateVets({ value }) {
   function handlerErrors(e) {
     e.preventDefault();
 
-    if (input.name === "") {
+    const validateName = new RegExp(/^.{3,50}$/);
+    const validatePhoneNumber = new RegExp(/^15\d{6,10}$/); //arranque con 15 y contenga entre 6 y 10
+    const validateDescription = new RegExp(/^.{6,200}$/);
+    const validateAddress = new RegExp(/^.{5,40}$/);
+    const validateEmail = new RegExp(/^.{6,50}$/);
+
+
+    if (input.name === "" || !validateName.test(input.name)) {
       errors.name = "Ingresar el nombre de Veterinaria";
     }
-    if (input.description === "") {
+    if (input.description === "" || !validateDescription.test(input.description)) {
       errors.description = "Dejar un comentario sobre algo";
     }
     if (input.image === "") {
       errors.image = "Seleccionar una imagen.";
     }
-    if (input.phone === "") {
-      errors.price = "Ingresar su teléfono";
+    if (input.phone === "" || !validatePhoneNumber.test(input.phone)) {
+      errors.phone = "Ingresar su teléfono";
     }
-    if (input.address === "") {
-      errors.stock = "Escribir la ubicación de la Veterinaria";
+    if (input.address === "" || !validateAddress.test(input.address)) {
+      errors.address = "Escribir la ubicación de la Veterinaria";
     }
-    if (input.email === "") {
-      errors.stock = "Agregar un email de contacto";
+    if (input.email === "" || !validateEmail.test(input.email)) {
+      errors.email = "Agregar un email de contacto";
     }
     if (
       !errors.name &&
@@ -97,13 +104,11 @@ export default function FormAffiliateVets({ value }) {
       !errors.phone &&
       !errors.address &&
       !errors.email
-      // !errors.location
     ) {
       handlerSubmit(e);
     } else {
-      console.log("ERRORS NO SUBMIT", errors)
-      console.log("INPUT NO SUBMIT", input)
-      alert("Falta rellenar algun campo.");
+      console.log(errors)
+      alert("Error: ", errors.name || errors.description || errors.image || errors.phone || errors.address || errors.email);
     }
   }
 
