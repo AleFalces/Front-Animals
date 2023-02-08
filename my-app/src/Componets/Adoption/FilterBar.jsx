@@ -6,8 +6,9 @@ import {
   getPets,
 } from "../../Redux/Actions";
 
+import { GiSniffingDog } from 'react-icons/gi';
 
-import { Box, SimpleGrid, Center, FormControl, FormLabel, Select, Button, Heading, Input } from '@chakra-ui/react'
+import { Box, SimpleGrid, Center, FormControl, FormLabel, Select, Button, Heading, Input, Icon } from '@chakra-ui/react'
 
 
 const FilterBar = ({ value, paginate }) => {
@@ -409,11 +410,12 @@ const FilterBar = ({ value, paginate }) => {
   useEffect(() => {}, [dispatch]);
 
   return (
-    <Box bg={"brand.green.200"} pt="1rem">
-      <Heading>Mascotas en Adopción</Heading>
+    <Box bg={"brand.green.200"} pt="2rem">
+      <Heading>Tu Buddy búsqueda!{" "}</Heading>
+      <Icon as={GiSniffingDog} boxSize={55} mt={'1rem'} ></Icon>
+
 
       {/* //SearchBar */}
-
       <Box bg={"brand.green.200"}>
         <Center>
           <Box w='50%' mt={['2rem', '2rem', '3rem']}  ml={['0rem', '0', '0']}>
