@@ -30,6 +30,7 @@ export default function CardProduct({
   name,
   image,
   price,
+  stock,
   description,
   handlerSetCart,
   handleRemoveItemCart,
@@ -85,6 +86,14 @@ export default function CardProduct({
             >
               {description}
             </Text>
+            <Text
+              fontWeight={500}
+              color={"gray.500"}
+              mb={1}
+              fontFamily={"body"}
+            >
+              Stock:{stock} U
+            </Text>
             <Heading
               fontSize={"2xl"}
               fontWeight={"bold"}
@@ -102,7 +111,7 @@ export default function CardProduct({
                   borderRadius={"full"}
                   size="md"
                 >
-                  Vet detalles
+                  Ver detalles
                 </Button>
                 <Box>
                   <Button
@@ -139,9 +148,10 @@ export default function CardProduct({
                           <Button
                             color={"white"}
                             bg={"brand.orange"}
-                            onClick={(e) =>
-                              handlerSetCart(e, id, price, image, name)
-                            }
+                            onClick={(e) => {
+                              handlerSetCart(e, id, price, image, name, stock);
+                              onClose();
+                            }}
                             ml={3}
                           >
                             Si, agregar
