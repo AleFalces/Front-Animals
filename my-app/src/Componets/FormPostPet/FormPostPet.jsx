@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Link, redirect, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { petDetails, postOrUpdatePet, postPet } from "../../Redux/Actions";
+import { petDetails, postOrUpdatePet } from "../../Redux/Actions";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -18,9 +18,7 @@ import {
 	Button,
 	Heading,
 	Text,
-	useColorModeValue,
 	Icon,
-	/*  Link, */
 	Select,
 } from "@chakra-ui/react";
 
@@ -64,10 +62,32 @@ export default function FormPostPet({ value }) {
 	const [infoSend, setInfoSend] = useState(false);
 	const [inputError, setInputError] = useState({});
 	const paramsId = useParams("id");
-	const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))[0].id;//.id
-	// const petData = JSON.parse(loggedUser)[0].pet.find((pet)=>pet.id === paramsId.id)
-	let petData;
+	let petData = useSelector((state) => state.Detail)
+
 	const [input, setInput] = useState({
+		species: "",
+		sex: "",
+		age: "",
+		size: "",
+		status: "",
+		area: "",
+		detail: "",
+		img: "",
+	});
+function dataEmptied() {
+	setInput({
+		species: "",
+		sex: "",
+		age: "",
+		size: "",
+		status: "",
+		area: "",
+		detail: "",
+		img: "",
+	})
+}
+function completePetData(){
+	setInput({
 		species: petData?.species || "",
 		sex: petData?.sex || "",
 		age: petData?.age || "",
@@ -76,31 +96,19 @@ export default function FormPostPet({ value }) {
 		area: petData?.area || "",
 		detail: petData?.detail || "",
 		img: petData?.img || "",
-	});
-
-
-
-	const loggedUserID = JSON.parse(localStorage.getItem("loggedUser"))[0].id;
-	console.log("LOGGED ID",loggedUserID);
-	console.log("PARAMS ID",paramsId);
-
-
-
-
+	})
+}
 	const handlerChange = (e) => {
 		setInput({
 			...input,
 			[e.target.name]: e.target.value,
 		});
-		//control errores
-		console.log("INPUT ONCHANGE PET",input);
 		setInputError(
 			validateForm({
 				...input,
 				[e.target.name]: e.target.value,
 			})
 		);
-		console.log("CHANGE: INPUT", input);
 	};
 	const handlerSubmit = (e) => {
 		e.preventDefault();
@@ -130,9 +138,16 @@ export default function FormPostPet({ value }) {
 			setInfoSend(false);
 		}
 	};
-
 	useEffect(() => {
-	}, []);
+		dispatch(petDetails(paramsId.id))
+	}, [dispatch]);
+	useEffect(()=>{
+		if(value==="update"){
+			completePetData()
+		} else {
+			dataEmptied()
+		}
+	},[petData, value])
 	return (
 		<div>
 			<Navbar />
