@@ -14,13 +14,25 @@ import {
 import { deletePetAdmin } from "../../../../Redux/Actions";
 import { useDispatch} from "react-redux";
 import { getPets } from "../../../../Redux/Actions";
-// import { useNavigate } from "react-router-dom";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
+import { IoMdMale } from "react-icons/io";
+import { IoMdFemale } from "react-icons/io";
 
 export default function PetCard({ id, size, species, age, img, detail, area, status, userId }) {
 
 const dispatch = useDispatch()
 const loggedUser = localStorage.getItem("loggedUser");
 const [logged] = JSON.parse(loggedUser);
+const { isOpen, onOpen, onClose } = useDisclosure();
+const cancelRef = React.useRef();
 
 
 function handlerDeletePet(e, id){
@@ -80,6 +92,49 @@ function handlerDeletePet(e, id){
                 </Center>
                 <Center>
                 <Button
+                  fontFamily={"body"}
+                  bg={"orange.300"}
+                  color={"white"}
+                  _hover={{
+                    bg: "green.500",
+                  }}
+                  onClick={()=>{onOpen();}}
+                >
+                  Dejar de publicar
+                </Button>
+              
+              <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+              >
+                <AlertDialogOverlay>
+                  <AlertDialogContent>
+                    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                      ¡Hey!
+                    </AlertDialogHeader>
+                    <AlertDialogBody>
+                      ¿Quieres dejar de publicar esta mascota?
+                    </AlertDialogBody>
+                    <AlertDialogFooter>
+                      <Button ref={cancelRef} onClick={onClose}>
+                        Mejor no.
+                      </Button>
+                      <Button
+                        colorScheme="red"
+                        onClick={(e) => {
+                          handlerDeletePet(e, id);
+                          onClose();
+                        }}
+                        ml={3}
+                      >
+                        Sí, eso quiero!
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialogOverlay>
+              </AlertDialog>
+                {/* <Button
                 onClick={(e) => {handlerDeletePet(e, id)}}
                 bg={"#40c2bb"}
                 color={"white"}
@@ -87,7 +142,7 @@ function handlerDeletePet(e, id){
                     bg: "green.400",
                   }}
                 >Dejar de publicar
-                </Button>
+                </Button> */}
                 </Center>
               </Box>
           </CardBody>

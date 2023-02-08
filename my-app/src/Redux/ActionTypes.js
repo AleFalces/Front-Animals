@@ -24,6 +24,7 @@ export const ACTUAL_PAGE = "ACTUAL_PAGE"; // se pueden sacar
 export const SET_STATUS_USER = "SET_STATUS_USER";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_VET = "UPDATE_VET";
 export const MODIFY_PRODUCT = "MODIFY_PRODUCT";
 export const OUT_OF_STOCK = "OUT_OF_STOCK";
 export const SET_IMAGE = "SET_IMAGE";

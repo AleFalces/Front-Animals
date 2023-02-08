@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { postVet } from "../../../Redux/Actions";
+import { postVet, updateVet, VeterinaryDetails } from "../../../Redux/Actions";
 import UploadImage from "./UploadImage";
-
+import { useParams } from "react-router-dom";
+import { ErrorForm, SuccedForm } from "../../FormPostPet/AlertForm/AlertForm";
 import {
   Flex,
   Box,
@@ -16,17 +17,24 @@ import {
   Heading,
   Text,
   useColorModeValue, Icon,
-  Select,
   Container
+  // Select,
 } from "@chakra-ui/react";
 
 
 import { MdArrowBackIosNew } from "react-icons/md";
 
-export default function FormAffiliateVets() {
+export default function FormAffiliateVets({ value }) {
   const dispatch = useDispatch();
 
+  const [isIncomplete, setIsIncomplete] = useState(false);
+	const [infoSend, setInfoSend] = useState(false);
+	// const [inputError, setInputError] = useState({});
+	const paramsId = useParams("id");
   const imageUrl = useSelector((state) => state.imageUrl)
+  const vetDetail = useSelector((state) => state.vetsDetail)
+  const vetInfo = vetDetail[0]
+
   const [image, setImage] = useState("")
   const [input, setInput] = useState({
     name: "",
@@ -48,12 +56,18 @@ export default function FormAffiliateVets() {
     location: [],
   };
 
-  useEffect(()=>{
+  function completeVetData(){
     setInput({
-      ...input,
-      image: imageUrl
+    name: vetInfo?.name || "",
+    description: vetInfo?.description || "",
+    phone: vetInfo?.phone || "",
+    email: vetInfo?.email || "",
+    address: vetInfo?.address || "",
+    image: vetInfo?.image || "",
+    location: vetInfo?.location || [],
     })
-  },[imageUrl])
+    console.log("COMPLETE DATA INPUT", input);
+  }
 
   function handlerErrors(e) {
     e.preventDefault();
@@ -83,9 +97,12 @@ export default function FormAffiliateVets() {
       !errors.phone &&
       !errors.address &&
       !errors.email
+      // !errors.location
     ) {
       handlerSubmit(e);
     } else {
+      console.log("ERRORS NO SUBMIT", errors)
+      console.log("INPUT NO SUBMIT", input)
       alert("Falta rellenar algun campo.");
     }
   }
@@ -95,37 +112,81 @@ export default function FormAffiliateVets() {
       ...input,
       [e.target.name]: e.target.value.trim(),
     });
-    console.log("input", input);
+    // setInputError(
+		// 	handlerErrors({
+		// 		...input,
+		// 		[e.target.name]: e.target.value,
+		// 	})
+		// );
+    console.log("HANDLERCHANG", input);
     console.log("error", errors);
   }
 
   function handlerSubmit(e) {
+    
     e.preventDefault();
-    let result = input.location.split(", ");
-    let finalResult = [Number(result[0]), Number(result[1])];
+    if(value === undefined){
+      let result = input.location.split(", ");
+      let finalResult = [Number(result[0]), Number(result[1])];
+      setInput({
+        ...input,
+        location: (input.location = finalResult),
+      });
+    }
+   
+    // dispatch(postVet(input))
 
+    if (
+			input.name &&
+			input.description &&
+			input.phone &&
+			input.address &&
+			input.email &&
+      input.location &&
+			input.image
+      ) {
+			if(value === undefined) {
+				dispatch(postVet(input, value))
+				setIsIncomplete(false);
+				setInfoSend(true);
+				// document.getElementById("myForm").reset();
+			} else {
+				dispatch(updateVet( paramsId.id, input ))
+				setIsIncomplete(false);
+				setInfoSend(true);
+				// document.getElementById("myForm").reset();			
+			}
+		} else {
+			setIsIncomplete(true);
+			setInfoSend(false);
+		}
+    console.log("HANDLERSUBMIT",input);
+	};
+  
+  useEffect(() => {
+		dispatch(VeterinaryDetails(paramsId.id))
+	}, [dispatch]);
+
+	useEffect(()=>{
+		if(value==="updateVet"){
+			completeVetData()
+		}
+	},[vetInfo, value])
+
+  useEffect(()=>{
     setInput({
       ...input,
-      location: (input.location = finalResult),
-    });
-    console.log(input);
-    dispatch(postVet(input));
-    setInput({
-      name: "",
-      description: "",
-      phone: "",
-      address: "",
-      image: "",
-      email: "",
-      location: [],
-    });
+      image: imageUrl
+    })
+  },[imageUrl])
 
-    document.getElementById("myForm").reset();
-    alert("Veterinaria afiliada exitosamente.");
-  }
 
   return (
     <div>
+
+      {isIncomplete ? <ErrorForm /> : null}
+			{infoSend ? <SuccedForm /> : null}
+
       <form id="myForm">
         <Flex
           minH={"100vh"}
@@ -134,12 +195,19 @@ export default function FormAffiliateVets() {
           bg={"brand.green.100"}>
         
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          {value === undefined ? (
             <Stack align={"center"}>
               <Heading fontSize={"4xl"} textAlign={"center"}>
                 Afiliar una Veterinaria
               </Heading>
             </Stack>
-
+          ): (
+            <Stack align={"center"}>
+              <Heading fontSize={"4xl"} textAlign={"center"}>
+                Editar Info. Veterinaria
+              </Heading>
+            </Stack>
+          )}
             <Box
               rounded={"lg"}
               bg={useColorModeValue("white", "gray.700")}
@@ -155,6 +223,7 @@ export default function FormAffiliateVets() {
                         placeholder="¿Cómo se llama?" //el input name solo acepta palabras sin espacios!!.
                         type="text"
                         name="name"
+                        value={input.name}
                         onChange={(e) => handlerChange(e)}
                       />
                       {errors.name && <Text>{errors.name}</Text>}
@@ -167,6 +236,7 @@ export default function FormAffiliateVets() {
                       <Input
                         placeholder="Algún comentario sobre la afiliación..."
                         name="description"
+                        value={input.description}
                         type="text"
                         key="description"
                         onChange={(e) => handlerChange(e)}
@@ -178,6 +248,7 @@ export default function FormAffiliateVets() {
                   <FormLabel>Teléfono de contacto: </FormLabel>
                   <Input
                     placeholder="Fijo/Celular"
+                    value={input.phone}
                     name="phone"
                     key="phone"
                     type="number"
@@ -188,43 +259,43 @@ export default function FormAffiliateVets() {
                 <FormControl id="address">
                   <FormLabel>Ubicación: </FormLabel>
                   <Input
-                    placeholder="¿Dónde se encuetra la Veterinaria?"
+                    placeholder="¿Dónde se encuentra la Veterinaria?"
+                    value={input.address}
                     name="address"
                     key="address"
                     type="text"
                     onChange={(e) => handlerChange(e)}
                   />
                 </FormControl>
-
-                <FormControl id="image" isRequired>
-                <Container>
-                    <h1>Subir imagen de la Veterinaria</h1>
-                  </Container>
-                <button><UploadImage image={image} setImage={setImage}/></button>
-                </FormControl>
-
+                
                 <FormControl id="email" isRequired>
                   <label>Email de contacto: </label>
                   <Input
+                    value={input.email}
                     type="text"
                     name="email"
                     placeholder="example@gmail.com"
                     onChange={(e) => handlerChange(e)}
                   />
                 </FormControl>
-
-                <FormControl id="location" isRequired>
-                  <label>Location: </label>
+              {value === undefined ?(<FormControl id="location" isRequired>
+                  <label>Locacion: </label>
                   <Input
                     type="text"
                     name="location"
                     placeholder="Latitud de tu veterinaria"
                     onChange={(e) => handlerChange(e)}
                   />
-                </FormControl>
-
+                </FormControl>): null}
                 
-                <Stack spacing={10} pt={2}>
+                {value === undefined ? (<FormControl id="image" isRequired>
+                    <h1>Subir imagen de la Veterinaria: </h1>
+                <Container>
+                <button><UploadImage image={image} setImage={setImage}/></button>
+                  </Container>
+                </FormControl>) : null}
+                
+              {value === undefined ? (<Stack spacing={10} pt={2}>
                   <Button
                     onClick={(e) => handlerErrors(e)}
                     loadingText="Afiliar Veterinaria"
@@ -235,13 +306,26 @@ export default function FormAffiliateVets() {
                     _hover={{
                       bg: "orange.400",
                     }}>
-                    Afiliar Veterinaria
+                    Afiliar
                   </Button>
-                </Stack>
+                </Stack>) : (<Stack spacing={10} pt={2}>
+                  <Button
+                    onClick={(e) => handlerErrors(e)}
+                    loadingText="Editar Veterinaria"
+                    fontFamily={"body"}
+                    size="lg"
+                    bg={"orange.300"}
+                    color={"white"}
+                    _hover={{
+                      bg: "orange.400",
+                    }}>
+                    Guardar informacion
+                  </Button>
+                </Stack>)}
               </Stack>
             </Box>
 
-            <Link to={"/dashboard"}>
+            <Link to={ "/dashboard"}>
 							<Icon
 								as={MdArrowBackIosNew}
 								color="orange.400"

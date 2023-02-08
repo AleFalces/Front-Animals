@@ -117,6 +117,10 @@ function App() {
 					element={<FormAffiliateVets />}></Route>
 				<Route
 					exact
+					path="/dashboard/updateVet/:id"
+					element={<FormAffiliateVets value={"updateVet"}/>}></Route>
+				<Route
+					exact
 					path="/dashboard/updateProduct"
 					element={<FormUpdateProduct />}></Route>
 				<Route path="*" element={<NotFound />}></Route>
