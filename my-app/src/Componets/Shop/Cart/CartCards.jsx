@@ -1,25 +1,82 @@
+import { Flex } from "@chakra-ui/layout";
+import { Button, Text, Center, SimpleGrid, Box } from "@chakra-ui/react";
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./CartCards.css"
+import { Product } from "./Product";
 
-export default function CartCards({amount, id, image, name, price, total, stock, handlerSetCart, handleRemoveItemCart}) {
-    return (
-        <div className="divContainerCartAll">
-          <div className="divContainerCart">
-            <img src={image} alt="img not found" className="img"/>
-            <div className="divDrescriptionCart">
-              <div><h2>Producto</h2><h3>{name}</h3></div>
-              <div><h2>Cantidad</h2><h3>{amount}</h3></div>
-              <div><h2>Precio</h2><h3>{price}</h3></div>
-              <div><h2>Total</h2><h3>{total}</h3></div>
-              <div>
-                <button onClick={(e) =>handlerSetCart(e, id, price, image, name, stock)}>Agregar</button>
-                <button onClick={(e)=> handleRemoveItemCart(e, id)}>Sacar</button>
-              </div>
+export default function CartCards({
+  amount,
+  id,
+  image,
+  name,
+  price,
+  total,
+  stock,
+  handlerSetCart,
+  handleRemoveItemCart,
+}) {
+  return (
+    <>
+      <Center>
+        <Flex
+          direction={{
+            base: "column",
+            md: "row",
+          }}
+          justify="space-between"
+          align="center"
+          flexWrap={"wrap"}
+        >
+          <Box>
+            <Product
+              name={name}
+              stock={stock}
+              image={image}
+              amount={amount}
+              price={price}
+            />
+          </Box>
+          <Box>
+            <Box>
+              <Button
+                fontFamily={"body"}
+                borderRadius={"full"}
+                size="sm"
+                // bg={"brand.orange"}
+                // color={"white"}
+                textTransform={"uppercase"}
+                _hover={{
+                  transform: "translateY(2px)",
+                  boxShadow: "lg",
+                }}
+                onClick={(e) => handleRemoveItemCart(e, id)}
+              >
+                -
+              </Button>
+              <Button
+                fontFamily={"body"}
+                borderRadius={"full"}
+                size="sm"
+                // bg={"brand.orange"}
+                // color={"white"}
+                textTransform={"uppercase"}
+                _hover={{
+                  transform: "translateY(2px)",
+                  boxShadow: "lg",
+                }}
+                onClick={(e) =>
+                  handlerSetCart(e, id, price, image, name, stock, price)
+                }
+              >
+                +
+              </Button>
+            </Box>
 
-            </div>
-          </div>
-        </div>
-    )
+            <Text>${total}</Text>
+          </Box>
+        </Flex>
+      </Center>
+    </>
+  );
 }

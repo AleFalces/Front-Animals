@@ -7,7 +7,7 @@ import CardsProduct from "./CardsProducts/CardsProduct";
 import ShopNavbar from "./ShopNavbar/ShopNavbar";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-import { Box, SimpleGrid, Center, chakra } from "@chakra-ui/react";
+import { Box, SimpleGrid, Center, Text } from "@chakra-ui/react";
 
 export default function Shop() {
   const dispatch = useDispatch();
@@ -48,11 +48,8 @@ export default function Shop() {
     }
   }
 
-
-
-  
   const handlerSetCart = (e, id, price, image, name, stock) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       let product = {
@@ -73,50 +70,65 @@ export default function Shop() {
           }
         });
         if (index !== false) {
-        if(stock=== 0 || stock === oldCart[index].amount) {
-          return alert("Se llegó al limite de stock actual")
-        } else {
-          oldCart[index].amount += 1;
+          if (stock === 0 || stock === oldCart[index].amount) {
+            return alert("Se llegó al limite de stock actual");
+          } else {
+            oldCart[index].amount += 1;
 
-          oldCart[index].total = oldCart[index].price * oldCart[index].amount
-          let newCart = window.localStorage.setItem("cart", JSON.stringify([...oldCart]))
-          dispatch(getAllProducts)
-          console.log("CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",JSON.parse(localStorage.getItem("cart")));
-          return alert(`Agregaste de nuevo el producto ${name}`)
+            oldCart[index].total = oldCart[index].price * oldCart[index].amount;
+            let newCart = window.localStorage.setItem(
+              "cart",
+              JSON.stringify([...oldCart])
+            );
+            dispatch(getAllProducts);
+            console.log(
+              "CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",
+              JSON.parse(localStorage.getItem("cart"))
+            );
+            // return alert(`Agregaste de nuevo el producto ${name}`);
+          }
+        } else {
+          if (stock !== 0) {
+            product.total = product.price;
+            let newCart = window.localStorage.setItem(
+              "cart",
+              JSON.stringify([...oldCart, product])
+            );
+            dispatch(getAllProducts);
+            console.log(
+              "CASO SI EXISTE CARRITO Y NOOOOO TENGO INDEX",
+              JSON.parse(localStorage.getItem("cart"))
+            );
+            // return alert(`Agregaste el producto ${name}`);
+          } else {
+            return alert("El producto no tiene stock :c");
+          }
         }
       } else {
-        if(stock!== 0) {
-        product.total = product.price
-        let newCart = window.localStorage.setItem("cart", JSON.stringify([...oldCart, product]))
-        dispatch(getAllProducts)
-        console.log("CASO SI EXISTE CARRITO Y NOOOOO TENGO INDEX",JSON.parse(localStorage.getItem("cart")));
-        return alert(`Agregaste el producto ${name}`)
-      } else {
-        return alert("El producto no tiene stock :c")
+        if (stock !== 0) {
+          product.total = product.price;
+          let newCart = window.localStorage.setItem(
+            "cart",
+            JSON.stringify([product])
+          );
+          dispatch(getAllProducts);
+          console.log(
+            "CASO NO EXISTE CARRITO",
+            JSON.parse(localStorage.getItem("cart"))
+          );
+          // return alert(`Agregaste el producto ${name}`);
+        } else {
+          return alert("El producto no tiene stock :c");
+        }
       }
-      }
-    } else {
-      if(stock!== 0) {
-        product.total = product.price
-        let newCart = window.localStorage.setItem("cart", JSON.stringify([product]))
-        dispatch(getAllProducts)
-        console.log("CASO NO EXISTE CARRITO",JSON.parse(localStorage.getItem("cart")));
-        return alert(`Agregaste el producto ${name}`)
-      } else {
-        return alert("El producto no tiene stock :c")
-      }
-    }
-
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-
     dispatch(getAllProducts());
   }, [cart]);
-
 
   return (
     <>
@@ -135,7 +147,18 @@ export default function Shop() {
                 handleRemoveItemCart={handleRemoveItemCart}
               />
             ) : (
-              <chakra.h1>No se econtraron productos</chakra.h1>
+              <Center>
+                <Text
+                  textAlign={"center"}
+                  fontSize={"4xl"}
+                  py={10}
+                  fontWeight={"bold"}
+                  color={"brand.darkBlue"}
+                  fontFamily={"heading"}
+                >
+                  No se econtraron productos
+                </Text>
+              </Center>
             )}
           </SimpleGrid>
         </Center>
