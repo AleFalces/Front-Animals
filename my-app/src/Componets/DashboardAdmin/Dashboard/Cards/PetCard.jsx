@@ -69,7 +69,7 @@ function handlerDeletePet(e, id){
                     borderRadius={'7px'}
                   />
                 </Center>
-                <Center height='50px'>
+                <Center height='50px' pt='1rem'>
                   <Heading size="xs" >
                     UBICACIÓN: <Text px='2rem' pt="2"> {area} </Text>
                   </Heading>
@@ -83,8 +83,9 @@ function handlerDeletePet(e, id){
                 onClick={(e) => {handlerDeletePet(e, id)}}
                 bg={"#40c2bb"}
                 color={"white"}
+                mt='1.5rem'
                   _hover={{
-                    bg: "green.400",
+                    bg: "blue.400",
                   }}
                 >Dejar de publicar
                 </Button>

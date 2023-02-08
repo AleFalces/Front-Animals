@@ -49,7 +49,7 @@ export const MyPets = () => {
             my="0rem"
             fontSize={{ base: "20px", md: "20px", lg: "22px" }}
             color="gray.500"
-          >Aquí están todas tus publicaciones, podrás editar su información, tanto como  para borrarlas
+          >Aquí están todas tus publicaciones, podrás editar y/o eliminar su información
           </Text>
         </Container>
       </Box>

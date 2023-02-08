@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postUser, updateUser, getUserId } from "../../Redux/Actions";
 import { ErrorForm, SuccedForm } from "../FormPostPet/AlertForm/AlertForm";
 import { MdArrowBackIosNew } from "react-icons/md";
-import logo from "../../assets/imagenes/logo_negro.png";
+import logo from "../../assets/imagenes/logo_negro2.png";
 import {
 	Flex,
 	Box,
@@ -153,7 +153,7 @@ export default function FormPostUser({ id, value }) {
 					align={"center"}
 					justify={"center"}
 					bg="brand.green.200">
-					<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+					<Stack spacing={8} mx={"auto"} maxW={"lg"} py={6} px={6}>
 						{value === undefined ? (
 							<Stack align={"center"}>
 								<Text
@@ -168,15 +168,22 @@ export default function FormPostUser({ id, value }) {
 								<Text fontSize={"lg"} color={"gray.600"}>
 									Gracias por cuidar a los animales ✌️
 								</Text>
-								<Box width={20} height={20}>
+								<Box width={20} pt='1rem' >
 									<Image src={logo}></Image>
 								</Box>
 							</Stack>
 						) : (
 							<Stack align={"center"}>
-								<Heading fontSize={"4xl"} textAlign={"center"}>
-									Actualizá la información de perfil
+								<Heading fontSize={"4xl"} textAlign={"center"} >
+									Actualizá tu información de perfíl
 								</Heading>
+
+								<Box>
+									<Image src={logo} width={20}></Image>
+								</Box>
+                <Text fontSize={"lg"} color={"gray.600"}>
+									Gracias por cuidar a los animales ✌️
+								</Text>
 							</Stack>
 						)}
 

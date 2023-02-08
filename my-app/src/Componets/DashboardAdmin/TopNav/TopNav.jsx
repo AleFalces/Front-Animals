@@ -1,9 +1,6 @@
 import React from "react";
-import styles from "./TopNav.module.css";
 import { Link } from "react-router-dom";
-
-import { Button, Box, Icon, SimpleGrid } from "@chakra-ui/react";
-
+import { Button, Box, Icon, SimpleGrid, Text } from "@chakra-ui/react";
 import { MdArrowBackIosNew } from "react-icons/md";
 
 const TopNav = () => {
@@ -11,7 +8,7 @@ const TopNav = () => {
     <nav /* className={styles.topNav} */>
       <SimpleGrid columns={[2, 4]} pt="2rem" bg={"brand.green.100"} pb={"1rem"}>
         <Box>
-          <h5 className={styles.brand}>Administrar sitio Web</h5>
+          <Text fontFamily={'heading'} fontWeight={'bold'} pt='0.5rem' fontSize={('1.5rem')}>Administrar sitio Web</Text>
         </Box>
 
         <Box>

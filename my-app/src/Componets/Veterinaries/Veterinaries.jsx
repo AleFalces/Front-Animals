@@ -35,7 +35,7 @@ const Veterinaries = () => {
               mb="1%"
               // py={10}
             >
-              Bienvenidos a nuestra seccion de veterinarias en línea.
+              Bienvenidos a nuestra sección de veterinarias en línea
             </chakra.h4>
           </Center>
           <Center>
@@ -108,8 +108,8 @@ const Veterinaries = () => {
           >
             Aquí encontrarás la ubicación precisa de una selección cuidadosa de
             clínicas médicas que ofrecen servicios de alta calidad.
-            <br /> Use esta herramienta para encontrar la clínica más cercana y
-            conveniente para sus necesidades médicas. ¡Comience a explorar
+            <br /> Usa esta herramienta para encontrar la clínica más cercana y
+            conveniente para tus necesidades médicas. ¡Comienza a explorar
             ahora!
           </Text>
         </Center>

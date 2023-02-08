@@ -165,7 +165,7 @@ const Details = () => {
               {/* Título sec. info */}
               <Heading as="h4" size="lg" pt="2rem" color="gray.600">
                 {" "}
-                Un poco sobre mi
+                Un poco sobre mí
               </Heading>
 
               {/* DETAIL */}
@@ -275,8 +275,8 @@ const Details = () => {
             <Text color={"gray.600"} fontSize={"xl"}>
               Leelos y ten en cuenta cada aspecto, la buena relación con las
               mascotas, su felicidad y salud dependen de estos factores, por
-              favor no los pases por alto y ten en cuenta qué puede cumplir y
-              que no a la hora de alojar un futuro miembro de tu familia!
+              favor no los pases por alto y piensa qué puedes cumplir y
+              qué no a la hora de alojar a un futuro miembro de la familia!
             </Text>
           </Stack>
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/imagenes/logo_negro.png";
+import logo from "../../assets/imagenes/logo_negro2.png";
 import Login from "../Login/Login";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./LandingPage.css";

@@ -42,7 +42,7 @@ const Adoption = ({ value }) => {
         />
       </Box>
       <Center >
-        <SimpleGrid columns={[1, 1, 2, 3]} spacing={10}>
+        <SimpleGrid columns={[1, 1, 2, 3]} spacing={10}  mb='3rem'>
           {!pets?.length ? (
             <Center>
               <Stack direction="row">
