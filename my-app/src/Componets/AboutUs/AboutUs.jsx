@@ -9,7 +9,7 @@ import {
   Flex,
   Icon,
   Image,
-  Center
+  Center, AspectRatio
 } from "@chakra-ui/react";
 
 import Navbar from "../Navbar/Navbar";
@@ -89,24 +89,30 @@ const AboutUs = () => {
 
       </Box>
 
+  
 
-      <Center bg={'orange.200'} pt='4rem'>
-        <SimpleGrid columns={1} pt='1rem' pb='1rem' bg={'orange.200'} m={'1rem'} >
-          <Box borderRadius={'7px'}  >
-            {/* <AspectRatio ratio={1}>  */}
+        <SimpleGrid columns={1}  pb='1rem' pt='1rem' bg={'orange.200'}  > 
+    <Container  h='100%'   width='100%' justifyContent={'center'}>
+        <Box borderRadius={'7px'}  bg='orange'   w='100%' >  
+       
+            <AspectRatio ratio={1} px='7rem'>  
+          
             <iframe
               width="720"
-              height="405"
+              height="405" 
               src="https://www.youtube.com/embed/rOW_cTjVleg"
               title="BuddyVid"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
-            ></iframe>
-            {/*  </AspectRatio>  */}
-          </Box>
-        </SimpleGrid>
-      </Center>
+            ></iframe>            
+            </AspectRatio>  
+          
+        </Box>  
+        </Container> 
+        
+        </SimpleGrid> 
+     
 
 
 
@@ -116,7 +122,7 @@ const AboutUs = () => {
           <Heading fontSize={"5xl"}>Nuestros Objetivos</Heading>
         </Stack>
       </Box>
-      <Box p={4} bgColor={"brand.green.200"} pb='5rem'>
+      <Box px={10} bgColor={"brand.green.200"} pb='5rem' fontSize='1.3rem'>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} >
           <Feature 
             icon={
@@ -129,7 +135,7 @@ const AboutUs = () => {
             }
             title={"Lucha por los animales"}
             text={
-              "Luchar contra el abandono, el maltrato y el sufrimiento animal.Educar sobre el respeto por la vida de los animales a través de charlas y talleres educativos en lugares públicos y privados"
+              "Luchar contra el abandono, el maltrato y el sufrimiento animal.Promover respeto por la vida de los animales a través de charlas y talleres en lugares públicos y privados"
             }
           />
           <Feature
@@ -153,7 +159,7 @@ const AboutUs = () => {
             }
             title={"Donación"}
             text={
-              "Organizar campañas de castración gratuitas y/o a bajo costo en las zonas vulnerables"
+              "Organizar campañas de castración gratuitas y/o a bajo costo en las zonas vulnerables para garantizar la salud de los animales"
             }
           />
         </SimpleGrid>

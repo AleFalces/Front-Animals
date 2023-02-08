@@ -87,15 +87,16 @@ export default function LargeWithNewsletter() {
       bottom={0}
     >
       <Container as={VStack} maxW={"6xl"} py={10}>
+        <Center>
         <SimpleGrid
-          templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 2fr" }}
+          columns={{ sm: "1", md: "3" , lg:'4' }}
           spacing={5}
         >
           <Stack spacing={6}>
             <Box>
               <Logo color={useColorModeValue("gray.700", "white")} />
             </Box>
-            <Text fontSize={"sm"} display="flex">
+            <Text fontSize={"md"} display="flex">
               © 2023 Buddy ONG. All rights reserved
             </Text>
             <Stack direction={"row"} spacing={6}>
@@ -110,7 +111,7 @@ export default function LargeWithNewsletter() {
               </SocialButton>
             </Stack>
           </Stack>
-          <Stack align={"flex-start"}>
+          <Stack>
             <ListHeader>Company</ListHeader>
             <Link href={"#"}>About us</Link>
             <Link href={"#"}>Blog</Link>
@@ -118,45 +119,69 @@ export default function LargeWithNewsletter() {
             <Link href={"#"}>Pricing</Link>
             <Link href={"#"}>Testimonials</Link>
           </Stack>
-          <Stack align={"flex-start"}>
+          <Stack >
             <ListHeader fontWeight="extrabold">LinkedIn</ListHeader>
-            <Link href={"https://www.linkedin.com/in/m-g-maceira/"} isExternal>
+            <Link href={"https://www.linkedin.com/in/m-g-maceira/"} isExternal _hover={{
+									fontWeight: 'bold',
+									color: "orange.400"
+								}}>
               Mariana Maceira
             </Link>
-            <Link href={"https://www.linkedin.com/in/lauracolof/"} isExternal>
+            <Link href={"https://www.linkedin.com/in/lauracolof/"} isExternal _hover={{
+									fontWeight: 'bold',
+									color: "orange.400"
+								}}>
               Maria Laura Colo
             </Link>
             <Link
               href={"https://www.linkedin.com/in/ignacio-coria-de-bernardi/"}
-              isExternal
+              isExternal _hover={{
+                fontWeight: 'bold',
+                color: "orange.400"
+              }}
             >
               Ignacio Coria
             </Link>
-            <Link href={"#"}>Alexis Falces</Link>
+            <Link href={"#"} _hover={{
+									fontWeight: 'bold',
+									color: "orange.400"
+								}}>Alexis Falces</Link>
             <Link
               href={"https://www.linkedin.com/in/julian-navarro-b25938247/"}
-              isExternal
+              isExternal _hover={{
+                fontWeight: 'bold',
+                color: "orange.400"
+              }}
             >
               Julian Navarro
             </Link>
-            <Link href={"https://www.linkedin.com/in/lucho47-dev/"} isExternal>
-              Luciano Navarro
+            <Link href={"https://www.linkedin.com/in/lucho47-dev/"} isExternal _hover={{
+									fontWeight: 'bold',
+									color: "orange.400"
+								}}>
+              Luciano Navarro 
             </Link>
             <Link
               href={"https://www.linkedin.com/in/magdalena-aliaga-bb239698/"}
-              isExternal
+              isExternal _hover={{
+                fontWeight: 'bold',
+                color: "orange.400"
+              }}
             >
               Magdalena Aliaga
             </Link>
-            <Link href={"https://www.linkedin.com/in/andres-salom/"} isExternal>
+            <Link href={"https://www.linkedin.com/in/andres-salom/"} isExternal _hover={{
+									fontWeight: 'bold',
+									color: "orange.400"
+								}}>
               Andres Salom
             </Link>
           </Stack>
           <Stack align={"flex-start"} spacing={6} px={10}>
             <ListHeader>Proyecto</ListHeader>
-            <Wrap spacing={"50x"}>
+            <Wrap spacing={"1rem"}>
               <WrapItem>
-                <Center w="300px" p={"20px"}>
+                <Center w="16rem" p={"20px"}>
                   {profiles1?.map((photos) => (
                     <Avatar
                       size={"lg"}
@@ -167,7 +192,7 @@ export default function LargeWithNewsletter() {
                 </Center>
               </WrapItem>
               <WrapItem>
-                <Center w="300px">
+                <Center w="16rem">
                   {profiles2?.map((photos) => (
                     <Avatar
                       size={"lg"}
@@ -180,6 +205,7 @@ export default function LargeWithNewsletter() {
             </Wrap>
           </Stack>
         </SimpleGrid>
+        </Center>
       </Container>
     </Box>
   );
