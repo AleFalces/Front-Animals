@@ -22,8 +22,9 @@ const Dashboard = () => {
   const petsArray = useSelector((state) => state.allPets)
 
   const bannedArray = usersArray.filter((user) => user.status === "banned")
-  console.log("SOMOS USERS", bannedArray)
-
+  const unbannedArray = usersArray.filter((user) => user.status !== "banned")
+  // console.log("SOMOS USERS",bannedArray)
+  
 
   function handlerShowDataUsers(e) {
     e.preventDefault();
@@ -49,12 +50,17 @@ const Dashboard = () => {
     setSelection("vets");
   }
 
+  const usersArray2 = useSelector((state) => state.allUsers)
+
+  useEffect(()=>{
+      
+  },[usersArray2, petsArray])
 
   useEffect(() => {
-    // dispatch(getAllUsers());
-    // dispatch(getPets())
-    // dispatch(getAllProducts())
-    // dispatch(getAllVeterinaries())
+    dispatch(getAllUsers());
+    dispatch(getPets())
+    dispatch(getAllProducts())
+    dispatch(getAllVeterinaries())
   }, [dispatch]);
 
   return (
@@ -112,7 +118,7 @@ const Dashboard = () => {
       <Center>
         <Box zIndex={4}>
           {selection === "users" ? (
-            <ShowUsers users={usersArray} />
+            <ShowUsers users={unbannedArray} />
           ) : selection === "bannedUser" ? (
             <ShowBannedUsers bannedUsers={bannedArray} />
           ) : selection === "products" ? (
