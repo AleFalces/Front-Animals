@@ -1,5 +1,6 @@
-import React from "react";
-import "../Adoption/Cards.css"
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import "../Adoption/Cards.css";
 import {
   Heading,
   Image,
@@ -21,23 +22,36 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
 } from "@chakra-ui/react";
-
+import "../Adoption/Cards.css";
 import { useDisclosure } from "@chakra-ui/react";
 import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { deletePet, getUserId } from "../../Redux/Actions";
+
+import { handlerDeletePet } from "../../utils";
 
 const Card = ({ data: { id, size, img, sex, species, age, area }, value} ) => {
+  const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const navigate = useNavigate()
-  console.log(id, "VALUE CARD MYPET",value);
+  const [loggedUser] = JSON.parse(localStorage.getItem("loggedUser")) 
 function handlerNavigateUpdate(e) {
   e.preventDefault();
   navigate(`/updatePet/${id}`)
 }
+
+function handlerDeletePet(e, id) {
+e.preventDefault();
+dispatch(deletePet(id, loggedUser.id))
+}
+// useEffect(()=>{
+
+// },[dispatch])
+
   return (
-    <Box>      
+    <Box>
       <Center py={6}>
         <Box
           maxW={"320px"}
@@ -49,9 +63,8 @@ function handlerNavigateUpdate(e) {
           p={6}
           textAlign={"center"}
         >
-
-
           {/* ↓↓↓↓↓↓   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↓↓↓↓↓↓ */}
+
 {value === "update"?
            <Box paddingRight={3} p={2} className="boxButtonDelete">
             <Button
@@ -86,7 +99,7 @@ function handlerNavigateUpdate(e) {
                     <Button ref={cancelRef} onClick={onClose}>
                       Cancelar
                     </Button>
-                    <Button colorScheme="red" onClick={onClose} ml={3}>
+                    <Button colorScheme="red" onClick={(e)=>{handlerDeletePet(e,id); onClose()}} ml={3}>
                       Borrar
                     </Button>
                   </AlertDialogFooter>
@@ -95,8 +108,8 @@ function handlerNavigateUpdate(e) {
             </AlertDialog>
           </Box>:null
 }
-          {/* ↑↑↑↑↑↑↑↑   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↑↑↑↑↑↑↑↑ */}
 
+          {/* ↑↑↑↑↑↑↑↑   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↑↑↑↑↑↑↑↑ */}
 
           <Center>
             <Image
@@ -134,22 +147,21 @@ function handlerNavigateUpdate(e) {
             </Box>
           </Text>
 
-{value!=="update"?<Text
-            fontWeight={"bold"}
-            textAlign={"center"}
-            color={"gray.500"}
-            fontFamily={"heading"}
-            px={3}
-          >
-            Tag{" "}
-            <Link href={"#"} color={"blue.400"}>
-              #adoptaun{species}
-            </Link>{" "}
-            en tus post!
-          </Text>
-    :null
-}
-
+          {value !== "update" ? (
+            <Text
+              fontWeight={"bold"}
+              textAlign={"center"}
+              color={"gray.500"}
+              fontFamily={"heading"}
+              px={3}
+            >
+              Tag{" "}
+              <Link href={"#"} color={"blue.400"}>
+                #adoptaun{species}
+              </Link>{" "}
+              en tus post!
+            </Text>
+          ) : null}
 
           <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
             <Badge
@@ -163,17 +175,17 @@ function handlerNavigateUpdate(e) {
             </Badge>
           </Stack>
 
-
-          
-{/*       ↓↓↓↓↓↓↓↓   BOTON EDITAR   ↓↓↓↓↓↓↓↓       */}
-{value=== "update"?<button className="modifyButton" onClick={(e) => handlerNavigateUpdate(e)}>Editar</button>:null}
-
-
-
-
+          {/*       ↓↓↓↓↓↓↓↓   BOTON EDITAR   ↓↓↓↓↓↓↓↓       */}
+          {value === "update" ? (
+            <button
+              className="modifyButton"
+              onClick={(e) => handlerNavigateUpdate(e)}
+            >
+              Editar
+            </button>
+          ) : null}
           <Stack mt={4} direction={"column"} spacing={4}>
-            <Center>
-            </Center>
+            <Center></Center>
           </Stack>
         </Box>
       </Center>
@@ -182,8 +194,3 @@ function handlerNavigateUpdate(e) {
 };
 
 export default Card;
-
-
-
-
-

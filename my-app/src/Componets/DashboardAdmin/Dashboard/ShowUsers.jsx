@@ -7,7 +7,7 @@ export default function ShowUsers({ users }) {
   
   return (
     
-    <SimpleGrid columns={[1, 2, 2]} spacing='10px' >
+    <SimpleGrid columns={[1, 1,2, 3]} spacing='25px' >
       {users.map((user) => (
        
         <UserCard

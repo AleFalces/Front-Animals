@@ -9,13 +9,16 @@ import {
   StackDivider,
   Box,
   Button,
-  Center
+  Center, Divider, Select
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setStatusUser } from "../../../../Redux/Actions";
+import { useNavigate } from "react-router-dom";
+
 
 export default function UserCard({ id, name, surname, email, phone, status }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const users = useSelector((state) => state.allUsers);
 
   function handlerSetStatusUser(id) {
@@ -27,13 +30,13 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
   return (
     <div>
       <Card >
-        <Box>
+        <Box maxW='350px'>
           <CardHeader>
             <Heading size="md">Info de usuario</Heading>
           </CardHeader>
 
           <CardBody>
-            <Stack divider={<StackDivider />} spacing="4">
+         
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   Nombre y Apellido:
@@ -42,6 +45,7 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
                   {name} {surname}
                 </Text>
               </Box>
+              <Divider h='0.2rem' bg='brand.green.100'my='0.5rem' />
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   Email:
@@ -50,6 +54,7 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
                   {email}
                 </Text>
               </Box>
+              <Divider h='0.2rem' bg='brand.green.100'my='0.5rem' />
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   N° telefono:
@@ -57,16 +62,17 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
                 <Text pt="2" fontSize="sm">
                   {phone}
                 </Text>
-                <Heading size="xs" textTransform="uppercase">
-                  ID:
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {id}
-                </Text>
+                <Divider h='0.2rem' bg='brand.green.100'my='0.5rem' />
+                <Center>
+                <Select placeholder='ID' w='50%'>
+                    <option value= 'option'>{id}</option>
+                  </Select>
+                  </Center>
+                <Divider h='0.2rem' bg='brand.green.100'my='0.5rem' />
                 <Heading size="xs" textTransform="uppercase">
                   Estado:
                 </Heading>
-                <Text pt="2" fontSize="sm">
+                <Text pt="1rem" pb="2rem" fontSize="sm" textTransform={'uppercase'} >
                   {status}
                 </Text>
 
@@ -95,8 +101,18 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
                     Bloquear
                   </Button>
                 )}
+                <Button
+                    onClick={() => navigate(`/updateUser/${id}`)}
+                    bg={"grey"}
+                    color={"white"}
+                    _hover={{
+                      bg: "red.400",
+                    }}
+                  >
+                    Editar
+                  </Button>
               </Box>
-            </Stack>
+            
           </CardBody>
         </Box>
       </Card>

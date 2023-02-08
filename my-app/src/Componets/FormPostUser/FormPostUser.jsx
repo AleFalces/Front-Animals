@@ -1,14 +1,12 @@
-
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { postUser } from "../../Redux/Actions";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { postUser, updateUser, getUserId } from "../../Redux/Actions";
 import { ErrorForm, SuccedForm } from "../FormPostPet/AlertForm/AlertForm";
 import { MdArrowBackIosNew } from "react-icons/md";
-import logo from '../../assets/imagenes/logo_negro.png'
+import logo from "../../assets/imagenes/logo_negro.png";
 import {
-
   Flex,
   Box,
   FormControl,
@@ -22,18 +20,15 @@ import {
   InputGroup,
   InputRightElement,
   InputLeftAddon,
-  Icon, Image
-
+  Icon,
+  Image,
 } from "@chakra-ui/react";
 
-
 //Regular expressions for mail
-let isEmail = new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-)
-
+let isEmail = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
 
 const validateForm = (input) => {
-  let inputError = {}
+  let inputError = {};
 
   if (input.name.trim() === "" || !input.name.length) {
     inputError.name = "Debes ingresar tu nombre";
@@ -43,9 +38,8 @@ const validateForm = (input) => {
   }
   if (input.email === "" || !input.name.length) {
     inputError.email = "Debes ingresar tu e-mail";
-  } else if (
-    !isEmail.test(input.email)) {
-    inputError.email = "ingresa formato de e-mail válido"
+  } else if (!isEmail.test(input.email)) {
+    inputError.email = "ingresa formato de e-mail válido";
   }
   if (input.username === "") {
     inputError.username = "Debes ingresar un nombre de usuario";
@@ -54,28 +48,16 @@ const validateForm = (input) => {
     if (input.phone.length !== 10) {
       inputError.phone = "Debe ser un numero de 10 digitos";
     }
-
   }
   return inputError;
-}
+};
 
+export default function FormPostUser({ id, value }) {
+  const dispatch = useDispatch();
+  const loggedUser = localStorage.getItem("loggedUser");
 
-export default function FormPostUser({ value }) {
-	const dispatch = useDispatch();
-
-  useEffect(() => { }, []);
-
-  //Display login feedback
-  const [isIncomplete, setIsIncomplete] = useState(false);
-  const [infoSend, setInfoSend] = useState(false);
-
-
-  //Show password
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-
-
-
   const [inputError, setInputError] = useState({});
   const [input, setInput] = useState({
     name: "",
@@ -86,6 +68,24 @@ export default function FormPostUser({ value }) {
     role: "user",
   });
 
+  useEffect(() => {
+    if (loggedUser) {
+      const [logged] = JSON.parse(loggedUser);
+      setInput({
+        name: logged.name,
+        surname: logged.surname,
+        email: logged.email,
+        username: logged.username,
+        phone: logged.phone,
+      });
+      dispatch(getUserId(logged.id));
+    }
+  }, [loggedUser]);
+
+
+  //Display login feedback
+  const [isIncomplete, setIsIncomplete] = useState(false);
+  const [infoSend, setInfoSend] = useState(false);
 
   const handlerChange = (e) => {
     setInput({
@@ -105,9 +105,9 @@ export default function FormPostUser({ value }) {
   };
   console.log("INPUT FORM", input);
 
-
-  const handlerSubmit = (e) => {
+  const handlerSubmit = (e, value, id) => {
     e.preventDefault();
+
     if (
       input.name &&
       input.surname &&
@@ -116,26 +116,22 @@ export default function FormPostUser({ value }) {
       input.phone
     ) {
       /* handlerSubmit(e); */
-      dispatch(postUser(input));
+      if (value === undefined) {
+        dispatch(postUser(input));
+      } else {
+        dispatch(updateUser(id, input));
+      }
 
       setIsIncomplete(false);
       setInfoSend(true);
 
-
       //borra todos los inputs pero no sé cómo será con el tema del form con put que trae info a rellenar, creo , asiq queda comentada!
       /*   document.getElementById("myForm").reset(); */
-
     } else {
-
       setIsIncomplete(true);
       setInfoSend(false);
-
     }
-
   };
-
-
-
 
 
   return (
@@ -153,14 +149,21 @@ export default function FormPostUser({ value }) {
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
             {value === undefined ? (
               <Stack align={"center"}>
-                <Text fontFamily="heading" fontWeight={'bold'} color='gray.600' fontSize={"5xl"} textAlign={"center"} textShadow={''}>
+                <Text
+                  fontFamily="heading"
+                  fontWeight={"bold"}
+                  color="gray.600"
+                  fontSize={"5xl"}
+                  textAlign={"center"}
+                  textShadow={""}
+                >
                   Crea tu cuenta!
                 </Text>
                 <Text fontSize={"lg"} color={"gray.600"}>
                   Gracias por cuidar a los animales ✌️
                 </Text>
                 <Box width={20} height={20}>
-                  <Image src={logo} ></Image>
+                  <Image src={logo}></Image>
                 </Box>
               </Stack>
             ) : (
@@ -171,35 +174,35 @@ export default function FormPostUser({ value }) {
               </Stack>
             )}
 
-            <Box
-              rounded={"lg"}
-              bg={"white"}
-              boxShadow={"lg"}
-              p={8}
-            >
+            <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
               <Stack spacing={4}>
                 <HStack>
                   <Box>
                     <FormControl id="name" isRequired>
                       <FormLabel>Nombre: </FormLabel>
                       <Input
+                        autoComplete="off"
                         type="text"
+                        value={input.name}
                         name="name"
                         key="name"
                         focusBorderColor={"brand.green.300"}
                         fontFamily={"body"}
-                        // value={input.name} 
+                        // value={input.name}
                         onChange={(e) => handlerChange(e)}
                       />
-                      {inputError.name && (<Text className="text_inputError">{inputError.name}</Text>)}
+                      {inputError.name && (
+                        <Text className="text_inputError">
+                          {inputError.name}
+                        </Text>
+                      )}
                     </FormControl>
 
-                  </Box>
-
-                  <Box>
                     <FormControl id="surname" isRequired>
                       <FormLabel>Apellido: </FormLabel>
                       <Input
+                        autoComplete="off"
+                        value={input.surname}
                         name="surname"
                         type="text"
                         key="surname"
@@ -207,7 +210,11 @@ export default function FormPostUser({ value }) {
                         fontFamily={"body"}
                         onChange={(e) => handlerChange(e)}
                       />
-                      {inputError.surname && (<Text className="text_inputError">{inputError.surname}</Text>)}
+                      {inputError.surname && (
+                        <Text className="text_inputError">
+                          {inputError.surname}
+                        </Text>
+                      )}
                     </FormControl>
                   </Box>
                 </HStack>
@@ -215,19 +222,26 @@ export default function FormPostUser({ value }) {
                 <FormControl id="username" isRequired>
                   <FormLabel>Apodo: </FormLabel>
                   <Input
+                    autoComplete="off"
                     name="username"
-                    value={input.description}
+                    value={input.username}
                     key="username"
                     type="text"
                     focusBorderColor={"brand.green.300"}
                     fontFamily={"body"}
                     onChange={(e) => handlerChange(e)}
-                  />{inputError.username && (<Text className="text_inputError">{inputError.username}</Text>)}
+                  />
+                  {inputError.username && (
+                    <Text className="text_inputError">
+                      {inputError.username}
+                    </Text>
+                  )}
                 </FormControl>
 
                 <FormControl id="email" isRequired>
                   <FormLabel>Email: </FormLabel>
                   <Input
+                    autoComplete="off"
                     name="email"
                     type="text"
                     value={input.email}
@@ -237,42 +251,52 @@ export default function FormPostUser({ value }) {
                     fontFamily={"body"}
                     onChange={(e) => handlerChange(e)}
                   ></Input>
-                  {inputError.email && (<Text className="text_inputError">{inputError.email}</Text>)}
+                  {inputError.email && (
+                    <Text className="text_inputError">{inputError.email}</Text>
+                  )}
                 </FormControl>
 
-                <FormControl id="password" isRequired>
-                  <FormLabel>Contraseña: </FormLabel>
-                  <InputGroup size="md">
-                    <Input
-                      placeholder="Ingresar una contraseña"
-                      name="password"
-                      key="password"
-                      focusBorderColor={"brand.green.300"}
-                      fontFamily={"body"}
-                      type={show ? 'text' : 'password'}
-                      onChange={(e) => handlerChange(e)}
-                    />
-                    <InputRightElement width="4.5rem">
-                      <Button h="1.75rem" size="sm" onClick={handleClick}>
-                        {show ? 'Hide' : 'Show'}
-                      </Button>
-                    </InputRightElement>
-                    {inputError.password && (<Text>{inputError.password}</Text>)}
-                  </InputGroup>
-                </FormControl>
+                {loggedUser ? null : (
+                  <FormControl id="password" isRequired>
+                    <FormLabel>Contraseña: </FormLabel>
+                    <InputGroup size="md">
+                      <Input
+                        autoComplete="off"
+                        placeholder="Ingresar una contraseña"
+                        name="password"
+                        key="password"
+                        focusBorderColor={"brand.green.300"}
+                        fontFamily={"body"}
+                        type={show ? "text" : "password"}
+                        onChange={(e) => handlerChange(e)}
+                      />
+                      <InputRightElement width="4.5rem">
+                        <Button h="1.75rem" size="sm" onClick={handleClick}>
+                          {show ? "Hide" : "Show"}
+                        </Button>
+                      </InputRightElement>
+                      {inputError.password && (
+                        <Text>{inputError.password}</Text>
+                      )}
+                    </InputGroup>
+                  </FormControl>
+                )}
 
                 <FormControl id="phone" isRequired>
                   <FormLabel>Cel/Teléfono:</FormLabel>
                   <InputGroup size="sm">
-                    <InputLeftAddon bg="gray.50"
+                    <InputLeftAddon
+                      bg="gray.50"
                       _dark={{
-                        bg: 'gray.800',
+                        bg: "gray.800",
                       }}
                       color="gray.500"
-                      rounded="md">
+                      rounded="md"
+                    >
                       +54 9
                     </InputLeftAddon>
                     <Input
+                      autoComplete="off"
                       type="number"
                       name="phone"
                       value={input.phone}
@@ -281,7 +305,9 @@ export default function FormPostUser({ value }) {
                       onChange={(e) => handlerChange(e)}
                     />
                   </InputGroup>
-                  {inputError.phone && (<Text className="text_inputError">{inputError.phone}</Text>)}
+                  {inputError.phone && (
+                    <Text className="text_inputError">{inputError.phone}</Text>
+                  )}
                 </FormControl>
                 <Stack spacing={10} pt={2}>
                   {value === undefined ? (
@@ -294,29 +320,29 @@ export default function FormPostUser({ value }) {
                       color={"white"}
                       _hover={{
                         bg: "orange.400",
-
-                      }}>
+                      }}
+                    >
                       Registrarse
                     </Button>
                   ) : (
                     <Button
-                      onClick={(e) => [handlerSubmit(e), window.scrollTo(0, 0)]}
-                      loadingText="Post mascota"
+                      onClick={(e) => [handlerSubmit(e, value, id), window.scrollTo(0, 0)]}
+                      loadingText="Registrarse"
                       fontFamily={"body"}
                       size="lg"
                       bg={"orange.300"}
                       color={"white"}
                       _hover={{
                         bg: "orange.400",
-
-                      }}>
+                      }}
+                    >
                       Guardar cambios
                     </Button>
                   )}
                 </Stack>
               </Stack>
             </Box>
-            <Link to={"/"}>
+            <Link to={loggedUser ? "/home" : "/"}>
               <Icon
                 as={MdArrowBackIosNew}
                 color="orange.400"
@@ -343,7 +369,8 @@ export default function FormPostUser({ value }) {
                   color: "orange.400",
                 }}
                 p="0"
-                mr="1rem">
+                mr="1rem"
+              >
                 {" "}
                 Atrás
               </Button>
@@ -354,4 +381,3 @@ export default function FormPostUser({ value }) {
     </div>
   );
 }
-

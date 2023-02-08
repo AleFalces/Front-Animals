@@ -64,38 +64,24 @@ const TopNav = () => {
           </Link>
         </Box>
 
-        <Box>
-          <Link to={"/dashboard/createProduct"}>
-            <Button
-              loadingText="Publicar el producto"
-              size="lg"
-              bg={"brand.green.300"}
-              color={"white"}
-              _hover={{
-                bg: "blue.500",
-              }}>
-              Publicar producto
-            </Button>
-          </Link>
-        </Box>
-
-        <Box>
-          <Link to={"/dashboard/createVet"}>
-            <Button
-              loadingText="Afiliar Veterinaria"
-              size="lg"
-              bg={"brand.green.300"}
-              color={"white"}
-              _hover={{
-                bg: "blue.500",
-              }}>
-              Afiliar Veterinaria
-            </Button>
-          </Link>
-        </Box>
-      </SimpleGrid>
-    </nav>
-  );
+				<Box>
+					<Link to={"/dashboard/createVet"}>
+						<Button
+							loadingText="Afiliar Veterinaria"
+							size="lg"
+							bg={"brand.green.300"}
+							color={"white"}
+							_hover={{
+								bg: "blue.500",
+							}}>
+							Afiliar Veterinaria
+						</Button>
+					</Link>
+				</Box>
+			</SimpleGrid>
+		</nav>
+	);
+          
 };
 
 export default TopNav;
