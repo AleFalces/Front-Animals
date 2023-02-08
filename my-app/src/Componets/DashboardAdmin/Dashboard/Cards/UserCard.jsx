@@ -101,7 +101,7 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
                   _hover={{
                     bg: "green.500",
                   }}
-                  onClick={()=>{ handlerSetStatusUser(id); onOpen();}}
+                  onClick={()=>{onOpen();}}
                 >
                   Desbloquear
                 </Button>
@@ -147,7 +147,7 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
                       _hover={{
                         bg: "orange.400",
                       }}
-                      onClick={()=>{ handlerSetStatusUser(id); onOpen();}}
+                      onClick={()=>{onOpen();}}
                     >
                       Bloquear
                     </Button>
