@@ -22,10 +22,7 @@ export default function VetCard({ id, name, email, phone, address }) {
 
   return (
     <div>
-      <Card align="center">
-        <CardHeader>
-          <Heading size="md"> Veterinaria</Heading>
-        </CardHeader>  
+      <Card align="center">  
         <CardBody>
           <Text>Nombre: {name}</Text>
         </CardBody>
@@ -42,10 +39,8 @@ export default function VetCard({ id, name, email, phone, address }) {
           <Text>Ubicación: {address}</Text>
         </CardBody>
         <CardFooter>
-            <Button onClick={(e)=> navigate(`/dashboard/updateVet/${id}`)}>Editar</Button>
-          <Link href={`http://localhost:3000/veterinary/${id}`}>
-            <Button colorScheme="yellow"> Visitar </Button>
-          </Link>
+            <Button color={"white"} bg="#40c2bb" _hover={{bg: "#ed8936"}} onClick={(e)=> navigate(`/dashboard/updateVet/${id}`)}>Editar</Button>
+            <Button onClick={() => navigate(`/veterinary/${id}`)} bg="#feebc8" _hover={{bg: "#e3f6f5", color: "grey"}}> Visitar </Button>
         </CardFooter>
       </Card>
     </div>

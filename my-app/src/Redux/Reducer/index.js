@@ -3,9 +3,10 @@ import {
 	GET_ADOPTION_PETS,
 	GET_PET_ID,
 	GET_LOST_PETS,
-	POST_PET,
 	UPDATE_PET,
 	DELETE_PET,
+	DELETE_PRODUCT,
+	POST_PET,
 	POST_USER,
 	POST_PRODUCT,
 	POST_VET,
@@ -255,6 +256,11 @@ const RootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				user: action.payload,
+			};
+		case DELETE_PRODUCT:
+			return {
+				...state,
+				allProducts: action.payload,
 			};
 		default:
 			return state;

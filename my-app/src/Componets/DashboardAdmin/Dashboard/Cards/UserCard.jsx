@@ -22,19 +22,16 @@ import {
   // StackDivider,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import { IoMdMale } from "react-icons/io";
-import { IoMdFemale } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { setStatusUser } from "../../../../Redux/Actions";
-import { useNavigate } from "react-router-dom";
+
 
 export default function UserCard({ id, name, surname, email, phone, status }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
 
-  const users = useSelector((state) => state.allUsers);
 
   function handlerSetStatusUser(id) {
     dispatch(setStatusUser(id));
@@ -44,9 +41,6 @@ export default function UserCard({ id, name, surname, email, phone, status }) {
     <div>
       <Card>
         <Box maxW="350px">
-          {/* <CardHeader>
-            <Heading size="md">/Heading>
-          </CardHeader> */}
           <CardBody>
             <Box>
               <Heading size="xs" textTransform="uppercase">

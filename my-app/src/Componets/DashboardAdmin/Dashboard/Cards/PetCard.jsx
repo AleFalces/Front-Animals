@@ -4,8 +4,8 @@ import {
   CardBody,
   Text,
   Heading,
-  Stack,
-  StackDivider,
+  // Stack,
+  // StackDivider,
   Box,
   Image, Divider, Center, Select,
   Button
@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { deletePetAdmin } from "../../../../Redux/Actions";
 import { useDispatch} from "react-redux";
-import { getPets } from "../../../../Redux/Actions";
+// import { getPets } from "../../../../Redux/Actions";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -23,14 +23,14 @@ import {
   AlertDialogOverlay,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import { IoMdMale } from "react-icons/io";
-import { IoMdFemale } from "react-icons/io";
+// import { IoMdMale } from "react-icons/io";
+// import { IoMdFemale } from "react-icons/io";
 
 export default function PetCard({ id, size, species, age, img, detail, area, status, userId }) {
 
 const dispatch = useDispatch()
-const loggedUser = localStorage.getItem("loggedUser");
-const [logged] = JSON.parse(loggedUser);
+// const loggedUser = localStorage.getItem("loggedUser");
+// const [logged] = JSON.parse(loggedUser);
 const { isOpen, onOpen, onClose } = useDisclosure();
 const cancelRef = React.useRef();
 
@@ -94,9 +94,9 @@ function handlerDeletePet(e, id){
                 <Button
                   fontFamily={"body"}
                   bg={"orange.300"}
-                  color={"white"}
+                  color={"black"}
                   _hover={{
-                    bg: "green.500",
+                    bg: "orange.200",
                   }}
                   onClick={()=>{onOpen();}}
                 >

@@ -1,18 +1,22 @@
 import React from "react";
 import styles from "./TopNav.module.css";
 import { Link } from "react-router-dom";
-
-import { Button, Box, Icon, SimpleGrid } from "@chakra-ui/react";
-
+import { Button, Box, Icon, SimpleGrid, useBreakpointValue } from "@chakra-ui/react";
 import { MdArrowBackIosNew } from "react-icons/md";
 
 const TopNav = () => {
   return (
     <nav /* className={styles.topNav} */>
       <SimpleGrid columns={[2, 4]} pt="2rem" bg={"brand.green.100"} pb={"1rem"}>
-        <Box>
-          <h5 className={styles.brand}>Administrar sitio Web</h5>
-        </Box>
+      <Box bg={"#1a202c"} maxW="7xl" mx={"auto"} pt={2} px={{ base: 2, sm: 12, md: 17 }} borderRadius="12px"
+      color={"white"}
+      fontWeight={700}
+      alignItems={"center"}
+      lineHeight={1.0}
+      fontSize={useBreakpointValue({ base: "2xl", md: "3xl" })}
+      textAlign={"center"}
+      justifyContent={"center"}>Administrar Página
+      </Box>
 
         <Box>
           <Link to={"/home"}>
