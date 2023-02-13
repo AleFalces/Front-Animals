@@ -10,7 +10,6 @@ import {
 	GET_VETERINARIES,
 	GET_DETAILS_VETERINARIES,
 	POST_PET,
-	UPDATE_PET,
 	POST_USER,
 	POST_PRODUCT,
 	POST_VET,
@@ -21,12 +20,14 @@ import {
 	NEXT_PAGE,
 	PREV_PAGE,
 	ACTUAL_PAGE,
+	UPDATE_PET,
 	UPDATE_PRODUCT,
 	UPDATE_USER,
 	UPDATE_VET,
 	MODIFY_PRODUCT,
 	SET_IMAGE,
 	DELETE_PET,
+	DELETE_PRODUCT
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -449,7 +450,7 @@ export function postOrUpdatePet(formInput, value, petId) {
 	};
 }
 export function setImageAsync(obj) {
-	console.log("OBJJJ", obj);
+	// console.log("OBJJJ", obj);
 	return async function (dispatch) {
 		try {
 			const files = obj;
@@ -465,7 +466,7 @@ export function setImageAsync(obj) {
 				}
 			);
 			const file = await res.json();
-			console.log("SECURE_URL", file.url);
+			// console.log("SECURE_URL", file.url);
 			return dispatch({
 				type: SET_IMAGE,
 				payload: file.url,
@@ -504,3 +505,19 @@ export function deletePetAdmin(id) {
 		}
 	};
 }
+
+export function deleteProductAdmin(id) {
+	return async function (dispatch) {
+		try {
+			const json = await axios.delete(`${HOST}/products/${id}`);
+			const json2 = await axios.get(`http://localhost:3001/products`);
+			return dispatch({
+				type: GET_ALL_PRODUCTS,
+				payload:  json2.data ,
+			});
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+}
+
