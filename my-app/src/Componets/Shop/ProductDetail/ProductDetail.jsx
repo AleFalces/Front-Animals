@@ -25,8 +25,19 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 export default function ProductDetail() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.productDetail);
@@ -47,7 +58,7 @@ export default function ProductDetail() {
       });
   };
   console.log("DETAIL PRODUCT STOCK :", detail[0].stock);
-
+let product = JSON.parse(localStorage.getItem("cart")).filter((pr)=>pr.id===detail[0].id)[0]
   return (
     <>
       <Navbar />
@@ -129,7 +140,7 @@ export default function ProductDetail() {
 
                 <Box>
                   <Text
-                    fontSize={{ base: "16px", lg: "18px" }}
+                    fontSize={{ base: "20px", lg: "22px" }}
                     color={useColorModeValue("yellow.500", "yellow.300")}
                     fontWeight={"500"}
                     textTransform={"uppercase"}
@@ -155,7 +166,88 @@ export default function ProductDetail() {
                 </Box>
               </Stack>
 
-              <Button
+{/* //!ACÁ ABAJO EMPIEZA LA PRUEBA DE BOTON AGREGAR AL CARRITO DESDE DETAIL 17/02/23 */}
+                {
+                product?.amount>0
+                ?
+                  <div>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      Cantidad en el carrito: 
+                    </Text> {product?.amount}u
+                  </div>
+                :null
+                }
+
+                <Box>
+                  <Button
+                    onClick={onOpen} 
+                    fontFamily={"body"}
+                    borderRadius={"full"}
+                    size="md"
+                    bg={"brand.green.300"}
+                    color={"white"}
+                    _hover={{
+                      transform: "translateY(2px)",
+                      boxShadow: "lg",
+                    }}
+                  >
+                    {/* {stock===0?"No hay stock":"Agregar"} */} 
+                    {detail[0].stock === 0 ?"No hay stock":product?.amount === detail[0].stock?"Tope de stock alcanzado":"Agregar al carrito"} 
+                  </Button>
+                  <AlertDialog
+                    isOpen={isOpen}
+                    leastDestructiveRef={cancelRef}
+                    onClose={onClose}
+                  >
+                    <AlertDialogOverlay>
+                      <AlertDialogContent>
+                        <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    {detail[0].stock === 0 ?"No hay stock":product?.amount === detail[0].stock?"No nos queda más stock":"Agregar al carrito"} 
+                        </AlertDialogHeader>
+                        <AlertDialogBody>
+                    {detail[0].stock === 0 ?"Lo sentimos, pronto habrá stock del producto":product?.amount === detail[0].stock?"Llegaste al limite actual de stock, próximamente repondremos el producto.":"¿Querés agregar este producto a tu carrito?"} 
+                        </AlertDialogBody>
+                        <AlertDialogFooter>
+                          <Button ref={cancelRef} onClick={onClose}>
+                            {detail[0].stock === 0 || product?.amount === detail[0].stock ?"Volver":"Cancelar"}
+                          </Button>
+  
+                    {
+                    detail[0].stock === 0 || product?.amount === detail[0].stock ?
+                    null
+                    :<Button
+                      color={"white"}
+                      bg={"brand.orange"}
+                       onClick={(e) =>{
+                  detail[0].handlerSetCart(
+                    e,
+                    detail[0].id,
+                    detail[0].price,
+                    detail[0].image,
+                    detail[0].name,
+                    detail[0].stock
+                  );
+                              onClose();
+                            }}
+                      ml={3}
+                      >
+                      Si, agregar
+                    </Button>
+                    }  
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialogOverlay>
+                  </AlertDialog>
+                </Box>
+
+
+
+
+
+
+
+                //! ↓↓↓↓↓↓↓  BOTON AGREGAR AL CARRITO QUE QUEDÓ DEL 09/02/23  ↓↓↓↓↓↓↓
+              {/* <Button
                 fontFamily={"body"}
                 borderRadius={"full"}
                 size="sm"
@@ -178,8 +270,8 @@ export default function ProductDetail() {
                 }
               >
                 Añadir al carrito
-              </Button>
-              <Button
+              </Button> */}
+              {/* <Button
                 fontFamily={"body"}
                 borderRadius={"full"}
                 size="sm"
@@ -193,7 +285,7 @@ export default function ProductDetail() {
                 onClick={() => payMp()}
               >
                 Comprar
-              </Button>
+              </Button> */}
 
               <Stack
                 direction="row"

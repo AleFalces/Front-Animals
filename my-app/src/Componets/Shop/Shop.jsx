@@ -70,7 +70,7 @@ export default function Shop({ handleSetUserFlag }) {
           }
         });
         if (index !== false) {
-          if (stock === 0 || stock === oldCart[index].amount) {
+          if (stock === oldCart[index].amount) { //! SAQUÉ "stock === 0 ||..."" del if 
             return alert("Se llegó al limite de stock actual");
           } else {
             oldCart[index].amount += 1;
