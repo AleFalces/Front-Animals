@@ -22,7 +22,7 @@ import {
 import { PhoneIcon } from "@chakra-ui/icons";
 import { RiHospitalLine } from "react-icons/ri";
 
-const VetsDetails = () => {
+const VetsDetails = ({ handleSetUserFlag }) => {
   const dispatch = useDispatch();
   const { paramsId } = useParams();
   const Detail = useSelector((state) => state.vetsDetail);
@@ -35,7 +35,7 @@ const VetsDetails = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar handleSetUserFlag={handleSetUserFlag}/>
       {!Detail?.length ? (
         <Box height="100vh" position="relative">
           <Center>

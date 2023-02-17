@@ -22,11 +22,12 @@ import {
   List,
   ListItem,
 } from "@chakra-ui/react";
-
+import { useNavigate } from "react-router-dom";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
 
 export default function ProductDetail() {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.productDetail);
 
@@ -50,6 +51,22 @@ export default function ProductDetail() {
   return (
     <>
       <Navbar />
+      <br />
+              <Button
+                fontFamily={"body"}
+                borderRadius={"full"}
+                size="sm"
+                bg={"brand.orange"}
+                color={"white"}
+                textTransform={"uppercase"}
+                _hover={{
+                  transform: "translateY(2px)",
+                  boxShadow: "lg",
+                }}
+                onClick={()=>{navigate("/shop")}}
+              >
+                Volver a la tienda
+              </Button>
       <Box minHeight={"100vh"} bg="brand.backgorund" paddingBottom={"3rem"}>
         <Container maxW={"4xl"}>
           <SimpleGrid

@@ -10,7 +10,7 @@ import { SimpleGrid, Box, Stack, Center, Icon, Text } from "@chakra-ui/react";
 import { SiDatadog } from "react-icons/si";
 import Pagination from "../Pagination/Pagination";
 
-const Adoption = ({ value }) => {
+const Adoption = ({ handleSetUserFlag, value }) => {
 	const pets = useSelector((state) => state.pets);
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -29,7 +29,7 @@ const Adoption = ({ value }) => {
 
 	return (
 		<>
-			<Navbar />
+			<Navbar handleSetUserFlag={handleSetUserFlag}/>
 
 			<FilterBar value={value} paginate={paginate} />
 

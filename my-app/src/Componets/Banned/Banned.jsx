@@ -2,12 +2,15 @@ import React from "react";
 import img5 from "../../assets/imagenes/logo_negro.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Box, Button, Image, Heading, Text, Center } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Banned = () => {
+  const navigate = useNavigate()
   const { logout } = useAuth0();
   const cerrarSesion = () => {
     localStorage.removeItem("loggedUser");
-    logout({ returnTo: "/" });
+    // logout({ returnTo: "/" });
+    navigate("/")
   };
 
   return (

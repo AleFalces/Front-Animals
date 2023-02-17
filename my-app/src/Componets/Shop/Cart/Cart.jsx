@@ -210,7 +210,7 @@ export default function Cart() {
                 color="brand.background"
               />
             </Box>
-            {!cart.length ? (
+            {!cart || cart.length === 0 ? (
               <Center>
                 <Stack>
                   <Text
@@ -226,6 +226,7 @@ export default function Cart() {
                   <Link to={"/shop"}>
                     <Icon
                       as={MdArrowBackIosNew}
+                      
                       color="orange.400"
                       boxSize={5}
                       _hover={{
