@@ -432,6 +432,25 @@ function App() {
       </div>
     );
   }
+
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //! ↓↓↓↓↓↓↓↓↓↓↓↓        RUTAS 09/02        ↓↓↓↓↓↓↓↓↓↓↓↓
   //   return usuario[0]?.status === "banned" ? (
   //     <div className="App">
   //       {console.log("CASO ESTA BANNEADO, APP")}

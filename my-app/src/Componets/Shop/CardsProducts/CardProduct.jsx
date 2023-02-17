@@ -45,7 +45,7 @@ export default function CardProduct({
     dispatch(getProductDetail(obj));
     setTimeout(() => navigate(`/shop/product/${id}`), 200);
   };
-  const product = JSON.parse(localStorage.getItem("cart")).filter((pr)=>pr.id===id)[0]
+  const product = JSON.parse(localStorage.getItem("cart"))?.filter((pr)=>pr.id===id)[0]
   return (
     <>
       <Box >

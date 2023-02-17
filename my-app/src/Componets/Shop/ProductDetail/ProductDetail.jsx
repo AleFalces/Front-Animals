@@ -58,7 +58,7 @@ export default function ProductDetail() {
       });
   };
   console.log("DETAIL PRODUCT STOCK :", detail[0].stock);
-let product = JSON.parse(localStorage.getItem("cart")).filter((pr)=>pr.id===detail[0].id)[0]
+let product = JSON.parse(localStorage.getItem("cart"))?.filter((pr)=>pr.id===detail[0].id)[0]
   return (
     <>
       <Navbar />
