@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { User } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-
 // <button className="btn btn-success" onClick={() => loginWithRedirect()}>
 //   Login{" "}
 // </button>
@@ -18,7 +17,8 @@ import {
 
 function validateForm(input) {
 	let inputErrors = {}
-
+	// const navigate = useNavigate() // Lo movi a la funcion de abajo
+	
 	if (input.password === "") {
 		inputErrors.password = `Debes ingresar tu contraseña`;
 	}
@@ -29,9 +29,10 @@ function validateForm(input) {
 }
 
 
-const Login = () => {
+const Login = ({ handleSetUserFlag }) => {
+	const navigate = useNavigate()
 	const { loginWithRedirect, logout } = useAuth0();
-	const navegate = useNavigate();
+	// const navigate = useNavigate();
 	const [usuario, setUsuario] = useState([]);
 	const [inputErrors, setInputErrors] = useState({});
 	const [input, setInput] = useState({
@@ -41,6 +42,30 @@ const Login = () => {
 
 
 
+	
+	const handleChange = (e) => {
+		setInput({
+			...input,
+			[e.target.name]: e.target.value,
+		});
+		
+		//control errors
+		setInputErrors(
+			validateForm({
+				...input,
+				[e.target.name]: e.target.value,
+			})
+			);
+	};
+	
+	const cerrarSesion = () => {
+		localStorage.removeItem("loggedUser");
+		// logout(); //! LOGOUT DE AUTH0
+		console.log("Ejecutando 'handleSetUserFlag' en fn 'cerrarSesion' LOGIN.jsx");
+		handleSetUserFlag()
+		navigate("/")
+	};
+
 	useEffect(() => {
 		const loggedUser = localStorage.getItem("loggedUser");
 		if (loggedUser) {
@@ -48,43 +73,23 @@ const Login = () => {
 			setUsuario(logged);
 		}
 	}, []);
-
-	const handleChange = (e) => {
-		setInput({
-			...input,
-			[e.target.name]: e.target.value,
-		});
-
-		//control errors
-		setInputErrors(
-			validateForm({
-				...input,
-				[e.target.name]: e.target.value,
-			})
-		);
-	};
-
-
-
-	const cerrarSesion = () => {
-		localStorage.removeItem("loggedUser");
-		logout();
-	};
-
+	
 	const loginPost = async (formData) => {
 		try {
+			console.log("LOGIN POST ENTRÉ: formData", formData);
 			let login = await axios.post(
 				"http://localhost:3001/users/login",
 				formData
 			);
-
-			if (login.data.length >= 0) {
-				localStorage.setItem("loggedUser", JSON.stringify(login.data));
-				navegate("/home");
+				console.log("LOGINPOST: ",login);
+			if (login.data.length > 0) {        //! NO SERÍA >0 EN VEZ DE >=0 ???????????????????
+				localStorage.setItem("loggedUser", JSON.stringify(login.data)); //! ACÁ ESTÁ EL USUARIO[0] MOLESTO
+				handleSetUserFlag()
 				alert("Usuario logueado");
-			} else {
-				alert("Ingrese usuario y contraseña")
-			}
+				navigate("/home");
+			} else {    //! CREO QUE NO ESTÁ HACIENDO NADA
+				alert("Ingrese usuario y contraseña")    //! CREO QUE NO ESTÁ HACIENDO NADA
+			}    //! CREO QUE NO ESTÁ HACIENDO NADA
 		} catch (err) {
 			alert("Su usuario o contraseña son incorrectos");
 		}

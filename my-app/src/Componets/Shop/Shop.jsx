@@ -9,7 +9,7 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { Box, SimpleGrid, Center, Text } from "@chakra-ui/react";
 
-export default function Shop() {
+export default function Shop({ handleSetUserFlag }) {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   // let reduxCart = useSelector((state) => state.cart)
@@ -29,19 +29,19 @@ export default function Shop() {
       });
 
       if (flag) {
-        console.log("CASO FLAG TRUE");
+        // console.log("CASO FLAG TRUE");
         if (currentCart[index].amount === 1) {
-          console.log("CASO FLAG TRUE & AMOUNT == 1");
+          // console.log("CASO FLAG TRUE & AMOUNT == 1");
           if (index === 0) {
-            console.log("CASO FLAG TRUE & AMOUNT == 1 & INDEX === 0");
+            // console.log("CASO FLAG TRUE & AMOUNT == 1 & INDEX === 0");
             currentCart.shift();
-            console.log(currentCart);
+            // console.log(currentCart);
           }
         } else {
-          console.log("CASO FLAG TRUE & AMOUNT !== 0");
+          // console.log("CASO FLAG TRUE & AMOUNT !== 0");
         }
       } else {
-        console.log("CASO FLAG FALSE");
+        // console.log("CASO FLAG FALSE");
       }
     } catch (error) {
       console.log(error);
@@ -70,7 +70,7 @@ export default function Shop() {
           }
         });
         if (index !== false) {
-          if (stock === 0 || stock === oldCart[index].amount) {
+          if (stock === oldCart[index].amount) { //! SAQUÉ "stock === 0 ||..."" del if 
             return alert("Se llegó al limite de stock actual");
           } else {
             oldCart[index].amount += 1;
@@ -81,10 +81,7 @@ export default function Shop() {
               JSON.stringify([...oldCart])
             );
             dispatch(getAllProducts);
-            console.log(
-              "CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",
-              JSON.parse(localStorage.getItem("cart"))
-            );
+console.log("CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",JSON.parse(localStorage.getItem("cart")));
             // return alert(`Agregaste de nuevo el producto ${name}`);
           }
         } else {
@@ -101,7 +98,7 @@ export default function Shop() {
             );
             // return alert(`Agregaste el producto ${name}`);
           } else {
-            return alert("El producto no tiene stock :c");
+            return alert("El producto no tiene stock");
           }
         }
       } else {
@@ -118,7 +115,7 @@ export default function Shop() {
           );
           // return alert(`Agregaste el producto ${name}`);
         } else {
-          return alert("El producto no tiene stock :c");
+          return alert("El producto no tiene stock");
         }
       }
     } catch (error) {
@@ -132,7 +129,7 @@ export default function Shop() {
 
   return (
     <>
-      <Navbar />
+      <Navbar handleSetUserFlag={handleSetUserFlag}/>
       <Box minHeight={"150vh"} bg="brand.backgorund" paddingBottom={"3rem"}>
         <ShopNavbar
           handlerSetCart={handlerSetCart}

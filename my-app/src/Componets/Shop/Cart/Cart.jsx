@@ -47,25 +47,25 @@ export default function Cart() {
         saveProduct.amount -= 1;
         saveProduct.total = saveProduct.price * saveProduct.amount;
         window.localStorage.setItem("cart", JSON.stringify(currentCart));
-        handleStateChange();
+        return handleStateChange();
         // return alert("Eliminaste 1 unidad de este producto de tu carrito");
       }
       if (saveProduct.amount === 1 && currentCart.length === 1) {
         let emptyArray = [];
         window.localStorage.setItem("cart", JSON.stringify(emptyArray));
-        handleStateChange();
+        return handleStateChange();
         // return alert("Eliminaste este producto de tu carrito");
       }
       if (saveProduct.amount === 1 && currentCart.length === 2) {
         if (index === 0) {
           let arrayResult = [currentCart[1]];
           window.localStorage.setItem("cart", JSON.stringify(arrayResult));
-          handleStateChange();
+          return handleStateChange();
           // return alert("Eliminaste este producto de tu carrito");
         } else {
           let array = [currentCart[0]];
           window.localStorage.setItem("cart", JSON.stringify(array));
-          handleStateChange();
+          return handleStateChange();
           // return alert("Eliminaste este producto de tu carrito");
         }
       }
@@ -73,19 +73,19 @@ export default function Cart() {
         if (index === 0) {
           let arrayResult = currentCart.slice(1);
           window.localStorage.setItem("cart", JSON.stringify(arrayResult));
-          handleStateChange();
+          return handleStateChange();
           // return alert("Eliminaste este producto de tu carrito");
         } else if (index === currentCart.length - 1) {
           let arrayResult = currentCart.slice(0, -1);
           window.localStorage.setItem("cart", JSON.stringify(arrayResult));
-          handleStateChange();
+          return handleStateChange();
           // return alert("Eliminaste este producto de tu carrito");
         } else {
           let first = currentCart.slice(0, index);
           let second = currentCart.slice(index + 1);
           let arrayResult = [...first, ...second];
           window.localStorage.setItem("cart", JSON.stringify(arrayResult));
-          handleStateChange();
+          return handleStateChange();
           // return alert("Eliminaste este producto de tu carrito");
         }
       }
@@ -151,14 +151,6 @@ export default function Cart() {
     }
   };
 
-  // function accRecursion(array, index) {
-  //   if (index === 0) {
-  //     return array[index].total
-  //   } else {
-  //     return accRecursion(array, --index)
-  //   }
-  // }
-
   const total = cart?.reduce((acc, el) => acc + el.total, 0);
   const payMp = () => {
     axios
@@ -210,7 +202,7 @@ export default function Cart() {
                 color="brand.background"
               />
             </Box>
-            {!cart.length ? (
+            {!cart || cart.length === 0 ? (
               <Center>
                 <Stack>
                   <Text
@@ -226,6 +218,7 @@ export default function Cart() {
                   <Link to={"/shop"}>
                     <Icon
                       as={MdArrowBackIosNew}
+                      
                       color="orange.400"
                       boxSize={5}
                       _hover={{

@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProductDetail } from "../../../Redux/Actions";
-
+import "./CardProduct.css"
 import {
   Box,
   useColorModeValue,
@@ -45,12 +45,12 @@ export default function CardProduct({
     dispatch(getProductDetail(obj));
     setTimeout(() => navigate(`/shop/product/${id}`), 200);
   };
-
+  const product = JSON.parse(localStorage.getItem("cart"))?.filter((pr)=>pr.id===id)[0]
   return (
     <>
-      <Box>
-        <Center py={6}>
-          <Box
+      <Box >
+        <Center  py={6}>
+          <Box className="boxCardContainer"
             maxW={"320px"}
             w={"full"}
             h={"450px"}
@@ -62,40 +62,43 @@ export default function CardProduct({
           >
             <Center>
               <Image
-                size={"lg"}
+                // size={"lg"}
                 src={image}
                 borderRadius="7px"
                 alt="img not found"
-                h={"150px"}
-                mb={4}
+                width={"12rem"}
+                h={"8.5rem"}
+                // mb={".4rem"}
                 pos={"relative"}
               />
             </Center>
             <Heading
-              fontSize={"2xl"}
+              fontSize={"1.1rem"}
               fontFamily={"heading"}
               textTransform="uppercase"
             >
               {name}
             </Heading>
             <Text
+              fontSize={".9rem"}
               fontWeight={500}
               color={"gray.500"}
-              mb={1}
+              mb={.5}
               fontFamily={"body"}
             >
-              {description}
+              {description.length>50?description.slice(0, 50)+"...":description}
             </Text>
             <Text
               fontWeight={500}
+              fontSize={".9rem"}
               color={"gray.500"}
               mb={1}
               fontFamily={"body"}
             >
-              Stock:{stock} U
+              Stock: {stock}u
             </Text>
             <Heading
-              fontSize={"2xl"}
+              fontSize={"1.3rem"}
               fontWeight={"bold"}
               fontFamily={"heading"}
               textTransform="uppercase"
@@ -104,18 +107,80 @@ export default function CardProduct({
               ${price}
             </Heading>
             <Center>
-              <HStack py={5}>
+              <HStack py={0}>
                 <Button
                   onClick={(e) => handleNavigateProduct(e)}
                   fontFamily={"body"}
                   borderRadius={"full"}
-                  size="md"
+                  // size="md"
+                  width={"7rem"}
                 >
                   Ver detalles
                 </Button>
-                <Box>
+
+                  <Box>
                   <Button
-                    onClick={onOpen}
+                    onClick={onOpen} 
+                    fontFamily={"body"}
+                    borderRadius={"full"}
+                    // size="md"
+                    width={"7rem"}
+                    bg={"brand.green.300"}
+                    color={"white"}
+                    _hover={{
+                      transform: "translateY(2px)",
+                      boxShadow: "lg",
+                    }}
+                  >
+                    {/* {stock===0?"No hay stock":"Agregar"} */} 
+                    {stock === 0 ?"No hay stock":product?.amount === stock?"Max":"Agregar"} 
+                  </Button>
+                  <AlertDialog
+                    isOpen={isOpen}
+                    leastDestructiveRef={cancelRef}
+                    onClose={onClose}
+                  >
+                    <AlertDialogOverlay>
+                      <AlertDialogContent>
+                        <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    {stock === 0 ?"No hay stock":product?.amount === stock?"No nos queda más stock":"Agregar al carrito"} 
+                        </AlertDialogHeader>
+                        <AlertDialogBody>
+                    {stock === 0 ?"Lo sentimos, pronto habrá stock del producto":product?.amount === stock?"Llegaste al limite actual de stock, próximamente repondremos el producto.":"¿Querés agregar este producto a tu carrito?"} 
+                        </AlertDialogBody>
+                        <AlertDialogFooter>
+                          <Button ref={cancelRef} onClick={onClose}>
+                            {stock === 0 || product?.amount === stock ?"Volver":"Cancelar"}
+                          </Button>
+  
+                    {
+                    stock === 0 || product?.amount === stock ?
+                    null
+                    :<Button
+                      color={"white"}
+                      bg={"brand.orange"}
+                      onClick={(e) => {
+                        handlerSetCart(e, id, price, image, name, stock);
+                        onClose();
+                      }}
+                      ml={3}
+                      >
+                      Si, agregar
+                    </Button>
+                    }  
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialogOverlay>
+                  </AlertDialog>
+                </Box>
+                
+                
+                
+
+//! RESGUARDO BOTON AGREGAR ↓↓↓↓↓↓↓↓↓↓↓↓
+                {/* <Box>
+                  <Button
+                    onClick={onOpen} 
                     fontFamily={"body"}
                     borderRadius={"full"}
                     size="md"
@@ -160,7 +225,8 @@ export default function CardProduct({
                       </AlertDialogContent>
                     </AlertDialogOverlay>
                   </AlertDialog>
-                </Box>
+                </Box> */}
+
               </HStack>
             </Center>
           </Box>

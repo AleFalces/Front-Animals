@@ -5,11 +5,11 @@ import "./NotFound.css";
 import img5 from "../../assets/imagenes/img5.png";
 import { Box, Image, Center, Heading, Button } from "@chakra-ui/react";
 
-const NotFound = () => {
+const NotFound = ({ handleSetUserFlag }) => {
   const navigate = useNavigate();
   return (
     <Box minH="100vh" position="relative" bg="brand.green.200">
-      <Navbar />
+      <Navbar handleSetUserFlag={handleSetUserFlag}/>
       <Box>
         <Center>
           <Heading

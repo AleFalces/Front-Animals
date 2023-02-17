@@ -20,12 +20,12 @@ import {
   BiHomeHeart,
 } from "react-icons/bi";
 
-const AboutUs = () => {
+export default function AboutUs ({ setUsuario, handleSetUserFlag }) {
   const Feature = ({ title, text, icon }) => {
     return (
       <Stack alignItems={"center"}>
         <Flex
-          w={16}
+          w={16} 
           h={16}
           align={"center"}
           justify={"center"}
@@ -41,9 +41,10 @@ const AboutUs = () => {
       </Stack>
     );
   };
+  console.log("SET-USUARIO, COMP ABOUT US: ",setUsuario);
   return (
     <>
-      <Navbar />
+      <Navbar setUsuario2={setUsuario} handleSetUserFlag={handleSetUserFlag}/>
 
 
       <Box bg={'brand.green.200'} py={['2rem', '4rem', '4rem', '3rem']}>
@@ -169,4 +170,3 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;

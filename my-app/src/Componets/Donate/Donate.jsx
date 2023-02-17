@@ -16,8 +16,9 @@ import {
 } from "@chakra-ui/react";
 
 import axios from "axios";
+import { HOST } from "../../utils";
 const Donate = () => {
-  const url = `http://localhost:3001`;
+  const url = `${HOST}`;
 
 
   const payMp = async (e) => {

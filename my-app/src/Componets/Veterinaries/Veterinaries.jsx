@@ -8,7 +8,7 @@ import MapView from "../Map/MapView";
 import { Box, Text, SimpleGrid, Center, chakra, Image } from "@chakra-ui/react";
 import logo from "../../assets/imagenes/logo_amarillo.png";
 
-const Veterinaries = () => {
+const Veterinaries = ({ handleSetUserFlag }) => {
   const veterinaries = useSelector((state) => state.allVets);
 
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Veterinaries = () => {
 
   return (
     <Box bg="brand.green.200">
-      <Navbar />
+      <Navbar handleSetUserFlag={handleSetUserFlag}/>
       <Box>
         <Box>
           <Center>

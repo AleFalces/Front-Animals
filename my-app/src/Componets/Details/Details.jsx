@@ -52,7 +52,7 @@ const features = messages.map(function (x, i) {
 	};
 });
 
-const Details = () => {
+const Details = ({ handleSetUserFlag }) => {
 	const dispatch = useDispatch();
 	const { paramsId } = useParams();
 	const Det = useSelector((state) => state.Detail);
@@ -65,7 +65,7 @@ const Details = () => {
 
 	return (
 		<div className="detailContainer">
-			<Navbar />
+			<Navbar handleSetUserFlag={handleSetUserFlag}/>
 			{window.scrollTo(0, 0)}
 			<Box bg="brand.green.200" pb={["1rem", "2rem", "2rem"]}>
 				<SimpleGrid columns={[1, 1, 2, 2]} spacing={["10px", "10px", "30px"]}>
