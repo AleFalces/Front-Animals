@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { petDetails, postOrUpdatePet } from "../../Redux/Actions";
+import { getPetDetails, postOrUpdatePet } from "../../Redux/Actions";
 import UploadImage from "../DashboardAdmin/Dashboard/UploadImage";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
@@ -160,7 +160,7 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
   };
 
   useEffect(() => {
-    dispatch(petDetails(paramsId.id));
+    dispatch(getPetDetails(paramsId.id));
   }, [dispatch]);
 
   useEffect(() => {
