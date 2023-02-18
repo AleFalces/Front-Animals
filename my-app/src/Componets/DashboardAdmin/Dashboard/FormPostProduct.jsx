@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { postProduct } from "../../../Redux/Actions";
+import {
+  getProductDetailAdmin,
+  postOrUpdateProduct,
+} from "../../../Redux/Actions";
 import UploadImage from "./UploadImage";
+import { ErrorForm, SuccedForm } from "../../FormPostPet/AlertForm/AlertForm";
 import {
   Flex,
   Box,
@@ -16,17 +19,23 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Select, Icon,
+  Select,
+  Icon,
   Container,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 import { MdArrowBackIosNew } from "react-icons/md";
 
-export default function FormPostProduct() {
+export default function FormPostProduct({ value }) {
+  // console.log("VALUEE", value)
   const dispatch = useDispatch();
+  const paramsId = useParams("id");
 
-  const imageUrl = useSelector((state) => state.imageUrl)
+  const product2 = useSelector((state) => state.productDetail);
+  const productInfo = product2[0];
+  const [isIncomplete, setIsIncomplete] = useState(false);
+  const [infoSend, setInfoSend] = useState(false);
   const [image, setImage] = useState("");
   const [input, setInput] = useState({
     name: "",
@@ -37,17 +46,6 @@ export default function FormPostProduct() {
     stock: 0,
   });
 
-  useEffect(()=>{
-    setInput({
-      ...input,
-      image: imageUrl
-    })
-  },[imageUrl])
-
-  // useEffect(()=>{
-  //   // console.log("soy el useEFFECT",input)
-  // },[input])
-
   const errors = {
     name: "",
     description: "",
@@ -56,6 +54,17 @@ export default function FormPostProduct() {
     price: 0,
     stock: 0,
   };
+
+  function completeProductData() {
+    setInput({
+      name: productInfo?.name || "",
+      description: productInfo?.description || "",
+      Category: productInfo?.Category || "",
+      image: productInfo?.image || "",
+      price: productInfo?.price || 0,
+      stock: productInfo?.stock || 0,
+    });
+  }
 
   function handlerErrors(e) {
     e.preventDefault();
@@ -86,9 +95,13 @@ export default function FormPostProduct() {
       !errors.price &&
       !errors.stock
     ) {
-      
+      setIsIncomplete(false);
+      setInfoSend(true);
       handlerSubmit(e);
     } else {
+      setIsIncomplete(true);
+      setInfoSend(false);
+      console.log(errors);
       alert("Falta rellenar algun campo");
     }
   }
@@ -96,47 +109,85 @@ export default function FormPostProduct() {
   function handlerChange(e) {
     setInput({
       ...input,
-      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value,
     });
     console.log("input", input);
     // console.log("error", errors);
   }
 
   function handlerSubmit(e) {
-    // e.preventDefault();
+    e.preventDefault();
+
+    if (
+      input.name &&
+      input.description &&
+      input.Category &&
+      input.image &&
+      input.price &&
+      input.stock
+    ) {
+      if (value === undefined) {
+        dispatch(postOrUpdateProduct(input, value));
+        setIsIncomplete(false);
+        setInfoSend(true);
+        setInput({
+          name: "",
+          description: "",
+          Category: "",
+          image: "",
+          price: 0,
+          stock: 0,
+        });
+        document.getElementById("myForm").reset();
+      } else {
+        dispatch(postOrUpdateProduct(paramsId.id, input, value));
+        setIsIncomplete(false);
+        setInfoSend(true);
+        // document.getElementById("myForm").reset();
+      }
+    }
+  }
+  useEffect(() => {
+    dispatch(getProductDetailAdmin(paramsId.id));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (value === "update") {
+      completeProductData();
+    }
+  }, [product2, value]);
+
+  useEffect(() => {
     setInput({
       ...input,
-    })
-    dispatch(postProduct(input));
-    // console.log("EXISTEE", input)
-    setInput({
-      name: "",
-      description: "",
-      Category: "",
-      image: "",
-      price: 0,
-      stock: 0,
+      image: image,
     });
-    
-    document.getElementById("myForm").reset();
-    alert("Producto agregado a la tienda.");
-  }
-
+  }, [image]);
   return (
-  <Box>
+    <Box>
+      {isIncomplete ? <ErrorForm /> : null}
+      {infoSend ? <SuccedForm /> : null}
       <form id="myForm">
         <Flex
           minH={"100vh"}
           align={"center"}
           justify={"center"}
-          bg={"brand.green.100"}>
-          <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6} >
-            <Stack align={"center"}>
-              <Heading fontSize={"4xl"} textAlign={"center"}>
-                Añadir producto a la tienda
-              </Heading>
-            </Stack>
-
+          bg={"brand.green.100"}
+        >
+          <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+            {value === undefined ? (
+              <Stack align={"center"}>
+                <Heading fontSize={"4xl"} textAlign={"center"}>
+                  Añadir producto a la tienda
+                </Heading>
+              </Stack>
+            ) : (
+              <Stack align={"center"}>
+                <Heading fontSize={"4xl"} textAlign={"center"}>
+                  Editar producto de la tienda
+                </Heading>
+              </Stack>
+            )}
             <Box
               rounded={"lg"}
               bg={useColorModeValue("white", "gray.700")}
@@ -152,6 +203,7 @@ export default function FormPostProduct() {
                         placeholder="¿Que vas a vender?"
                         type="text"
                         name="name"
+                        value={input.name}
                         onChange={(e) => handlerChange(e)}
                       />
                       {errors.name && <Text>{errors.name}</Text>}
@@ -166,6 +218,7 @@ export default function FormPostProduct() {
                         name="price"
                         type="number"
                         key="price"
+                        value={input.price}
                         onChange={(e) => handlerChange(e)}
                       />
                     </FormControl>
@@ -176,6 +229,7 @@ export default function FormPostProduct() {
                   <Select
                     name="Category"
                     key="Category"
+                    value={input.Category}
                     onChange={(e) => handlerChange(e)}
                   >
                     <option value="default" key="defaultCategory">
@@ -201,6 +255,7 @@ export default function FormPostProduct() {
                   <Input
                     placeholder="Cantidad disponible"
                     name="stock"
+                    value={input.stock}
                     key="stock"
                     type="number"
                     onChange={(e) => handlerChange(e)}
@@ -212,6 +267,7 @@ export default function FormPostProduct() {
                   <Input
                     placeholder="Algún comentario sobre el producto"
                     name="description"
+                    value={input.description}
                     key="description"
                     type="text"
                     onChange={(e) => handlerChange(e)}
@@ -219,63 +275,80 @@ export default function FormPostProduct() {
                 </FormControl>
 
                 <FormControl id="image" isRequired>
-                <Container>
+                  <Container>
                     <h1>Imagen del producto</h1>
                   </Container>
-                  <button>
-                    <UploadImage image={image} setImage={setImage} />
+                  <button value={input.image}>
+                    <UploadImage setImage={setImage} />
                   </button>
                 </FormControl>
                 <Stack spacing={10} pt={2}>
-                  <Button
-                    onClick={(e) => handlerErrors(e)}
-                    loadingText="Publicar el producto"
-                    fontFamily={"body"}
-                    size="lg"
-                    bg={"orange.300"}
-                    color={"white"}
-                    _hover={{
-                      bg: "orange.400",
-                    }}>
-                    Publicar producto
-                  </Button>
+                  {value === undefined ? (
+                    <Button
+                      onClick={(e) => [handlerErrors(e), window.scrollTo(0, 0)]}
+                      loadingText="Publicar el producto"
+                      fontFamily={"body"}
+                      size="lg"
+                      bg={"orange.300"}
+                      color={"white"}
+                      _hover={{
+                        bg: "orange.400",
+                      }}
+                    >
+                      Publicar producto
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={(e) => [handlerErrors(e), window.scrollTo(0, 0)]}
+                      loadingText="Modificar el producto"
+                      fontFamily={"body"}
+                      size="lg"
+                      bg={"orange.300"}
+                      color={"white"}
+                      _hover={{
+                        bg: "orange.400",
+                      }}
+                    >
+                      Guardar
+                    </Button>
+                  )}
                 </Stack>
               </Stack>
             </Box>
 
-
             <Link to={"/dashboard"}>
-							<Icon
-								as={MdArrowBackIosNew}
-								color="orange.400"
-								boxSize={5}
-								_hover={{
-									color: "grey",
-									boxSize: "7",
-								}}
-							/>
-							<Icon
-								as={MdArrowBackIosNew}
-								color="orange.400"
-								boxSize={5}
-								_hover={{
-									color: "grey",
-									boxSize: "7",
-								}}
-							/>
-							<Button
-								fontFamily={"body"}
-								bg="base.green.100"
-								color={"grey"}
-								_hover={{
-									color: "orange.400",
-								}}
-								p="0"
-								mr="1rem">
-								{" "}
-								Atrás
-							</Button>
-						</Link>
+              <Icon
+                as={MdArrowBackIosNew}
+                color="orange.400"
+                boxSize={5}
+                _hover={{
+                  color: "grey",
+                  boxSize: "7",
+                }}
+              />
+              <Icon
+                as={MdArrowBackIosNew}
+                color="orange.400"
+                boxSize={5}
+                _hover={{
+                  color: "grey",
+                  boxSize: "7",
+                }}
+              />
+              <Button
+                fontFamily={"body"}
+                bg="base.green.100"
+                color={"grey"}
+                _hover={{
+                  color: "orange.400",
+                }}
+                p="0"
+                mr="1rem"
+              >
+                {" "}
+                Atrás
+              </Button>
+            </Link>
           </Stack>
         </Flex>
       </form>

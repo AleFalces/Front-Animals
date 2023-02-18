@@ -26,7 +26,7 @@ export const MyPets = () => {
 
   }, [])
 
-  console.log("userPets", userPets);
+  // console.log("userPets", userPets);
 
   return (
     <>

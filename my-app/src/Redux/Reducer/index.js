@@ -26,9 +26,6 @@ import {
 	SET_STATUS_USER,
 	UPDATE_PRODUCT,
 	UPDATE_USER,
-	UPDATE_VET,
-	MODIFY_PRODUCT,
-	SET_IMAGE,
 } from "../ActionTypes";
 
 const initialState = {
@@ -40,7 +37,6 @@ const initialState = {
 	allProducts: [],
 	products: [],
 	productDetail: {},
-	modifyProduct: {},
 	actualPage: 1,
 	allVets: [],
 	vetsDetail: {},
@@ -48,7 +44,6 @@ const initialState = {
 	user: [],
 	cart: [],
 	functions: {},
-	imageUrl: "",
 };
 
 const RootReducer = (state = initialState, action) => {
@@ -241,16 +236,6 @@ const RootReducer = (state = initialState, action) => {
 		case UPDATE_USER:
 			return {
 				...state,
-			};
-		case MODIFY_PRODUCT:
-			return {
-				...state,
-				modifyProduct: action.payload,
-			};
-		case SET_IMAGE:
-			return {
-				...state,
-				imageUrl: action.payload,
 			};
 		case DELETE_PET:
 			return {

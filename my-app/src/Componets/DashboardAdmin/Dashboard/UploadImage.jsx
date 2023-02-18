@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import { Container, FormGroup, Input } from "reactstrap";
-import { useDispatch } from "react-redux";
-import { setImageAsync } from "../../../Redux/Actions";
+import React from "react";
+import { FormGroup, Input } from "reactstrap";
 
-export default function UploadImage({image, setImage}) {
-  
-  const dispatch = useDispatch()
-  const [loading, setLoading] = useState(false);
+import { setImageAsync } from "../../../utils";
 
-  function handleSetImage(e){
+export default function UploadImage({setImage}) {
+
+  async function handleSetImage(e){
     e.preventDefault()
-    dispatch(setImageAsync(e.target.files))
+    const img = await setImageAsync(e.target.files)
+    setImage(img)
   }
 
   return (
@@ -19,10 +17,9 @@ export default function UploadImage({image, setImage}) {
         <Input
           type="file"
           name="file"
-          placeholder="Selecciona las imagenes"
+          placeholder="Selecciona una imagen"
           onChange={(e) => handleSetImage(e)}
         />
-        {loading ? (<h3>Cargando imagenes...</h3>) : (<img src={image} style={{width: "100px"}}/>)}
       </FormGroup>
     </div>
   );
