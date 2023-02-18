@@ -51,13 +51,13 @@ export default function ShopNavbar({ handlerSetCart, handleRemoveItemCart }) {
   }
 
   return (
-    <>
+    <div >
       <Box bg={"brand.green.200"} pt="1rem">
         <Center>
           <Heading>Productos Solidarios</Heading>
         </Center>
       </Box>
-      <Box bg={"brand.green.200"} h={"30vh"} alignItems={"center"}>
+      <Box bg={"brand.green.200"} alignItems={"center"}>
         <Center>
           <Box padding={5}>
             {" "}
@@ -200,6 +200,6 @@ export default function ShopNavbar({ handlerSetCart, handleRemoveItemCart }) {
           </SimpleGrid>
         </Center>
       </Box>
-    </>
+    </div>
   );
 }
