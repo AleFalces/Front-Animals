@@ -65,7 +65,8 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
   const [infoSend, setInfoSend] = useState(false);
   const [inputError, setInputError] = useState({});
   const paramsId = useParams("id");
-  let petData = useSelector((state) => state.Detail);
+  let petData = useSelector((state) => state.petDetails);
+  console.log("PETDATA FORM",petData);
   const petInfo = petData[0];
 
   const [input, setInput] = useState({
@@ -80,18 +81,20 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
   });
   console.log("INPUT", input);
   
-  // function dataEmptied() {
-  // 	setInput({
-  // 		species: "",
-  // 		sex: "",
-  // 		age: "",
-  // 		size: "",
-  // 		status: "",
-  // 		area: "",
-  // 		detail: "",
-  // 		img: "",
-  // 	})
-  // }
+  function dataEmptied() {
+  	setInput({
+  		species: "",
+  		sex: "",
+  		age: "",
+  		size: "",
+  		status: "",
+  		area: "",
+  		detail: "",
+  		img: "",
+  	})
+    setInfoSend(false)
+    setIsIncomplete(false)
+  }
 
   function completePetData() {
     setInput({
@@ -166,6 +169,8 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
   useEffect(() => {
     if (value === "update") {
       completePetData();
+    } else {
+       dataEmptied()
     }
   }, [petInfo, value]);
 
