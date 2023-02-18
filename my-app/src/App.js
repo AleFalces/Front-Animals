@@ -423,7 +423,7 @@ function App() {
             path="/veterinary/:paramsId"
             element={<VetsDetails handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
-          <Route
+          {/* <Route
             exact
             path="/dashboard/createProduct"
             element={<FormPostProduct />}
@@ -437,7 +437,7 @@ function App() {
             exact
             path="/dashboard/updateVet/:id"
             element={<FormAffiliateVets value={"updateVet"} />}
-          ></Route>
+          ></Route> */}
           {/* <Route
             exact
             path="/dashboard/updateProduct"

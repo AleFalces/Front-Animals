@@ -67,6 +67,8 @@ export default function FormPostUser({ id, value }) {
 		phone: "",
 		role: "user",
 	});
+	console.log("INPUT", input)
+	
 	useEffect(() => {
 		const loggedUser = localStorage.getItem("loggedUser");
 		if (loggedUser) {

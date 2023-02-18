@@ -24,6 +24,8 @@ import {
 import { MdArrowBackIosNew } from "react-icons/md";
 
 export default function FormAffiliateVets({ value }) {
+  // console.log("VALUE", value)
+
   const dispatch = useDispatch();
 
   const [isIncomplete, setIsIncomplete] = useState(false);
@@ -43,6 +45,7 @@ export default function FormAffiliateVets({ value }) {
     email: "",
     location: [],
   });
+  console.log("INPUT", input);
 
   const errors = {
     name: "",
@@ -140,7 +143,7 @@ export default function FormAffiliateVets({ value }) {
       ...input,
       [e.target.name]: e.target.value,
     });
-    console.log("INPUT", input);
+    // console.log("INPUT", input);
   }
 
   function handlerSubmit(e) {
@@ -157,10 +160,10 @@ export default function FormAffiliateVets({ value }) {
     if (
       input.name &&
       input.description &&
-      input.Category &&
+      input.phone &&
+      input.address &&
+      input.email &&
       input.image &&
-      input.price &&
-      input.stock &&
       input.location !== ""
     ) {
       if (value === undefined) {
@@ -178,7 +181,7 @@ export default function FormAffiliateVets({ value }) {
         });
         document.getElementById("myForm").reset();
       } else {
-        dispatch(postOrUpdateVet(paramsId.id, input, value));
+        dispatch(postOrUpdateVet(input, value, paramsId.id));
         setIsIncomplete(false);
         setInfoSend(true);
       }
