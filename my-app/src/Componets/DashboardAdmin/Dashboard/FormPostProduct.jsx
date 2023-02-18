@@ -42,9 +42,10 @@ export default function FormPostProduct({ value }) {
     description: "",
     Category: "",
     image: "",
-    price: 0,
-    stock: 0,
+    price: "",
+    stock: "",
   });
+  console.log("INPUT", input);
 
   const errors = {
     name: "",
@@ -135,12 +136,12 @@ export default function FormPostProduct({ value }) {
           description: "",
           Category: "",
           image: "",
-          price: 0,
-          stock: 0,
+          price: "",
+          stock: "",
         });
         document.getElementById("myForm").reset();
       } else {
-        dispatch(postOrUpdateProduct(paramsId.id, input, value));
+        dispatch(postOrUpdateProduct(input, value, paramsId.id));
         setIsIncomplete(false);
         setInfoSend(true);
         // document.getElementById("myForm").reset();

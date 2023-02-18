@@ -78,7 +78,8 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
     detail: "",
     img: "",
   });
-
+  console.log("INPUT", input);
+  
   // function dataEmptied() {
   // 	setInput({
   // 		species: "",
@@ -182,7 +183,7 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
       {isIncomplete ? <ErrorForm /> : null}
       {infoSend ? <SuccedForm /> : null}
 
-      <form onSubmit={(e) => handlerSubmit(e)} id="myForm">
+      <form id="myForm">
         <Flex
           minH={"100vh"}
           align={"center"}
