@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../src/Componets/Home/Home";
 import Pets from "../src/Componets/Adoption/Pets";
 import Details from "../src/Componets/Details/Details";
-import Login from "../src/Componets/Login/Login";
 import LandingPage from "../src/Componets/LandingPage/LandingPage";
 import NotFound from "../src/Componets/NotFound/NotFound";
 import Donate from "./Componets/Donate/Donate";
@@ -23,6 +22,7 @@ import { useState, useEffect } from "react";
 import CreateUserAuth0 from "./Componets/CreateUserAuth0/CreateUserAuth0";
 import Cart from "./Componets/Shop/Cart/Cart";
 import Banned from "./Componets/Banned/Banned";
+import Login from "../src/Componets/Login/Login";
 import Navbar from "./Componets/Navbar/Navbar";
 
 function App() {
@@ -145,6 +145,11 @@ function App() {
             exact
             path="/createAuth0"
             element={<CreateUserAuth0 />}
+          ></Route>
+          <Route
+            exact
+            path="/createUser"
+            element={<FormPostUser />}
           ></Route>
         </Routes>
       </div>
@@ -287,19 +292,12 @@ function App() {
 					exact
 					path="/dashboard/updateVet/:id"
 					element={<FormAffiliateVets token={token} value="updateVet"/>}></Route>
-          ></Route>
-          <Route
-            exact
-            path="/dashboard/updateProduct"
-            element={<FormUpdateProduct />}
-          ></Route>
           <Route
             path="*"
             element={<NotFound handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
-        </Routes>
 				<Route path="*" element={<NotFound />}></Route>
-			</Routes>
+        </Routes>
       </div>
     );
   }
@@ -440,11 +438,11 @@ function App() {
             path="/dashboard/updateVet/:id"
             element={<FormAffiliateVets value={"updateVet"} />}
           ></Route>
-          <Route
+          {/* <Route
             exact
             path="/dashboard/updateProduct"
             element={<FormUpdateProduct />}
-          ></Route>
+          ></Route> */}
           <Route
             path="*"
             element={<NotFound handleSetUserFlag={handleSetUserFlag} />}
