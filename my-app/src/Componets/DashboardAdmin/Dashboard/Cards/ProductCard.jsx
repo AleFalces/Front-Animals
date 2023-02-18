@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardBody,
@@ -19,8 +19,8 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
 } from "@chakra-ui/react";
+
 import { useDispatch } from "react-redux";
-import { modifyProduct } from "../../../../Redux/Actions";
 import { useNavigate } from "react-router-dom";
 import { deleteProductAdmin } from "../../../../Redux/Actions";
 import { useDisclosure } from "@chakra-ui/react";
@@ -30,42 +30,20 @@ export default function ProductCard({
   name,
   image,
   stock,
-  price,
-  description,
-  Category,
+  price
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
 
-  function recievedDataProduct(
-    e,
-    id,
-    name,
-    image,
-    stock,
-    price,
-    description,
-    Category
-  ) {
-    e.preventDefault();
-    const obj = {
-      id,
-      name,
-      image,
-      stock,
-      price,
-      description,
-      Category,
-    };
-    // console.log("receivedData", obj)
-    dispatch(modifyProduct(obj));
-  }
-
   function handlerDeleteProduct(e, id) {
     dispatch(deleteProductAdmin(id));
   }
+
+  useEffect(()=>{
+
+  },[dispatch])
 
   return (
     <div>
@@ -99,9 +77,6 @@ export default function ProductCard({
                   <option value="option">{id}</option>
                 </Select>
               </Center>
-              {/*                 <Text mt="1rem" fontSize="md">
-                  {id}
-                </Text> */}
               <Divider h="0.2rem" bg="brand.green.100" mt="1rem" />
               <Heading size="sm" mt="1rem">
                 PRECIO:
@@ -111,19 +86,7 @@ export default function ProductCard({
               </Text>
               <Button
                 my="1rem"
-                onClick={(e) => {
-                  recievedDataProduct(
-                    e,
-                    id,
-                    name,
-                    image,
-                    stock,
-                    price,
-                    description,
-                    Category
-                  );
-                  navigate("/dashboard/updateProduct");
-                }}
+                onClick={(e) => navigate(`/dashboard/updateProduct/${id}`)}
                 bg={"green"}
                 color={"white"}
                 _hover={{

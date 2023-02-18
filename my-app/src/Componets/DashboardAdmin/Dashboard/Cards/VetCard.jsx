@@ -3,12 +3,9 @@ import {
   Card,
   CardBody,
   Text,
-  Heading,
-  CardHeader,
   CardFooter,
   Button,
-  Link,
-  Divider
+  Divider,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

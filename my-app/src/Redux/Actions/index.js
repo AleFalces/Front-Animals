@@ -24,10 +24,7 @@ import {
 	UPDATE_PRODUCT,
 	UPDATE_USER,
 	UPDATE_VET,
-	MODIFY_PRODUCT,
-	SET_IMAGE,
 	DELETE_PET,
-	DELETE_PRODUCT
 } from "../ActionTypes";
 import { HOST, header } from "../../utils";
 import axios from "axios";
@@ -185,44 +182,65 @@ export function updateUser(userID, formInput) {
 	};
 }
 
-export function updateVet(vetId, formInput) {
+
+
+export function postOrUpdateProduct(id, formInput, value ) {
 	return async function (dispatch) {
 		try {
-			await axios.put(`${HOST}/veterinary/${vetId}`, formInput);
+			if(value === undefined){
+				const newProduct = await axios.post(`${HOST}/products`, formInput);
+				return dispatch({
+					type: POST_PRODUCT,
+				});
+			}else{
+				// console.log("Action updateProduc", id);
+				// const updatedProduct = await axios.get(`${HOST}/products`)
+				await axios.put(`${HOST}/products/${id}`, formInput);
 			dispatch({
-				type: UPDATE_VET,
+				type: UPDATE_PRODUCT,
 			});
-		} catch (error) {
-			console.log(error.message);
-		}
-	};
-}
-
-export function postProduct(formInput) {
-	return async function (dispatch) {
-		try {
-			const newProduct = await axios.post(`${HOST}/products`, formInput);
-			return dispatch({
-				type: POST_PRODUCT,
-			});
+			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
 
-export function postVet(formInput) {
+export function postOrUpdateVet(id, formInput, value) {
+	// console.log("VALUE", value)
+	console.log("FORMINPUT", formInput)
 	return async function (dispatch) {
 		try {
-			const newVet = await axios.post(`${HOST}/veterinary`, formInput);
-			return dispatch({
-				type: POST_VET,
-			});
+			if(value === undefined){
+				const newVet = await axios.post(`${HOST}/veterinary`, formInput);
+				return dispatch({
+					type: POST_VET,
+				});
+			}else{
+				await axios.put(`${HOST}/veterinary/${id}`, formInput)
+				dispatch({
+					type: UPDATE_VET,
+				});
+			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
 }
+
+// export function updateVet(vetId, formInput) {
+// 	return async function (dispatch) {
+// 		try {
+// 			await axios.put(`${HOST}/veterinary/${vetId}`, formInput);
+// 			dispatch({
+// 				type: UPDATE_VET,
+// 			});
+// 		} catch (error) {
+// 			console.log(error.message);
+// 		}
+// 	};
+// }
+
 export function filterAdoptionPets(arrayFilterValues, value) {
 	return async function (dispatch) {
 		try {
@@ -272,11 +290,27 @@ export function getAllProducts() {
 }
 
 export function getProductDetail(obj) {
+
 	return async function (dispatch) {
 		try {
 			const productDetail = await axios.get(`${HOST}/products/${obj.id}`);
 			productDetail.data[0].handlerSetCart = obj.handlerSetCart;
 			productDetail.data[0].handleRemoveItemCart = obj.handleRemoveItemCart;
+			return dispatch({
+				type: GET_PRODUCT_DETAIL,
+				payload: productDetail.data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function getProductDetailAdmin(id) {
+
+	return async function (dispatch) {
+		try {
+			const productDetail = await axios.get(`${HOST}/products/${id}`);
 			return dispatch({
 				type: GET_PRODUCT_DETAIL,
 				payload: productDetail.data,
@@ -373,7 +407,6 @@ export const VeterinaryDetails = (id) => async (dispatch) => {
 };
 
 export function setStatusUser(id) {
-	//preguntar si se manda en obj o array la data
 	return async function (dispatch) {
 		try {
 			await axios.put(`${HOST}/users/setStatusUser/${id}`);
@@ -388,94 +421,40 @@ export function setStatusUser(id) {
 	};
 }
 
-export function updateProduct(id, formInput) {
-	return async function (dispatch) {
-		try {
-			console.log("Action updateProduc", id);
-			await axios.put(`${HOST}/products/${id}`, formInput);
-			// const updatedProduct = await axios.get(`${HOST}/products`)
-			dispatch({
-				type: UPDATE_PRODUCT,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
-}
-
-export function modifyProduct(obj) {
-	return async function (dispatch) {
-		try {
-			console.log("modifyProduct", obj);
-			return dispatch({
-				type: MODIFY_PRODUCT,
-				payload: obj,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
-}
-
 export function postOrUpdatePet(formInput, value, petId) {
 	return async function (dispatch) {
 		try {
 			if (value === "update") {
-				console.log("ACTION CASO UPDATE");
-				console.log("FORM INPUT", formInput);
-				console.log("VALUE", value);
-				console.log("PETID", petId);
-				const userLocalstorage = JSON.parse(
-					localStorage.getItem("loggedUser")
-				)[0];
-				console.log("USERLOCALSTORAGE: ", userLocalstorage);
+				// console.log("ACTION CASO UPDATE");
+				// console.log("FORM INPUT", formInput);
+				// console.log("VALUE", value);
+				// console.log("PETID", petId);
+				// const userLocalstorage = JSON.parse(
+				// 	localStorage.getItem("loggedUser")
+				// )[0];
+				// console.log("USERLOCALSTORAGE: ", userLocalstorage);
+
 				let json = await axios.put(`${HOST}/pets/${petId}`, formInput);
 				return dispatch({
 					type: UPDATE_PET,
 				});
 			} else {
 				const userId = JSON.parse(localStorage.getItem("loggedUser"))[0].id;
-				console.log("USER ID ACTION CASO POST", userId);
 				formInput = { ...formInput, userId };
-				console.log("LOG ACTION CASO POST", formInput, value, petId);
 				let json = await axios.post(`${HOST}/pets`, formInput);
-				console.log(formInput, value, petId);
 				return dispatch({
 					type: POST_PET,
 				});
+				// console.log("USER ID ACTION CASO POST", userId);
+				// console.log("LOG ACTION CASO POST", formInput, value, petId);
+				// console.log(formInput, value, petId);
 			}
 		} catch (error) {
 			console.log(error.message);
 		}
 	};
 }
-export function setImageAsync(obj) {
-	// console.log("OBJJJ", obj);
-	return async function (dispatch) {
-		try {
-			const files = obj;
-			const data = new FormData();
-			data.append("file", files[0]);
-			data.append("upload_preset", "buddycare");
 
-			const res = await fetch(
-				"https://api.cloudinary.com/v1_1/lucho123/image/upload/",
-				{
-					method: "POST",
-					body: data,
-				}
-			);
-			const file = await res.json();
-			// console.log("SECURE_URL", file.url);
-			return dispatch({
-				type: SET_IMAGE,
-				payload: file.url,
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
-}
 export function deletePet(idPet, idUser) {
 	return async function (dispatch) {
 		try {

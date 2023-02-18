@@ -13,7 +13,6 @@ import FormPostPet from "./Componets/FormPostPet/FormPostPet";
 import FormPostUser from "./Componets/FormPostUser/FormPostUser";
 import FormPostProduct from "./Componets/DashboardAdmin/Dashboard/FormPostProduct";
 import FormAffiliateVets from "./Componets/DashboardAdmin/Dashboard/FormAffiliateVets";
-import FormUpdateProduct from "./Componets/DashboardAdmin/Dashboard/FormUpdateProduct";
 import Veterinaries from "../src/Componets/Veterinaries/Veterinaries";
 import DashboardAdmin from "./Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
 import ProductDetail from "./Componets/Shop/ProductDetail/ProductDetail";
@@ -61,6 +60,7 @@ function App() {
       setUsuario([]);
     }
   }, [loggedUser]);
+
 
   useEffect(() => {}, [userFlag, usuario]);
   console.log("USUARIO APP", usuario);
@@ -275,14 +275,18 @@ function App() {
             element={<FormPostProduct />}
           ></Route>
           <Route
+					exact
+					path="/dashboard/updateProduct/:id"
+					element={<FormPostProduct token={token} value = "update" />}></Route>
+          <Route
             exact
             path="/dashboard/createVet"
             element={<FormAffiliateVets />}
           ></Route>
           <Route
-            exact
-            path="/dashboard/updateVet/:id"
-            element={<FormAffiliateVets value={"updateVet"} />}
+					exact
+					path="/dashboard/updateVet/:id"
+					element={<FormAffiliateVets token={token} value="updateVet"/>}></Route>
           ></Route>
           <Route
             exact
@@ -294,6 +298,8 @@ function App() {
             element={<NotFound handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
         </Routes>
+				<Route path="*" element={<NotFound />}></Route>
+			</Routes>
       </div>
     );
   }
