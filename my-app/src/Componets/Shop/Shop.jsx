@@ -131,7 +131,7 @@ console.log("CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",JSON.parse(localStorag
     <>
       <Navbar handleSetUserFlag={handleSetUserFlag}/>
       <Box minHeight={"150vh"} bg="brand.backgorund" paddingBottom={"3rem"}>
-        <ShopNavbar
+        <ShopNavbar 
           handlerSetCart={handlerSetCart}
           handleRemoveItemCart={handleRemoveItemCart}
         />

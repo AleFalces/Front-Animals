@@ -24,6 +24,7 @@ import { useState, useEffect } from "react";
 import CreateUserAuth0 from "./Componets/CreateUserAuth0/CreateUserAuth0";
 import Cart from "./Componets/Shop/Cart/Cart";
 import Banned from "./Componets/Banned/Banned";
+import Navbar from "./Componets/Navbar/Navbar";
 
 function App() {
   const { getAccessTokenSilently } = useAuth0();
@@ -66,6 +67,7 @@ function App() {
 
   //!   ↓↓↓↓↓↓↓  A PARTIR DE ACÁ ESTÁ EL RENDER DE LAS RUTAS SEGUN CORRESPONDA  ↓↓↓↓↓↓↓
   //!          * EL ORDEN ES IMPORTANTE!
+  //!  ↓↓↓↓↓ ↓↓↓↓↓     RUTAS 17/02/23     ↓↓↓↓↓ ↓↓↓↓↓
   if (usuario[0]?.status === "banned") {
     //?          CASO ESTÁ BANNEADO
     console.log("CASO ESTÁ BANNEADO, APP.js");
@@ -84,62 +86,68 @@ function App() {
     console.log("CASO NO HAY USUARIO LOGEADO, APP.js");
 
     return (
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={<LandingPage handleSetUserFlag={handleSetUserFlag} />}
-        ></Route>
-        <Route
-          exact
-          path="/home"
-          element={
-            <Home
-              setUsuario2={setUsuario}
-              handleSetUserFlag={handleSetUserFlag}
-            />
-          }
-        ></Route>
-        <Route
-          exact
-          path="/donate"
-          element={<Donate handleSetUserFlag={handleSetUserFlag} />}
-        ></Route>
-        <Route
-          exact
-          path="/veterinary"
-          element={<Veterinaries handleSetUserFlag={handleSetUserFlag} />}
-        ></Route>
-        <Route
-          exact
-          path="/aboutUs"
-          element={
-            <AboutUs
-              setUsuario={setUsuario}
-              handleSetUserFlag={handleSetUserFlag}
-            />
-          }
-        ></Route>
-        <Route
-          exact
-          path="/adoptions"
-          element={
-            <Pets handleSetUserFlag={handleSetUserFlag} value={"adoptions"} />
-          }
-        ></Route>
-        <Route
-          exact
-          path="/lostPets"
-          element={
-            <Pets handleSetUserFlag={handleSetUserFlag} value={"lostPets"} />
-          }
-        ></Route>
-        <Route
-          path="*"
-          element={<NotFound handleSetUserFlag={handleSetUserFlag} />}
-        ></Route>
-        <Route exact path="/createAuth0" element={<CreateUserAuth0 />}></Route>
-      </Routes>
+      <div>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<LandingPage handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
+          <Route
+            exact
+            path="/home"
+            element={
+              <Home
+                setUsuario2={setUsuario}
+                handleSetUserFlag={handleSetUserFlag}
+              />
+            }
+          ></Route>
+          <Route
+            exact
+            path="/donate"
+            element={<Donate handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
+          <Route
+            exact
+            path="/veterinary"
+            element={<Veterinaries handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
+          <Route
+            exact
+            path="/aboutUs"
+            element={
+              <AboutUs
+                setUsuario={setUsuario}
+                handleSetUserFlag={handleSetUserFlag}
+              />
+            }
+          ></Route>
+          <Route
+            exact
+            path="/adoptions"
+            element={
+              <Pets handleSetUserFlag={handleSetUserFlag} value={"adoptions"} />
+            }
+          ></Route>
+          <Route
+            exact
+            path="/lostPets"
+            element={
+              <Pets handleSetUserFlag={handleSetUserFlag} value={"lostPets"} />
+            }
+          ></Route>
+          <Route
+            path="*"
+            element={<NotFound handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
+          <Route
+            exact
+            path="/createAuth0"
+            element={<CreateUserAuth0 />}
+          ></Route>
+        </Routes>
+      </div>
     );
   }
   if (usuario[0]?.role === "admin") {
@@ -149,7 +157,6 @@ function App() {
     return (
       <div className="App">
         <Routes>
-          {/* <Route exact path="/banned" element={<Banned />}></Route> */}
           <Route
             exact
             path="/"
@@ -171,7 +178,11 @@ function App() {
             path="/dashboard"
             element={<DashboardAdmin token={token} />}
           ></Route>
-          <Route exact path="/donate" element={<Donate />}></Route>
+          <Route
+            exact
+            path="/donate"
+            element={<Donate handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
           <Route
             exact
             path="/createPet"
@@ -307,7 +318,11 @@ function App() {
             path="/dashboard"
             element={<DashboardAdmin token={token} />}
           ></Route> */}
-          <Route exact path="/donate" element={<Donate />}></Route>
+          <Route
+            exact
+            path="/donate"
+            element={<Donate handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
           <Route
             exact
             path="/createPet"
@@ -432,19 +447,6 @@ function App() {
       </div>
     );
   }
-
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
   //
   //
   //

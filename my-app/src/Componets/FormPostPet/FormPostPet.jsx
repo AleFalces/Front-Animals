@@ -56,7 +56,7 @@ const validateForm = (input) => {
 	return inputError;
 };
 
-export default function FormPostPet({ value }) {
+export default function FormPostPet({ handleSetUserFlag, value }) {
 	const dispatch = useDispatch();
 	const [isIncomplete, setIsIncomplete] = useState(false);
 	const [infoSend, setInfoSend] = useState(false);
@@ -150,7 +150,7 @@ function completePetData(){
 	},[petData, value])
 	return (
 		<div>
-			<Navbar />
+			<Navbar handleSetUserFlag={handleSetUserFlag}/>
 
 			{isIncomplete ? <ErrorForm /> : null}
 			{infoSend ? <SuccedForm /> : null}
