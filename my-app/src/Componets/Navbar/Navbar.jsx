@@ -29,13 +29,16 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
-export default function Simple() {
+export default function Navbar({ setUsuario2, handleSetUserFlag }) {
+	// console.log("handleSetUserFlag, Navbar SIMPLE: ",handleSetUserFlag);
 	const dispatch = useDispatch();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { user, isAuthenticated, logout } = useAuth0();
 	const [usuario, setUsuario] = useState([]);
 	const navigate = useNavigate();
 	const userInfo = useSelector((state) => state.user);
+
+
 
 	useEffect(() => {
 		const loggedUser = localStorage.getItem("loggedUser");
@@ -55,7 +58,12 @@ export default function Simple() {
 
 	const cerrarSesion = () => {
 		localStorage.removeItem("loggedUser");
-		logout();
+		// logout();
+		console.log("seteando el usuario en null");
+		setUsuario(null)
+		console.log("Ejecutando 'handleSetUserFlag' en boton 'Cerrar Sesion' de Navbar");
+		handleSetUserFlag();
+		navigate("/")
 	};
 
 	const userPhone = (e) => {
@@ -296,7 +304,7 @@ export default function Simple() {
 										</MenuItem>
 									</MenuList>
 								) : (
-									<NavLink to="/">Ingresar</NavLink>
+									<NavLink onClick={()=>{handleSetUserFlag()}} to="/">Ingresar</NavLink>
 								)}
 							</MenuList>
 						</Menu>

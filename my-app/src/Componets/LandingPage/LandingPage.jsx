@@ -76,7 +76,7 @@ const avatars = [
   },
 ];
 
-const LandingPage = () => {
+const LandingPage = ({ handleSetUserFlag }) => {
 
 
   return (
@@ -197,7 +197,7 @@ const LandingPage = () => {
 
             <Box as={'form'} mt={2}>
               <Stack spacing={1}>
-                <Login name="Login" />
+                <Login name="Login" handleSetUserFlag={handleSetUserFlag}/>
               </Stack>
             </Box>
 

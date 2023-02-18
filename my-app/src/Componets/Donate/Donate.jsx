@@ -16,8 +16,9 @@ import {
 } from "@chakra-ui/react";
 
 import axios from "axios";
-const Donate = () => {
-  const url = `http://localhost:3001`;
+import { HOST } from "../../utils";
+const Donate = ({ handleSetUserFlag }) => {
+  const url = `${HOST}`;
 
 
   const payMp = async (e) => {
@@ -57,7 +58,7 @@ const Donate = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar handleSetUserFlag={handleSetUserFlag}/>
       <Box minHeight={"100vh"} bg="brand.backgorund" paddingBottom={"3rem"}>
         <Box maxW="7xl" mx={"auto"} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
           <chakra.h1

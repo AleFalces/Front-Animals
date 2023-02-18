@@ -56,7 +56,8 @@ function StatsCard({ icon, title, stat }) {
     </Stat>
   );
 }
-const Home = () => {
+const Home = ({ setUsuario2, handleSetUserFlag }) => {
+  // console.log("HOME: handleSetUserFlag: ", handleSetUserFlag);
   // const { user } = useAuth0();
   const dispatch = useDispatch();
   const veterinaries = useSelector((state) => state.allVets);
@@ -79,7 +80,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar setUsuario2={setUsuario} handleSetUserFlag={handleSetUserFlag}/>
       <Box minHeight={"100vh"} bg="brand.backgorund" paddingBottom={"3rem"}>
         <Flex
           w={"full"}

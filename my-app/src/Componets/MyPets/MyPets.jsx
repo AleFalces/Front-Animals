@@ -7,7 +7,7 @@ import Card from "../Card/Card"
 import { SimpleGrid, Heading, Container, Text, Center, Box } from "@chakra-ui/react";
 import { getUserId } from "../../Redux/Actions"; //dispatch getUserId(aca le paso el id (del localStorage)y me trae toda la info del user, y a esa info la guardo en una variable/ Dsp uso esa variable para sacar los pets de ahi y recorrerlos
 
-export const MyPets = () => {
+export const MyPets = ({ handleSetUserFlag }) => {
   const dispatch = useDispatch();
   const [usuario, setUsuario] = useState({});
   const userRedux = useSelector((state) => state.user); //userInfo[0].pet.map()
@@ -30,7 +30,7 @@ export const MyPets = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar handleSetUserFlag={handleSetUserFlag}/>
 
       <Box bg={'brand.green.200'} mb='3rem'>
         <Heading as="h1" fontSize="2.5rem" pt="3rem" color="gray.800">

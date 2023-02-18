@@ -58,123 +58,103 @@ const validateForm = (input) => {
   return inputError;
 };
 
-export default function FormPostPet({ value }) {
-  //   console.log("SOY VALUE", value)
 
-  const dispatch = useDispatch();
-  const paramsId = useParams("id");
-  const [isIncomplete, setIsIncomplete] = useState(false);
-  const [infoSend, setInfoSend] = useState(false);
-  const [inputError, setInputError] = useState({});
-  const [img, setImage] = useState("");
-  let petData = useSelector((state) => state.Detail);
+export default function FormPostPet({ handleSetUserFlag, value }) {
+	const dispatch = useDispatch();
+	const [isIncomplete, setIsIncomplete] = useState(false);
+	const [infoSend, setInfoSend] = useState(false);
+	const [inputError, setInputError] = useState({});
+	const paramsId = useParams("id");
+	let petData = useSelector((state) => state.Detail)
 
-  const [input, setInput] = useState({
-    species: "",
-    sex: "",
-    age: "",
-    size: "",
-    status: "",
-    area: "",
-    detail: "",
-    img: "",
-  });
-  //   function dataEmptied() {
-  //     setInput({
-  //       species: "",
-  //       sex: "",
-  //       age: "",
-  //       size: "",
-  //       status: "",
-  //       area: "",
-  //       detail: "",
-  //       img: "",
-  //     });
-  //   }
-  function completePetData() {
-    setInput({
-      species: petData?.species || "",
-      sex: petData?.sex || "",
-      age: petData?.age || "",
-      size: petData?.size || "",
-      status: petData?.status || "",
-      area: petData?.area || "",
-      detail: petData?.detail || "",
-      img: petData?.img || "",
-    });
-  }
-  const handlerChange = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-    setInputError(
-      validateForm({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
-    console.log("INPUT", input);
-  };
-  const handlerSubmit = (e) => {
-    if (
-      input.species &&
-      input.sex &&
-      input.age &&
-      input.size &&
-      input.area &&
-      input.status &&
-      input.detail &&
-      input.img !== ""
-    ) {
-      if (value === undefined) {
-        dispatch(postOrUpdatePet(input, value));
-        setIsIncomplete(false);
-        setInfoSend(true);
-        setInput({
-          species: "",
-          sex: "",
-          age: "",
-          size: "",
-          area: "",
-          status: "",
-          detail: "",
-          img: "",
-        });
-        document.getElementById("myForm").reset();
-      } else {
-        dispatch(postOrUpdatePet(input, value, paramsId.id));
-        setIsIncomplete(false);
-        setInfoSend(true);
-
-        document.getElementById("myForm").reset();
-      }
-    } else {
-      setIsIncomplete(true);
-      setInfoSend(false);
-    }
-  };
-
-  useEffect(() => {
-    dispatch(petDetails(paramsId.id));
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (value === "update") {
-      completePetData();
-    }
-  }, [petData, value]);
-
-  useEffect(() => {
-    setInput({
-      ...input,
-      img: img,
-    });
-  }, [img]);
+	const [input, setInput] = useState({
+		species: "",
+		sex: "",
+		age: "",
+		size: "",
+		status: "",
+		area: "",
+		detail: "",
+		img: "",
+	});
+function dataEmptied() {
+	setInput({
+		species: "",
+		sex: "",
+		age: "",
+		size: "",
+		status: "",
+		area: "",
+		detail: "",
+		img: "",
+	})
+}
+function completePetData(){
+	setInput({
+		species: petData?.species || "",
+		sex: petData?.sex || "",
+		age: petData?.age || "",
+		size: petData?.size || "",
+		status: petData?.status || "",
+		area: petData?.area || "",
+		detail: petData?.detail || "",
+		img: petData?.img || "",
+	})
+}
+	const handlerChange = (e) => {
+		setInput({
+			...input,
+			[e.target.name]: e.target.value,
+		});
+		setInputError(
+			validateForm({
+				...input,
+				[e.target.name]: e.target.value,
+			})
+		);
+	};
+	const handlerSubmit = (e) => {
+		e.preventDefault();
+		if (
+			input.species &&
+			input.sex &&
+			input.age &&
+			input.size &&
+			input.area &&
+			input.status &&
+			input.detail &&
+			input.img !== ""
+		) {
+			if(value === undefined) {
+				dispatch(postOrUpdatePet(input, value))
+				setIsIncomplete(false);
+				setInfoSend(true);
+				document.getElementById("myForm").reset();
+			} else {
+				dispatch(postOrUpdatePet(input, value, paramsId.id))
+				setIsIncomplete(false);
+				setInfoSend(true);
+				document.getElementById("myForm").reset();			
+			}
+		} else {
+			setIsIncomplete(true);
+			setInfoSend(false);
+		}
+	};
+	useEffect(() => {
+		dispatch(petDetails(paramsId.id))
+	}, [dispatch]);
+	useEffect(()=>{
+		if(value==="update"){
+			completePetData()
+		} else {
+			dataEmptied()
+		}
+	},[petData, value])
 
   return (
     <div>
-      <Navbar />
+      <Navbar handleSetUserFlag={handleSetUserFlag}/>
 
       {isIncomplete ? <ErrorForm /> : null}
       {infoSend ? <SuccedForm /> : null}
