@@ -18,7 +18,9 @@ export default function CartCards({
 }) {
   return (
     <>
-      <Center>
+      <Center
+          bg={"blue"}
+      >
         <Flex
           direction={{
             base: "column",
@@ -26,6 +28,7 @@ export default function CartCards({
           }}
           justify="space-between"
           align="center"
+          bg={"red"}
           flexWrap={"wrap"}
         >
           <Box>

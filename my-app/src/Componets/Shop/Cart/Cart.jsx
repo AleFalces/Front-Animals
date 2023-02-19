@@ -145,7 +145,7 @@ export default function Cart() {
         return handleStateChange();
       }
 
-      handleStateChange();
+      // handleStateChange();
     } catch (error) {
       console.log(error);
     }

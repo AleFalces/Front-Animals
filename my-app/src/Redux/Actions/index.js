@@ -1,7 +1,5 @@
 import {
   GET_PETS,
-  GET_ADOPTION_PETS,
-  GET_LOST_PETS,
   GET_PET_ID,
   GET_ALL_USERS,
   GET_USER_ID,
@@ -17,9 +15,6 @@ import {
   FILTER_BY_SEARCH_AREA,
   SHOP_SEARCH_INPUT_NAME,
   SHOP_FILTER_VALUE,
-  NEXT_PAGE,
-  PREV_PAGE,
-  ACTUAL_PAGE,
   UPDATE_PET,
   UPDATE_PRODUCT,
   UPDATE_USER,
@@ -100,35 +95,7 @@ export function getUserId(id) {
   };
 }
 
-export function getAdoptionPets() {
-  return async function (dispatch) {
-    try {
-      const allPets = await axios.get("http://localhost:3001/pets");
-      return dispatch({
-        type: GET_ADOPTION_PETS,
-        payload: allPets.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export function getLostPets() {
-  return async function (dispatch) {
-    try {
-      const allPets = await axios.get(`${HOST}/pets`);
-      return dispatch({
-        type: GET_LOST_PETS,
-        payload: allPets.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export const petDetails = (id) => async (dispatch) => {
+export const getPetDetails = (id) => async (dispatch) => {
   try {
     const getID = await axios.get(`${HOST}/pets/${id}`);
     return dispatch({
@@ -205,7 +172,7 @@ export function postOrUpdateProduct(formInput, value, id) {
 }
 
 export function postOrUpdateVet(formInput, value, id) {
-  console.log("VALUE", value)
+  console.log("VALUE", value);
   console.log("FORMINPUT", formInput);
   return async function (dispatch) {
     try {
@@ -316,39 +283,6 @@ export function shopSearchInputName(input) {
     }
   };
 }
-
-export const Prev = (actualPage) => (dispatch) => {
-  try {
-    let next = actualPage - 1;
-    dispatch({
-      type: PREV_PAGE,
-      payload: next,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-export const Next = (actualPage) => (dispatch) => {
-  try {
-    let next = actualPage + 1;
-    dispatch({
-      type: NEXT_PAGE,
-      payload: next,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-export const ActualPage = (page) => (dispatch) => {
-  try {
-    dispatch({
-      type: ACTUAL_PAGE,
-      payload: page,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export function shopFilterValue(value) {
   return async function (dispatch) {

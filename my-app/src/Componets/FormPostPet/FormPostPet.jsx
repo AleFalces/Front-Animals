@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { petDetails, postOrUpdatePet } from "../../Redux/Actions";
+import { getPetDetails, postOrUpdatePet } from "../../Redux/Actions";
 import UploadImage from "../DashboardAdmin/Dashboard/UploadImage";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
@@ -65,8 +65,9 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
   const [infoSend, setInfoSend] = useState(false);
   const [inputError, setInputError] = useState({});
   const paramsId = useParams("id");
-  let petData = useSelector((state) => state.Detail);
-  const petInfo = petData[0];
+  let petData = useSelector((state) => state.petDetails);
+  console.log("PETDATA FORM",petData);
+  const petInfo = petData;
 
   const [input, setInput] = useState({
     species: "",
@@ -80,18 +81,20 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
   });
   console.log("INPUT", input);
   
-  // function dataEmptied() {
-  // 	setInput({
-  // 		species: "",
-  // 		sex: "",
-  // 		age: "",
-  // 		size: "",
-  // 		status: "",
-  // 		area: "",
-  // 		detail: "",
-  // 		img: "",
-  // 	})
-  // }
+  function dataEmptied() {
+  	setInput({
+  		species: "",
+  		sex: "",
+  		age: "",
+  		size: "",
+  		status: "",
+  		area: "",
+  		detail: "",
+  		img: "",
+  	})
+    setInfoSend(false)
+    setIsIncomplete(false)
+  }
 
   function completePetData() {
     setInput({
@@ -160,12 +163,14 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
   };
 
   useEffect(() => {
-    dispatch(petDetails(paramsId.id));
+    dispatch(getPetDetails(paramsId.id));
   }, [dispatch]);
 
   useEffect(() => {
     if (value === "update") {
       completePetData();
+    } else {
+       dataEmptied()
     }
   }, [petInfo, value]);
 
