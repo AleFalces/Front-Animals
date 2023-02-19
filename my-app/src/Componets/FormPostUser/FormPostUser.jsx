@@ -89,7 +89,9 @@ export default function FormPostUser({ id, value }) {
 				surname: userInfo[0]?.surname,
 				email: userInfo[0]?.email,
 				username: userInfo[0]?.username,
+				phone: userInfo[0]?.phone,
 				role: "user",
+
 			});
 	}, []);
 
@@ -154,6 +156,40 @@ export default function FormPostUser({ id, value }) {
 					justify={"center"}
 					bg="brand.green.200">
 					<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+						<Link to={value === "update" ? "/home" : "/"}>
+							<Icon
+								as={MdArrowBackIosNew}
+								color="orange.400"
+								boxSize={7}
+								_hover={{
+									color: "grey",
+									boxSize: "7",
+								}}
+								/>
+							<Icon
+								as={MdArrowBackIosNew}
+								color="orange.400"
+								boxSize={7}
+								_hover={{
+									color: "grey",
+									boxSize: "7",
+								}}
+								/>
+							
+							<Button
+								fontFamily={"body"}
+								bg="base.green.100"
+								color={"grey"}
+								fontSize={"1.4rem"}
+								_hover={{
+									color: "orange.400",
+								}}
+								p="0"
+								mr="1rem">
+								{" "}
+								Atrás
+							</Button>
+						</Link>
 						{value === undefined ? (
 							<Stack align={"center"}>
 								<Text
@@ -347,7 +383,7 @@ export default function FormPostUser({ id, value }) {
 								</Stack>
 							</Stack>
 						</Box>
-						<Link to={value === "update" ? "/home" : "/"}>
+						{/* <Link to={value === "update" ? "/home" : "/"}>
 							<Icon
 								as={MdArrowBackIosNew}
 								color="orange.400"
@@ -378,7 +414,7 @@ export default function FormPostUser({ id, value }) {
 								{" "}
 								Atrás
 							</Button>
-						</Link>
+						</Link> */}
 					</Stack>
 				</Flex>
 			</form>
