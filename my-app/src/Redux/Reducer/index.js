@@ -80,7 +80,6 @@ const RootReducer = (state = initialState, action) => {
         user: action.payload,
       };
     case GET_PET_ID:
-      console.log("ACTION PAYLOAD[0] DETAILS PET: ", action.payload[0]);
       return {
         ...state,
         petDetails: action.payload[0],

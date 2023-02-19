@@ -56,9 +56,7 @@ const Details = ({ handleSetUserFlag }) => {
 	const dispatch = useDispatch();
 	const { paramsId } = useParams();
 	const petDetails = useSelector((state) => state.petDetails);
-	// const userNumber = useSelector(state)=> state.
-	const userNumber = 543534787713;
-console.log("PET DETAILS; DETAILS.JSX",petDetails);
+	const userNumber = petDetails.user.phone;
 	useEffect(() => {
 
 		dispatch(getPetDetails(paramsId));
