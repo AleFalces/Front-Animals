@@ -67,7 +67,7 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
   const paramsId = useParams("id");
   let petData = useSelector((state) => state.petDetails);
   console.log("PETDATA FORM",petData);
-  const petInfo = petData[0];
+  const petInfo = petData;
 
   const [input, setInput] = useState({
     species: "",
