@@ -73,8 +73,10 @@ function App() {
     return (
       <div className="App">
         <Routes>
-          <Route exact path="/banned" element={<Banned />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
+          <Route
+            path="*"
+            element={<Banned handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
         </Routes>
       </div>
     );
@@ -101,6 +103,25 @@ function App() {
                 handleSetUserFlag={handleSetUserFlag}
               />
             }
+          ></Route>
+          <Route
+            exact
+            path="/shop"
+            element={
+              <Shop
+                setUsuario2={setUsuario}
+                handleSetUserFlag={handleSetUserFlag}
+              />
+            }
+          ></Route>
+          <Route
+            path="/shop/product/:productId"
+            element={<ProductDetail handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
+          <Route
+            exact
+            path="/shop/cart"
+            element={<Cart handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
           <Route
             exact
@@ -171,13 +192,22 @@ function App() {
           <Route
             exact
             path="/shop"
-            element={<Shop handleSetUserFlag={handleSetUserFlag} />}
+            element={
+              <Shop
+                setUsuario2={setUsuario}
+                handleSetUserFlag={handleSetUserFlag}
+              />
+            }
           ></Route>
           <Route
             path="/shop/product/:productId"
             element={<ProductDetail handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
-          <Route exact path="/shop/cart" element={<Cart />}></Route>
+          <Route
+            exact
+            path="/shop/cart"
+            element={<Cart handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
           <Route
             exact
             path="/dashboard"
@@ -220,11 +250,11 @@ function App() {
             path="/updateUser"
             element={<FormPostUser id={usuario.id} value={"update"} />}
           ></Route>
-          <Route
+          {/* <Route
             exact
             path="/updateUser"
             element={<FormPostUser value={"update"} />}
-          ></Route>
+          ></Route>     //!LA COMENTE PORQUE ESTÁ REPETIDA  */}
           <Route
             exact
             path="/home"

@@ -176,6 +176,40 @@ export default function FormPostProduct({ value }) {
           bg={"brand.green.100"}
         >
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+                        <Link to={"/dashboard"}>
+              <Icon
+                as={MdArrowBackIosNew}
+                color="orange.400"
+                boxSize={7}
+                _hover={{
+                  color: "grey",
+                  boxSize: "8",
+                }}
+              />
+              <Icon
+                as={MdArrowBackIosNew}
+                color="orange.400"
+                boxSize={7}
+                _hover={{
+                  color: "grey",
+                  boxSize: "8",
+                }}
+              />
+              <Button
+                fontFamily={"body"}
+                bg="base.green.100"
+                color={"grey"}
+                fontSize={"1.4rem"}
+                _hover={{
+                  color: "orange.400",
+                }}
+                p="0"
+                mr="1rem"
+              >
+                {" "}
+                Atrás
+              </Button>
+            </Link>
             {value === undefined ? (
               <Stack align={"center"}>
                 <Heading fontSize={"4xl"} textAlign={"center"}>
@@ -316,40 +350,6 @@ export default function FormPostProduct({ value }) {
                 </Stack>
               </Stack>
             </Box>
-
-            <Link to={"/dashboard"}>
-              <Icon
-                as={MdArrowBackIosNew}
-                color="orange.400"
-                boxSize={5}
-                _hover={{
-                  color: "grey",
-                  boxSize: "7",
-                }}
-              />
-              <Icon
-                as={MdArrowBackIosNew}
-                color="orange.400"
-                boxSize={5}
-                _hover={{
-                  color: "grey",
-                  boxSize: "7",
-                }}
-              />
-              <Button
-                fontFamily={"body"}
-                bg="base.green.100"
-                color={"grey"}
-                _hover={{
-                  color: "orange.400",
-                }}
-                p="0"
-                mr="1rem"
-              >
-                {" "}
-                Atrás
-              </Button>
-            </Link>
           </Stack>
         </Flex>
       </form>

@@ -35,7 +35,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-export default function ProductDetail() {
+export default function ProductDetail({ handleSetUserFlag }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const navigate = useNavigate()
@@ -61,7 +61,7 @@ export default function ProductDetail() {
 let product = JSON.parse(localStorage.getItem("cart"))?.filter((pr)=>pr.id===detail[0].id)[0]
   return (
     <>
-      <Navbar />
+      <Navbar handleSetUserFlag={handleSetUserFlag}/>
       <br />
               <Button
                 fontFamily={"body"}

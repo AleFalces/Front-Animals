@@ -195,7 +195,42 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
           justify={"center"}
           bg="brand.green.200"
         >
+          
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+                        <Link to={value === "update" ? "/myPets" : "/home"}>
+              <Icon
+                as={MdArrowBackIosNew}
+                color="orange.400"
+                boxSize={7}
+                _hover={{
+                  color: "grey",
+                  boxSize: "8",
+                }}
+              />
+              <Icon
+                as={MdArrowBackIosNew}
+                color="orange.400"
+                boxSize={7}
+                _hover={{
+                  color: "grey",
+                  boxSize: "8",
+                }}
+              />
+              <Button
+                fontFamily={"body"}
+                bg="base.green.100"
+                fontSize={"1.4rem"}
+                color={"grey"}
+                _hover={{
+                  color: "orange.400",
+                }}
+                p="0"
+                mr="1rem"
+              >
+                {" "}
+                Atrás
+              </Button>
+            </Link>
             <Stack align={"center"}>
               {value === "update" ? (
                 <Heading fontSize={"4xl"} textAlign={"center"}>
@@ -412,7 +447,6 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
                       color={"white"}
                       _hover={{
                         bg: "orange.400",
-                        /* color:"brand.green.100" */
                       }}
                     >
                       Post mascota
@@ -427,7 +461,6 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
                       color={"white"}
                       _hover={{
                         bg: "orange.400",
-                        /* color:"brand.green.100" */
                       }}
                     >
                       Modificar mascota
@@ -436,44 +469,9 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
                 </Stack>
               </Stack>
             </Box>
-
-            <Link to={value === "update" ? "/myPets" : "/home"}>
-              <Icon
-                as={MdArrowBackIosNew}
-                color="orange.400"
-                boxSize={5}
-                _hover={{
-                  color: "grey",
-                  boxSize: "7",
-                }}
-              />
-              <Icon
-                as={MdArrowBackIosNew}
-                color="orange.400"
-                boxSize={5}
-                _hover={{
-                  color: "grey",
-                  boxSize: "7",
-                }}
-              />
-              <Button
-                fontFamily={"body"}
-                bg="base.green.100"
-                color={"grey"}
-                _hover={{
-                  color: "orange.400",
-                }}
-                p="0"
-                mr="1rem"
-              >
-                {" "}
-                Atrás
-              </Button>
-            </Link>
           </Stack>
         </Flex>
       </form>
-
       <Footer />
     </div>
   );
