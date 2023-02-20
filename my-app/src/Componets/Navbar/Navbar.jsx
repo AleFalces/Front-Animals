@@ -29,7 +29,7 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
-export default function Navbar({ setUsuario2, handleSetUserFlag }) {
+export default function Navbar({ handleSetUserFlag }) {
 	// console.log("handleSetUserFlag, Navbar SIMPLE: ",handleSetUserFlag);
 	const dispatch = useDispatch();
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -243,10 +243,14 @@ export default function Navbar({ setUsuario2, handleSetUserFlag }) {
 
 							<Menu>
 								<MenuButton
+									fontSize={"1.3rem"}
+									fontFamily={"body"}
 									_hover={{
-										color: "orange.400",
+										fontWeight: "bold",
+										color: "brand.green.300",
 									}}>
-									<GiSittingDog size="2rem" />
+									{/* <GiSittingDog size="2rem" /> ICONO DEL PERRITO LO SAQUÉ*/}
+									Mascotas
 								</MenuButton>
 								<MenuList>
 									<MenuItem>

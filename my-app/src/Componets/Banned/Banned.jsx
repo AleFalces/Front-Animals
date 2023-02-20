@@ -4,12 +4,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Box, Button, Image, Heading, Text, Center } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-const Banned = () => {
+const Banned = ({ handleSetUserFlag }) => {
   const navigate = useNavigate()
   const { logout } = useAuth0();
   const cerrarSesion = () => {
     localStorage.removeItem("loggedUser");
     // logout({ returnTo: "/" });
+    handleSetUserFlag()
     navigate("/")
   };
 
@@ -42,7 +43,7 @@ const Banned = () => {
             fontFamily="heading"
             fontWeight="bold"
           >
-            Por favor pongase en contacto con Administración
+            El equipo decidió bloquearte, si crees que has sido bloqueado erroneamente, por favor contactate con nosotros informandonos sobre tu caso.
           </Text>
         </Center>
         <Button

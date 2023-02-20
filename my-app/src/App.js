@@ -61,7 +61,6 @@ function App() {
     }
   }, [loggedUser]);
 
-
   useEffect(() => {}, [userFlag, usuario]);
   console.log("USUARIO APP", usuario);
 
@@ -74,8 +73,10 @@ function App() {
     return (
       <div className="App">
         <Routes>
-          <Route exact path="/banned" element={<Banned />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
+          <Route
+            path="*"
+            element={<Banned handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
         </Routes>
       </div>
     );
@@ -102,6 +103,25 @@ function App() {
                 handleSetUserFlag={handleSetUserFlag}
               />
             }
+          ></Route>
+          <Route
+            exact
+            path="/shop"
+            element={
+              <Shop
+                setUsuario2={setUsuario}
+                handleSetUserFlag={handleSetUserFlag}
+              />
+            }
+          ></Route>
+          <Route
+            path="/shop/product/:productId"
+            element={<ProductDetail handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
+          <Route
+            exact
+            path="/shop/cart"
+            element={<Cart handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
           <Route
             exact
@@ -138,6 +158,11 @@ function App() {
             }
           ></Route>
           <Route
+            exact
+            path="/pets/:paramsId"
+            element={<Details handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
+          <Route
             path="*"
             element={<NotFound handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
@@ -146,11 +171,7 @@ function App() {
             path="/createAuth0"
             element={<CreateUserAuth0 />}
           ></Route>
-          <Route
-            exact
-            path="/createUser"
-            element={<FormPostUser />}
-          ></Route>
+          <Route exact path="/createUser" element={<FormPostUser />}></Route>
         </Routes>
       </div>
     );
@@ -171,13 +192,22 @@ function App() {
           <Route
             exact
             path="/shop"
-            element={<Shop handleSetUserFlag={handleSetUserFlag} />}
+            element={
+              <Shop
+                setUsuario2={setUsuario}
+                handleSetUserFlag={handleSetUserFlag}
+              />
+            }
           ></Route>
           <Route
             path="/shop/product/:productId"
             element={<ProductDetail handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
-          <Route exact path="/shop/cart" element={<Cart />}></Route>
+          <Route
+            exact
+            path="/shop/cart"
+            element={<Cart handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
           <Route
             exact
             path="/dashboard"
@@ -220,11 +250,11 @@ function App() {
             path="/updateUser"
             element={<FormPostUser id={usuario.id} value={"update"} />}
           ></Route>
-          <Route
+          {/* <Route
             exact
             path="/updateUser"
             element={<FormPostUser value={"update"} />}
-          ></Route>
+          ></Route>     //!LA COMENTE PORQUE ESTÁ REPETIDA  */}
           <Route
             exact
             path="/home"
@@ -280,23 +310,25 @@ function App() {
             element={<FormPostProduct />}
           ></Route>
           <Route
-					exact
-					path="/dashboard/updateProduct/:id"
-					element={<FormPostProduct token={token} value = "update" />}></Route>
+            exact
+            path="/dashboard/updateProduct/:id"
+            element={<FormPostProduct token={token} value="update" />}
+          ></Route>
           <Route
             exact
             path="/dashboard/createVet"
             element={<FormAffiliateVets />}
           ></Route>
           <Route
-					exact
-					path="/dashboard/updateVet/:id"
-					element={<FormAffiliateVets token={token} value="updateVet"/>}></Route>
+            exact
+            path="/dashboard/updateVet/:id"
+            element={<FormAffiliateVets token={token} value="updateVet" />}
+          ></Route>
           <Route
             path="*"
             element={<NotFound handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
-				<Route path="*" element={<NotFound />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
     );

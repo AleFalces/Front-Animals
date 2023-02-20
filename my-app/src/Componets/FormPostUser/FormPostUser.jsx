@@ -125,19 +125,15 @@ export default function FormPostUser({ id, value }) {
 			input.username &&
 			input.phone
 		) {
-			/* handlerSubmit(e); */
 			if (value === undefined) {
 				dispatch(postUser(input));
-				// navigate("/");
+				navigate("/");
 			} else {
 				dispatch(updateUser(userInfo[0]?.id, input));
 			}
 
 			setIsIncomplete(false);
 			setInfoSend(true);
-
-			//borra todos los inputs pero no sé cómo será con el tema del form con put que trae info a rellenar, creo , asiq queda comentada!
-			/*   document.getElementById("myForm").reset(); */
 		} else {
 			setIsIncomplete(true);
 			setInfoSend(false);
@@ -163,7 +159,7 @@ export default function FormPostUser({ id, value }) {
 								boxSize={7}
 								_hover={{
 									color: "grey",
-									boxSize: "7",
+									boxSize: "8",
 								}}
 								/>
 							<Icon
@@ -172,10 +168,9 @@ export default function FormPostUser({ id, value }) {
 								boxSize={7}
 								_hover={{
 									color: "grey",
-									boxSize: "7",
+									boxSize: "8",
 								}}
 								/>
-							
 							<Button
 								fontFamily={"body"}
 								bg="base.green.100"
@@ -230,7 +225,6 @@ export default function FormPostUser({ id, value }) {
 												key="name"
 												focusBorderColor={"brand.green.300"}
 												fontFamily={"body"}
-												// value={input.name}
 												onChange={(e) => handlerChange(e)}
 											/>
 											{inputError.name && (
@@ -383,38 +377,6 @@ export default function FormPostUser({ id, value }) {
 								</Stack>
 							</Stack>
 						</Box>
-						{/* <Link to={value === "update" ? "/home" : "/"}>
-							<Icon
-								as={MdArrowBackIosNew}
-								color="orange.400"
-								boxSize={5}
-								_hover={{
-									color: "grey",
-									boxSize: "7",
-								}}
-							/>
-							<Icon
-								as={MdArrowBackIosNew}
-								color="orange.400"
-								boxSize={5}
-								_hover={{
-									color: "grey",
-									boxSize: "7",
-								}}
-							/>
-							<Button
-								fontFamily={"body"}
-								bg="base.green.100"
-								color={"grey"}
-								_hover={{
-									color: "orange.400",
-								}}
-								p="0"
-								mr="1rem">
-								{" "}
-								Atrás
-							</Button>
-						</Link> */}
 					</Stack>
 				</Flex>
 			</form>
