@@ -56,7 +56,8 @@ const Details = ({ handleSetUserFlag }) => {
 	const dispatch = useDispatch();
 	const { paramsId } = useParams();
 	const petDetails = useSelector((state) => state.petDetails);
-	const userNumber = petDetails.user.phone;
+	const userNumber = petDetails.user?.phone;
+	console.log("PET DETAILS: DETAILS.JSX", petDetails);
 	useEffect(() => {
 
 		dispatch(getPetDetails(paramsId));
@@ -65,11 +66,11 @@ const Details = ({ handleSetUserFlag }) => {
 	return (
 		<div className="detailContainer">
 			<Navbar handleSetUserFlag={handleSetUserFlag}/>
-			{window.scrollTo(0, 0)}
+			{/* {window.scrollTo(0, 0)} */}
 			<Box bg="brand.green.200" pb={["1rem", "2rem", "2rem"]}>
 				<SimpleGrid columns={[1, 1, 2, 2]} spacing={["10px", "10px", "30px"]}>
 					{/* Info1 Titulos*/}
-					<Center w="100%" h="100%">
+					<Center w="100%" h="100%" >
 						<Box
 							height="300px"
 							w={[250, 400, 600]}
@@ -82,19 +83,24 @@ const Details = ({ handleSetUserFlag }) => {
 							<Heading
 								as="h1"
 								size="3xl"
+								display={"flex"}
+								justifyContent={"center"}
 								textTransform="uppercase"
 								color="gray.500">
-								{petDetails.species}{" "}
+								{petDetails.species}
 							</Heading>
 							<Heading
+								display={"flex"}
+								justifyContent={"center"}
 								as="h2"
 								size="lg"
 								textTransform="uppercase"
 								color="gray.500">
-								{petDetails.sex}{" "}
+								{petDetails.sex}
 							</Heading>
-							<Box pt="0px">
-								{" "}
+							<Box pt="0px" display={"flex"}
+								justifyContent={"center"}>
+								
 								{petDetails.species === "perro" ? (
 									<Icon
 										as={GiSittingDog}
@@ -145,6 +151,10 @@ const Details = ({ handleSetUserFlag }) => {
 					mt="3rem">
 					<Center>
 						<Box
+							display={"flex"}
+							flexDirection={"column"}
+							justifyContent={"center"}
+							alignItems={"center"}
 							bg="brand.green.200"
 							boxShadow={"2xl"}
 							rounded={"md"}
@@ -164,6 +174,8 @@ const Details = ({ handleSetUserFlag }) => {
 							{/* DETAIL */}
 							<Container>
 								<Text
+								display={"flex"}
+								justifyContent={"center"}
 									fontFamily={"body"}
 									fontWeight={"300"}
 									/* noOfLines={[4, 4, 3]} */
@@ -189,6 +201,8 @@ const Details = ({ handleSetUserFlag }) => {
 
 							{/* Area */}
 							<Text
+								display={'flex'}
+								justifyContent={'center'}
 								fontFamily={"body"}
 								fontWeight={"300"}
 								noOfLines={[2, 2, 3]}
@@ -197,6 +211,8 @@ const Details = ({ handleSetUserFlag }) => {
 								py={["3rem", "2rem", "0rem"]}>
 								Se encuentra en la zona de:{" "}
 								<Text
+									display={'flex'}
+									justifyContent={'center'}
 									color="orange.500"
 									textTransform={"uppercase"}
 									fontFamily={"heading"}
@@ -210,6 +226,8 @@ const Details = ({ handleSetUserFlag }) => {
 					{/*  Info3  Contact */}
 					<Center w="100%">
 						<Box
+							display={"flex"}
+							flexDirection={"column"}
 							bg="orange.100"
 							boxShadow={"2xl"}
 							rounded={"md"}
@@ -234,12 +252,19 @@ const Details = ({ handleSetUserFlag }) => {
 								</Wrap>
 							</Center>
 
-							<Heading as="h4" size="sm" pt="2rem">
-								{" "}
+							<Heading 
+								as="h4" 
+								size="sm" 
+								pt="2rem"
+								justifyContent={"center"}
+								display={"flex"}>
 								Puedes contactarme!
 							</Heading>
 							<IconButton
 								as="a"
+								w="50%"
+								alignSelf={"center"}
+								justifyContent={"center"}								
 								colorScheme="teal"
 								aria-label="Call Segun"
 								target="_blank"
@@ -248,7 +273,7 @@ const Details = ({ handleSetUserFlag }) => {
 								mt="1rem"
 								href={`https://wa.me/${userNumber}`}
 								icon={<PhoneIcon />}
-							/>
+								/>
 						</Box>
 					</Center>
 				</SimpleGrid>

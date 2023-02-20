@@ -61,7 +61,6 @@ function App() {
     }
   }, [loggedUser]);
 
-
   useEffect(() => {}, [userFlag, usuario]);
   console.log("USUARIO APP", usuario);
 
@@ -138,6 +137,11 @@ function App() {
             }
           ></Route>
           <Route
+            exact
+            path="/pets/:paramsId"
+            element={<Details handleSetUserFlag={handleSetUserFlag} />}
+          ></Route>
+          <Route
             path="*"
             element={<NotFound handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
@@ -146,11 +150,7 @@ function App() {
             path="/createAuth0"
             element={<CreateUserAuth0 />}
           ></Route>
-          <Route
-            exact
-            path="/createUser"
-            element={<FormPostUser />}
-          ></Route>
+          <Route exact path="/createUser" element={<FormPostUser />}></Route>
         </Routes>
       </div>
     );
@@ -280,23 +280,25 @@ function App() {
             element={<FormPostProduct />}
           ></Route>
           <Route
-					exact
-					path="/dashboard/updateProduct/:id"
-					element={<FormPostProduct token={token} value = "update" />}></Route>
+            exact
+            path="/dashboard/updateProduct/:id"
+            element={<FormPostProduct token={token} value="update" />}
+          ></Route>
           <Route
             exact
             path="/dashboard/createVet"
             element={<FormAffiliateVets />}
           ></Route>
           <Route
-					exact
-					path="/dashboard/updateVet/:id"
-					element={<FormAffiliateVets token={token} value="updateVet"/>}></Route>
+            exact
+            path="/dashboard/updateVet/:id"
+            element={<FormAffiliateVets token={token} value="updateVet" />}
+          ></Route>
           <Route
             path="*"
             element={<NotFound handleSetUserFlag={handleSetUserFlag} />}
           ></Route>
-				<Route path="*" element={<NotFound />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
     );
