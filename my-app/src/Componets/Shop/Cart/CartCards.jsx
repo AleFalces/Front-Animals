@@ -19,28 +19,30 @@ export default function CartCards({
   return (
     <>
       <Center
-          bg={"blue"}
+          bg={"violet"}
+          w={"100%"}
       >
         <Flex
           direction={{
             base: "column",
             md: "row",
           }}
+          w={"80%"}
           justify="space-between"
           align="center"
-          bg={"red"}
-          flexWrap={"wrap"}
+          bg={"red"}                //! RED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  
+          flexDirection={"row"}
         >
           <Box>
             <Product
+              image={image}
               name={name}
               stock={stock}
-              image={image}
               amount={amount}
               price={price}
             />
           </Box>
-          <Box>
+          <Box bg={"orange"}>
             <Box>
               <Button
                 fontFamily={"body"}
