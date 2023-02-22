@@ -18,14 +18,14 @@ export default function Shop({ handleSetUserFlag }) {
   const [cart, setCart] = useState();
 
 	const [currentPage, setCurrentPage] = useState(1);
-	const [productsPerPage, setProductsPerPage] = useState(3);
+	const [productsPerPage, setProductsPerPage] = useState(6);
 	const indexOfLastProduct = currentPage * productsPerPage;
 	const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 	const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 	const paginate = (number) => {
 		setCurrentPage(number);
 	};
-console.log("ShopNavbar", currentProducts);
+  
   function handleRemoveItemCart(e, id) {
     e.preventDefault();
     try {
@@ -149,13 +149,16 @@ console.log("CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",JSON.parse(localStorag
         />
         <Pagination petsPerPage={productsPerPage} allPets={products.length} paginate={paginate} currentPage={currentPage}/>
         <Center>
-          <SimpleGrid columns={[1, 1, 2, 3]} spacing="40px">
+        <Box >
+          <SimpleGrid columns={[1, 1, 2, 3]} w={"90vw"}spacing="40px">
             {products.length ? (
-              <CardsProduct
-                products={currentProducts}
-                handlerSetCart={handlerSetCart}
-                handleRemoveItemCart={handleRemoveItemCart}
-              />
+                <CardsProduct
+                  products={currentProducts}
+                  handlerSetCart={handlerSetCart}
+                  handleRemoveItemCart={handleRemoveItemCart}
+                  />
+         
+
             ) : (
               <Center 
                   w={"99vw"}
@@ -174,6 +177,7 @@ console.log("CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",JSON.parse(localStorag
               </Center>
             )}
           </SimpleGrid>
+        </Box>
         </Center>
       </Box>
       <Footer />
