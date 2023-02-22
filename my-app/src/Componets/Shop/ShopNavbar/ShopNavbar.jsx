@@ -18,7 +18,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-export default function ShopNavbar({ handlerSetCart, handleRemoveItemCart }) {
+export default function ShopNavbar({ handlerSetCart, handleRemoveItemCart, paginate }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [input, setInput] = useState("");
@@ -32,6 +32,7 @@ export default function ShopNavbar({ handlerSetCart, handleRemoveItemCart }) {
     e.preventDefault(e);
     if (input.trim() !== "") {
       dispatch(shopSearchInputName(input.trim()));
+      paginate(1)
       inputSearch.value = "";
     } else {
       inputSearch.value = "";
@@ -43,12 +44,15 @@ export default function ShopNavbar({ handlerSetCart, handleRemoveItemCart }) {
     e.target.value !== "todos"
       ? dispatch(shopFilterValue(e.target.value))
       : dispatch(getAllProducts());
+      paginate(1)
   };
 
   function handlerClick(e) {
     e.preventDefault();
     setTimeout(() => navigate("/shop/cart"), 500);
   }
+
+
 
   return (
     <div >

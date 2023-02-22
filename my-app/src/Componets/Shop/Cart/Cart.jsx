@@ -334,7 +334,7 @@ console.log("isLogged Cart: ",isLogged);
                         {
                           isLogged?
                         <AlertDialogBody>
-                         Solo falta ir a pagar, si no necesitas nada mas haz click en "Ir a pagar"
+                         Solo falta ir a pagar, si no necesitas nada más haz click en "Ir a pagar"
                         </AlertDialogBody>
                         :
                         <AlertDialogBody>

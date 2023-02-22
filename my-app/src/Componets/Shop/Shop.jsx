@@ -8,6 +8,8 @@ import ShopNavbar from "./ShopNavbar/ShopNavbar";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { Box, SimpleGrid, Center, Text } from "@chakra-ui/react";
+import Pagination from "../Pagination/Pagination";
+
 
 export default function Shop({ handleSetUserFlag }) {
   const dispatch = useDispatch();
@@ -15,6 +17,15 @@ export default function Shop({ handleSetUserFlag }) {
   // let reduxCart = useSelector((state) => state.cart)
   const [cart, setCart] = useState();
 
+	const [currentPage, setCurrentPage] = useState(1);
+	const [productsPerPage, setProductsPerPage] = useState(3);
+	const indexOfLastProduct = currentPage * productsPerPage;
+	const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+	const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+	const paginate = (number) => {
+		setCurrentPage(number);
+	};
+console.log("ShopNavbar", currentProducts);
   function handleRemoveItemCart(e, id) {
     e.preventDefault();
     try {
@@ -130,23 +141,28 @@ console.log("CASO SI EXISTE CARRITO Y SIIIII TENGO INDEX",JSON.parse(localStorag
   return (
     <>
       <Navbar handleSetUserFlag={handleSetUserFlag}/>
-      <Box minHeight={"150vh"} bg="brand.backgorund" paddingBottom={"3rem"}>
+      <Box minHeight={"80vh"} bg="brand.backgorund" paddingBottom={"3rem"}>
         <ShopNavbar 
           handlerSetCart={handlerSetCart}
           handleRemoveItemCart={handleRemoveItemCart}
+          paginate={paginate}
         />
+        <Pagination petsPerPage={productsPerPage} allPets={products.length} paginate={paginate} currentPage={currentPage}/>
         <Center>
           <SimpleGrid columns={[1, 1, 2, 3]} spacing="40px">
             {products.length ? (
               <CardsProduct
-                products={products}
+                products={currentProducts}
                 handlerSetCart={handlerSetCart}
                 handleRemoveItemCart={handleRemoveItemCart}
               />
             ) : (
-              <Center>
-                <Text
-                  textAlign={"center"}
+              <Center 
+                  w={"99vw"}
+                  display={"flex"} 
+                  alignItems={"center"}>
+                <Text 
+
                   fontSize={"4xl"}
                   py={10}
                   fontWeight={"bold"}
