@@ -74,6 +74,7 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
 		detail: "",
 		img: "",
 	});
+	
 function dataEmptied() {
 	setInput({
 		species: "",
