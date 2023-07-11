@@ -29,8 +29,10 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
-export default function Navbar({ handleSetUserFlag }) {
-	// console.log("handleSetUserFlag, Navbar SIMPLE: ",handleSetUserFlag);
+
+export default function Navbar({ setUsuario2, handleSetUserFlag }) {
+
+
 	const dispatch = useDispatch();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { user, isAuthenticated, logout } = useAuth0();
@@ -48,27 +50,22 @@ export default function Navbar({ handleSetUserFlag }) {
 		}
 	}, []);
 
-	// if (!userInfo?.length) {
-	// 	dispatch(getUserId(usuario[0]?.id));
-	// }
-
 	useEffect(() => {
-		dispatch(getUserId(usuario[0]?.id)); //del localStorage me traigo la info del usuario, desde su posicion 0 de array, por eso le pregunto si tiene algo con el "?", si tiene algo dentro que me traiga su id
-	}, [dispatch, usuario]);
+		if(usuario[0]){
+			dispatch(getUserId(usuario[0]?.id)); 
+		}
+	}, [usuario]);
 
 	const cerrarSesion = () => {
 		localStorage.removeItem("loggedUser");
 		// logout();
-		console.log("seteando el usuario en null");
 		setUsuario(null)
-		console.log("Ejecutando 'handleSetUserFlag' en boton 'Cerrar Sesion' de Navbar");
 		handleSetUserFlag();
 		navigate("/")
 	};
 
 	const userPhone = (e) => {
 		e.preventDefault();
-		console.log(userInfo);
 		if (userInfo[0]?.phone === "123456789") {
 			navigate("/updateUser");
 			alert("Actualiza tu telefono para publicar");
@@ -79,7 +76,7 @@ export default function Navbar({ handleSetUserFlag }) {
 
 	const userAuth = (e) => {
 		e.preventDefault();
-		alert("Para publicar tu mascota Ingresa tu usuario");
+		alert("Para publicar una mascota ingresa a tu cuenta");
 		navigate("/");
 	};
 
