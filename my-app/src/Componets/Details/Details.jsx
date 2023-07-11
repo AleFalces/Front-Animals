@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { useParams } from "react-router-dom";
-import { petDetails } from "../../Redux/Actions/index";
+import { getPetDetails } from "../../Redux/Actions/index";
 /* import "./Detail.css"; */
 
 // import { extendTheme } from "@chakra-ui/react";
@@ -55,22 +55,22 @@ const features = messages.map(function (x, i) {
 const Details = ({ handleSetUserFlag }) => {
 	const dispatch = useDispatch();
 	const { paramsId } = useParams();
-	const Det = useSelector((state) => state.Detail);
-	// const userNumber = useSelector(state)=> state.
-	const userNumber = 543534787713;
-
+	const petDetails = useSelector((state) => state.petDetails);
+	const userNumber = petDetails.user?.phone;
+	console.log("PET DETAILS: DETAILS.JSX", petDetails);
 	useEffect(() => {
-		dispatch(petDetails(paramsId));
+
+		dispatch(getPetDetails(paramsId));
 	}, [dispatch, paramsId]);
 
 	return (
 		<div className="detailContainer">
 			<Navbar handleSetUserFlag={handleSetUserFlag}/>
-			{window.scrollTo(0, 0)}
+			{/* {window.scrollTo(0, 0)} */}
 			<Box bg="brand.green.200" pb={["1rem", "2rem", "2rem"]}>
 				<SimpleGrid columns={[1, 1, 2, 2]} spacing={["10px", "10px", "30px"]}>
 					{/* Info1 Titulos*/}
-					<Center w="100%" h="100%">
+					<Center w="100%" h="100%" >
 						<Box
 							height="300px"
 							w={[250, 400, 600]}
@@ -83,20 +83,25 @@ const Details = ({ handleSetUserFlag }) => {
 							<Heading
 								as="h1"
 								size="3xl"
+								display={"flex"}
+								justifyContent={"center"}
 								textTransform="uppercase"
 								color="gray.500">
-								{Det.species}{" "}
+								{petDetails.species}
 							</Heading>
 							<Heading
+								display={"flex"}
+								justifyContent={"center"}
 								as="h2"
 								size="lg"
 								textTransform="uppercase"
 								color="gray.500">
-								{Det.sex}{" "}
+								{petDetails.sex}
 							</Heading>
-							<Box pt="0px">
-								{" "}
-								{Det.species === "perro" ? (
+							<Box pt="0px" display={"flex"}
+								justifyContent={"center"}>
+								
+								{petDetails.species === "perro" ? (
 									<Icon
 										as={GiSittingDog}
 										color="orange"
@@ -128,7 +133,7 @@ const Details = ({ handleSetUserFlag }) => {
 							pt={["0rem", "5rem", "1rem"]}>
 							<Center w="100%" h="100%">
 								<Image
-									src={Det.img}
+									src={petDetails.img}
 									alt="dogs"
 									borderRadius="50px"
 									objectFit="cover"
@@ -146,6 +151,10 @@ const Details = ({ handleSetUserFlag }) => {
 					mt="3rem">
 					<Center>
 						<Box
+							display={"flex"}
+							flexDirection={"column"}
+							justifyContent={"center"}
+							alignItems={"center"}
 							bg="brand.green.200"
 							boxShadow={"2xl"}
 							rounded={"md"}
@@ -165,6 +174,8 @@ const Details = ({ handleSetUserFlag }) => {
 							{/* DETAIL */}
 							<Container>
 								<Text
+								display={"flex"}
+								justifyContent={"center"}
 									fontFamily={"body"}
 									fontWeight={"300"}
 									/* noOfLines={[4, 4, 3]} */
@@ -173,7 +184,7 @@ const Details = ({ handleSetUserFlag }) => {
 									my="0rem"
 									fontSize={{ base: "14px", md: "18px", lg: "20px" }}
 									color="gray.500">
-									{Det.detail}
+									{petDetails.detail}
 								</Text>
 							</Container>
 							{/* AGE */}
@@ -185,11 +196,13 @@ const Details = ({ handleSetUserFlag }) => {
 								fontFamily={"heading"}
 								fontWeight="bold"
 								pb={["0rem", "0rem", "1rem"]}>
-								{Det.age}
+								{petDetails.age}
 							</Text>
 
 							{/* Area */}
 							<Text
+								display={'flex'}
+								justifyContent={'center'}
 								fontFamily={"body"}
 								fontWeight={"300"}
 								noOfLines={[2, 2, 3]}
@@ -198,11 +211,13 @@ const Details = ({ handleSetUserFlag }) => {
 								py={["3rem", "2rem", "0rem"]}>
 								Se encuentra en la zona de:{" "}
 								<Text
+									display={'flex'}
+									justifyContent={'center'}
 									color="orange.500"
 									textTransform={"uppercase"}
 									fontFamily={"heading"}
 									fontWeight="bold">
-									{Det.area}{" "}
+									{petDetails.area}{" "}
 								</Text>
 							</Text>
 						</Box>
@@ -211,6 +226,8 @@ const Details = ({ handleSetUserFlag }) => {
 					{/*  Info3  Contact */}
 					<Center w="100%">
 						<Box
+							display={"flex"}
+							flexDirection={"column"}
 							bg="orange.100"
 							boxShadow={"2xl"}
 							rounded={"md"}
@@ -224,23 +241,30 @@ const Details = ({ handleSetUserFlag }) => {
 							<Center w="100%">
 								<Wrap m="1rem" mt="1rem" pt="1rem">
 									<WrapItem>
-										<Avatar size="lg" name={Det.species} src={Det.img} />{" "}
+										<Avatar size="lg" name={petDetails.species} src={petDetails.img} />{" "}
 									</WrapItem>
 									<WrapItem>
-										<Avatar size="lg" name={Det.species} src={Det.img} />{" "}
+										<Avatar size="lg" name={petDetails.species} src={petDetails.img} />{" "}
 									</WrapItem>
 									<WrapItem>
-										<Avatar size="lg" name={Det.species} src={Det.img} />{" "}
+										<Avatar size="lg" name={petDetails.species} src={petDetails.img} />{" "}
 									</WrapItem>
 								</Wrap>
 							</Center>
 
-							<Heading as="h4" size="sm" pt="2rem">
-								{" "}
+							<Heading 
+								as="h4" 
+								size="sm" 
+								pt="2rem"
+								justifyContent={"center"}
+								display={"flex"}>
 								Puedes contactarme!
 							</Heading>
 							<IconButton
 								as="a"
+								w="50%"
+								alignSelf={"center"}
+								justifyContent={"center"}								
 								colorScheme="teal"
 								aria-label="Call Segun"
 								target="_blank"
@@ -249,7 +273,7 @@ const Details = ({ handleSetUserFlag }) => {
 								mt="1rem"
 								href={`https://wa.me/${userNumber}`}
 								icon={<PhoneIcon />}
-							/>
+								/>
 						</Box>
 					</Center>
 				</SimpleGrid>

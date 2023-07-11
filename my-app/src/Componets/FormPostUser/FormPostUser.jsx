@@ -67,6 +67,8 @@ export default function FormPostUser({ id, value }) {
 		phone: "",
 		role: "user",
 	});
+	console.log("INPUT", input)
+	
 	useEffect(() => {
 		const loggedUser = localStorage.getItem("loggedUser");
 		if (loggedUser) {
@@ -87,7 +89,9 @@ export default function FormPostUser({ id, value }) {
 				surname: userInfo[0]?.surname,
 				email: userInfo[0]?.email,
 				username: userInfo[0]?.username,
+				phone: userInfo[0]?.phone,
 				role: "user",
+
 			});
 	}, []);
 
@@ -121,19 +125,15 @@ export default function FormPostUser({ id, value }) {
 			input.username &&
 			input.phone
 		) {
-			/* handlerSubmit(e); */
 			if (value === undefined) {
 				dispatch(postUser(input));
-				// navigate("/");
+				navigate("/");
 			} else {
 				dispatch(updateUser(userInfo[0]?.id, input));
 			}
 
 			setIsIncomplete(false);
 			setInfoSend(true);
-
-			//borra todos los inputs pero no sé cómo será con el tema del form con put que trae info a rellenar, creo , asiq queda comentada!
-			/*   document.getElementById("myForm").reset(); */
 		} else {
 			setIsIncomplete(true);
 			setInfoSend(false);
@@ -152,6 +152,39 @@ export default function FormPostUser({ id, value }) {
 					justify={"center"}
 					bg="brand.green.200">
 					<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+						<Link to={value === "update" ? "/home" : "/"}>
+							<Icon
+								as={MdArrowBackIosNew}
+								color="orange.400"
+								boxSize={7}
+								_hover={{
+									color: "grey",
+									boxSize: "8",
+								}}
+								/>
+							<Icon
+								as={MdArrowBackIosNew}
+								color="orange.400"
+								boxSize={7}
+								_hover={{
+									color: "grey",
+									boxSize: "8",
+								}}
+								/>
+							<Button
+								fontFamily={"body"}
+								bg="base.green.100"
+								color={"grey"}
+								fontSize={"1.4rem"}
+								_hover={{
+									color: "orange.400",
+								}}
+								p="0"
+								mr="1rem">
+								{" "}
+								Atrás
+							</Button>
+						</Link>
 						{value === undefined ? (
 							<Stack align={"center"}>
 								<Text
@@ -192,7 +225,6 @@ export default function FormPostUser({ id, value }) {
 												key="name"
 												focusBorderColor={"brand.green.300"}
 												fontFamily={"body"}
-												// value={input.name}
 												onChange={(e) => handlerChange(e)}
 											/>
 											{inputError.name && (
@@ -345,38 +377,6 @@ export default function FormPostUser({ id, value }) {
 								</Stack>
 							</Stack>
 						</Box>
-						<Link to={value === "update" ? "/home" : "/"}>
-							<Icon
-								as={MdArrowBackIosNew}
-								color="orange.400"
-								boxSize={5}
-								_hover={{
-									color: "grey",
-									boxSize: "7",
-								}}
-							/>
-							<Icon
-								as={MdArrowBackIosNew}
-								color="orange.400"
-								boxSize={5}
-								_hover={{
-									color: "grey",
-									boxSize: "7",
-								}}
-							/>
-							<Button
-								fontFamily={"body"}
-								bg="base.green.100"
-								color={"grey"}
-								_hover={{
-									color: "orange.400",
-								}}
-								p="0"
-								mr="1rem">
-								{" "}
-								Atrás
-							</Button>
-						</Link>
 					</Stack>
 				</Flex>
 			</form>

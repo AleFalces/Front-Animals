@@ -54,12 +54,10 @@ export const MyPets = ({ handleSetUserFlag }) => {
         </Container>
       </Box>
       <Center>
-        <SimpleGrid columns={[1, 1, 2, 3]} spacing='40px' mb='6rem' >
+        <SimpleGrid w={"100%"} columns={[1, 1, 2, 3]} spacing='40px' mb='6rem' >
           {
             userPets ? userPets.map((pet) => (
-              <div className="divContainer">
                 <Card data={pet} value={"update"} />
-              </div>
             )) : null
           }
         </SimpleGrid>

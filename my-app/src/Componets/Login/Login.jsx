@@ -29,7 +29,7 @@ function validateForm(input) {
 }
 
 
-const Login = ({ handleSetUserFlag }) => {
+const Login = ({ loggedUser, handleSetUserFlag }) => {
 	const navigate = useNavigate()
 	const { loginWithRedirect, logout } = useAuth0();
 	// const navigate = useNavigate();
@@ -109,9 +109,29 @@ const Login = ({ handleSetUserFlag }) => {
 	return (
 		<>
 			{usuario.length > 0 ? (
-				<button className="btn btn-danger" onClick={() => cerrarSesion()}>
+				<Box w={"100%"}>
+					<Button 
+						_hover={{
+							bg: "red.600",
+						}} 
+						color={"#fff"} 
+						bg={"red.500"} 
+						w={"90%"} 
+						onClick={() => cerrarSesion()}>
 					Cerrar Sesion
-				</button>
+					</Button>
+					<Button
+						_hover={{
+							bg: "orange.400",
+						}} 
+						color={"#fff"} 
+						bg={"orange.300"} 
+						w={"90%"} 
+						mt={"1rem"}
+						onClick={() => navigate("/home")}>
+						Ir al home
+					</Button>
+				</Box>
 			) : (
 				<div>
 					{" "}

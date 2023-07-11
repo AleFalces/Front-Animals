@@ -56,14 +56,14 @@ const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
 	// useEffect(()=>{
 
 	// },[dispatch])
-
+let cardHeightValue = value==="update"?"520px":"450px" //? seteo el valor del height de la card en base a si estamos en MyPets o en Pets
 	return (
 		<Box>
-			<Center py={6}>
+			<Center w={"100%"}>
 				<Box
 					maxW={"320px"}
 					w={"full"}
-					h={"450px"}
+					h={cardHeightValue}
 					bg={"white"}
 					boxShadow={"2xl"}
 					rounded={"lg"}
@@ -178,14 +178,16 @@ const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
 					</Stack>
 
 					{/*       ↓↓↓↓↓↓↓↓   BOTON EDITAR   ↓↓↓↓↓↓↓↓       */}
-					{value === "update" ? (
-						<Button
+
+						{value === "update" ? (
+							<Stack align={"center"} justify={"center"} direction={"row"} mt={".5rem"}>
+							<Button
 							fontFamily={"body"}
 							size="lg"
 							bg={"orange.300"}
 							color={"white"}
 							w="30%"
-							mt="1rem"
+							// mt="1rem"
 							_hover={{
 								bg: "orange.400",
 								/* color:"brand.green.100" */
@@ -193,10 +195,8 @@ const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
 							onClick={(e) => handlerNavigateUpdate(e)}>
 							Editar
 						</Button>
-					) : null}
-					<Stack mt={4} direction={"column"} spacing={4}>
-						<Center></Center>
-					</Stack>
+							</Stack>
+						) : null}
 				</Box>
 			</Center>
 		</Box>

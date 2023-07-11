@@ -15,9 +15,11 @@ const Pagination = ({ petsPerPage, allPets, paginate, currentPage }) => {
 	return (
 		<>
 			<SimpleGrid columns= {[1, 1 ,1]} spacing={'15px'}>
-			<Center>
+				<Center mt={"1rem"} display={"flex"} justifyContent={"center"}>
 				<ul>
-					<Button w={[ '2rem','2rem','5rem']} mx='1rem'
+					<Button 
+						w={[ '2rem','2rem','5rem']}
+						mx='1rem'
 						onClick={()=>{paginate(currentPage - 1)}}
 						hidden={currentPage <= 1 ? true : false}
 						className={"button"}>

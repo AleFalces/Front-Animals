@@ -3,18 +3,19 @@ import {
   Image,
   Stack,
   Text,
+  Flex,
   useColorModeValue as mode,
 } from "@chakra-ui/react";
 
 export const Product = (props) => {
   const { image, name, stock, amount, price } = props;
-  console.log("llega el stock?", stock);
+
   return (
-    <Stack direction="row" spacing="5" width="full">
+    <Flex direction="row" display={"flex"} w={"100%"} bg={"lightskyblue"} justify="space-evenly" spacing="5" width="full">
       <Image
         rounded="lg"
-        width="120px"
-        height="120px"
+        width="9rem"
+        height="9rem"
         fit="cover"
         src={image}
         alt={name}
@@ -48,6 +49,6 @@ export const Product = (props) => {
           Precio:${price}
         </Text>
       </Box>
-    </Stack>
+    </Flex>
   );
 };

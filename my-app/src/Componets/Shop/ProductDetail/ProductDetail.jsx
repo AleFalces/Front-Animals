@@ -35,7 +35,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-export default function ProductDetail() {
+export default function ProductDetail({ handleSetUserFlag }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const navigate = useNavigate()
@@ -61,7 +61,7 @@ export default function ProductDetail() {
 let product = JSON.parse(localStorage.getItem("cart"))?.filter((pr)=>pr.id===detail[0].id)[0]
   return (
     <>
-      <Navbar />
+      <Navbar handleSetUserFlag={handleSetUserFlag}/>
       <br />
               <Button
                 fontFamily={"body"}
@@ -240,53 +240,6 @@ let product = JSON.parse(localStorage.getItem("cart"))?.filter((pr)=>pr.id===det
                   </AlertDialog>
                 </Box>
 
-
-
-
-
-
-
-                //! ↓↓↓↓↓↓↓  BOTON AGREGAR AL CARRITO QUE QUEDÓ DEL 09/02/23  ↓↓↓↓↓↓↓
-              {/* <Button
-                fontFamily={"body"}
-                borderRadius={"full"}
-                size="sm"
-                bg={"brand.orange"}
-                color={"white"}
-                textTransform={"uppercase"}
-                _hover={{
-                  transform: "translateY(2px)",
-                  boxShadow: "lg",
-                }}
-                onClick={(e) =>
-                  detail[0].handlerSetCart(
-                    e,
-                    detail[0].id,
-                    detail[0].price,
-                    detail[0].image,
-                    detail[0].name,
-                    detail[0].stock
-                  )
-                }
-              >
-                Añadir al carrito
-              </Button> */}
-              {/* <Button
-                fontFamily={"body"}
-                borderRadius={"full"}
-                size="sm"
-                bg={"brand.orange"}
-                color={"white"}
-                textTransform={"uppercase"}
-                _hover={{
-                  transform: "translateY(2px)",
-                  boxShadow: "lg",
-                }}
-                onClick={() => payMp()}
-              >
-                Comprar
-              </Button> */}
-
               <Stack
                 direction="row"
                 alignItems="center"
@@ -303,57 +256,3 @@ let product = JSON.parse(localStorage.getItem("cart"))?.filter((pr)=>pr.id===det
     </>
   );
 }
-
-//  <div className="detailProductContainerAll">
-//    <Navbar />
-//    <div className="detailProductNavbarDivBottom"></div>
-//    <div className="detailProductContainer">
-//      <div className="divDetailProductDescription">
-//        <div className="detailProductDescription">
-//          <h1>{detail[0].name}</h1>
-//          {/* <h1>Puntuacion </h1> */}
-//          {/* <h4>★★★</h4> */}
-//          <div className="detailDescription">
-//            <div>
-//              <h2>Categoria</h2> <h3>{detail[0].Category}</h3>
-//            </div>
-//            <div className="detailProductDescription2">
-//              <h2>Descripcion:</h2> <h3>{detail[0].description}</h3>
-//            </div>
-//            <div>
-//              <h2>Precio</h2> <h3>${detail[0].price}</h3>{" "}
-//            </div>
-//            <div>
-//              <h2>Stock</h2> <h3>{detail[0].stock}u</h3>
-//            </div>
-//          </div>
-//        </div>
-//        <div className="imgxbutton">
-//          <img src={detail[0].image} alt="" />
-//          <div>
-//            <button onClick={() => payMp()}>Comprar</button>
-
-//            <button
-//              onClick={(e) =>
-//                detail[0].handlerSetCart(
-//                  e,
-//                  detail[0].id,
-//                  detail[0].price,
-//                  detail[0].image,
-//                  detail[0].name,
-//                  detail[0].stock
-//                )
-//              }
-//            >
-//              Agregar
-//            </button>
-//          </div>
-//        </div>
-//      </div>
-//    </div>
-//    <div className="divTopReview"></div>
-//    <div className="reviewsContainer">Reseñas</div>
-//    <div className="footerProductDetail">
-//      <Footer />
-//    </div>
-//  </div>;
