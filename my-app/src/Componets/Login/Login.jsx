@@ -21,7 +21,7 @@ function validateForm(input) {
 }
 
 
-const Login = ({ handleSetUserFlag }) => {
+const Login = ({ loggedUser, handleSetUserFlag }) => {
 	const navigate = useNavigate()
 	const { loginWithRedirect, logout } = useAuth0();
 	// const navigate = useNavigate();
@@ -101,6 +101,7 @@ const Login = ({ handleSetUserFlag }) => {
 	return (
 		<>
 			{usuario.length > 0 ? (
+<<<<<<< HEAD
 				<Box display="flex" flexDirection="column">
 				  <Button colorScheme="teal"
 					marginBottom="1rem"
@@ -118,6 +119,31 @@ const Login = ({ handleSetUserFlag }) => {
 				  	Cerrar Sesion
 				  </Button>
 				</Box> 
+=======
+				<Box w={"100%"}>
+					<Button 
+						_hover={{
+							bg: "red.600",
+						}} 
+						color={"#fff"} 
+						bg={"red.500"} 
+						w={"90%"} 
+						onClick={() => cerrarSesion()}>
+					Cerrar Sesion
+					</Button>
+					<Button
+						_hover={{
+							bg: "orange.400",
+						}} 
+						color={"#fff"} 
+						bg={"orange.300"} 
+						w={"90%"} 
+						mt={"1rem"}
+						onClick={() => navigate("/home")}>
+						Ir al home
+					</Button>
+				</Box>
+>>>>>>> ecf5b88c14c845f5d1ee4cc7e0b55f28b34f8ad2
 			) : (
 				<div>
 					{" "}

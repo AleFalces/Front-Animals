@@ -1,0 +1,19 @@
+
+.totalText {
+    display: flex;
+    align-self: flex-start;
+    width: 7rem;
+}
+
+
+
+@media screen and (max-width: 450px){
+    .priceText {
+        font-size: 15px !important;
+        font-weight: 700;
+    }
+    .totalText {
+        font-size: 19px;
+        width: 3rem;
+    }
+}

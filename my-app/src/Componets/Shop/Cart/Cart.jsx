@@ -18,12 +18,29 @@ import {
   Button,
   useColorModeValue as mode,
 } from "@chakra-ui/react";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-export default function Cart() {
+export default function Cart({ handleSetUserFlag }) {
   const [cartFlag, setCartFlag] = useState(false);
   const cart = JSON.parse(window.localStorage.getItem("cart"));
-  console.log(cart);
-
+console.log(cart);
+  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+  let isLogged = false
+  loggedUser?isLogged=true:isLogged=false
+console.log("loggedUser Cart: ",loggedUser);
+console.log("isLogged Cart: ",isLogged);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
+  const navigate = useNavigate()
   function handleStateChange() {
     if (cartFlag === true) {
       setCartFlag(false);
@@ -145,14 +162,18 @@ export default function Cart() {
         return handleStateChange();
       }
 
-      handleStateChange();
+      // handleStateChange();
     } catch (error) {
       console.log(error);
     }
   };
-
+  function isNotLogged(){
+    alert("Tenes que logearte")
+  }
   const total = cart?.reduce((acc, el) => acc + el.total, 0);
   const payMp = () => {
+    console.log("CART PAYMP: ",cart);
+    isLogged?
     axios
       .post(`http://localhost:3001/donation`, {
         cart,
@@ -162,14 +183,14 @@ export default function Cart() {
       })
       .catch((error) => {
         console.error(error);
-      });
+      }):alert("Tenés que logearte")
   };
 
   useEffect(() => {}, [cartFlag]);
 
   return (
     <>
-      <Navbar />
+      <Navbar handleSetUserFlag={handleSetUserFlag} />
       <Box minHeight={"90vh"} bg="brand.backgorund" paddingBottom={"3rem"}>
         <Stack
           direction={{
@@ -278,21 +299,88 @@ export default function Cart() {
                     >
                       Total: $ {total}
                     </Text>
-                    <Button
-                      fontFamily={"body"}
-                      borderRadius={"full"}
-                      size="sm"
-                      bg={"brand.orange"}
-                      color={"white"}
-                      textTransform={"uppercase"}
-                      _hover={{
+                <Box>
+                  <Button
+                    onClick={onOpen} 
+                    fontFamily={"body"}
+                    borderRadius={"full"}
+                    size="lg"
+                    bg={"brand.orange"}
+                    color={"white"}
+                    _hover={{
                         transform: "translateY(2px)",
                         boxShadow: "lg",
                       }}
-                      onClick={() => payMp()}
-                    >
-                      Pagar
-                    </Button>
+                  >
+                    Ir a pagar
+                  </Button>
+                  <AlertDialog
+                    isOpen={isOpen}
+                    leastDestructiveRef={cancelRef}
+                    onClose={onClose}
+                  >
+                    <AlertDialogOverlay>
+                      <AlertDialogContent>
+                        {
+                          isLogged?
+                        <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                          El total actual del carrito es ${total}
+                        </AlertDialogHeader>
+                        :
+                        <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                         Necesitamos tus datos!
+                        </AlertDialogHeader>
+                        }
+                        {
+                          isLogged?
+                        <AlertDialogBody>
+                         Solo falta ir a pagar, si no necesitas nada más haz click en "Ir a pagar"
+                        </AlertDialogBody>
+                        :
+                        <AlertDialogBody>
+                           Para hacer la compra debes ingresar tu cuenta, si no tienes puedes crear una!
+                        </AlertDialogBody>
+                        }
+                        {
+                          isLogged?
+                          <AlertDialogFooter>
+                          <Button ref={cancelRef} onClick={onClose}>
+                            Volver al carrito
+                          </Button>
+                          <Button
+                            color={"white"}
+                            bg={"brand.orange"}
+                            onClick={(e) => {
+                              payMp()
+                              onClose();
+                            }}
+                            ml={3}
+                            >
+                            Ir a pagar
+                          </Button>
+                        </AlertDialogFooter>
+                        :
+                        <AlertDialogFooter>
+                          <Button ref={cancelRef} onClick={onClose}>
+                            Cancelar
+                          </Button>
+                          <Button
+                            color={"white"}
+                            bg={"brand.orange"}
+                            onClick={(e) => {
+                              onClose();
+                              navigate("/")
+                            }}
+                            ml={3}
+                            >
+                            Ingresar
+                          </Button>
+                        </AlertDialogFooter>
+                          }
+                      </AlertDialogContent>
+                    </AlertDialogOverlay>
+                  </AlertDialog>
+                </Box>
                   </SimpleGrid>
                 </Center>
 
