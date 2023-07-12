@@ -171,6 +171,7 @@ const LandingPage = ({ handleSetUserFlag }) => {
             spacing={{ base: 8 }}
             maxW={{ lg: 'lg' }}>
             <Stack spacing={4}>
+              
               <Heading
                 color={'gray.800'}
                 lineHeight={1.1}
@@ -184,7 +185,6 @@ const LandingPage = ({ handleSetUserFlag }) => {
                   !
                 </Text>
               </Heading>
-
               <Center>
                 <Box w='70%'>
                   <Text noOfLines={[4, 4, 3]} color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>

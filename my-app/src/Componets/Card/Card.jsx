@@ -27,9 +27,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { deletePet, getUserId } from "../../Redux/Actions";
-
-import { handlerDeletePet } from "../../utils";
+import { deletePet } from "../../Redux/Actions";
 
 const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
 	const dispatch = useDispatch();
@@ -53,23 +51,24 @@ const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
 		e.preventDefault();
 		dispatch(deletePet(id, usuario[0]?.id));
 	}
-	// useEffect(()=>{
 
-	// },[dispatch])
-let cardHeightValue = value==="update"?"520px":"450px" //? seteo el valor del height de la card en base a si estamos en MyPets o en Pets
 	return (
-		<Box>
-			<Center w={"100%"}>
+		<Box 		
+			// maxW={"320px"}
+			// w={"380px"}
+			// h={"450px"}
+			// bg={"#fff"}
+			>
+			<Center py={6}>
 				<Box
 					maxW={"320px"}
-					w={"full"}
-					h={cardHeightValue}
-					bg={"white"}
+					w={"380px"}
+					h={"450px"}
+					bg={"#fff"}
 					boxShadow={"2xl"}
 					rounded={"lg"}
 					p={6}
 					textAlign={"center"}>
-					{/* ↓↓↓↓↓↓   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↓↓↓↓↓↓ */}
 
 					{value === "update" ? (
 						<Box pr={"1rem"} className="boxButtonDelete">
@@ -118,9 +117,8 @@ let cardHeightValue = value==="update"?"520px":"450px" //? seteo el valor del he
 								</AlertDialogOverlay>
 							</AlertDialog>
 						</Box>
-					) : null}
+					) : null }
 
-					{/* ↑↑↑↑↑↑↑↑   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↑↑↑↑↑↑↑↑ */}
 
 					<Center>
 						<Image
@@ -178,16 +176,14 @@ let cardHeightValue = value==="update"?"520px":"450px" //? seteo el valor del he
 					</Stack>
 
 					{/*       ↓↓↓↓↓↓↓↓   BOTON EDITAR   ↓↓↓↓↓↓↓↓       */}
-
-						{value === "update" ? (
-							<Stack align={"center"} justify={"center"} direction={"row"} mt={".5rem"}>
-							<Button
+					{value === "update" ? (
+						<Button
 							fontFamily={"body"}
 							size="lg"
 							bg={"orange.300"}
 							color={"white"}
 							w="30%"
-							// mt="1rem"
+							mt="1rem"
 							_hover={{
 								bg: "orange.400",
 								/* color:"brand.green.100" */
@@ -195,8 +191,10 @@ let cardHeightValue = value==="update"?"520px":"450px" //? seteo el valor del he
 							onClick={(e) => handlerNavigateUpdate(e)}>
 							Editar
 						</Button>
-							</Stack>
-						) : null}
+					) : null}
+					<Stack mt={4} direction={"column"} spacing={4}>
+						<Center></Center>
+					</Stack>
 				</Box>
 			</Center>
 		</Box>
