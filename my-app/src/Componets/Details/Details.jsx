@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { useParams } from "react-router-dom";
-import { petDetails } from "../../Redux/Actions/index";
+import { getPetDetails } from "../../Redux/Actions/index";
 // import { extendTheme } from "@chakra-ui/react";
 import {
 	Box,
@@ -55,7 +55,7 @@ const Details = ({ handleSetUserFlag }) => {
 	// const userNumber = 543534787713;
 
 	useEffect(() => {
-		dispatch(petDetails(paramsId));
+		dispatch(getPetDetails(paramsId));
 	}, []);
 	useEffect(()=>{
 		console.log("DET: ",Det)

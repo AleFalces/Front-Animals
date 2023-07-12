@@ -17,7 +17,6 @@ import Details from "../../Componets/Details/Details";
 import { MyPets } from "../../Componets/MyPets/MyPets";
 import VetsDetails from "../../Componets/VetsDetail/VetsDetail";
 import FormAffiliateVets from "../../Componets/DashboardAdmin/Dashboard/FormAffiliateVets";
-import FormUpdateProduct from "../../Componets/DashboardAdmin/Dashboard/FormUpdateProduct";
 import FormPostProduct from "../../Componets/DashboardAdmin/Dashboard/FormPostProduct";
 import DashboardAdmin from "../../Componets/DashboardAdmin/DashboardAdmin/DashboardAdmin";
 
@@ -230,7 +229,7 @@ export function isUser(handleSetUserFlag, setUsuario, usuario, token) {
         <Route
           exact
           path="/dashboard/updateProduct"
-          element={<FormUpdateProduct />}
+          element={<FormPostProduct />}
         ></Route>
         <Route
           path="*"
@@ -368,7 +367,7 @@ export function isAdm(handleSetUserFlag, setUsuario, usuario, token) {
         <Route
           exact
           path="/dashboard/updateProduct"
-          element={<FormUpdateProduct />}
+          element={<FormPostProduct />}
         ></Route>
         <Route
           path="*"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { petDetails, postOrUpdatePet } from "../../Redux/Actions";
+import { getPetDetails, postOrUpdatePet } from "../../Redux/Actions";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
@@ -147,7 +147,7 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
 	}, [])
 	useEffect(() => {
 		if(paramsId) {
-			dispatch(petDetails(paramsId))
+			dispatch(getPetDetails(paramsId))
 		}
 	}, []);
 

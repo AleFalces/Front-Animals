@@ -90,14 +90,8 @@ export default function FormPostUser({ id, value }) {
 				surname: userInfo[0]?.surname,
 				email: userInfo[0]?.email,
 				username: userInfo[0]?.username,
-<<<<<<< HEAD
 				role: userInfo[0]?.role,
 				phone: userInfo[0]?.phone
-=======
-				phone: userInfo[0]?.phone,
-				role: "user",
-
->>>>>>> ecf5b88c14c845f5d1ee4cc7e0b55f28b34f8ad2
 			});
 	}, []);
 
