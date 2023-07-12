@@ -2,14 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import { User } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-// <button className="btn btn-success" onClick={() => loginWithRedirect()}>
-//   Login{" "}
-// </button>
-// <button className="btn btn-danger" onClick={() => logout()}>
-//   Cerrar Sesion
-// </button>
 
 import {
 	Box, Stack, Text, Input, Button, Divider, Center
@@ -17,7 +10,6 @@ import {
 
 function validateForm(input) {
 	let inputErrors = {}
-	// const navigate = useNavigate() // Lo movi a la funcion de abajo
 	
 	if (input.password === "") {
 		inputErrors.password = `Debes ingresar tu contraseña`;
@@ -109,9 +101,23 @@ const Login = ({ handleSetUserFlag }) => {
 	return (
 		<>
 			{usuario.length > 0 ? (
-				<button className="btn btn-danger" onClick={() => cerrarSesion()}>
-					Cerrar Sesion
-				</button>
+				<Box display="flex" flexDirection="column">
+				  <Button colorScheme="teal"
+					marginBottom="1rem"
+					letterSpacing=".15rem"
+					fontSize="1.2rem"
+				  	fontWeight="400"
+					onClick={(e) => navigate("/home")}>Ir a la pagina</Button>
+				  <Button className="btn btn-danger"
+				    onClick={() => cerrarSesion()}
+				    colorScheme="red"
+					letterSpacing=".15rem"
+					fontSize="1.2rem"
+					fontWeight="400"
+				   >
+				  	Cerrar Sesion
+				  </Button>
+				</Box> 
 			) : (
 				<div>
 					{" "}

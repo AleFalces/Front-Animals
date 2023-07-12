@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Card from "../Card/Card"
-// import Pagination from "../Pagination/Pagination";
 import { SimpleGrid, Heading, Container, Text, Center, Box } from "@chakra-ui/react";
 import { getUserId } from "../../Redux/Actions"; //dispatch getUserId(aca le paso el id (del localStorage)y me trae toda la info del user, y a esa info la guardo en una variable/ Dsp uso esa variable para sacar los pets de ahi y recorrerlos
 
 export const MyPets = ({ handleSetUserFlag }) => {
   const dispatch = useDispatch();
   const [usuario, setUsuario] = useState({});
-  const userRedux = useSelector((state) => state.user); //userInfo[0].pet.map()
+  const userRedux = useSelector((state) => state.user); 
   const userPets = userRedux[0]?.pet;
   const loggedUser = localStorage.getItem("loggedUser");
 
@@ -22,11 +21,9 @@ export const MyPets = ({ handleSetUserFlag }) => {
     }
   }, [loggedUser, userPets]);
   useEffect(() => {
-    dispatch(getUserId(JSON.parse(loggedUser)[0].id)); //del localStorage me traigo la info del usuario, desde su posicion 0 de array, por eso le pregunto si tiene algo con el "?", si tiene algo dentro que me traiga su id
-
+    dispatch(getUserId(JSON.parse(loggedUser)[0].id));
   }, [])
 
-  // console.log("userPets", userPets);
 
   return (
     <>
@@ -49,47 +46,32 @@ export const MyPets = ({ handleSetUserFlag }) => {
             my="0rem"
             fontSize={{ base: "20px", md: "20px", lg: "22px" }}
             color="gray.500"
-          >Aquí están todas tus publicaciones, podrás editar su información, tanto como  para borrarlas
+            >
+              Aquí están todas tus publicaciones, podrás editar su información, tanto como  para borrarlas
           </Text>
         </Container>
       </Box>
       <Center>
-        <SimpleGrid columns={[1, 1, 2, 3]} spacing='40px' mb='6rem' >
+
           {
-            userPets ? userPets.map((pet) => (
+            userPets && userPets[0]
+            ? userPets.map((pet) => (
+              <SimpleGrid columns={[1, 1, 2, 3]} spacing='40px' mb='6rem' >
               <div className="divContainer">
                 <Card data={pet} value={"update"} />
               </div>
-            )) : null
+              </SimpleGrid>
+            )) 
+            : <Box display="flex"justifyContent={"center"}width={"100%"}>
+                 <Text fontSize="2rem"marginBottom={"2rem"}>
+                  No tienes mascotas publicadas
+                 </Text>
+              </Box>
           }
-        </SimpleGrid>
+
       </Center>
       <Footer />
-
     </>
 
-  );
+);
 };
-
-
-
-
-
-
-
-
-
-{/* <div className="Pagination">
-  <Pagination pets={userPets} PetPerPage={PetPerPage} />
-</div>
-<SimpleGrid columns={[1, 2, 3]} spacing="40px">
-  {!pets?.length ? (
-    <p>No hay mascotas</p>
-  ) : (
-    currentPetPerPage?.map((el) => (
-      <Link to={`/pets/${el.id}`} key={el.id}>
-        <Card data={el} />
-      </Link>
-    ))
-  )}
-</SimpleGrid> */}

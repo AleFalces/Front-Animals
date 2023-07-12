@@ -161,12 +161,6 @@ export function isUser(handleSetUserFlag, setUsuario, usuario, token) {
         ></Route>
         <Route
           exact
-          path="/updateUser"
-          element={<FormPostUser value={"update"} />}
-        ></Route>
-
-        <Route
-          exact
           path="/shop"
           element={<Shop handleSetUserFlag={handleSetUserFlag} />}
         ></Route>

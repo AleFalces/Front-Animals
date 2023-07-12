@@ -75,19 +75,21 @@ export default function FormPostUser({ id, value }) {
 		}
 	}, []);
 	useEffect(() => {
-		if (value === "update") dispatch(getUserId(usuario[0]?.id)); //del localStorage me traigo la info del usuario, desde su posicion 0 de array, por eso le pregunto si tiene algo con el "?", si tiene algo dentro que me traiga su id
+		if (value === "update" && usuario.length) dispatch(getUserId(usuario[0]?.id)); //del localStorage me traigo la info del usuario, desde su posicion 0 de array, por eso le pregunto si tiene algo con el "?", si tiene algo dentro que me traiga su id
 	}, [dispatch, usuario]);
 
 	const userInfo = useSelector((state) => state.user);
 
 	useEffect(() => {
 		if (value === "update")
+			console.log("userInfo: ",userInfo);
 			setInput({
 				name: userInfo[0]?.name,
 				surname: userInfo[0]?.surname,
 				email: userInfo[0]?.email,
 				username: userInfo[0]?.username,
-				role: "user",
+				role: userInfo[0]?.role,
+				phone: userInfo[0]?.phone
 			});
 	}, []);
 

@@ -239,14 +239,25 @@ export default function Navbar({ setUsuario2, handleSetUserFlag }) {
 							<Menu>
 								<MenuButton
 									_hover={{
-										color: "orange.400",
+										fontWeight: "bold",
+										color: "brand.green.300",
 									}}>
-									<GiSittingDog size="2rem" />
+									<Text
+									fontSize="1.3rem"
+									fontFamily={"body"}
+									_hover={{
+										fontWeight: "bold",
+										color: "brand.green.300",
+									}}>
+									Mascotas
+								</Text>
 								</MenuButton>
 								<MenuList>
 									<MenuItem>
 										<NavLink to="/adoptions">
-											<Text fontFamily={"body"}>Adopcion</Text>
+											<Text fontFamily={"body"}>
+												Adopcion
+											</Text>
 										</NavLink>
 									</MenuItem>
 									<MenuItem>
@@ -365,8 +376,20 @@ export default function Navbar({ setUsuario2, handleSetUserFlag }) {
 								</Text>
 							</NavLink>
 							<Menu>
-								<MenuButton>
-									<GiSittingDog size="2rem" />
+								<MenuButton 
+									_hover={{
+										fontWeight: "bold",
+										color: "brand.green.300",
+									}}>
+									<Text
+									fontSize="1.3rem"
+									fontFamily={"body"}
+									_hover={{
+										fontWeight: "bold",
+										color: "brand.green.300",
+									}}>
+									Mascotas
+								</Text>
 								</MenuButton>
 								<MenuList>
 									<MenuItem>

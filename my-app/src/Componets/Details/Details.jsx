@@ -4,10 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import { useParams } from "react-router-dom";
 import { petDetails } from "../../Redux/Actions/index";
-/* import "./Detail.css"; */
-
 // import { extendTheme } from "@chakra-ui/react";
-
 import {
 	Box,
 	Heading,
@@ -26,7 +23,6 @@ import {
 	HStack,
 	VStack,
 } from "@chakra-ui/react";
-
 import { GiSittingDog } from "react-icons/gi";
 import { GiCat } from "react-icons/gi";
 import { PhoneIcon, CheckIcon } from "@chakra-ui/icons";
@@ -56,13 +52,14 @@ const Details = ({ handleSetUserFlag }) => {
 	const dispatch = useDispatch();
 	const { paramsId } = useParams();
 	const Det = useSelector((state) => state.Detail);
-	// const userNumber = useSelector(state)=> state.
-	const userNumber = 543534787713;
+	// const userNumber = 543534787713;
 
 	useEffect(() => {
 		dispatch(petDetails(paramsId));
-	}, [dispatch, paramsId]);
-
+	}, []);
+	useEffect(()=>{
+		console.log("DET: ",Det)
+	},[Det])
 	return (
 		<div className="detailContainer">
 			<Navbar handleSetUserFlag={handleSetUserFlag}/>
@@ -85,18 +82,18 @@ const Details = ({ handleSetUserFlag }) => {
 								size="3xl"
 								textTransform="uppercase"
 								color="gray.500">
-								{Det.species}{" "}
+								{Det[0].species}{" "}
 							</Heading>
 							<Heading
 								as="h2"
 								size="lg"
 								textTransform="uppercase"
 								color="gray.500">
-								{Det.sex}{" "}
+								{Det[0].sex}{" "}
 							</Heading>
 							<Box pt="0px">
 								{" "}
-								{Det.species === "perro" ? (
+								{Det[0].species === "perro" ? (
 									<Icon
 										as={GiSittingDog}
 										color="orange"
@@ -127,9 +124,8 @@ const Details = ({ handleSetUserFlag }) => {
 							mt={["0rem", "0rem", "1rem"]}
 							pt={["0rem", "5rem", "1rem"]}>
 							<Center w="100%" h="100%">
-								<Image
-									src={Det.img}
-									alt="dogs"
+								<Image src={Det[0].img}
+									alt="Todavía no hay imagen de la mascota"
 									borderRadius="50px"
 									objectFit="cover"
 									w="60%"
@@ -173,7 +169,7 @@ const Details = ({ handleSetUserFlag }) => {
 									my="0rem"
 									fontSize={{ base: "14px", md: "18px", lg: "20px" }}
 									color="gray.500">
-									{Det.detail}
+									{Det[0].detail}
 								</Text>
 							</Container>
 							{/* AGE */}
@@ -185,7 +181,7 @@ const Details = ({ handleSetUserFlag }) => {
 								fontFamily={"heading"}
 								fontWeight="bold"
 								pb={["0rem", "0rem", "1rem"]}>
-								{Det.age}
+								{Det[0].age}
 							</Text>
 
 							{/* Area */}
@@ -202,7 +198,7 @@ const Details = ({ handleSetUserFlag }) => {
 									textTransform={"uppercase"}
 									fontFamily={"heading"}
 									fontWeight="bold">
-									{Det.area}{" "}
+									{Det[0].area}{" "}
 								</Text>
 							</Text>
 						</Box>
@@ -224,13 +220,13 @@ const Details = ({ handleSetUserFlag }) => {
 							<Center w="100%">
 								<Wrap m="1rem" mt="1rem" pt="1rem">
 									<WrapItem>
-										<Avatar size="lg" name={Det.species} src={Det.img} />{" "}
+										<Avatar size="lg" name={Det[0].species} src={Det[0].img} />{" "}
 									</WrapItem>
 									<WrapItem>
-										<Avatar size="lg" name={Det.species} src={Det.img} />{" "}
+										<Avatar size="lg" name={Det[0].species} src={Det[0].img} />{" "}
 									</WrapItem>
 									<WrapItem>
-										<Avatar size="lg" name={Det.species} src={Det.img} />{" "}
+										<Avatar size="lg" name={Det[0].species} src={Det[0].img} />{" "}
 									</WrapItem>
 								</Wrap>
 							</Center>
@@ -247,7 +243,7 @@ const Details = ({ handleSetUserFlag }) => {
 								size="lg"
 								px="3rem"
 								mt="1rem"
-								href={`https://wa.me/${userNumber}`}
+								href={`https://wa.me/+549${Det[0].user.phone}`}
 								icon={<PhoneIcon />}
 							/>
 						</Box>

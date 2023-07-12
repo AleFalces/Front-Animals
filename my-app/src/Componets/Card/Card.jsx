@@ -27,9 +27,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { IoMdMale } from "react-icons/io";
 import { IoMdFemale } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { deletePet, getUserId } from "../../Redux/Actions";
-
-import { handlerDeletePet } from "../../utils";
+import { deletePet } from "../../Redux/Actions";
 
 const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
 	const dispatch = useDispatch();
@@ -53,23 +51,24 @@ const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
 		e.preventDefault();
 		dispatch(deletePet(id, usuario[0]?.id));
 	}
-	// useEffect(()=>{
-
-	// },[dispatch])
 
 	return (
-		<Box>
+		<Box 		
+			// maxW={"320px"}
+			// w={"380px"}
+			// h={"450px"}
+			// bg={"#fff"}
+			>
 			<Center py={6}>
 				<Box
 					maxW={"320px"}
-					w={"full"}
+					w={"380px"}
 					h={"450px"}
-					bg={"white"}
+					bg={"#fff"}
 					boxShadow={"2xl"}
 					rounded={"lg"}
 					p={6}
 					textAlign={"center"}>
-					{/* ↓↓↓↓↓↓   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↓↓↓↓↓↓ */}
 
 					{value === "update" ? (
 						<Box pr={"1rem"} className="boxButtonDelete">
@@ -118,9 +117,8 @@ const Card = ({ data: { id, size, img, sex, species, age, area }, value }) => {
 								</AlertDialogOverlay>
 							</AlertDialog>
 						</Box>
-					) : null}
+					) : null }
 
-					{/* ↑↑↑↑↑↑↑↑   BUTTON DELETE PET FALTARIA UBICARLO MEJOR  ↑↑↑↑↑↑↑↑ */}
 
 					<Center>
 						<Image

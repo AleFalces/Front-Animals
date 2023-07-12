@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { petDetails, postOrUpdatePet } from "../../Redux/Actions";
@@ -61,9 +60,8 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
 	const [isIncomplete, setIsIncomplete] = useState(false);
 	const [infoSend, setInfoSend] = useState(false);
 	const [inputError, setInputError] = useState({});
-	const paramsId = useParams("id");
-	let petData = useSelector((state) => state.Detail)
-
+	const paramsId = useParams().id;
+	const petData = useSelector((state) => state.Detail);
 	const [input, setInput] = useState({
 		species: "",
 		sex: "",
@@ -75,7 +73,7 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
 		img: "",
 	});
 	
-function dataEmptied() {
+	function dataEmptied() {
 	setInput({
 		species: "",
 		sex: "",
@@ -86,19 +84,23 @@ function dataEmptied() {
 		detail: "",
 		img: "",
 	})
-}
-function completePetData(){
-	setInput({
-		species: petData?.species || "",
-		sex: petData?.sex || "",
-		age: petData?.age || "",
-		size: petData?.size || "",
-		status: petData?.status || "",
-		area: petData?.area || "",
-		detail: petData?.detail || "",
-		img: petData?.img || "",
-	})
-}
+	};
+	function completePetData() {
+		if(petData && petData[0]) {
+			console.log("SETEANDO INPUT CON FN");
+			setInput({
+				species: petData[0].species || "",
+				sex: petData[0].sex || "",
+				age: petData[0].age || "",
+				size: petData[0].size || "",
+				status: petData[0].status || "",
+				area: petData[0].area || "",
+				detail: petData[0].detail || "",
+				img: petData[0].img || "",
+			})
+		}
+
+	};
 	const handlerChange = (e) => {
 		setInput({
 			...input,
@@ -140,22 +142,28 @@ function completePetData(){
 		}
 	};
 	useEffect(() => {
-		dispatch(petDetails(paramsId.id))
-	}, [dispatch]);
+		return () => dataEmptied()
+		
+	}, [])
+	useEffect(() => {
+		if(paramsId) {
+			dispatch(petDetails(paramsId))
+		}
+	}, []);
+
 	useEffect(()=>{
 		if(value==="update"){
 			completePetData()
 		} else {
 			dataEmptied()
 		}
-	},[petData, value])
+	},[petData])
+
 	return (
 		<div>
 			<Navbar handleSetUserFlag={handleSetUserFlag}/>
-
 			{isIncomplete ? <ErrorForm /> : null}
 			{infoSend ? <SuccedForm /> : null}
-
 			<form onSubmit={(e) => handlerSubmit(e)} id="myForm">
 				<Flex
 					minH={"100vh"}
@@ -163,8 +171,9 @@ function completePetData(){
 					justify={"center"}
 					bg="brand.green.200">
 					<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-						<Stack align={"center"}>
-							{value === "update" ? (
+					  <Stack align={"center"}>
+							{
+							value === "update" ? (
 								<Heading fontSize={"4xl"} textAlign={"center"}>
 									Edita tu mascota
 								</Heading>
@@ -173,40 +182,41 @@ function completePetData(){
 									Registra tu mascota
 								</Heading>
 							)}
-							<Text fontSize={"lg"} color={"gray.600"}>
+							<Text fontSize={"lg"} color={"gray.600"
+							}>
 								Gracias por cuidar a los animales ✌️
 							</Text>
-						</Stack>
-						<Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
+					  </Stack>
+					  <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
 							<Stack spacing={4}>
 								<HStack>
 									<Box>
-										<FormControl id="species" isRequired>
-											<Select
-												focusBorderColor={"brand.green.300"}
-												fontFamily={"body"}
-												name="species"
-												value={input.species}
-												onChange={(e) => handlerChange(e)}>
-												<option
-													value=""
-													name="especie"
-													key="defaultSpecies">
-													Especie
-												</option>
-												<option value={"gato"} name="gato" key="cat">
-													Gatx
-												</option>
-												<option value={"perro"} name="perro" key="dog">
-													Perrx
-												</option>
-											</Select>
-											{inputError.species && (
-												<Text className="text_inputError">
-													{inputError.species}
-												</Text>
-											)}
-										</FormControl>
+									  <FormControl id="species" isRequired>
+									    <Select
+									    	focusBorderColor={"brand.green.300"}
+									    	fontFamily={"body"}
+									    	name="species"
+									    	value={input.species}
+									    	onChange={(e) => handlerChange(e)}>
+									    	<option
+									    		value=""
+									    		name="especie"
+									    		key="defaultSpecies">
+									    		Especie
+									    	</option>
+									    	<option value={"gato"} name="gato" key="cat">
+									    		Gatx
+									    	</option>
+									    	<option value={"perro"} name="perro" key="dog">
+									    		Perrx
+									    	</option>
+									    </Select>
+									    {inputError.species && (
+									    	<Text className="text_inputError">
+									    		{inputError.species}
+									    	</Text>
+									    )}
+									  </FormControl>
 									</Box>
 
 									<Box>
@@ -376,8 +386,7 @@ function completePetData(){
 											bg={"orange.300"}
 											color={"white"}
 											_hover={{
-												bg: "orange.400",
-												/* color:"brand.green.100" */
+												bg: "orange.400"
 											}}>
 											Post mascota
 										</Button>
@@ -390,17 +399,15 @@ function completePetData(){
 											bg={"orange.300"}
 											color={"white"}
 											_hover={{
-												bg: "orange.400",
-												/* color:"brand.green.100" */
+												bg: "orange.400"
 											}}>
 											Modificar mascota
 										</Button>
 									)}
 								</Stack>
 							</Stack>
-						</Box>
-
-						<Link to={"/home"}>
+					  </Box>
+					  <Link to={"/home"}>
 							<Icon
 								as={MdArrowBackIosNew}
 								color="orange.400"
@@ -428,15 +435,13 @@ function completePetData(){
 								}}
 								p="0"
 								mr="1rem">
-								{" "}
 								Atrás
 							</Button>
-						</Link>
+					  </Link>
 					</Stack>
 				</Flex>
 			</form>
-
 			<Footer />
 		</div>
 	);
-}
+};
