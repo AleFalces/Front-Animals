@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 import Card from "../Card/Card"
 import { SimpleGrid, Heading, Container, Text, Center, Box } from "@chakra-ui/react";
 import { getUserId } from "../../Redux/Actions"; //dispatch getUserId(aca le paso el id (del localStorage)y me trae toda la info del user, y a esa info la guardo en una variable/ Dsp uso esa variable para sacar los pets de ahi y recorrerlos
+import s from "./MyPets.module.css"
 
 export const MyPets = ({ handleSetUserFlag }) => {
   const dispatch = useDispatch();
@@ -51,23 +52,22 @@ export const MyPets = ({ handleSetUserFlag }) => {
           </Text>
         </Container>
       </Box>
-      <Center>
+      <Center >
 
+        <div className={s.divContainer}>
           {
             userPets && userPets[0]
             ? userPets.map((pet) => (
-              <SimpleGrid columns={[1, 1, 2, 3]} spacing='40px' mb='6rem' >
-              <div className="divContainer">
                 <Card data={pet} value={"update"} />
-              </div>
-              </SimpleGrid>
-            )) 
-            : <Box display="flex"justifyContent={"center"}width={"100%"}>
-                 <Text fontSize="2rem"marginBottom={"2rem"}>
-                  No tienes mascotas publicadas
-                 </Text>
+                )) 
+            : <Box display="flex"justifyContent={"center"}width={"100%"}
+              >
+                <Text fontSize="2rem"marginBottom={"2rem"}>
+                 No tienes mascotas publicadas
+                </Text>
               </Box>
           }
+        </div> 
 
       </Center>
       <Footer />
