@@ -61,7 +61,7 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
 	const [infoSend, setInfoSend] = useState(false);
 	const [inputError, setInputError] = useState({});
 	const paramsId = useParams().id;
-	const petData = useSelector((state) => state.Detail);
+	const petData = useSelector((state) => state.petDetails);
 	const [input, setInput] = useState({
 		species: "",
 		sex: "",
@@ -86,17 +86,18 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
 	})
 	};
 	function completePetData() {
-		if(petData && petData[0]) {
+		
+		if(petData) {
 			console.log("SETEANDO INPUT CON FN");
 			setInput({
-				species: petData[0].species || "",
-				sex: petData[0].sex || "",
-				age: petData[0].age || "",
-				size: petData[0].size || "",
-				status: petData[0].status || "",
-				area: petData[0].area || "",
-				detail: petData[0].detail || "",
-				img: petData[0].img || "",
+				species: petData.species || "",
+				sex: petData.sex || "",
+				age: petData.age || "",
+				size: petData.size || "",
+				status: petData.status || "",
+				area: petData.area || "",
+				detail: petData.detail || "",
+				img: petData.img || "",
 			})
 		}
 
@@ -142,6 +143,7 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
 		}
 	};
 	useEffect(() => {
+		
 		return () => dataEmptied()
 		
 	}, [])
@@ -152,6 +154,7 @@ export default function FormPostPet({ handleSetUserFlag, value }) {
 	}, []);
 
 	useEffect(()=>{
+		console.log("petData: ",petData)
 		if(value==="update"){
 			completePetData()
 		} else {
